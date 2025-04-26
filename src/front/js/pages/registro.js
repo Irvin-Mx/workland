@@ -6,7 +6,7 @@ export const Registro = () => {
 
     return (
         <div className="d-flex justify-content-center">
-            <h1 className="text-center">¡Bienvenido a workland !</h1>
+            <h1 className="text-center">¡Bienvenido a Workland !!!</h1>
             <div className="w-50 p-4 border rounded shadow">
              
                 <form>
