@@ -1,70 +1,113 @@
-import React  from "react";
-import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext.js";
+import { Link } from "react-router-dom";
+import "../../styles/registro.css";
 
 export const Registro = () => {
-    useEffect(() => {
+    const { actions } = useContext(Context);
+    const [formData, setFormData] = useState({
+        name: '',
+        lastName: '',
+        phone: '',
+        address: '',
+        email: '',
+        password: '',
+        rol: ''
+    });
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await actions.signup(formData);
+        setFormData({
+            name: '',
+            lastName: '',
+            phone: '',
+            address: '',
+            email: '',
+            password: '',
+            rol: ''
+
+        });
+    };
+    useEffect(() => {
         document.body.style.backgroundColor = '#CCD6F6';
         return () => {
-            
             document.body.style.backgroundColor = '';
-          };
-        }, []);
+        };
+    }, []);
+
 
     const { id } = useParams();
 
     return (
-        
-            <div className=" d-flex flex-column align-items-center vh-100" >
-                <h1 className="text-center mb-4">¡Bienvenido a Workland!</h1>
-                <div className="w-50 p-4 border rounded shadow"id ="formRegistro" >
 
-                    <form>
-                        <h5 className="text-center mb-4">Ingresa los siguientes datos para crear tu cuenta</h5>
-                        <div className="mb-3">
-                            <label htmlFor="inputName" className="form-label">Nombre </label>
-                            <input type="text" className="form-control" id="inputName" placeholder="Nombre" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="inputLastName" className="form-label">Apellido </label>
-                            <input type="text" className="form-control" id="inputLastName" placeholder="Apellido" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="inputPhone" className="form-label">Teléfono</label>
-                            <input type="number" className="form-control" id="inputPhone" placeholder="Ingresa tu teléfono" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="inputAddress" className="form-label">Dirección</label>
-                            <input type="text" className="form-control" id="inputAddress" placeholder="Ingresa tu dirección" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="inputEmail" className="form-label">Correo electrónico</label>
-                            <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email" />
-                            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="inputPassword" className="form-label">Contraseña</label>
-                            <input type="password" className="form-control" id="inputPassword" placeholder="Password" />
-                        </div>
-                        <div className="mb-3">
-                            <label for="disabledSelect" className="form-label">Selecciona el modo de perfil</label>
-                            <select id="disabledSelect" className="form-select">
-                                <option selected>Selecciona una opción</option>
-                                <option>Emprendedor</option>
-                                <option>Freelance</option>
-                            </select>
-                        </div>
-                        <button type="submit" className="btn" id="registro">Registrar</button>
-                        <Link to="/">
-                            <button type="button" className="btn" id="cancelar" ms-2 >Cancelar</button>
-                        </Link>
-                    </form>
+        <div className=" d-flex flex-column align-items-center vh-100" >
+            <h1 className="text-center mb-4">¡Bienvenido a Workland!</h1>
+            <div className="w-50 p-4 border rounded shadow" id="formRegistro" >
 
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <h5 className="text-center mb-4">Ingresa los siguientes datos para crear tu cuenta</h5>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Nombre </label>
+                        <input id="name" name="name" type="text" className="form-control" placeholder="Nombre" value={formData.name}
+                            onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputLastName" className="form-label">Apellido </label>
+                        <input id="inputLastName" name="lastName"type="text" className="form-control" placeholder="Apellido" value={formData.lastName}
+                            onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputPhone" className="form-label">Teléfono</label>
+                        <input id="inputPhone" name="phone" type="number" className="form-control" placeholder="Ingresa tu teléfono" value={formData.phone}
+                            onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputAddress" className="form-label">Dirección</label>
+                        <input id="inputAddress" name="address" type="text" className="form-control" placeholder="Ingresa tu dirección" value={formData.address}
+                            onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputEmail" className="form-label">Correo electrónico</label>
+                        <input id="inputEmail" name="email"type="email" className="form-control" aria-describedby="emailHelp" placeholder="Email" value={formData.email}
+                            onChange={handleChange} />
+                        <div id="emailHelp" className="form-text">Tu correo está seguro con nosotros, no lo compartiremos con nadie.</div>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputPassword" className="form-label">Contraseña</label>
+                        <input id="inputPassword" name="password" type="password" className="form-control" placeholder="Password" value={formData.password}
+                            onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="disabledSelect" className="form-label">Selecciona el modo de perfil</label>
+                        <select id="disabledSelect" name="rol" className="form-select" value={formData.rol}
+                            onChange={handleChange}>
+                            <option value="">Selecciona una opción</option>
+                            <option value="emprendedor">Emprendedor</option>
+                            <option value="usuario">Freelance</option>
+                        </select>
+                    </div>
+                    <button type="submit" className="btn" id="registro">Registrar</button>
+                    <Link to="/">
+                        <button type="button" className="btn ms-2" id="cancelar" >Cancelar</button>
+                    </Link>
+                </form>
+
             </div>
-        
+        </div>
+
     );
 };
 
 export default Registro;
+
