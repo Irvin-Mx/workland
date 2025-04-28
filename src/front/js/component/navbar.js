@@ -1,41 +1,40 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect} from "react";
+import { Link,useLocation } from "react-router-dom";
+
+//syles
+import styles from "./navbar.module.css"
 
 export const Navbar = () => {
+	let location = useLocation()
+
+	// useEffect(()=>{
+	// 	let location = useLocation()
+	// 	console.log(location)
+	// })
+
+
 	return (
-		<nav className="navbar navbar-expand-lg bg-body-tertiary">
+		<nav className={`${styles.navbar__container} navbar navbar-expand-lg bg-body-tertiary`}>
 			<div className="container-fluid">
-				<a className="navbar-brand" href="#">Workland</a>
+				{/* <a className= href="">Workland</a> */}
+				<Link to="/" className={`${styles.navbar__brand} navbar-brand fs-2 `} >Workland</Link>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-						<li className="nav-item">
-							<a className="nav-link active" aria-current="page" href="#">Home</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="#">Link</a>
-						</li>
-						<li className="nav-item dropdown">
-							<a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Dropdown
-							</a>
-							<ul className="dropdown-menu">
-								<li><a className="dropdown-item" href="#">Action</a></li>
-								<li><a className="dropdown-item" href="#">Another action</a></li>
-								<li><hr className="dropdown-divider"/></li>
-								<li><a className="dropdown-item" href="#">Something else here</a></li>
-							</ul>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link disabled" aria-disabled="true">Disabled</a>
-						</li>
-					</ul>
-					<form className="d-flex" role="search">
-						<input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-							<button className="btn btn-outline-success" type="submit">Search</button>
-					</form>
+					<div className="w-100">
+						<div className="d-grid gap-2 d-md-flex justify-content-md-end">
+							{/* if user in home, show register button */}
+							{location.pathname === "/"? <Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link>  : null}
+							{location.pathname === "/"? <Link to="/login"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link>  : null}
+							
+							{/* if user in register, show login button */}
+							{location.pathname === "/registro"? <Link to="/login"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link> : null}
+							
+							{/* if user in login, show register button */}
+							{location.pathname === "/login"? <Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link> : null}
+						</div>
+					</div>
 				</div>
 			</div>
 		</nav>
