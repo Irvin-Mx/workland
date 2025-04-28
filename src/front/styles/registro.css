@@ -1,0 +1,13 @@
+#formRegistro{
+    background-color: aliceblue;
+    }
+      #registro{
+        background-color: #00D1B2;
+        color: aliceblue;
+      }
+    
+      #cancelar {
+        background-color: #FF3860;
+        color: aliceblue;
+        margin: 15px;
+      }

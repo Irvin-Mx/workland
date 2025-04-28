@@ -46,7 +46,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			signup: async ({ name, last_name, email, password, phone, rol, address }) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/registro", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ name, last_name, email, password, phone, rol, address })
+					});
+			
+					const data = await response.json();
+			
+					if (response.ok) {
+						alert("Usuario registrado con éxito ✅");
+						console.log("Nuevo usuario:", data.new_user_created);
+						setStore({ user: data.new_user_created }); 
+						return data;
+					} else {
+						console.error("Error en la respuesta del servidor:", data);
+						alert(data.error || "Error al registrar el usuario");
+					}
+				} catch (error) {
+					console.error("Error en el registro:", error);
+					alert("Ocurrió un error al intentar registrarse");
+				}
+			},
 		}
 	};
 };
