@@ -11,9 +11,6 @@ export const Navbar = () => {
 	// 	let location = useLocation()
 	// 	console.log(location)
 	// })
-	useEffect(()=>{
-		console.log(location.pathname)
-	})
 
 
 	return (
