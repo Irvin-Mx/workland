@@ -39,7 +39,7 @@ def sign_up():
         phone = data.get("phone")
         rol = data.get("rol")
         address = data.get("address")
-        print(data)
+   
 
         required_fields = ["name", "last_name", "email", "password", "phone", "rol","address"]
         missing_fields = [field for field in required_fields if not data.get(field)]
@@ -86,7 +86,7 @@ def log_in():
         email = data.get("email")
         password = data.get("password")
 
-        print(email,password)
+    
 
 
         required_fields = ["email", "password"]
@@ -98,8 +98,8 @@ def log_in():
                 "result": []
             }), 400
         
-        existe_usuario = User.query.filter_by(email=email).one()
-        print(existe_usuario)
+        existe_usuario = User.query.filter_by(email=email).first()
+  
 
         if not existe_usuario:
             return jsonify({"msj":"Correo no esta registardo","result":[]}),400
@@ -112,7 +112,7 @@ def log_in():
             token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
             return jsonify({ 'token':token}), 200
         else :
-            return jsonify({"msg":"Password equivocado"}),404
+            return jsonify({"msj":"Password equivocado"}),404
 
         
     except Exception as e:
