@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User,Service
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import timedelta
@@ -17,14 +17,6 @@ CORS(api)
 jwt = JWTManager() 
 bcrypt = Bcrypt()  
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
 
 @api.route('/sign-up', methods=['POST'])
 def sign_up():
@@ -86,9 +78,6 @@ def log_in():
         email = data.get("email")
         password = data.get("password")
 
-    
-
-
         required_fields = ["email", "password"]
         missing_fields = [field for field in required_fields if not data.get(field)]
         
@@ -113,6 +102,69 @@ def log_in():
             return jsonify({ 'token':token}), 200
         else :
             return jsonify({"msj":"Password equivocado"}),404
+
+        
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
+    
+
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
+    try:
+        user_id=get_jwt_identity()
+        if user_id:
+            user=User.query.filter_by(id=user_id).first()
+            return jsonify(user.serialize()), 200
+    
+        else:
+            return {"Error": "Token inválido o no proporcionado"}, 401
+
+        
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
+    
+@api.route('/service', methods=['POST'])
+@jwt_required()
+def post_service():
+    try:
+        data = request.get_json()
+
+        title = data.get("title")
+        price = data.get("price")
+        description = data.get("description")
+        img_url = data.get("img_url")
+        user_id=get_jwt_identity()
+        print(type(user_id))
+
+        required_fields = ["title", "price", "description", "img_url"]
+        missing_fields = [field for field in required_fields if not data.get(field)]
+        if missing_fields:
+            return jsonify({
+                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
+                "result": []
+            }), 400
+
+        existe_usuario = User.query.filter(User.id == int(user_id)).first()
+
+
+        if not existe_usuario:
+            return jsonify({"msj":"No existe usuario"}), 400
+        
+        nuevo_servicio=Service(title=title,price=int(price),description=description,img_url=img_url,user_id=int(user_id)
+        )
+
+        db.session.add(nuevo_servicio)
+        db.session.commit()
+
+        return jsonify({
+        'msj': 'Servicio creado exitosamente',
+        'result': nuevo_servicio.serialize()}), 201
+
 
         
     except Exception as e:

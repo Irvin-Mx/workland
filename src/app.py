@@ -54,6 +54,7 @@ def handle_invalid_usage(error):
 
 jwt = JWTManager(app) 
 bcrypt = Bcrypt(app)  
+app.config["JWT_SECRET_KEY"]=os.getenv('FLASK_APP_KEY')
 
 
 

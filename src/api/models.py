@@ -43,10 +43,9 @@ class Service(db.Model):
     description = db.Column(db.String(200), nullable=True)
     img_url=db.Column(db.String(), nullable=True)
 
-    
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
     
-    usuario_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship("User", back_populates="services")
 
     def serialize(self):
@@ -56,6 +55,6 @@ class Service(db.Model):
             "price": self.price,
             "description": self.description,
             "img_url": self.img_url,
-            "usuario_id": self.usuario_id,
+            "user_id": self.user_id,
             # do not serialize the password, its a security breach
         }
