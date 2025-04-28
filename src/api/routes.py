@@ -76,3 +76,46 @@ def sign_up():
         return jsonify({
             "error":str(e)
         })
+    
+@api.route('/log-in', methods=['POST'])
+def log_in():
+
+    try:
+        data = request.get_json()
+
+        email = data.get("email")
+        password = data.get("password")
+
+        print(email,password)
+
+
+        required_fields = ["email", "password"]
+        missing_fields = [field for field in required_fields if not data.get(field)]
+        
+        if missing_fields:
+            return jsonify({
+                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
+                "result": []
+            }), 400
+        
+        existe_usuario = User.query.filter_by(email=email).one()
+        print(existe_usuario)
+
+        if not existe_usuario:
+            return jsonify({"msj":"Correo no esta registardo","result":[]}),400
+        
+        hasheada_password=existe_usuario.password
+        its_valid_password=bcrypt.check_password_hash(hasheada_password,password)
+
+        if its_valid_password:
+            expires=timedelta(days=1)
+            token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
+            return jsonify({ 'token':token}), 200
+        else :
+            return jsonify({"msg":"Password equivocado"}),404
+
+        
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
