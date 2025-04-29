@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar registrarse");
                 }
             },
-            login: async ({name,email}) => {
+            login: async ({name,email }) => {
                 try{
                     const response = await fetch(process.env.BACKEND_URL + "/api/log-in", {
                         method: "POST",
