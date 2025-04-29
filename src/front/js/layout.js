@@ -42,8 +42,6 @@ const Layout = () => {
 
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
-                        <Route element={<h1>Vista de login con exito1</h1>} path="/abc" />
-                        <Route element={<h1>Vista de login con exito2</h1>} path="/def" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
