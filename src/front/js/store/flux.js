@@ -45,11 +45,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             
                     if (response.ok) {
                         alert("Usuario inicio sesion con éxito ✅");
-                        console.log(data);
+                        //console.log(data);
                         // setStore({ userToken: data.token });
                         setStore({...setStore,userToken:data.token})
                         const store = getStore()
-                        console.log(store)
+                        //console.log(store)
                         
                         return data;
                     } else {
@@ -68,6 +68,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }else{
                     return true
                 }
+            },
+            logOut: ()=>{
+                let store = getStore()
+                localStorage.clear()
+                setStore({...setStore,userToken: null})
             }
         },
     };

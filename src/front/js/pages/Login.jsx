@@ -9,12 +9,10 @@ const Login = () => {
     const navigate = useNavigate()
     
     useEffect(() => {
-        console.log(localStorage)
-        let token = localStorage.getItem("userToken");
-        //console.log("User has a token",token)
-        if (token != "undefined") {
+
+        if (actions.checkLogInUser()) {
             // Si el token existe, redirigir al usuario a home donde ya puede ver su perfil de home 
-            navigate("/def")
+            navigate("/")
         }
     })
 
@@ -30,12 +28,12 @@ const Login = () => {
             email: '',
             password: ''
         });
-        console.log("Aqui esta el token...vista login")
-        console.log(localStorage)
+        // console.log("Aqui esta el token...vista login")
+        // console.log(localStorage)
         localStorage.setItem("userToken", store.userToken);
         if (store.userToken) {
             //console.log(store.token)
-            navigate("/abc")
+            navigate("/")
         }
     };
 
