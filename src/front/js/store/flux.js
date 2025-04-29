@@ -30,26 +30,31 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            login: async ({name,email }) => {
+            login: async ({email,password }) => {
                 try{
+                    console.log("Entramos a la funcion login...")
                     const response = await fetch(process.env.BACKEND_URL + "/api/log-in", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify({ name, last_name, email, password, phone, rol, address })
+                        body: JSON.stringify({ email, password})
                     });
             
                     const data = await response.json();
             
                     if (response.ok) {
-                        alert("Usuario registrado con éxito ✅");
-                        console.log("Nuevo usuario:", data.new_user_created);
-                        setStore({ user: data.new_user_created }); 
+                        alert("Usuario inicio sesion con éxito ✅");
+                        console.log(data);
+                        // setStore({ userToken: data.token });
+                        setStore({...setStore,userToken:data.token})
+                        const store = getStore()
+                        console.log(store)
+                        
                         return data;
                     } else {
                         console.error("Error en la respuesta del servidor:", data);
-                        alert(data.error || "Error al registrar el usuario");
+                        alert(data.error || "Error al intentar iniciar sesion");
                     }
                 }catch(e){
                     console.log("Error", e)
