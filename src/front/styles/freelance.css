@@ -1,0 +1,11 @@
+#tituloProducto {
+  height: 45px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-title, .card-description, .card-package   {
+
+    background-color: aliceblue;
+   
+  }
