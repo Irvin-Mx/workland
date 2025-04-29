@@ -8,7 +8,7 @@ export const Registro = () => {
     const { actions } = useContext(Context);
     const [formData, setFormData] = useState({
         name: '',
-        lastName: '',
+        last_name: '',
         phone: '',
         address: '',
         email: '',
@@ -30,7 +30,7 @@ export const Registro = () => {
         await actions.signup(formData);
         setFormData({
             name: '',
-            lastName: '',
+            last_name: '',
             phone: '',
             address: '',
             email: '',
@@ -52,7 +52,7 @@ export const Registro = () => {
     return (
 
         <div className=" d-flex flex-column align-items-center vh-100" >
-            <h1 className="text-center mb-4">¡Bienvenido a Workland!</h1>
+            <h1 className="text-center m-5">¡Bienvenido a Workland!</h1>
             <div className="w-50 p-4 border rounded shadow" id="formRegistro" >
 
                 <form onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ export const Registro = () => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="inputLastName" className="form-label">Apellido </label>
-                        <input id="inputLastName" name="lastName"type="text" className="form-control" placeholder="Apellido" value={formData.lastName}
+                        <input id="inputLastName" name="last_name" type="text" className="form-control" placeholder="Apellido" value={formData.last_name}
                             onChange={handleChange} />
                     </div>
                     <div className="mb-3">

@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             signup: async ({ name, last_name, email, password, phone, rol, address }) => {
                 try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/registro", {
+                    const response = await fetch(process.env.BACKEND_URL + "/api/sign-up", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
