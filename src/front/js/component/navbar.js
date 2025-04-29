@@ -26,13 +26,13 @@ export const Navbar = () => {
 						<div className="d-grid gap-2 d-md-flex justify-content-md-end">
 							{/* if user in home, show register button */}
 							{location.pathname === "/"? <Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link>  : null}
-							{location.pathname === "/"? <Link to="/login"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link>  : null}
+							{location.pathname === "/"? <Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link>  : null}
 							
 							{/* if user in register, show login button */}
-							{location.pathname === "/registro"? <Link to="/login"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link> : null}
+							{location.pathname === "/registro"? <Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link> : null}
 							
 							{/* if user in login, show register button */}
-							{location.pathname === "/login"? <Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link> : null}
+							{location.pathname === "/iniciar-sesion"? <Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link> : null}
 						</div>
 					</div>
 				</div>
