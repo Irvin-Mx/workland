@@ -16,6 +16,8 @@ class User(db.Model):
     phone = db.Column(db.String(20), nullable=False)
     address = db.Column(db.String(200), nullable=False)
     rol = db.Column(db.String(20), nullable=False)
+    service_description = db.Column(db.String(300), nullable=True)
+
     is_active = db.Column(db.Boolean(), nullable=False,default=True)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
 
