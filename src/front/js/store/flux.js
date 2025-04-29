@@ -1,52 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            message: null,
-            demo: [
-                {
-                    title: "FIRST",
-                    background: "white",
-                    initial: "white"
-                },
-                {
-                    title: "SECOND",
-                    background: "white",
-                    initial: "white"
-                }
-            ]
         },
         actions: {
-            // Use getActions to call a function within a fuction
-            exampleFunction: () => {
-                getActions().changeColor(0, "green");
-            },
-
-            getMessage: async () => {
-                try{
-                    // fetching data from the backend
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-                    const data = await resp.json()
-                    setStore({ message: data.message })
-                    // don't forget to return something, that is how the async resolves
-                    return data;
-                }catch(error){
-                    console.log("Error loading message from backend", error)
-                }
-            },
-            changeColor: (index, color) => {
-                //get the store
-                const store = getStore();
-
-                //we have to loop the entire demo array to look for the respective index
-                //and change its color
-                const demo = store.demo.map((elm, i) => {
-                    if (i === index) elm.background = color;
-                    return elm;
-                });
-
-                //reset the global store
-                setStore({ demo: demo });
-            },
             signup: async ({ name, last_name, email, password, phone, rol, address }) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/sign-up", {
@@ -73,7 +29,52 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar registrarse");
                 }
             },
-        }
+
+            login: async ({email,password }) => {
+                try{
+                    console.log("Entramos a la funcion login...")
+                    const response = await fetch(process.env.BACKEND_URL + "/api/log-in", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ email, password})
+                    });
+            
+                    const data = await response.json();
+            
+                    if (response.ok) {
+                        alert("Usuario inicio sesion con éxito ✅");
+                        //console.log(data);
+                        // setStore({ userToken: data.token });
+                        setStore({...setStore,userToken:data.token})
+                        const store = getStore()
+                        //console.log(store)
+                        
+                        return data;
+                    } else {
+                        console.error("Error en la respuesta del servidor:", data);
+                        alert(data.error || "Error al intentar iniciar sesion");
+                    }
+                }catch(e){
+                    console.log("Error", e)
+                }
+            },
+            checkLogInUser:()=>{
+                let token = localStorage.getItem("user_token");
+    
+                if(token==null){
+                    return false
+                }else{
+                    return true
+                }
+            },
+            logOut: ()=>{
+                let store = getStore()
+                localStorage.clear()
+                setStore({...setStore,userToken: null})
+            }
+        },
     };
 };
 
