@@ -109,23 +109,26 @@ def log_in():
             "error":str(e)
         })
     
-@api.route("/search/<str:busqueda>",methods=["GET"])
-def search_results(busqueda):
+
+@api.route("/search",methods=["POST"])
+def search_results():
     try:
+        busqueda=request.get_json()
         resultados = User.query.filter(
             User.service_description.ilike(f'%{busqueda}%')
         ).all()
 
         data = [{
             'id': resultado.id,
-            'service_description': resultado.service_description,
+            'title': resultado.service_description,
+            "user_name":f'{resultado.name} {resultado.last_name}'
             # Agrega otros campos que necesites mostrar
         } for resultado in resultados]
 
         return jsonify({
-            'success': True,
-            'total': len(resultados),
-            'results': data
+            'msj': True,
+            "result":data
+            
         })
     
 
@@ -134,10 +137,6 @@ def search_results(busqueda):
             "error":str(e)
         })
 
-    
-
-
-    
 
 @api.route('/user', methods=['GET'])
 @jwt_required()
