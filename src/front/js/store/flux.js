@@ -54,9 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }catch(e){
                     console.log("Error", e)
                 }
-            }
-        }
-
+            },
             checkLogInUser:()=>{
                 let token = localStorage.getItem("user_token");
     
@@ -66,11 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return true
                 }
             }
-
-            
         },
-
-
     };
 };
 
