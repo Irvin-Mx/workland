@@ -199,3 +199,16 @@ def post_service():
         return jsonify({
             "error":str(e)
         })
+
+
+@api.route('/create-order', methods=['POST'])
+@jwt_required()
+def create_order():
+    try:
+        print('Attempting to create new order...')
+    
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
+    
