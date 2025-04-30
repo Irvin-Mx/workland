@@ -12,7 +12,8 @@ import { Footer } from "./component/footer";
 import Registro from "./pages/registro";
 
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
-import { Freelance } from "./pages/freelance";
+import  Ordenes  from "./pages/Ordenes.jsx";
+
 
 import Login from "./pages/Login.jsx";
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
@@ -44,6 +45,7 @@ const Layout = () => {
                         <Route element={<Login/>} path="/iniciar-sesion" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
+                        <Route element={<Ordenes />} path="/ordenes" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
