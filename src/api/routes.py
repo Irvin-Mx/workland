@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User,Service
+from api.models import db, User,Service,Order
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import timedelta
@@ -206,6 +206,34 @@ def post_service():
 def create_order():
     try:
         print('Attempting to create new order...')
+        data = request.get_json()
+        print(data)
+
+        status = data.get("status")
+        is_payed = data.get("is_payed")
+        
+        required_fields = ["status", "is_payed"]
+        # missing_fields = [field for field in required_fields if not data.get(field)]
+        missing_fields = [field for field in required_fields if field not in data]
+        
+        if missing_fields:
+            return jsonify({
+                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
+                "result": []
+            }), 400
+        
+        
+        nueva_orden=Order(status=status,is_payed=is_payed)
+        
+        db.session.add(nueva_orden)
+        db.session.commit()
+
+        return jsonify({"msg":"Craedo exitosamente","result":{
+            "status":status,
+            "is_payed": is_payed
+        }}), 201
+
+
     
     except Exception as e:
         return jsonify({
