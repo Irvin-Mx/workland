@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
-import "../../styles/registro.css";
+
 
 export const Registro = () => {
     const { actions } = useContext(Context);
@@ -52,7 +52,7 @@ export const Registro = () => {
 
         <div className=" d-flex flex-column align-items-center vh-100" >
             <h1 className="text-center m-5">¡Bienvenido a Workland!</h1>
-            <div className="w-50 p-4 border rounded shadow" id="formRegistro" >
+            <div className="w-50 p-4 border rounded shadow" style={{ background: "aliceblue" }} >
 
                 <form onSubmit={handleSubmit}>
                     <h5 className="text-center mb-4">Ingresa los siguientes datos para crear tu cuenta</h5>
@@ -98,9 +98,9 @@ export const Registro = () => {
                             <option value="usuario">Freelance</option>
                         </select>
                     </div>
-                    <button type="submit" className="btn" id="registro">Registrar</button>
+                    <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }}>Registrar</button>
                     <Link to="/">
-                        <button type="button" className="btn ms-2" id="cancelar" >Cancelar</button>
+                        <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} >Cancelar</button>
                     </Link>
                 </form>
 
