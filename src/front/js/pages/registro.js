@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import "../../styles/registro.css";
@@ -47,7 +46,7 @@ export const Registro = () => {
     }, []);
 
 
-    const { id } = useParams();
+ 
 
     return (
 

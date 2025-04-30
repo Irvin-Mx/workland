@@ -1,7 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            resutadosBusqueda: []
+            resutadosBusqueda: [],
+            userInfo:{},
+            userProfile:{}
         },
         actions: {
             signup: async ({ name, last_name, email, password, phone, rol, address }) => {
@@ -48,8 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         alert("Usuario inicio sesion con éxito ✅");
                         //console.log(data);
                         // setStore({ userToken: data.token });
-                        setStore({ ...setStore, userToken: data.token })
                         const store = getStore()
+                        console.log(data.token)
+                        localStorage.setItem("user_token", data.token);
+                        setStore({ ...store, userInfo: data.user_info })
+                        
                         //console.log(store)
 
                         return data;
@@ -61,39 +66,73 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("Error", e)
                 }
             },
-            checkLogInUser: () => {
-                let token = localStorage.getItem("user_token");
 
-                if (token == null) {
-                    return false
-                } else {
-                    return true
-                }
-            },
-            logOut: () => {
-                let store = getStore()
-                localStorage.clear()
-                setStore({ ...setStore, userToken: null })
-            },
-            busquedaFreelancers: async (busqueda) => {
+            getMyProfile: async () => {
                 try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
-                        method: 'POST',
+                    const token = localStorage.getItem("user_token");
+                    console.log(token)
+
+                    const response = await fetch(process.env.BACKEND_URL + "/api/user", {
+                        method: "GET",
                         headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(busqueda)
+                            "Authorization": "Bearer " + token, 
+                            "Content-Type": "application/json"
+                        }
                     });
+            
+                    const data =await response.json();
 
-                    
-                    const data = await response.json()
-                    setStore({...getStore(),resutadosBusqueda:data.result})
-                } catch (error) {
-                    console.log(error)
+                    if (response.ok) {
+                    console.log ("Datos del usuario", data);
+                    setStore({ ...getStore(), userProfile: data });
+                    return data;
+                    } else{
+
+                        console.error("Error al obtener los datos del usuario", data);
+                    alert(data.error || "Error al obtner el perfil de usuario");
+                    return null;
+
+                    }
+                } catch(e) {
+                    console.error ("Error en la solicitus para obtener el perfil de usuario", error);
+                    alert("Ocurrio un error al obtener los datos del perfil freelance");
+                    return null;
                 }
-            }
-        },
-    };
-};
+            },
 
-export default getState;
+            
+                checkLogInUser: () => {
+                    let token = localStorage.getItem("user_token");
+
+                    if (token == null) {
+                        return false
+                    } else {
+                        return true
+                    }
+                },
+                    logOut: () => {
+                        localStorage.removeItem("user_token");
+                       
+                    },
+                        busquedaFreelancers: async (busqueda) => {
+                            try {
+                                const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(busqueda)
+                                });
+
+
+                                const data = await response.json()
+                                setStore({ ...getStore(), resutadosBusqueda: data.result })
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        }
+            },
+        };
+    };
+
+    export default getState;

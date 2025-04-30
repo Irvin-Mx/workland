@@ -37,7 +37,7 @@ export const Navbar = () => {
 							{/* if user in home, show register button */}
 							{location.pathname === "/" && !localStorage.userToken? <Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link>  : null}
 							{location.pathname === "/" && !localStorage.userToken? <Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link>  : null}
-							
+							<Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link>
 							{/* if user in register, show login button */}
 							{location.pathname === "/registro"? <Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2`} type="button">Iniciar sesion</button></Link> : null}
 							
