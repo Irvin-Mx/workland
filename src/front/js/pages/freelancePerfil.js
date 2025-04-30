@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
-export const Paquetes = () => {
+export const freelancePerfil = () => {
     const { store, actions } = useContext(Context);
 
     return (
@@ -177,5 +177,5 @@ export const Paquetes = () => {
     );
 };
 
-export default Paquetes;
+export default freelancePerfil;
 

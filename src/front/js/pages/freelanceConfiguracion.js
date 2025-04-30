@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../../styles/freelance.css";
 
 
-export const Freelance = () => {
+export const FreelanceConfiguracion = () => {
     const { store, actions } = useContext(Context);
 
     return (
@@ -96,4 +96,4 @@ export const Freelance = () => {
     );
 };
 
-export default Freelance;
+export default FreelanceConfiguracion;

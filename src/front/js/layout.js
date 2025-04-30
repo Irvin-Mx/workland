@@ -10,11 +10,14 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Registro from "./pages/registro";
+
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
 import { Freelance } from "./pages/freelance";
+
 import Login from "./pages/Login.jsx";
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
-import Paquetes from "./pages/paquetes.js";
+import FreelancePerfil  from "./pages/freelancePerfil.js";
+import FreelanceConfiguracion from "./pages/freelanceConfiguracion.js";
 
 
 
@@ -35,12 +38,10 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
-                        <Route element={<Paquetes/>} path="/paquetes" />
-                        <Route element={<Freelance />} path="/freelance" />
-                     
+                        <Route element={<FreelanceConfiguracion/>} path="/freelanceConfiguracion"/>
+                        <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
                         <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
                         <Route element={<Login/>} path="/iniciar-sesion" />
-
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
                         <Route element={<h1>Not found!</h1>} />
