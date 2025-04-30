@@ -12,7 +12,6 @@ import { Footer } from "./component/footer";
 import Registro from "./pages/registro";
 
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
-import { Freelance } from "./pages/freelance";
 
 import Login from "./pages/Login.jsx";
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
