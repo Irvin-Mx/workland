@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             resutadosBusqueda: [],
-            userInfo:{},
-            userProfile:{}
+            userProfile:{},
+            terminoBusqueda:""
         },
         actions: {
             signup: async ({ name, last_name, email, password, phone, rol, address }) => {
@@ -51,9 +51,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         //console.log(data);
                         // setStore({ userToken: data.token });
                         const store = getStore()
-                        console.log(data.token)
+                
                         localStorage.setItem("user_token", data.token);
-                        setStore({ ...store, userInfo: data.user_info })
+                        setStore({ ...store, userProfile: data.user_info })
                         
                         //console.log(store)
 
@@ -70,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             getMyProfile: async () => {
                 try {
                     const token = localStorage.getItem("user_token");
-                    console.log(token)
+               
 
                     const response = await fetch(process.env.BACKEND_URL + "/api/user", {
                         method: "GET",
@@ -112,6 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 },
                     logOut: () => {
                         localStorage.removeItem("user_token");
+                        setStore({...getStore(),userProfile:{}})
                        
                     },
                         busquedaFreelancers: async (busqueda) => {
