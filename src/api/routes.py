@@ -211,8 +211,13 @@ def create_order():
 
         status = data.get("status")
         is_payed = data.get("is_payed")
-        
-        required_fields = ["status", "is_payed"]
+        service_id = get_jwt_identity()
+        user_id = get_jwt_identity()
+
+        print(service_id)
+        print(user_id)
+        required_fields = ["status", "is_payed",]
+        #required_fields = ["status", "is_payed","service_id","user_id"]
         # missing_fields = [field for field in required_fields if not data.get(field)]
         missing_fields = [field for field in required_fields if field not in data]
         
@@ -228,7 +233,7 @@ def create_order():
         db.session.add(nueva_orden)
         db.session.commit()
 
-        return jsonify({"msg":"Craedo exitosamente","result":{
+        return jsonify({"msg":"Craeda exitosamente","result":{
             "status":status,
             "is_payed": is_payed
         }}), 201
@@ -240,3 +245,16 @@ def create_order():
             "error":str(e)
         })
     
+
+
+@api.route('/order', methods=['GET'])
+@jwt_required()
+def get_order():
+    try:
+        print(get_jwt_identity())
+
+        return jsonify({'msj':'orden obtenida'}),200
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
