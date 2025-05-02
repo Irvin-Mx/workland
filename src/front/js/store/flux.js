@@ -81,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        
+
                         setStore({ ...getStore(), userProfile: data });
                         return data;
                     } else {
@@ -97,6 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
+           
             checkLogInUser: () => {
                 let token = localStorage.getItem("user_token");
 
@@ -106,6 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return true
                 }
             },
+       
             logOut: () => {
                 localStorage.removeItem("user_token");
                 setStore({ ...getStore(), userProfile: {} })
@@ -135,7 +137,37 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (term == false) {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
-            }
+            },
+                 
+            createProduct: async ({ title, description, amount, img_url }) => {
+
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + "/api/service", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ title, description, amount, img_url })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert("Producto agregado correctamente ✅");
+                        console.log("Producto creado:", data.new_product_created);
+                        const store = getStore();
+                        setStore({ ...store, products: [...(store.products || []), data.new_product_created] });
+                        return data;
+                    } else {
+                        console.error("Error en la respuesta del servidor:", data);
+                        alert(data.error || "Error al agregar producto");
+                    }
+                } catch (error) {
+                    console.error("Error al agregar producto:", error);
+                    alert("Ocurrió un error al intentar añadir producto");
+                }
+            },
+   
 
         },
     };
