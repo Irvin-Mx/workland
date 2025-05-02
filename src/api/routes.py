@@ -207,16 +207,23 @@ def create_order():
     try:
         print('Attempting to create new order...')
         data = request.get_json()
-        print(data)
+        
+        user_id = get_jwt_identity()
+
+        user_dict = User.query.filter_by(id=user_id).first()
+        #print(user_dict.serialize()["name"])
+        user_name= user_dict.serialize()["name"]
+
 
         status = data.get("status")
         is_payed = data.get("is_payed")
-        service_id = get_jwt_identity()
-        user_id = get_jwt_identity()
+        service_id = data.get("service_id")
+        
+        #user_id = data.get("user_id")
+        price = data.get("price")
 
-        print(service_id)
-        print(user_id)
-        required_fields = ["status", "is_payed",]
+        
+        required_fields = ["status", "is_payed","price","user_id","service_id"]
         #required_fields = ["status", "is_payed","service_id","user_id"]
         # missing_fields = [field for field in required_fields if not data.get(field)]
         missing_fields = [field for field in required_fields if field not in data]
@@ -227,18 +234,28 @@ def create_order():
                 "result": []
             }), 400
         
+        #Buscar si existe user_id en db
+        usuario = User.query.filter_by(id=user_id).first()
+
+        #service_user_name = data.get()
+
+        if not usuario:
+            return jsonify({"msj":"Usuario no encontrado","result":[]}),400
         
-        nueva_orden=Order(status=status,is_payed=is_payed)
+        #Buscar si existe service_id en db
+        servicio = Service.query.filter_by(id=service_id).first()
+  
+
+        if not servicio:
+            return jsonify({"msj":"Servicio no encontrado","result":[]}),400
+        
+        #nueva_orden=Order(status=status,is_payed=is_payed,price=price,service_id=service_id,user_id=user_id)
+        nueva_orden=Order(status=status,is_payed=is_payed,price=price,service_id=service_id,user_id=user_id,user_name=user_name)
         
         db.session.add(nueva_orden)
         db.session.commit()
 
-        return jsonify({"msg":"Craeda exitosamente","result":{
-            "status":status,
-            "is_payed": is_payed
-        }}), 201
-
-
+        return jsonify({"msg":"Craeda exitosamente","result": nueva_orden.serialize()}), 201
     
     except Exception as e:
         return jsonify({
@@ -251,9 +268,41 @@ def create_order():
 @jwt_required()
 def get_order():
     try:
-        print(get_jwt_identity())
+        orders = Order.query.filter_by(user_id=get_jwt_identity()).all()
+        
+       
+        data = [order.serialize() for order in orders]
 
-        return jsonify({'msj':'orden obtenida'}),200
+        #print(data)
+
+        freelancers_id = [freelancer_id["service_id"] for freelancer_id in data]
+        #print(freelancers_id)
+
+
+        ids_of_freelancers = [Service.query.filter(Service.id == serviceId).first().serialize()["user_id"] for serviceId in freelancers_id]
+        #print("----")
+        #print(ids_of_freelancers)
+
+
+        #print("ooooooooo")
+        #print(User.query.filter_by(id=1).first().serialize()["name"])
+
+        names_of_freelancers = [   {"freelance_name": User.query.filter_by(id=freelance_id).first().serialize()["name"] , "freelance_id": freelance_id}    for freelance_id in ids_of_freelancers]
+
+        #print("below the names of the freelancers")
+        #print(names_of_freelancers)
+
+
+
+
+        #service = Service.query.filter_by(id=1).first()
+        service = Service.query.filter(Service.id == 2).first()
+        #print(service.serialize()["user_id"])
+        #print(Service.query.all()) 
+
+            
+        
+        return jsonify({'msj':'orden obtenida', "rslt": data, "freelance info": names_of_freelancers }),200
     except Exception as e:
         return jsonify({
             "error":str(e)

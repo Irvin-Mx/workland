@@ -69,7 +69,9 @@ class Order(db.Model):
     __tablename__="orders"
     id = db.Column(db.Integer, unique=True, primary_key=True)
     status = db.Column(db.String(20), nullable=False)
-    is_payed = db.Column(db.Boolean(), nullable=False,default=False)
+    is_payed = db.Column(db.Boolean(),default=False)
+    price = db.Column(db.Integer)
+    user_name = db.Column(db.String(30), nullable=False)
 
     user_id = Column(Integer, ForeignKey('users.id'))
     service_id = Column(Integer, ForeignKey('services.id'))
@@ -83,8 +85,10 @@ class Order(db.Model):
         return {
             "id": self.id,
             "status": self.status,
+            "price": self.price,
             "is_payed": self.is_payed,
             "user_id": self.user_id,
             "service_id": self.service_id,
+            "user_name": self.user_name
             # do not serialize the password, its a security breach
         }

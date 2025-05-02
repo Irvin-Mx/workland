@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/1c141fa834fa_.py
-Revision ID: 1c141fa834fa
+Revision ID: 4da9618222ab
 Revises: 
-Create Date: 2025-04-30 20:19:19.834189
-========
-Revision ID: e4d7811f1c75
-Revises: 
-Create Date: 2025-05-02 04:02:08.245880
->>>>>>>> develop:migrations/versions/e4d7811f1c75_.py
+Create Date: 2025-05-02 21:43:52.887683
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/1c141fa834fa_.py
-revision = '1c141fa834fa'
-========
-revision = 'e4d7811f1c75'
->>>>>>>> develop:migrations/versions/e4d7811f1c75_.py
+revision = '4da9618222ab'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -58,13 +48,16 @@ def upgrade():
     op.create_table('orders',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('status', sa.String(length=20), nullable=False),
-    sa.Column('is_payed', sa.Boolean(), nullable=False),
+    sa.Column('is_payed', sa.Boolean(), nullable=True),
+    sa.Column('price', sa.Integer(), nullable=True),
+    sa.Column('user_name', sa.String(length=30), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('service_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
     sa.ForeignKeyConstraint(['service_id'], ['services.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('id')
     )
     # ### end Alembic commands ###
 
