@@ -1,3 +1,4 @@
+import { toastExito,toastFallo } from "../component/Toaster/toasterIndex.jsx";
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
@@ -46,7 +47,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        alert("Usuario inicio sesion con éxito ✅");
+                        // toastExito("Usuario inicio sesion con éxito ✅")
+                        // alert("Usuario inicio sesion con éxito ✅");
                         //console.log(data);
                         // setStore({ userToken: data.token });
                         const store = getStore()
@@ -58,8 +60,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                         return data;
                     } else {
+                        // toastFallo("Error al intentar iniciar sesion")
                         console.error("Error en la respuesta del servidor:", data);
-                        alert(data.error || "Error al intentar iniciar sesion");
+                        // alert(data.error || "Error al intentar iniciar sesion");
                     }
                 } catch (e) {
                     console.log("Error", e)
