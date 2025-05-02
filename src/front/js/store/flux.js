@@ -32,7 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar registrarse");
                 }
             },
-
             login: async ({ email, password }) => {
                 try {
                     console.log("Entramos a la funcion login...")
@@ -66,7 +65,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("Error", e)
                 }
             },
-
             getMyProfile: async () => {
                 try {
                     const token = localStorage.getItem("user_token");
@@ -83,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        console.log("Datos del usuario", data);
+
                         setStore({ ...getStore(), userProfile: data });
                         return data;
                     } else {
@@ -99,8 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-
-
+           
             checkLogInUser: () => {
                 let token = localStorage.getItem("user_token");
 
@@ -110,6 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return true
                 }
             },
+       
             logOut: () => {
                 localStorage.removeItem("user_token");
                 setStore({ ...getStore(), userProfile: {} })
@@ -132,7 +130,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(error)
                 }
             },
-
+            changeSearchTerm: (term) => {
+                if (term !== false) {
+                    setStore({ ...getStore(), terminoBusqueda: term })
+                }
+                if (term == false) {
+                    setStore({ ...getStore(), terminoBusqueda: "" })
+                }
+            },
+                 
             createProduct: async ({ title, description, amount, img_url }) => {
 
                 try {
@@ -161,13 +167,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
+   
 
-
-
-        }
-
-    }
-
+        },
+    };
 };
 
 export default getState;

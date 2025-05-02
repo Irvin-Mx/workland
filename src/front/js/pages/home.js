@@ -14,6 +14,8 @@ export const Home = () => {
 
 	const handleKeyDown = (e) => {
 		if (e.key === "Enter") {
+			actions.changeSearchTerm(terminoBusqueda)
+			setTerminoBusqueda("")
 			navigate("/busqueda")
 		}
 	  };
