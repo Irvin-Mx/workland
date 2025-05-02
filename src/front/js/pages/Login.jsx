@@ -10,10 +10,10 @@ const Login = () => {
     
     useEffect(() => {
 
-        if (actions.checkLogInUser()) {
-            // Si el token existe, redirigir al usuario a home donde ya puede ver su perfil de home 
-            navigate("/")
-        }
+        // if (actions.checkLogInUser()) {
+        //     // Si el token existe, redirigir al usuario a home donde ya puede ver su perfil de home 
+        //     navigate("/")
+        // }
     })
 
     const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ const Login = () => {
         // console.log("Aqui esta el token...vista login")
         // console.log(localStorage)
         localStorage.setItem("userToken", store.userToken);
-        if (store.userToken) {
+        if (actions.checkLogInUser()) {
             //console.log(store.token)
             navigate("/")
         }

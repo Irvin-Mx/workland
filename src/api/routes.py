@@ -99,7 +99,7 @@ def log_in():
         if its_valid_password:
             expires=timedelta(days=1)
             token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
-            return jsonify({ 'token':token}), 200
+            return jsonify({ 'token':token,"user_info":existe_usuario.serialize()}), 200
         else :
             return jsonify({"msj":"Password equivocado"}),404
 

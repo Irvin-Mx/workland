@@ -1,9 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
+
 export const Home = () => {
+	const navigate=useNavigate()
 	const { store, actions } = useContext(Context);
+	const [terminoBusqueda,setTerminoBusqueda]=useState(store.terminoBusqueda)
+	const handleChange=(e)=>{
+		setTerminoBusqueda(e.target.value)
+	}
+
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") {
+			actions.changeSearchTerm(terminoBusqueda)
+			setTerminoBusqueda("")
+			navigate("/busqueda")
+		}
+	  };
+
 
 	return (
 		<div className="text-center mt-5">
@@ -12,7 +28,10 @@ export const Home = () => {
 					<h1>Workland</h1>
 					<h4>¡El trabajo de tus suenos, te espera!</h4>
 					<div className="input-group mb-3 w-50">
-						<input type="text" className="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" />
+						<input
+						onChange={handleChange}
+						onKeyDown={handleKeyDown}
+						type="text" className="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" />
 						<button className="btn btn-outline-secondary" type="button" id="button-addon2"><i className="fa-solid fa-magnifying-glass"></i></button>
 					</div>
 				</div>

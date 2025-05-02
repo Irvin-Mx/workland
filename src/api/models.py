@@ -17,6 +17,7 @@ class User(db.Model):
     address = db.Column(db.String(200), nullable=False)
     rol = db.Column(db.String(20), nullable=False)
     service_description = db.Column(db.String(300), nullable=True)
+    balance=db.Column(db.Integer(), nullable=True ,default=0)
 
     is_active = db.Column(db.Boolean(), nullable=False,default=True)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
@@ -35,6 +36,7 @@ class User(db.Model):
             "address": self.address,
             "rol": self.rol,
             "is_active": self.is_active,
+            "balance": self.balance,
             # do not serialize the password, its a security breach
         }
 

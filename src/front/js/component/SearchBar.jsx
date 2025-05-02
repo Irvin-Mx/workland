@@ -4,8 +4,8 @@ import styles from "./SearchBar.module.css"
 import {Context}  from "../store/appContext.js"
 
 const SearchBar = () => {
-  const [terminoBuqueda, setTerminoBuqueda] = useState("")
-  const {_,actions}=useContext(Context) 
+  const {store,actions}=useContext(Context) 
+  const [terminoBuqueda, setTerminoBuqueda] = useState(store.terminoBusqueda)
   const handleChange = (e) => {
     setTerminoBuqueda(e.target.value)
   }
