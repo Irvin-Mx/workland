@@ -52,13 +52,48 @@ export const FreelanceEdit = () => {
             <div className="user-card d-flex flex-column p-1 w-50 align-items-center border-rounded">
                 <h3>¡Súmate hoy y haz que cada servicio cuente!</h3>
             </div>
-            <p>Estas a un solo paso de onbtener el trabajo de tus sueños Sigue las instricciones para agregar tus servicios</p>
-            <Link to="/freeConfig">
-            <button type="button" className="btn ms-2" style={{ background: "#00D1B2", color: "aliceblue" }}>
-                Agregar Servicio
-            </button>
-            </Link>
-        
+            <p>¡Estás a pocos pasos de conseguir el trabajo de tus sueños! Completa la siguiente información para comenzar a ofrecer tus servicios.</p>
+
+
+            <div class="container mt-4">
+                <div class="row g-4">
+
+
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="badge me-2" style={{background: "#FF6B6B"}}>1</span>
+                                    Agrega tus servicios
+                                </h5>
+                                <p class="card-text">Describe lo que ofreces para que los clientes puedan encontrarte fácilmente.</p>
+                                <Link to="/freeConfig">
+                                    <button type="button" className="btn ms-2" style={{ background: "#00D1B2", color: "aliceblue" }}>
+                                        Agregar Servicio
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="badge me-2" style={{background: "#FF6B6B"}}>2</span>
+                                    Crea una cuenta de PalPal
+                                </h5>
+                                <p class="card-text">Conecta una cuenta para recibir los pagos directamente de tus clientes.</p>
+                                <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank" rel="noopener noreferrer" class="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Vincular cuenta</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     );
 };
