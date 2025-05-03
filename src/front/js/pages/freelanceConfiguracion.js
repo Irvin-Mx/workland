@@ -6,47 +6,41 @@ import { Context } from "../store/appContext.js";
 export const FreelanceConfiguracion = () => {
     const { store, actions } = useContext(Context);
     const [formData, setFormData] = useState({
-        basic: {
-            title: '',
-            description: '',
-            price: '',
-            img_url: '',
-        },
-        pro: {
-            title: '',
-            description: '',
-            price: '',
-            img_url: '',
-        },
-        enterprise: {
-            title: '',
-            description: '',
-            price: '',
-            img_url: '',
-        },
-    });
+    
+        title: '',
+        description: '',
+        price: '',
+        img_url: '',
+    
+    
+});
 
     const [activeTab, setActiveTab] = useState("basic");
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        const newValue = files ? files[0] : value;
+        // const { title, description, price, img_url } = e.target;
+        // const newValue = title, description,price,img_url ? [0] : value;
     
-        setFormData({
-            ...formData,
-            [activeTab]: {
-                ...formData[activeTab],
-                [name]: newValue, 
-            },
+        e.persist() 
+        setFormData((prev) => {
+            return {
+                ...prev,
+                [e.target.name]: e.target.value
+            };
         });
+
     };
 
-
-
-    const handleSubmit = () => {
-        console.log("Datos guardados:", formData);
-        alert("Producto guardado ✅");
+    const handleSubmit = async() => {
+        try{
+            await actions.createProduct(formData);
+            alert("Producto creado correctamente ✅");
+        }catch (error) {
+            console.error("Error al crear el producto:", error);
+            alert("Ocurrió un error al crear el producto");
+        }
     };
+    
 
 
     useEffect(() => {
@@ -60,7 +54,7 @@ export const FreelanceConfiguracion = () => {
         <div className="container my-4">
             <h2>Configuración del Producto</h2>
 
-            <ul className="nav nav-tabs">
+            {/* <ul className="nav nav-tabs">
                 {["basic", "pro", "enterprise"].map(tab => (
                     <li className="nav-item" key={tab}>
                         <button
@@ -71,7 +65,7 @@ export const FreelanceConfiguracion = () => {
                         </button>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
 
            
             <div className="my-3">
@@ -80,7 +74,7 @@ export const FreelanceConfiguracion = () => {
                     type="text"
                     name="title"
                     className="form-control mb-2"
-                    value={formData[activeTab].title}
+                    value={formData.title}
                     onChange={handleChange}
                 />
 
@@ -88,7 +82,7 @@ export const FreelanceConfiguracion = () => {
                 <textarea
                     name="description"
                     className="form-control mb-2"
-                    value={formData[activeTab].description}
+                    value={formData.description}
                     onChange={handleChange}
                 />
 
@@ -97,7 +91,7 @@ export const FreelanceConfiguracion = () => {
                     type="text"
                     name="price"
                     className="form-control mb-3"
-                    value={formData[activeTab].price}
+                    value={formData.price}
                     onChange={handleChange}
                 />
 
@@ -106,7 +100,7 @@ export const FreelanceConfiguracion = () => {
                 </button>
             </div>
 
-            <div className="mt-4">
+            {/* <div className="mt-4">
                 <h4>Vista previa:</h4>
                 {["basic", "pro", "enterprise"].map(pkg => (
                     <div key={pkg} className="card p-3 mb-2">
@@ -116,9 +110,9 @@ export const FreelanceConfiguracion = () => {
                         <p><b>Precio:</b> ${formData[pkg].price}</p>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
-};
 
-export default FreelanceConfiguracion;
+}
+ export default FreelanceConfiguracion;

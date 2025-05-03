@@ -20,8 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        alert("Usuario registrado con éxito ✅");
-                        console.log("Nuevo usuario:", data.new_user_created);
+                        toastExito("Usuario registrado con éxito ✅");
                         setStore({ user: data.new_user_created });
                         return data;
                     } else {
@@ -49,10 +48,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.ok) {
                         // toastExito("Usuario inicio sesion con éxito ✅")
                         // alert("Usuario inicio sesion con éxito ✅");
-                        //console.log(data);
+                        console.log(data);
                         // setStore({ userToken: data.token });
                         const store = getStore()
-
                         localStorage.setItem("user_token", data.token);
                         setStore({ ...store, userProfile: data.user_info })
 
@@ -142,7 +140,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
                  
-            createProduct: async ({ title, description, amount, img_url }) => {
+            createProduct: async (productData) => {
                 const token = localStorage.getItem("user_token");
 
                 try {
@@ -152,7 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Content-Type": "application/json",
                             "Authorization": "Bearer " + token
                         },
-                        body: JSON.stringify({ title, description, amount, img_url })
+                        body: JSON.stringify(productData)
                     });
 
                     const data = await response.json();
@@ -160,8 +158,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.ok) {
                         alert("Producto agregado correctamente ✅");
                         console.log("Producto creado:", data.new_product_created);
-                        const store = getStore();
-                        setStore({ ...store, products: [...(store.products || []), data.new_product_created] });
+                        // const store = getStore();
+                        // setStore({ ...store, products: [...(store.products || []), data.new_product_created] });
                         return data;
                     } else {
                         console.error("Error en la respuesta del servidor:", data);
@@ -172,6 +170,37 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
+
+            getMyFreelanceProfile: async (freelance_id) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            // Incluye el token si es necesario
+                            "Authorization": "Bearer " + localStorage.getItem("user_token")
+                        }
+                    });
+            
+                    const data = await response.json();
+            
+                    if (response.ok) {
+                        // Almacena los datos en el estado global
+                        const store = getStore();
+                        setStore({ ...store, freelancerProfile: data });
+            
+                        return data; // Devuelve los datos si es necesario
+                    } else {
+                        console.error("Error al obtener los datos del usuario:", data);
+                        alert(data.error || "Error al obtener el perfil de usuario");
+                        return null;
+                    }
+                } catch (e) {
+                    console.error("Error en la solicitud para obtener el perfil de usuario:", e);
+                    alert("Ocurrió un error al obtener los datos del perfil freelance");
+                    return null;
+                }
+            }
    
 
         },

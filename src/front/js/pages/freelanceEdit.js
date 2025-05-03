@@ -2,12 +2,12 @@ import React, { useContext, useEffect, } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
-export const FreelanceEdit = () => {
+const FreelanceEdit = () => {
     const { store, actions } = useContext(Context);
 
-    useEffect(() => {
-        actions.getMyProfile();
-    }, []);
+    // useEffect(() => {
+    //     actions.getMyProfile();
+    // }, []);
 
     const user = store.userProfile || {};
     if (!user.name) return <p>Cargando datos del usuario...</p>;
@@ -38,7 +38,7 @@ export const FreelanceEdit = () => {
                     <button
                         type="button"
                         className="btn btn-link">
-                        <i class="fa-solid fa-pen-to-square"></i>
+                        <i className="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button
                         type="button"
@@ -55,18 +55,18 @@ export const FreelanceEdit = () => {
             <p>¡Estás a pocos pasos de conseguir el trabajo de tus sueños! Completa la siguiente información para comenzar a ofrecer tus servicios.</p>
 
 
-            <div class="container mt-4">
-                <div class="row g-4">
+            <div className="container mt-4">
+                <div className="row g-4">
 
 
-                    <div class="col-md-6">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="badge me-2" style={{background: "#FF6B6B"}}>1</span>
+                    <div className="col-md-6">
+                        <div className="card shadow-sm border-0">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <span className="badge me-2" style={{background: "#FF6B6B"}}>1</span>
                                     Agrega tus servicios
                                 </h5>
-                                <p class="card-text">Describe lo que ofreces para que los clientes puedan encontrarte fácilmente.</p>
+                                <p className="card-text">Describe lo que ofreces para que los clientes puedan encontrarte fácilmente.</p>
                                 <Link to="/freeConfig">
                                     <button type="button" className="btn ms-2" style={{ background: "#00D1B2", color: "aliceblue" }}>
                                         Agregar Servicio
@@ -77,15 +77,15 @@ export const FreelanceEdit = () => {
                     </div>
 
 
-                    <div class="col-md-6">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="badge me-2" style={{background: "#FF6B6B"}}>2</span>
+                    <div className="col-md-6">
+                        <div className="card shadow-sm border-0">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <span className="badge me-2" style={{background: "#FF6B6B"}}>2</span>
                                     Crea una cuenta de PalPal
                                 </h5>
-                                <p class="card-text">Conecta una cuenta para recibir los pagos directamente de tus clientes.</p>
-                                <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank" rel="noopener noreferrer" class="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Vincular cuenta</a>
+                                <p className="card-text">Conecta una cuenta para recibir los pagos directamente de tus clientes.</p>
+                                <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Vincular cuenta</a>
                                 
                             </div>
                         </div>

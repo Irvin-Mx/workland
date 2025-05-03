@@ -37,6 +37,7 @@ class User(db.Model):
             "rol": self.rol,
             "is_active": self.is_active,
             "balance": self.balance,
+            "services":  self.services,
             # do not serialize the password, its a security breach
         }
 
