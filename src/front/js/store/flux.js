@@ -208,10 +208,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al obtener los datos del perfil freelance");
                     return null;
                 }
-            }
+            },
    
-
-
             getSingleService: async (serviceId) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/service/${serviceId}`);
