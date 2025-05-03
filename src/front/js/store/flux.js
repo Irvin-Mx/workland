@@ -143,12 +143,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
                  
             createProduct: async ({ title, description, amount, img_url }) => {
+                const token = localStorage.getItem("user_token");
 
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
                         },
                         body: JSON.stringify({ title, description, amount, img_url })
                     });
