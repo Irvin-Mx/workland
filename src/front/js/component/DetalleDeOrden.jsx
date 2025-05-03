@@ -1,6 +1,6 @@
 import React from "react"
 
-const DetalleDeOrden = () => {
+const DetalleDeOrden = ({service,fullName}) => {
 
 
     const handlePago = ()=>{
@@ -12,8 +12,8 @@ const DetalleDeOrden = () => {
                 <h1 className="text-danger">Detallado de orden</h1>
                 <div className="border-top border-bottom">
                     <h3>Orden: #######</h3>
-                    <h4>Cliente: xxxxx xxxxxx</h4>
-                    <h4>Freelance: xxxxx xxxxxx</h4>
+                    <h4>Cliente: {fullName}</h4>
+                    <h4>Freelance: {service}</h4>
                     <div className="border-top border-bottom">
                         <p>Producto:</p>
                         <p>Pagina web</p>

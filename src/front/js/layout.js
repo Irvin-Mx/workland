@@ -13,7 +13,12 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Registro from "./pages/registro";
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
+
+
 import  Ordenes  from "./pages/Ordenes.jsx";
+
+
+
 import Login from "./pages/Login.jsx";
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
 import FreelancePerfil  from "./pages/freelancePerfil.js";
@@ -28,7 +33,6 @@ const initialOptions = {
 
 
 
-
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -38,7 +42,7 @@ const Layout = () => {
     if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
 
     return (
-        // <PayPalScriptProvider options={initialOptions}>
+        <PayPalScriptProvider options={initialOptions}>
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
@@ -57,12 +61,12 @@ const Layout = () => {
                         <Route element={<Ordenes />} path="/ordenes" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <Footer />
+                    {/* <Footer /> */}
                 </ScrollToTop>
-                {/* <Toaster/> */}
+                <Toaster/>
             </BrowserRouter>
         </div>
-        // </PayPalScriptProvider>
+        </PayPalScriptProvider>
     );
 };
 
