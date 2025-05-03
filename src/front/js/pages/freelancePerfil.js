@@ -1,8 +1,17 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const freelancePerfil = () => {
+export const FreelancePerfil = () => {
     const { store, actions } = useContext(Context);
+    const { freelance_id } = useParams();
+
+    useEffect(() => {
+        actions.getMyFreelanceProfile(freelance_id).then((data) => {
+            console.log("Perfil del freelance:", data);
+        });
+    }, []);
+  
 
     return (
 
@@ -55,11 +64,7 @@ export const freelancePerfil = () => {
                             <h5>Básico</h5>
                             <h6>$9/mes</h6>
                             <p>Descripción del producto</p>
-                            <ul>
-                                <li>✔ 1 boceto</li>
-                                <li>✔ 5 cambios</li>
-                                <li>✔ Archivo editable</li>
-                            </ul>
+                            
                             <button type="button" className="btn ms-2" style={{ backgroundColor:"#00D1B2", color:"white", border:"none", borderRadius:"2px", alignItems: "center", width:"300px" }}>Comprar paquete</button>
                         </div>
                     </div>
@@ -76,7 +81,7 @@ export const freelancePerfil = () => {
                             <button type="button" className="btn ms-2" style={{ backgroundColor:"#00D1B2", color:"white", border:"none", borderRadius:"2px", alignItems: "center", width:"300px" }}>Comprar paquete</button>
                         </div>
                     </div>
-                    <div className="tab-pane fade" id="enterprise" role="tabpanel">
+                    {/* <div className="tab-pane fade" id="enterprise" role="tabpanel">
                         <div className="card p-4 shadow-sm">
                             <h5>Empresarial</h5>
                             <h6>$99/mes</h6>
@@ -88,7 +93,7 @@ export const freelancePerfil = () => {
                             </ul>
                             <button type="button" className="btn ms-2" style={{ backgroundColor:"#00D1B2", color:"white", border:"none", borderRadius:"2px", alignItems: "center", width:"300px" }}>Comprar paquete</button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -97,5 +102,5 @@ export const freelancePerfil = () => {
     );
 };
 
-export default freelancePerfil;
+export default FreelancePerfil;
 

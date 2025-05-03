@@ -88,6 +88,8 @@ def log_in():
             }), 400
         
         existe_usuario = User.query.filter_by(email=email).first()
+        services = [service.serialize() for service in existe_usuario.services]
+        resultado={**existe_usuario.serialize(), "services": services}
   
 
         if not existe_usuario:
@@ -99,7 +101,7 @@ def log_in():
         if its_valid_password:
             expires=timedelta(days=1)
             token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
-            return jsonify({ 'token':token,"user_info":existe_usuario.serialize()}), 200
+            return jsonify({ 'token':token,"user_info":resultado}), 200
         else :
             return jsonify({"msj":"Password equivocado"}),404
 
@@ -145,7 +147,9 @@ def get_user():
         user_id=get_jwt_identity()
         if user_id:
             user=User.query.filter_by(id=user_id).first()
-            return jsonify(user.serialize()), 200
+            services = [service.serialize() for service in user.services]
+            resultado={**user.serialize(), "services": services}
+            return jsonify(resultado), 200
     
         else:
             return {"Error": "Token inválido o no proporcionado"}, 401
@@ -169,7 +173,7 @@ def post_service():
         user_id=get_jwt_identity()
         print(type(user_id))
 
-        required_fields = ["title", "price", "description", "img_url"]
+        required_fields = ["title", "price", "description"]
         missing_fields = [field for field in required_fields if not data.get(field)]
         if missing_fields:
             return jsonify({
@@ -185,7 +189,7 @@ def post_service():
         
         nuevo_servicio=Service(title=title,price=int(price),description=description,img_url=img_url,user_id=int(user_id)
         )
-
+        print(nuevo_servicio.serialize())
         db.session.add(nuevo_servicio)
         db.session.commit()
 
@@ -340,6 +344,27 @@ def get_order():
             
         
         return jsonify({'msj':'orden obtenida', "rslt": data, "freelance info": names_of_freelancers }),200
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        }),
+
+@api.route('/freelance/<int:freelance_id>', methods=['GET'])
+def get_freelance(freelance_id):
+    try:
+        print(freelance_id)
+        user_dict = User.query.filter_by(id=freelance_id).first()
+        if not user_dict:
+            return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
+        services = [service.serialize() for service in user_dict.services]
+        freelance_with ={
+            "name": user_dict.serialize()["name"],
+            "services": services
+        }
+        return jsonify({
+            "result": freelance_with
+            }), 200
+        
     except Exception as e:
         return jsonify({
             "error":str(e)
