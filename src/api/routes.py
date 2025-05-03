@@ -205,6 +205,43 @@ def post_service():
         })
 
 
+@api.route('/service/<int:service_id>', methods=['GET'])
+def get_single_service(service_id):
+    try:
+        servicio = Service.query.filter(Service.id == int(service_id)).first()
+
+        if not servicio:
+            return jsonify({"msj":"No existe servicio"}), 400
+
+
+        usuario = User.query.filter(User.id == int(servicio.user_id)).first()
+
+        if not usuario:
+            return jsonify({"msj":"No existe usuario"}), 400
+        
+        result={
+            "description":servicio.serialize()["description"] ,
+            "id": servicio.serialize()["id"] ,
+            "img_url":servicio.serialize()["img_url"] ,
+            "price":servicio.serialize()["price"],
+            "title": servicio.serialize()["title"],
+            "user": {
+                "id":usuario.serialize()["id"],
+                "name":usuario.serialize()["name"]
+            }
+        }
+        
+
+        return jsonify({
+        'result': result}), 200
+
+    
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
+
+
 @api.route('/create-order', methods=['POST'])
 @jwt_required()
 def create_order():
