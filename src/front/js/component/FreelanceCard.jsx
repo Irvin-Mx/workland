@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const FreelanceCard = ({user_name,title}) => {
+const FreelanceCard = ({user_name,title,id}) => {
+    const navigate=useNavigate()
     return (
         <div className="card" style={{width: "18rem"}}>
             <img src="https://dummyimage.com/350x200/000/fff.jpg" className="card-img-top" alt="alt image"/>
@@ -11,6 +13,10 @@ const FreelanceCard = ({user_name,title}) => {
                             title
                         }
                     </p>
+                    <button onClick={()=>navigate(`/freelancePerfil/${id}`)}>
+
+                    </button>
+
                 </div>
         </div>
     )
