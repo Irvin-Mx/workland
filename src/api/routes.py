@@ -88,9 +88,6 @@ def log_in():
             }), 400
         
         existe_usuario = User.query.filter_by(email=email).first()
-        services = [service.serialize() for service in existe_usuario.services]
-        resultado={**existe_usuario.serialize(), "services": services}
-  
 
         if not existe_usuario:
             return jsonify({"msj":"Correo no esta registardo","result":[]}),400
@@ -99,11 +96,21 @@ def log_in():
         its_valid_password=bcrypt.check_password_hash(hasheada_password,password)
 
         if its_valid_password:
+            services = [service.serialize() for service in existe_usuario.services]
+            resultado={**existe_usuario.serialize(), "services": services}
             expires=timedelta(days=1)
             token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
             return jsonify({ 'token':token,"user_info":resultado}), 200
         else :
             return jsonify({"msj":"Password equivocado"}),404
+
+
+      
+  
+
+
+        
+
 
         
     except Exception as e:
@@ -291,7 +298,7 @@ def create_order():
             return jsonify({"msj":"Servicio no encontrado","result":[]}),400
         
         #nueva_orden=Order(status=status,is_payed=is_payed,price=price,service_id=service_id,user_id=user_id)
-        nueva_orden=Order(status=status,is_payed=is_payed,price=price,service_id=service_id,user_id=user_id,user_name=user_name)
+        nueva_orden=Order(status=status,is_payed=is_payed,price=float(price),service_id=int(service_id),user_id=int(user_id),user_name=user_name)
         
         db.session.add(nueva_orden)
         db.session.commit()
@@ -311,39 +318,28 @@ def get_order():
     try:
         orders = Order.query.filter_by(user_id=get_jwt_identity()).all()
         
-       
         data = [order.serialize() for order in orders]
-
-        #print(data)
-
-        freelancers_id = [freelancer_id["service_id"] for freelancer_id in data]
-        #print(freelancers_id)
-
-
-        ids_of_freelancers = [Service.query.filter(Service.id == serviceId).first().serialize()["user_id"] for serviceId in freelancers_id]
-        #print("----")
-        #print(ids_of_freelancers)
-
-
-        #print("ooooooooo")
-        #print(User.query.filter_by(id=1).first().serialize()["name"])
-
-        names_of_freelancers = [   {"freelance_name": User.query.filter_by(id=freelance_id).first().serialize()["name"] , "freelance_id": freelance_id}    for freelance_id in ids_of_freelancers]
-
-        #print("below the names of the freelancers")
-        #print(names_of_freelancers)
-
-
-
-
-        #service = Service.query.filter_by(id=1).first()
-        service = Service.query.filter(Service.id == 2).first()
-        #print(service.serialize()["user_id"])
-        #print(Service.query.all()) 
-
+    
+        def info(x):
+            service_id=x["service_id"]
+            freelance_user_id=Service.query.filter_by(id=service_id).first().serialize()["user_id"]
+            frelance_name=User.query.filter_by(id=freelance_user_id).first().serialize()
             
+
+            return {
+                "id":x["id"],
+                "freelance_name":frelance_name["name"],
+                "freelance_email":frelance_name["email"],
+                "freelance_phone":frelance_name["phone"],
+                "user_name":x["user_name"],
+                "price":x["price"],
+                "is_payed":x["is_payed"],
+            }
         
-        return jsonify({'msj':'orden obtenida', "rslt": data, "freelance info": names_of_freelancers }),200
+        raw= list(map(info, data))
+
+        return jsonify({"result": raw} ),200
+
     except Exception as e:
         return jsonify({
             "error":str(e)
