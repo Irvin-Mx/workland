@@ -13,7 +13,8 @@ const FreelanceCard = ({user_name,title,id}) => {
                             title
                         }
                     </p>
-                    <button onClick={()=>navigate(`/freelancePerfil/${id}`)}>
+                    <button className='btn btn-primary' onClick={()=>navigate(`/freelancePerfil/${id}`)}>
+                        Detalles del Freelance
 
                     </button>
 

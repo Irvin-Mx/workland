@@ -22,8 +22,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-
-                        setStore({ user: data.new_user_created });
+                        toastExito("Usuario creado con exito")
+                        // setStore({ user: data.new_user_created });
                         return data;
                     } else {
                         // console.error("Error en la respuesta del servidor:", data);
@@ -50,20 +50,21 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        toastExito("Usuario inicio sesion con éxito ✅")
+                       
                         // alert("Usuario inicio sesion con éxito ✅");
-                        console.log(data);
+                
                         // setStore({ userToken: data.token });
                         const store = getStore()
                         localStorage.setItem("user_token", data.token);
                         setStore({ ...store, userProfile: data.user_info })
+                        toastExito("Usuario inicio sesion con éxito ✅")
 
                         //console.log(store)
 
                         return data;
                     } else {
                         toastFallo("Error al intentar iniciar sesion")
-                        console.error("Error en la respuesta del servidor:", data);
+                        // console.error("Error en la respuesta del servidor:", data);
                         // alert(data.error || "Error al intentar iniciar sesion");
                     }
                 } catch (e) {
@@ -91,13 +92,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return data;
                     } else {
 
-                        console.error("Error al obtener los datos del usuario", data);
+                        // console.error("Error al obtener los datos del usuario", data);
                         alert(data.error || "Error al obtner el perfil de usuario");
                         return null;
 
                     }
                 } catch (e) {
-                    console.error("Error en la solicitus para obtener el perfil de usuario", error);
+                    // console.error("Error en la solicitus para obtener el perfil de usuario", error);
                     alert("Ocurrio un error al obtener los datos del perfil freelance");
                     return null;
                 }
@@ -164,12 +165,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     if (response.ok) {
                         alert("Producto agregado correctamente ✅");
-                        console.log("Producto creado:", data.new_product_created);
+                        // console.log("Producto creado:", data.new_product_created);
                         // const store = getStore();
                         // setStore({ ...store, products: [...(store.products || []), data.new_product_created] });
                         return data;
                     } else {
-                        console.error("Error en la respuesta del servidor:", data);
+                        // console.error("Error en la respuesta del servidor:", data);
                         alert(data.error || "Error al agregar producto");
                     }
                 } catch (error) {
@@ -199,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             
                         return data; // Devuelve los datos si es necesario
                     } else {
-                        console.error("Error al obtener los datos del usuario:", data);
+                        // console.error("Error al obtener los datos del usuario:", data);
                         alert(data.error || "Error al obtener el perfil de usuario");
                         return null;
                     }
@@ -258,7 +259,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         },
                     });
                     const data = await response.json();
-                    console.log(data)
+     
 
                     if (response.ok) {
                         return data;

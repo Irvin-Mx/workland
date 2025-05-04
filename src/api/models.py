@@ -71,7 +71,7 @@ class Order(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     status = db.Column(db.String(20), nullable=False)
     is_payed = db.Column(db.Boolean(),default=False)
-    price = db.Column(db.Integer)
+    price = db.Column(db.Float)
     user_name = db.Column(db.String(30), nullable=False)
 
     user_id = Column(Integer, ForeignKey('users.id'))

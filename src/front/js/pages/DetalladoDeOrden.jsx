@@ -29,13 +29,13 @@ const DetalladoDeOrden = () => {
         }
 
         actions.getSingleService(service).then((res)=>{
-            console.log(res.result)
+      
             setServiceData(res.result)
         }).catch((err)=>console.log(err))
     }, [])
 
-    const createOrderWhenAprove=()=>{
-        actions.createOrder({
+    const createOrderWhenAprove=async()=>{
+        return actions.createOrder({
             status:true,
             is_payed:true,
             price:serviceData.price,
@@ -50,20 +50,23 @@ const DetalladoDeOrden = () => {
             purchase_units: [
                 {
                     amount: {
-                        value: "10.00",
+                        value: serviceData.price
                     },
                 },
             ],
         });
     }
 
-    const onApproveOrder = (data, actions) => {
-        return actions.order.capture().then((details) => {
-            createOrderWhenAprove()
-            toastExito("Operaccion realizada con exito")
-            navigate("/ordenes")
-
-        });
+    const onApproveOrder = async (data, actions) => {
+        // return actions.order.capture().then((details) => {
+            await createOrderWhenAprove().then(()=>{
+                toastExito("Operaccion realizada con exito")
+                navigate("/ordenes")
+            }).catch(()=>{
+                toastExito("Fallo la operacion")
+            })
+        
+        // });
     }
     const onCancelOrder = () => {
         toastFallo("Pago cancelado")
@@ -84,7 +87,7 @@ const DetalladoDeOrden = () => {
 
     return (
         <div className="d-flex flex-column justify-content-center align-items-center p-4 vh-100">
-            <DetalleDeOrden service={service} fullName={fullName}/>
+            <DetalleDeOrden service={serviceData.user?.name} price={serviceData.price} fullName={fullName} description={serviceData.description} />
             <div style={{ width: "525px" }} className="checkout  ">
                 {isPending ? <p>LOADING...</p> :
                     <PayPalButtons
