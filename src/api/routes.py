@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import os
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User,Service,Order
 from api.utils import generate_sitemap, APIException
@@ -8,6 +9,17 @@ from flask_cors import CORS
 from datetime import timedelta
 from flask_jwt_extended import  JWTManager,create_access_token, jwt_required, get_jwt_identity
 from flask_bcrypt import Bcrypt
+
+import cloudinary
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
+
+cloudinary.config( 
+    cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME"), 
+    api_key = os.getenv("CLOUDINARY_API_KEY"), 
+    api_secret = os.getenv("CLOUDINARY_API_SECRET"), # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
 
 api = Blueprint('api', __name__)
 
@@ -18,7 +30,7 @@ jwt = JWTManager()
 bcrypt = Bcrypt()  
 
 
-@api.route('/sign-up', methods=['POST'])
+@api.route('/test/sign-up', methods=['POST'])
 def sign_up():
 
     try:
@@ -83,7 +95,7 @@ def log_in():
         
         if missing_fields:
             return jsonify({
-                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
+                "msj": f"Faltan campos necesarios: {', '.join(missing_fields)}",
                 "result": []
             }), 400
         
@@ -100,9 +112,9 @@ def log_in():
             resultado={**existe_usuario.serialize(), "services": services}
             expires=timedelta(days=1)
             token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
-            return jsonify({ 'token':token,"user_info":resultado}), 200
+            return jsonify({ 'token':token,"user_info":resultado,"msj":"Inicio de sesion exitosa"}), 200
         else :
-            return jsonify({"msj":"Password equivocado"}),404
+            return jsonify({"msj":"Contraseña equivocada"}),404
 
 
       
@@ -123,6 +135,13 @@ def log_in():
 def search_results():
     try:
         busqueda=request.get_json()
+        
+        if not busqueda:
+            return jsonify({
+            'msj': "El termino de busqueda no debe de estar vacio.",
+            "result":[]
+        }),400
+
         resultados = User.query.filter(
             User.service_description.ilike(f'%{busqueda}%')
         ).all()
@@ -138,7 +157,7 @@ def search_results():
             'msj': True,
             "result":data
             
-        })
+        }),200
     
 
     except Exception as e:
@@ -363,5 +382,59 @@ def get_freelance(freelance_id):
         
     except Exception as e:
         return jsonify({
+            "error":str(e)
+        })
+    
+
+@api.route('/sign-up', methods=['POST'])
+def sign_up_img():
+    try:
+        data=request.form
+        print(data)
+        name = request.form.get('name')
+        last_name = request.form.get('last_name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        rol = request.form.get('rol')
+        address = request.form.get('address')
+        phone = request.form.get('phone')
+
+        photo = request.files.get('photo')
+
+        required_fields = ["name", "last_name", "email", "password", "phone", "rol","address"]
+        missing_fields = [field for field in required_fields if not data.get(field)]
+            
+        if missing_fields:
+            return jsonify({
+                "msj": f"Faltan campos necesarios: {', '.join(missing_fields)}",
+                    "result": []
+                }), 400
+
+        if  not photo :
+            photo="https://res.cloudinary.com/dph121s7p/image/upload/v1746471079/image_profile_placceholder_dfzbln.jpg"
+        else:
+            upload_result = upload(photo)
+            thumbnail_url, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=300,height=300)
+            photo=thumbnail_url
+        
+        existe_usuario = User.query.filter(User.email == email).first()
+
+        if existe_usuario:
+            return jsonify({"msj":"Correo ya registrado","result":[]}),400
+        
+        password_hasheada=bcrypt.generate_password_hash(password).decode("utf-8")
+        nuevo_usuario=User(name=name,last_name=last_name,email=email,password=password_hasheada,phone=phone ,rol=rol,address=address,img_url=photo)
+        
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+     
+        return jsonify({
+                "msj":"Usuario creado correctamente",
+                "result":nuevo_usuario.serialize()
+                }), 200
+    
+    except Exception as e:
+        return jsonify({
+            "msj":"Problemas al crear el usuario",
             "error":str(e)
         })

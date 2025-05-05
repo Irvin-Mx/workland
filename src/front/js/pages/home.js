@@ -1,24 +1,26 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import "../../styles/home.css";
 
 
 export const Home = () => {
-	const navigate=useNavigate()
+	const navigate = useNavigate()
 	const { store, actions } = useContext(Context);
-	const [terminoBusqueda,setTerminoBusqueda]=useState(store.terminoBusqueda)
-	const handleChange=(e)=>{
+	const [terminoBusqueda, setTerminoBusqueda] = useState(store.terminoBusqueda)
+	const handleChange = (e) => {
 		setTerminoBusqueda(e.target.value)
 	}
 
 	const handleKeyDown = (e) => {
+
 		if (e.key === "Enter") {
 			actions.changeSearchTerm(terminoBusqueda)
 			setTerminoBusqueda("")
 			navigate("/busqueda")
 		}
-	  };
+	};
 
 
 	return (
@@ -29,10 +31,18 @@ export const Home = () => {
 					<h4>¡El trabajo de tus suenos, te espera!</h4>
 					<div className="input-group mb-3 w-50">
 						<input
-						onChange={handleChange}
-						onKeyDown={handleKeyDown}
-						type="text" className="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" />
-						<button className="btn btn-outline-secondary" type="button" id="button-addon2"><i className="fa-solid fa-magnifying-glass"></i></button>
+							onChange={handleChange}
+							onKeyDown={handleKeyDown}
+							value={terminoBusqueda}
+							type="text" className="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" />
+						<button
+							onClick={() => {
+								actions.changeSearchTerm(terminoBusqueda)
+								setTerminoBusqueda("")
+								navigate("/busqueda")
+							}}
+
+							className="btn btn-outline-secondary" type="button" id="button-addon2"><i className="fa-solid fa-magnifying-glass"></i></button>
 					</div>
 				</div>
 
@@ -57,7 +67,7 @@ export const Home = () => {
 						{/* Card */}
 						<div className="card mb-3">
 							<div className="row g-0 ">
-							<div className="col-md-7 d-flex align-items-center ">
+								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
 										<h5 className="card-title justify-content-start w-25  fs-3">Card title</h5>
 										<p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non mauris vehicula, laoreet dolor sed, fermentum ante. Proin eleifend molestie neque, pulvinar euismod sem. Pellentesque vel malesuada orci. Donec ornare convallis tincidunt. Curabitur vitae lobortis purus, et scelerisque ligula. Suspendisse et pretium ante. Pellentesque eget libero eget ex efficitur ultricies. Sed feugiat consequat tincidunt. Mauris elementum laoreet molestie. </p>
