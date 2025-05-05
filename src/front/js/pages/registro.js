@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const Registro = () => {
+    const navigate=useNavigate()
     const { actions } = useContext(Context);
     const [formData, setFormData] = useState({
         name: '',
@@ -14,6 +16,7 @@ export const Registro = () => {
         password: '',
         rol: ''
     });
+    const [photo,setPhoto]=useState([])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,17 +29,39 @@ export const Registro = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await actions.signup(formData);
-        setFormData({
-            name: '',
-            last_name: '',
-            phone: '',
-            address: '',
-            email: '',
-            password: '',
-            rol: ''
+        
+        const formDatatoSubmit = new FormData();
+        formDatatoSubmit.append('name', formData.name);
+        formDatatoSubmit.append('last_name', formData.last_name);
+        formDatatoSubmit.append('phone', formData.phone);
+        formDatatoSubmit.append('address', formData.address);
+        formDatatoSubmit.append('email', formData.email);
+        formDatatoSubmit.append('password', formData.password);
+        formDatatoSubmit.append('rol', formData.rol);
+        formDatatoSubmit.append('photo', photo);
 
-        });
+
+        await actions.signup(formDatatoSubmit)
+        .then((res)=>{
+        if(res.msj=="Usuario creado correctamente"){
+            setFormData({
+                name: '',
+                last_name: '',
+                phone: '',
+                address: '',
+                email: '',
+                password: '',
+                rol: ''
+            })
+            navigate("/iniciar-sesion")
+        }
+        })
+        .catch((err)=>{
+            console.log(err)
+
+        })
+        // await actions.signup(formData);
+
     };
     useEffect(() => {
         document.body.style.backgroundColor = '#CCD6F6';
@@ -63,10 +88,14 @@ export const Registro = () => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="inputLastName" className="form-label">Apellido </label>
-
                         <input id="inputLastName" name="last_name" type="text" className="form-control" placeholder="Apellido" value={formData.last_name}
-
                             onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputPhoto" className="form-label">Subir Imagen </label>
+                        <input id="inputPhoto" name="photo" type="file" accept="image/*" className="form-control"  
+                            // value={photo}
+                            onChange={(e)=>setPhoto(e.target.files[0])} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="inputPhone" className="form-label">Teléfono</label>

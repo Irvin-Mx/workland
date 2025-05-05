@@ -2,6 +2,7 @@ import React, { useState, useEffect,useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from "./SearchBar.module.css"
 import {Context}  from "../store/appContext.js"
+import { toastFallo } from './Toaster/toasterIndex.jsx'
 
 const SearchBar = () => {
   const {store,actions}=useContext(Context) 
@@ -11,6 +12,7 @@ const SearchBar = () => {
   }
 
   const handleKeyDown = (e) => {
+
     if (e.key === "Enter") {
       actions.busquedaFreelancers(terminoBuqueda)
       setTerminoBuqueda("")
@@ -26,10 +28,15 @@ const SearchBar = () => {
         type="text"
         placeholder='Barra de busqueda' />
       <div
-        style={{ width: "50px", height: "100%" }}
+       onClick={()=>{
+
+        actions.busquedaFreelancers(terminoBuqueda)
+      }}
+        style={{ width: "50px", height: "100%",cursor:"pointer" }}
         className={`d-flex justify-content-center align-items-center `}
       >
-        <i className={`${styles.searchbar_icon} fa-solid fa-magnifying-glass `} ></i>
+        <i 
+        className={`${styles.searchbar_icon} fa-solid fa-magnifying-glass `}  ></i>
       </div>
     </div>
   )
