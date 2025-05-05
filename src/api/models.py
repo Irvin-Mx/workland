@@ -48,6 +48,7 @@ class Service(db.Model):
     price = db.Column(db.DECIMAL(precision=10, scale=2), nullable=True)
     description = db.Column(db.String(200), nullable=True)
     img_url=db.Column(db.String(), nullable=True)
+    category=db.Column(db.String(50), nullable=True)
 
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
     
@@ -63,6 +64,7 @@ class Service(db.Model):
             "description": self.description,
             "img_url": self.img_url,
             "user_id": self.user_id,
+            "category": self.category,
             # do not serialize the password, its a security breach
         }
 

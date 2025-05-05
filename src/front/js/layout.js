@@ -13,17 +13,13 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Registro from "./pages/registro";
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
-
-
 import  Ordenes  from "./pages/Ordenes.jsx";
-
-
-
 import Login from "./pages/Login.jsx";
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
 import FreelancePerfil  from "./pages/freelancePerfil.js";
 import FreelanceConfiguracion from "./pages/freelanceConfiguracion.js";     
 import FreelanceEdit from "./pages/freelanceEdit.js";
+import FreelanceLayout from "./pages/freelanceLayout.js";
 
 const initialOptions = {
     "client-id": `${process.env.PAYPAL_CLIENT_ID}`,
@@ -55,6 +51,7 @@ const Layout = () => {
                         <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
                         <Route element={<FreelanceEdit/>} path="/freeEdit"/>
                         <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
+                        <Route element={<FreelanceLayout />} path="/freelanceLayout"/>
                         <Route element={<Login/>} path="/iniciar-sesion" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
