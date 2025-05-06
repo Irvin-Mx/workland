@@ -196,10 +196,11 @@ def post_service():
         price = data.get("price")
         description = data.get("description")
         img_url = data.get("img_url")
+        category = data.get("category")
         user_id=get_jwt_identity()
         print(type(user_id))
 
-        required_fields = ["title", "price", "description"]
+        required_fields = ["title", "price", "description", "category"]
         missing_fields = [field for field in required_fields if not data.get(field)]
         if missing_fields:
             return jsonify({
@@ -213,7 +214,7 @@ def post_service():
         if not existe_usuario:
             return jsonify({"msj":"No existe usuario"}), 400
         
-        nuevo_servicio=Service(title=title,price=int(price),description=description,img_url=img_url,user_id=int(user_id)
+        nuevo_servicio=Service(title=title,price=int(price),description=description,img_url=img_url,category=category,user_id=int(user_id)
         )
         print(nuevo_servicio.serialize())
         db.session.add(nuevo_servicio)

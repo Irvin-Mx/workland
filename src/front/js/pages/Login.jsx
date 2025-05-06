@@ -64,7 +64,8 @@ const Login = () => {
                     </div>
                     <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }} >Iniciar sesion</button>
                     <Link to="/">
-                        <button type="butto" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} >Cancelar</button>
+                        <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} >Cancelar</button>
+
                     </Link>
                 </form>
             </div>
