@@ -1,40 +1,41 @@
-import React, { useContext, useState,useEffect } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { Context } from "../store/appContext.js";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const { store, actions } = useContext(Context)
 
     const navigate = useNavigate()
-    
-    useEffect(() => {
 
-        // if (actions.checkLogInUser()) {
-        //     // Si el token existe, redirigir al usuario a home donde ya puede ver su perfil de home 
-        //     navigate("/")
-        // }
-    })
 
     const [formData, setFormData] = useState({
-            email: '',
-            password: ''
-        });
+        email: '',
+        password: ''
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await actions.login(formData);
-        setFormData({
-            email: '',
-            password: ''
-        });
-        // console.log("Aqui esta el token...vista login")
-        // console.log(localStorage)
-        localStorage.setItem("userToken", store.userToken);
-        if (actions.checkLogInUser()) {
-            //console.log(store.token)
-            navigate("/")
-        }
+        await actions.login(formData)
+            .then((res) => {
+                if (res?.msj == "Inicio de sesion exitosa") {
+                    setFormData({
+                        email: '',
+                        password: ''
+                    })
+                    navigate("/")
+                }
+
+            })
+            .catch((err) => {
+                // console.log(err)
+            })
+
+
+
+        // if (actions.checkLogInUser()) {
+        //     navigate("/")
+        // }
     };
 
     const handleChange = (e) => {
@@ -64,6 +65,7 @@ const Login = () => {
                     <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }} >Iniciar sesion</button>
                     <Link to="/">
                         <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} >Cancelar</button>
+
                     </Link>
                 </form>
             </div>

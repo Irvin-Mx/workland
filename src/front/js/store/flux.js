@@ -1,5 +1,54 @@
 import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import { useSearchParams } from 'react-router-dom';
+// Funcion que traduce los campos que faltan en sign-up si es que faltan
+function extraerCamposFaltantes(mensaje) {
+    // Verificar si el mensaje contiene el texto esperado
+    if (!mensaje.includes("Faltan campos necesarios:")) {
+        return [];
+    }
+    
+    // Separar después del texto fijo y eliminar espacios en blanco
+    const partes = mensaje.split("Faltan campos necesarios:");
+    
+    // Si solo hay una parte, significa que no hay campos faltantes
+    if (partes.length === 1) {
+        return [];
+    }
+    
+    // Obtener la segunda parte y procesarla
+    const campos = partes[1].trim();
+    
+    // Si hay campos, dividirlos por coma y espacio, y limpiar espacios
+    if (campos) {
+        const c=campos.split(",").map(campo => campo.trim());
+        const camposTraduidos=c.map((elem)=>{
+            if(elem=="name"){
+                return "Nombre"
+            }
+            if(elem=="last_name"){
+                return "Apellido"
+            }
+            if(elem=="phone"){
+                return "Teléfono"
+            }
+            if(elem=="address"){
+                return "Dirección"
+            }
+            if(elem=="email"){
+                return "Correo Electronico"
+            }
+            if(elem=="password"){
+                return "Contraseña"
+            }
+            if(elem=="rol"){
+                return "Rol"
+            }
+        }).join(",").trim()
+
+        return `Faltan campos nesarios: ${camposTraduidos}`
+    }
+    return [];
+}
 
 const getState = ({ getStore, getActions, setStore }) => {
     return {
@@ -9,28 +58,34 @@ const getState = ({ getStore, getActions, setStore }) => {
             terminoBusqueda: ""
         },
         actions: {
-            signup: async ({ name, last_name, email, password, phone, rol, address }) => {
+            signup: async (body) => {
+                
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/sign-up", {
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ name, last_name, email, password, phone, rol, address })
+                        body: body
                     });
-
                     const data = await response.json();
-
                     if (response.ok) {
-                        toastExito("Usuario creado con exito")
-                        // setStore({ user: data.new_user_created });
+                        toastExito(data.msj)
                         return data;
                     } else {
-                        // console.error("Error en la respuesta del servidor:", data);
-                        toastFallo("Error al registrar el usuario")
-                        // alert(data.error || "Error al registrar el usuario");
+                        // Chequeo de tipo de error
+                        if(data.msj.includes("Faltan campos necesarios:")){
+                            toastFallo(extraerCamposFaltantes(data.msj))
+                            return
+                        }
+
+                        if(data.msj.includes("Correo ya registrado")){
+                            toastFallo(data.msj)
+                            return
+                        }
+                        toastFallo("Algo salio mal.")
+                        console.error("Error en la respuesta del servidor:", data);
+                  
                     }
                 } catch (error) {
+                    
                     console.error("Error en el registro:", error);
                     // alert("Ocurrió un error al intentar registrarse");
                     toastFallo("Error al registrar el usuario")
@@ -51,24 +106,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     if (response.ok) {
                        
-                        // alert("Usuario inicio sesion con éxito ✅");
-                
-                        // setStore({ userToken: data.token });
                         const store = getStore()
                         localStorage.setItem("user_token", data.token);
                         setStore({ ...store, userProfile: data.user_info })
-                        toastExito("Usuario inicio sesion con éxito ✅")
-
-                        //console.log(store)
+                        toastExito(data.msj)
 
                         return data;
                     } else {
-                        toastFallo("Error al intentar iniciar sesion")
-                        // console.error("Error en la respuesta del servidor:", data);
-                        // alert(data.error || "Error al intentar iniciar sesion");
+                        // toastFallo("Error al intentar iniciar sesion")
+                        if(data.msj.includes("Faltan campos necesarios:")){
+                            toastFallo(extraerCamposFaltantes(data.msj))
+                            return
+                        }
+                        if(data.msj.includes("Contraseña equivocada")){
+                            toastFallo(data.msj)
+                            return
+                        }
+                        if(data.msj.includes("Correo no esta registardo")){
+                            toastFallo(data.msj)
+                            return
+                        }
                     }
                 } catch (e) {
-                    console.log("Error", e)
+                    console.error("Error en el registro:", error);
+                    toastFallo("Error al registrar el usuario")
                 }
             },
             getMyProfile: async () => {
@@ -117,6 +178,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             logOut: () => {
                 localStorage.removeItem("user_token");
                 setStore({ ...getStore(), userProfile: {} })
+                toastExito("Cerraste exitosamente la sesion.")
 
             },
             busquedaFreelancers: async (busqueda) => {
@@ -129,9 +191,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(busqueda)
                     });
 
-
                     const data = await response.json()
+                   
+                    if(response.ok){
                     setStore({ ...getStore(), resutadosBusqueda: data.result })
+                    }else{
+                        toastFallo(data.msj)
+                    }
+                    
                 } catch (error) {
                     console.log(error)
                 }
