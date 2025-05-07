@@ -20,6 +20,7 @@ import FreelancePerfil  from "./pages/freelancePerfil.js";
 import FreelanceConfiguracion from "./pages/freelanceConfiguracion.js";     
 import FreelanceEdit from "./pages/freelanceEdit.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
+import CommentTestPage from "./pages/CommentTestPage.jsx";
 
 const initialOptions = {
     "client-id": `${process.env.PAYPAL_CLIENT_ID}`,
@@ -45,6 +46,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<CommentTestPage />} path="/test-comment" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
                         <Route element={<FreelanceConfiguracion/>} path="/freeConfig"/>
