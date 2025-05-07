@@ -475,4 +475,97 @@ def sign_up_img():
         return jsonify({
             "msj":"Problemas al crear el usuario",
             "error":str(e)
+        })
+
+#/favorite/check
+@api.route("/favorite/check", methods=['POST'])
+@jwt_required()
+def check_favorite():
+    try:
+        # Obtener el ID del usuario 
+        current_user_id = get_jwt_identity()
+        data = request.get_json()
+
+        # Validar que se haya proporcionado un favorite_id
+        favorite_id = data.get('favorite_id')
+
+        # Obtener los usuarios involucrados
+        user = User.query.get(current_user_id)
+        favorite_user = User.query.get(favorite_id)
+
+        # Verificar si los usuarios existen
+        if not user or not favorite_user:
+            return jsonify({"error": "Usuario o favorito no encontrado"}), 404
+
+        # Verificar si el usuario está en la lista de favoritos
+        is_favorite = user.tiene_favorito(favorite_user)
+
+        return jsonify({
+            "result": is_favorite,
+            "message": "El usuario está en la lista de favoritos" if is_favorite else "El usuario no está en la lista de favoritos"
+        }), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@api.route('/favorites/all', methods=['GET'])
+@jwt_required()
+def get_user_favorites():
+    user_id = int(get_jwt_identity())
+
+    if user_id <= 0:
+        return jsonify({"error": "El ID del usuario debe ser un número positivo"}), 400
+
+    user = User.query.get(int(user_id))
+    if not user:
+        return jsonify({"error": f"Usuario con ID {user_id} no encontrado"}), 404
+
+    favorites = user.favoritos_agregados
+    return jsonify({
+        "result": [fav.serialize() for fav in favorites]
+    }), 200
+
+
+@api.route('/favorite/change', methods=['POST'])
+@jwt_required()
+def create_favorite():
+    try:
+        current_user_id = get_jwt_identity()
+        data = request.get_json()
+        favorite_status = data.get('favorite_status')
+
+        favorite_id = data.get('favorite_id')
+
+        user = User.query.get(current_user_id)
+        favorite_user = User.query.get(favorite_id)
+
+        if not user or not favorite_user:
+            return jsonify({"error": "Usuario o favorito no encontrado"}), 404
+
+        if favorite_status == False:
+            # Verificar si el favorito ya existe
+            if favorite_user in user.favoritos_agregados:
+                return jsonify({"message": "El usuario ya está en la lista de favoritos"}), 200
+
+            # Agregar el favorito
+            user.agregar_favorito(favorite_user)
+            db.session.commit()
+            return jsonify({
+                "result": True,
+                "message": "Favorito agregado correctamente"
+                # "favoritos": [fav.id for fav in user.favoritos_agregados]
+            }),201
+        else:
+            # Eliminar el favorito
+            user.eliminar_favorito(favorite_user)
+            db.session.commit()
+            return jsonify({
+                "result": False,
+                "message": "Favorito eliminado correctamente"
+            }),200
+            
+    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
         }), 400

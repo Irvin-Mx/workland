@@ -6,6 +6,11 @@ from decimal import Decimal
 
 db = SQLAlchemy()
 
+favoritos = db.Table('favoritos',
+    db.Column('usuario_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('favorito_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
+)
+
 class User(db.Model):
     __tablename__="users"
     id = db.Column(db.Integer, primary_key=True)
@@ -25,6 +30,28 @@ class User(db.Model):
 
     services = relationship("Service", back_populates="user")
     orders = relationship("Order",back_populates="user")
+
+    favoritos_agregados = db.relationship(
+        'User',
+        secondary=favoritos,
+        primaryjoin="User.id==favoritos.c.usuario_id",
+        secondaryjoin="User.id==favoritos.c.favorito_id",
+        backref=db.backref('favoritos_de', lazy='dynamic')
+    )
+
+    def agregar_favorito(self, usuario):
+        """Agregar un usuario como favorito"""
+        if usuario not in self.favoritos_agregados:
+            self.favoritos_agregados.append(usuario)
+
+    def eliminar_favorito(self, usuario):
+        """Eliminar un usuario de la lista de favoritos"""
+        if usuario in self.favoritos_agregados:
+            self.favoritos_agregados.remove(usuario)
+
+    def tiene_favorito(self, usuario):
+        """Verificar si un usuario está en la lista de favoritos"""
+        return usuario in self.favoritos_agregados
 
 
     def serialize(self):
