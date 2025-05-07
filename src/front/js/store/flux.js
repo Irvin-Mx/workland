@@ -109,6 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                         const store = getStore()
                         localStorage.setItem("user_token", data.token);
+                        localStorage.setItem("userProfile", JSON.stringify(data.user_info));
                         setStore({ ...store, userProfile: data.user_info })
                         toastExito(data.msj)
 
@@ -131,6 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (e) {
                     console.error("Error en el registro:", error);
                     toastFallo("Error al registrar el usuario")
+                    return null
                 }
             },
             getMyProfile: async () => {

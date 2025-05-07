@@ -209,8 +209,8 @@ export const Registro = () => {
                         id="disabledSelect" name="rol" className="form-select" value={formData.rol}
                             onChange={handleChange}>
                             <option value="">Selecciona una opción</option>
-                            <option value="emprendedor">Emprendedor</option>
-                            <option value="usuario">Freelance</option>
+                            <option value="user">Usuario</option>
+                            <option value="freelance">Freelance</option>
                         </select>
                         <div style={{ height: "20px" }}>
                             {errors.rol && errors.rol.type === "required" && (
