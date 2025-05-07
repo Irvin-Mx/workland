@@ -123,15 +123,6 @@ def log_in():
         else :
             return jsonify({"msj":"Contraseña equivocada"}),404
 
-
-      
-  
-
-
-        
-
-
-        
     except Exception as e:
         return jsonify({
             "error":str(e)
@@ -391,7 +382,47 @@ def get_freelance(freelance_id):
     except Exception as e:
         return jsonify({
             "error":str(e)
-        })
+        }),
+
+@api.route('/freelance', methods=['PUT'])
+@jwt_required()
+def update_freelance(): 
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"msg": "Faltan datos en la solicitud"}), 400
+
+        user_id = get_jwt_identity()
+        current_user = User.query.filter_by(id=user_id).first()
+
+        if not current_user:
+            return jsonify({"msj": "Usuario no encontrado", "result": []}), 404
+
+
+        user_to_update = User.query.filter_by(id=user_id).first()
+
+        if not user_to_update:
+            return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
+
+        user_to_update.name = data.get("name", user_to_update.name)
+        user_to_update.last_name = data.get("last_name", user_to_update.last_name)
+        user_to_update.email = data.get("email", user_to_update.email)
+        user_to_update.phone = data.get("phone", user_to_update.phone)
+        user_to_update.address = data.get("address", user_to_update.address)
+
+        db.session.commit()
+
+        return jsonify({
+            "msj": "Freelance actualizado correctamente",
+            "result": user_to_update.serialize()
+        }), 200
+
+    except Exception as e:
+        print(f"Error al actualizar freelance: {e}")
+        return jsonify({
+            "error": f"Error interno del servidor: {str(e)}"  
+        }), 500
+
     
 
 @api.route('/sign-up', methods=['POST'])
@@ -444,4 +475,4 @@ def sign_up_img():
         return jsonify({
             "msj":"Problemas al crear el usuario",
             "error":str(e)
-        })
+        }), 400
