@@ -19,21 +19,57 @@ export const Navbar = () => {
 	return (
 		<nav className={`${styles.navbar__container} navbar navbar-expand-lg bg-body-tertiary`}>
 			<div className="container-fluid">
-				<div className="d-flex justify-content-between align-items-center flex-row">
+				<div className="d-flex justify-content-between align-items-center w-100">
 					<Link to="/" className={`${styles.navbar__brand} navbar-brand fs-2 `} >Workland</Link>
 					{
 						store.userProfile?.name &&
-						<div className="d-flex align-items-center justify-content-center flex-row">
-							<div className="rounded-circle" style={{ height: "30px", width: "30px",marginLeft:"10px",marginRight:"10px" }}>
-								<img 
-								className="rounded-circle"
-								src={store.userProfile.img_url} alt="imagen perfil" style={{
-									width: "100%",
-									height: "100%",
-									objectFit: "cover"
-								}} />
+						<div className="dropdown d-flex align-items-center">
+							<div
+								className="d-flex align-items-center justify-content-center flex-row dropdown-toggle ms-2"
+								id="dropdownMenuButton"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+								style={{ cursor: "pointer" }}
+							>
+								<div
+									className="rounded-circle"
+									style={{
+										height: "30px",
+										width: "30px",
+										marginLeft: "10px",
+										marginRight: "10px",
+									}}
+								>
+									<img
+										className="rounded-circle"
+										src={store.userProfile.img_url}
+										alt="imagen perfil"
+										style={{
+											width: "100%",
+											height: "100%",
+											objectFit: "cover",
+										}}
+									/>
+								</div>
+								<p className="m-0 text-white">{`de ${store.userProfile.name}`}</p>
 							</div>
-							<p className="m-0 text-white">{`de ${store.userProfile.name}`}</p>
+							<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<li>
+									<Link className="dropdown-item" to="/freeEdit">
+										Mi Perfil
+									</Link>
+								</li>
+								<li>
+									<Link className="dropdown-item" to="/settings">
+										Configuración
+									</Link>
+								</li>
+								<li>
+									<button className="dropdown-item" onClick={handleLogOut}>
+										Cerrar sesión
+									</button>
+								</li>
+							</ul>
 						</div>
 					}
 
