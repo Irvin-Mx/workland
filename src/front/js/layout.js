@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import PrivateRoute from "./component/PrivateRoute.jsx";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import  { Toaster } from "react-hot-toast";
-
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -54,7 +54,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
                         <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
-                        <Route element={<FreelanceEdit/>} path="/freeEdit"/>
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceEdit/></PrivateRoute>} path="/freeEdit"/>
                         <Route element={<FreelanceDescrption/>} path="/freeCV"/>
                         <Route element={<FreelanceFormulario/>} path="/freeForm"/>
                         <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />

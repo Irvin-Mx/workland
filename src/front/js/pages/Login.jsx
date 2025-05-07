@@ -16,23 +16,31 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await actions.login(formData)
-            .then((res) => {
-                if (res?.msj == "Inicio de sesion exitosa") {
-                    setFormData({
-                        email: '',
-                        password: ''
-                    })
-                    navigate("/")
+        try {
+            const res = await actions.login(formData);
+    
+            if (!res) return; // si login falló, no sigas
+    
+            if (res?.msj === "Inicio de sesion exitosa") {
+                setFormData({
+                    email: '',
+                    password: ''
+                });
+    
+                const rol = res.user_info.rol;
+                console.log("ROL del usuario:", rol);
+    
+                if (rol === "freelance") {
+                    navigate("/dashboard-freelance");
+                } else if (rol === "user") {
+                    navigate("/dashboard-usuario");
+                } else {
+                    navigate("/");
                 }
-
-            })
-            .catch((err) => {
-                // console.log(err)
-            })
-
-
-
+            }
+        } catch (err) {
+            console.error("Error inesperado en login:", err);
+        }
         // if (actions.checkLogInUser()) {
         //     navigate("/")
         // }
