@@ -29,6 +29,13 @@ CORS(api)
 jwt = JWTManager() 
 bcrypt = Bcrypt()  
 
+IMAGE_PROFILE_URL="https://res.cloudinary.com/dph121s7p/image/upload/v1746471079/image_profile_placceholder_dfzbln.jpg"
+
+def photo_uploader(photo,height=300,width=300):
+    upload_result = upload(photo)
+    cloud_url, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=height,height=height)
+
+    return cloud_url
 
 @api.route('/test/sign-up', methods=['POST'])
 def sign_up():
@@ -422,7 +429,7 @@ def update_freelance():
 def sign_up_img():
     try:
         data=request.form
-        print(data)
+  
         name = request.form.get('name')
         last_name = request.form.get('last_name')
         email = request.form.get('email')
@@ -443,11 +450,10 @@ def sign_up_img():
                 }), 400
 
         if  not photo :
-            photo="https://res.cloudinary.com/dph121s7p/image/upload/v1746471079/image_profile_placceholder_dfzbln.jpg"
+            photo=IMAGE_PROFILE_URL
         else:
-            upload_result = upload(photo)
-            thumbnail_url, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=300,height=300)
-            photo=thumbnail_url
+
+            photo=photo_uploader(photo)
         
         existe_usuario = User.query.filter(User.email == email).first()
 

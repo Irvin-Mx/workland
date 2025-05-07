@@ -19,6 +19,9 @@ import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
 import FreelancePerfil  from "./pages/freelancePerfil.js";   
 import FreelanceEdit from "./pages/freelanceEdit.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
+
+import CommentTestPage from "./pages/CommentTestPage.jsx";
+
 import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 
@@ -47,6 +50,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<CommentTestPage />} path="/test-comment" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
                         <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
