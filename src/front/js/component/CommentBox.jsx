@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState,Suspense } from 'react'
+import React, { useContext, useState, } from 'react'
 import { Context } from "../store/appContext.js";
 import { useForm } from "react-hook-form"
 import ImageLoader from './ImageLoader.jsx';
-
 
 const StarComponent = ({ value, stars, setStarsState }) => {
     const [hover, setHover] = useState(false)
@@ -21,41 +20,41 @@ const StarComponent = ({ value, stars, setStarsState }) => {
 const CommentBox = () => {
     const { store, actions } = useContext(Context)
     const [starsState, setStarsState] = useState(1)
-    // const [msj, setMsj] = useState("")
-    const MAX_CHARACTERS=200
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
-      } = useForm()
+    } = useForm()
 
-      const msj = watch("texto")
+    const MAX_CHARACTERS = 200
+    const msj = watch("texto")
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data) =>{ 
+        console.log(data.texto)
+        console.log(starsState)
+        console.log(store.userProfile.id,"id user")
+    }
 
     return (
-        <div className="card container-fluid" >
+        <div style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}} className="card container-fluid" >
             <div className="card-body">
                 <div className='d-flex justify-content-start align-content-center flex-row'>
                     <div className="rounded-circle" style={{ height: "50px", width: "50px", marginRight: "10px" }}>
-                    <Suspense fallback={<p>ragando</p>}>
-                    <img
-                            className="rounded-circle"
-                            loading="eager"
-                            src={store.userProfile?.img_url} alt="imagen perfil" 
+                        <ImageLoader
+                            src={store.userProfile?.img_url}
+                            alt='Imagen por defecto'
                             width="100%"
                             height="100%"
-                            style={{
-                                objectFit: "cover"
-                            }} />
-</Suspense>
-     
+                        />
+
                     </div>
 
                     <h4 className='m-0 p-0 d-flex justify-content-start align-items-center'>
                         {`${store.userProfile.name} ${store.userProfile.last_name} `}
                     </h4>
+
+
                 </div>
                 <hr />
                 <div>
@@ -69,12 +68,12 @@ const CommentBox = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                            Comenta aquí <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black" }`}>({msj?.length || 0}/200 caracteres)</span> 
+                                Comenta aquí <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black"}`}>({msj?.length || 0}/200 caracteres)</span>
                             </label>
-                            <textarea 
-                            
-                            {...register("texto", { required: true,maxLength: MAX_CHARACTERS })}
-                            style={{ resize: 'none' }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea
+
+                                {...register("texto", { required: true, maxLength: MAX_CHARACTERS })}
+                                style={{ resize: 'none' }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
 
                         <div style={{ height: "30px" }} className='w-full'>
