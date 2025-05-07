@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import PrivateRoute from "./component/PrivateRoute.jsx";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import  { Toaster } from "react-hot-toast";
-
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -16,10 +16,15 @@ import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
 import  Ordenes  from "./pages/Ordenes.jsx";
 import Login from "./pages/Login.jsx";
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
-import FreelancePerfil  from "./pages/freelancePerfil.js";
-import FreelanceConfiguracion from "./pages/freelanceConfiguracion.js";     
+import FreelancePerfil  from "./pages/freelancePerfil.js";   
 import FreelanceEdit from "./pages/freelanceEdit.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
+
+import CommentTestPage from "./pages/CommentTestPage.jsx";
+
+import FreelanceDescrption from "./pages/freelanceDescripcion.js";
+import FreelanceFormulario from "./pages/freelanceFormulario.js";
+
 
 const initialOptions = {
     "client-id": `${process.env.PAYPAL_CLIENT_ID}`,
@@ -45,13 +50,15 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<CommentTestPage />} path="/test-comment" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
-                        <Route element={<FreelanceConfiguracion/>} path="/freeConfig"/>
                         <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
-                        <Route element={<FreelanceEdit/>} path="/freeEdit"/>
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceEdit/></PrivateRoute>} path="/freeEdit"/>
+                        <Route element={<FreelanceDescrption/>} path="/freeCV"/>
+                        <Route element={<FreelanceFormulario/>} path="/freeForm"/>
                         <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
-                        <Route element={<FreelanceLayout />} path="/freelanceLayout"/>
+                        <Route element={<FreelanceLayout />} path="/freeConfig"/>
                         <Route element={<Login/>} path="/iniciar-sesion" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />

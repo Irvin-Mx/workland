@@ -29,6 +29,13 @@ CORS(api)
 jwt = JWTManager() 
 bcrypt = Bcrypt()  
 
+IMAGE_PROFILE_URL="https://res.cloudinary.com/dph121s7p/image/upload/v1746471079/image_profile_placceholder_dfzbln.jpg"
+
+def photo_uploader(photo,height=300,width=300):
+    upload_result = upload(photo)
+    cloud_url, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=height,height=height)
+
+    return cloud_url
 
 @api.route('/test/sign-up', methods=['POST'])
 def sign_up():
@@ -116,15 +123,6 @@ def log_in():
         else :
             return jsonify({"msj":"Contraseña equivocada"}),404
 
-
-      
-  
-
-
-        
-
-
-        
     except Exception as e:
         return jsonify({
             "error":str(e)
@@ -384,14 +382,54 @@ def get_freelance(freelance_id):
     except Exception as e:
         return jsonify({
             "error":str(e)
-        })
+        }),
+
+@api.route('/freelance', methods=['PUT'])
+@jwt_required()
+def update_freelance(): 
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"msg": "Faltan datos en la solicitud"}), 400
+
+        user_id = get_jwt_identity()
+        current_user = User.query.filter_by(id=user_id).first()
+
+        if not current_user:
+            return jsonify({"msj": "Usuario no encontrado", "result": []}), 404
+
+
+        user_to_update = User.query.filter_by(id=user_id).first()
+
+        if not user_to_update:
+            return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
+
+        user_to_update.name = data.get("name", user_to_update.name)
+        user_to_update.last_name = data.get("last_name", user_to_update.last_name)
+        user_to_update.email = data.get("email", user_to_update.email)
+        user_to_update.phone = data.get("phone", user_to_update.phone)
+        user_to_update.address = data.get("address", user_to_update.address)
+
+        db.session.commit()
+
+        return jsonify({
+            "msj": "Freelance actualizado correctamente",
+            "result": user_to_update.serialize()
+        }), 200
+
+    except Exception as e:
+        print(f"Error al actualizar freelance: {e}")
+        return jsonify({
+            "error": f"Error interno del servidor: {str(e)}"  
+        }), 500
+
     
 
 @api.route('/sign-up', methods=['POST'])
 def sign_up_img():
     try:
         data=request.form
-        print(data)
+  
         name = request.form.get('name')
         last_name = request.form.get('last_name')
         email = request.form.get('email')
@@ -412,11 +450,10 @@ def sign_up_img():
                 }), 400
 
         if  not photo :
-            photo="https://res.cloudinary.com/dph121s7p/image/upload/v1746471079/image_profile_placceholder_dfzbln.jpg"
+            photo=IMAGE_PROFILE_URL
         else:
-            upload_result = upload(photo)
-            thumbnail_url, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=300,height=300)
-            photo=thumbnail_url
+
+            photo=photo_uploader(photo)
         
         existe_usuario = User.query.filter(User.email == email).first()
 
@@ -531,3 +568,4 @@ def create_favorite():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+        }), 400

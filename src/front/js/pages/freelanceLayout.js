@@ -130,7 +130,7 @@ export const FreelanceLayout = () => {
                       
                         <div className="card-package border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                Precios
+                                Precio
                             </div>
                             <div className="card-body">
                                 <label htmlFor="price">Precio</label>
@@ -149,17 +149,17 @@ export const FreelanceLayout = () => {
                         <div className="d-flex justify-content-between">
                             <button
                                 type="button"
-                                className="btn btn-primary"
+                                className="btn"
                                 onClick={handleNextCategory}
-                                style={{ width: "150px" }}
+                                style={{ width: "150px", background: "#1e266d", color:"aliceblue" }}
                             >
                                 Siguiente
                             </button>
                             <button
                                 type="button"
-                                className="btn btn-success"
+                                className="btn"
                                 onClick={handleSubmit}
-                                style={{ width: "150px" }}
+                                style={{ width: "150px",  background: "#00D1B2", color: "aliceblue" }}
                             >
                                 Guardar
                             </button>
@@ -169,7 +169,7 @@ export const FreelanceLayout = () => {
 
 
                 <div className="col-md-4 mt-4">
-                    <h3>Vista previa completa</h3>
+                    <h3>Vista previa de paquetes</h3>
                     <div className="row">
                         {["basic", "pro", "enterprise"].map((category) => (
                             <div className="card p-3 shadow-sm mb-3" key={category}>
