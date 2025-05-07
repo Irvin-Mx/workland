@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 
+
 export const FreelancePerfil = () => {
     const { store, actions } = useContext(Context);
     const { freelance_id } = useParams();
@@ -74,6 +75,7 @@ export const FreelancePerfil = () => {
                                 data-bs-target={`#${key}`}
                                 type="button"
                                 role="tab"
+                                
                             >
                                 {label}
                             </button>
@@ -111,7 +113,8 @@ export const FreelancePerfil = () => {
                                                 }
                                             }}
                                             type="button"
-                                            className="btn btn-comprar-paquete"
+                                            className="btn btn-sm btn-comprar-paquete"
+                                            style={{ background: "#00D1B2", color: "aliceblue", width: "150px" }}
                                         >
                                             Comprar paquete
                                         </button>
@@ -123,7 +126,27 @@ export const FreelancePerfil = () => {
                         </div>
                     ))}
                 </div>
+
             </div>
+            <div className="container my-5">
+                <h3>Comentarios</h3>
+                <div className="row">
+                    <div className="col-md-4 mb-4">
+                        <div className="card shadow-sm">
+                            <div className="card-body">
+                                <h5 className="card-title">Nombre de quien deja comentarios</h5>
+                                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac mi massa. Quisque sed porta tellus, vitae placerat lorem. Vivamus molestie massa mauris, vel vehicula dolor posuere placerat.</p>
+                                <small className="text-muted">Publicado el fecha </small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <p className="text-muted">No hay comentarios disponibles.</p>
+                    
+                </div>
+            </div>
+
         </div>
     );
 };

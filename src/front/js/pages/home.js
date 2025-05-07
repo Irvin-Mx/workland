@@ -24,28 +24,70 @@ export const Home = () => {
 
 
 	return (
-		<div className="text-center mt-5">
+		<div className="text-center">
 			<div>
-				<div className="d-flex flex-column align-items-center">
-					<h1>Workland</h1>
-					<h4>¡El trabajo de tus suenos, te espera!</h4>
-					<div className="input-group mb-3 w-50">
+			<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+					<ol className="carousel-indicators">
+						<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					</ol>
+					<div className="carousel-inner">
+						<div className="carousel-item active">
+							<img className="d-block w-100" src="https://placehold.co/500x200" alt="First slide" />
+						</div>
+						<div className="carousel-item">
+							<img className="d-block w-100" src="https://placehold.co/500x200" alt="Second slide" />
+						</div>
+						<div className="carousel-item">
+							<img className="d-block w-100" src="https://placehold.co/500x200" alt="Third slide" />
+						</div>
+					</div>
+					<div className="input-group mb-3 w-50 position-absolute top-50 start-50 translate-middle">
 						<input
 							onChange={handleChange}
 							onKeyDown={handleKeyDown}
 							value={terminoBusqueda}
-							type="text" className="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" />
+							type="text"
+							className="form-control"
+							placeholder="Search"
+							aria-label="Recipient's username"
+							aria-describedby="button-addon2"
+						/>
 						<button
 							onClick={() => {
-								actions.changeSearchTerm(terminoBusqueda)
-								setTerminoBusqueda("")
-								navigate("/busqueda")
+								actions.changeSearchTerm(terminoBusqueda);
+								setTerminoBusqueda("");
+								navigate("/busqueda");
 							}}
+							className="btn btn-outline-secondary"
+							type="button"
+							id="button-addon2"
+						>
+							<i className="fa-solid fa-magnifying-glass"></i>
+						</button>
+					</div>
 
-							className="btn btn-outline-secondary" type="button" id="button-addon2"><i className="fa-solid fa-magnifying-glass"></i></button>
+					<a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span className="sr-only">Previous</span>
+					</a>
+					<a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+						<span className="carousel-control-next-icon" aria-hidden="true"></span>
+						<span className="sr-only">Next</span>
+					</a>
+				</div>
+				<div className="row align-items-center">
+					<div className="col">
+					Conexión rápida
+					</div>
+					<div className="col">
+					Gestión integral
+					</div>
+					<div className="col">
+						One of three columns
 					</div>
 				</div>
-
 				<div className="d-flex flex-column justify-content-center align-items-center">
 					<div className="w-75">
 						{/* Card */}
