@@ -44,6 +44,15 @@ class User(db.Model):
         if usuario not in self.favoritos_agregados:
             self.favoritos_agregados.append(usuario)
 
+    def eliminar_favorito(self, usuario):
+        """Eliminar un usuario de la lista de favoritos"""
+        if usuario in self.favoritos_agregados:
+            self.favoritos_agregados.remove(usuario)
+
+    def tiene_favorito(self, usuario):
+        """Verificar si un usuario está en la lista de favoritos"""
+        return usuario in self.favoritos_agregados
+
 
     def serialize(self):
         return {
