@@ -443,9 +443,9 @@ def sign_up_img():
 #/favorite/check
 #/favorite/change
 #/favorite/all
-@api.route('/user/<int:user_id>/favorites', methods=['GET'])
-def get_user_favorites(user_id):
-    user = User.query.get(user_id)
+@api.route('/user/favorites/<int:freelance_user_id>', methods=['GET'])
+def get_user_favorites(freelance_user_id):
+    user = User.query.get(freelance_user_id)
     if not user:
         return jsonify({"error": "Usuario no encontrado"}), 404
 
