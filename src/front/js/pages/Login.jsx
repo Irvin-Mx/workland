@@ -18,13 +18,15 @@ const Login = () => {
         formState: { errors },
     } = useForm()
 
+
+
     const onSubmit = async (data) => {
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+      
         try {
-            const res = await actions.login(formData);
+            const res = await actions.login({
+                email:data.email,
+                password:data.password
+            });
     
             if (!res) return; // si login falló, no sigas
     
@@ -32,7 +34,7 @@ const Login = () => {
                 setFormData({
                     email: '',
                     password: ''
-                });
+                })}
     
                 const rol = res.user_info.rol;
                 console.log("ROL del usuario:", rol);
@@ -42,26 +44,26 @@ const Login = () => {
                 } else if (rol === "user") {
                     navigate("/dashboard-usuario");
                 } else {
-                    navigate("/");
+                    navigate("/")}
 
-        await actions.login({ email: data.email, password: data.password })
-            .then((res) => {
-                if (res?.msj == "Inicio de sesion exitosa") {
-                    setFormData({
-                        email: '',
-                        password: ''
-                    })
-                    navigate("/")
+        // await actions.login({ email: data.email, password: data.password })
+        //     .then((res) => {
+        //         if (res?.msj == "Inicio de sesion exitosa") {
+        //             setFormData({
+        //                 email: '',
+        //                 password: ''
+        //             })
+        //             navigate("/")
 
-                }
-            }
-        } catch (err) {
+        //         }
+        //     })
+
+        }catch (err) {
             console.error("Error inesperado en login:", err);
         }
-        // if (actions.checkLogInUser()) {
-        //     navigate("/")
-        // }
-    };
+    
+    }
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
