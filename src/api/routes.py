@@ -439,3 +439,51 @@ def sign_up_img():
             "msj":"Problemas al crear el usuario",
             "error":str(e)
         })
+
+#/favorite/check
+#/favorite/change
+#/favorite/all
+@api.route('/user/<int:user_id>/favorites', methods=['GET'])
+def get_user_favorites(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+
+    favorites = user.favoritos_agregados  # Obtener todos los favoritos del usuario
+    return jsonify({
+        "result": [fav.serialize() for fav in favorites]
+    }), 200
+
+
+@api.route('/favorite', methods=['POST'])
+@jwt_required()
+def create_favorite():
+    current_user_id = get_jwt_identity()
+    data = request.get_json()
+
+    favorite_id = data.get('favorite_id')
+    if not favorite_id:
+        return jsonify({"error": "Se requiere el ID del usuario a favorito"}), 400
+
+    user = User.query.get(current_user_id)
+    favorite_user = User.query.get(favorite_id)
+
+    if not user or not favorite_user:
+        return jsonify({"error": "Usuario o favorito no encontrado"}), 404
+
+    # Usamos la función del modelo para evitar duplicados
+    user.agregar_favorito(favorite_user)
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            "result": True
+            # "favoritos": [fav.id for fav in user.favoritos_agregados]
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
+
+
