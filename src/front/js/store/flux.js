@@ -212,11 +212,37 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
-            createProduct: async (productData) => {
+            createFreelanceProfile: async (freelance_Profile, freelance_id) => {
                 const token = localStorage.getItem("user_token");
 
+                try {
+                    const response = await fetch(process.env.BACKEND_URL+`/api/profile/freelance/${freelance_id}`, { 
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body: JSON.stringify(freelance_Profile)
+                    });
 
+                    const data = await response.json();
 
+                    if (response.ok) {
+                        toastExito("Perfil agregado correctamente ✅");
+                    
+                        return data;
+                    } else {
+                
+                        alert(data.error || "Error al agregar informacion del perfil");
+                    }
+                } catch (error) {
+                    console.error("Error al agregar perfil:", error);
+                    alert("Ocurrió un error al intentar añadir información al perfil");
+                }
+            },
+
+            createProduct: async (productData) => {
+                const token = localStorage.getItem("user_token");
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
                         method: "POST",
@@ -244,6 +270,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
+
             getMyFreelanceProfile: async (freelance_id) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {

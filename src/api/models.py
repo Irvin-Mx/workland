@@ -22,6 +22,8 @@ class User(db.Model):
     address = db.Column(db.String(200), nullable=False)
     rol = db.Column(db.String(20), nullable=False)
     service_description = db.Column(db.String(300), nullable=True)
+    service_title = db.Column(db.String(100), nullable=True)
+    profile_description = db.Column(db.String(800), nullable=True)
     balance=db.Column(db.Integer(), nullable=True ,default=0)
     img_url=db.Column(db.String(), nullable=True)
 
@@ -70,6 +72,9 @@ class User(db.Model):
             "balance": self.balance,
             "services":  self.services,
             "img_url":  self.img_url,
+            "service_description": self.service_description,
+            "service_title": self.service_title,
+            "profile_description": self.profile_description,
             # do not serialize the password, its a security breach
         }
 
@@ -78,6 +83,7 @@ class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=True)
     price = db.Column(db.DECIMAL(precision=10, scale=2), nullable=True)
+    time = db.Column(db.String(50), nullable=True)
     description = db.Column(db.String(200), nullable=True)
     img_url=db.Column(db.String(), nullable=True)
     category=db.Column(db.String(50), nullable=True)
@@ -93,6 +99,7 @@ class Service(db.Model):
             "id": self.id,
             "title": self.title,
             "price": self.price,
+            "time": self.time,
             "description": self.description,
             "img_url": self.img_url,
             "user_id": self.user_id,

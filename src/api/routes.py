@@ -184,6 +184,44 @@ def get_user():
             "error":str(e)
         })
     
+@api.route('/profile/freelance/<int:freelance_id>', methods=['POST'])
+@jwt_required()
+def create_freelance_profile():
+    try:
+        data = request.get_json()
+
+        required_fields = ["service_title", "service_description", "profile_description"]
+        missing_fields = [field for field in required_fields if not data.get(field)is None ]
+        if missing_fields:
+            return jsonify({
+                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
+                "result": []
+            }), 400
+        
+        user_id = get_jwt_identity()
+        user = User.query.filter(User.id == int(user_id)).first()
+
+
+        if not User:
+            return jsonify({"msj":"No existe usuario"}), 400
+        
+        if user.service_title or user.service_description or user.profile_description:
+            return jsonify({"msj": "El perfil ya existe"}), 400
+        
+        user.service_title = data["service_title"]
+        user.service_description = data["service_description"]
+        user.profile_description = data["profile_description"]
+        db.session.commit()
+
+        return jsonify({
+        'msj': 'Perfil creado exitosamente',
+        'result': user.serialize()}), 200
+
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
+        
 @api.route('/service', methods=['POST'])
 @jwt_required()
 def post_service():
@@ -193,12 +231,13 @@ def post_service():
         title = data.get("title")
         price = data.get("price")
         description = data.get("description")
+        time= data.get("time")
         img_url = data.get("img_url")
         category = data.get("category")
         user_id=get_jwt_identity()
         print(type(user_id))
 
-        required_fields = ["title", "price", "description", "category"]
+        required_fields = ["title", "price", "time" "description", "category"]
         missing_fields = [field for field in required_fields if not data.get(field)]
         if missing_fields:
             return jsonify({
@@ -212,8 +251,7 @@ def post_service():
         if not existe_usuario:
             return jsonify({"msj":"No existe usuario"}), 400
         
-        nuevo_servicio=Service(title=title,price=int(price),description=description,img_url=img_url,category=category,user_id=int(user_id)
-        )
+        nuevo_servicio=Service(title=title,price=int(price),time=time, description=description,img_url=img_url,category=category,user_id=int(user_id))
         print(nuevo_servicio.serialize())
         db.session.add(nuevo_servicio)
         db.session.commit()
@@ -228,6 +266,8 @@ def post_service():
         return jsonify({
             "error":str(e)
         })
+    
+
 
 
 @api.route('/service/<int:service_id>', methods=['GET'])
@@ -249,6 +289,7 @@ def get_single_service(service_id):
             "id": servicio.serialize()["id"] ,
             "img_url":servicio.serialize()["img_url"] ,
             "price":servicio.serialize()["price"],
+            "time":servicio.serialize()["time"],
             "title": servicio.serialize()["title"],
             "user": {
                 "id":usuario.serialize()["id"],
@@ -570,6 +611,7 @@ def create_favorite():
         return jsonify({"error": str(e)}), 500
 
 
+
 @api.route("/comment/delete",methods=["DELETE"])
 @jwt_required()
 def delete_comment():
@@ -720,3 +762,4 @@ def get_comment_freelance(freelance_id):
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
  
+

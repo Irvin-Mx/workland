@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 
 
 const FormularioFreelance = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
     const [user, setUser]= useState(
         store.userProfile
     )
@@ -27,6 +28,7 @@ const FormularioFreelance = () => {
             email: user.email
         };
         actions.updateFreelanceProfile(updateData);
+        navigate(-1);
     };
 
     return (
@@ -107,7 +109,7 @@ const FormularioFreelance = () => {
                         Guardar
                     </button>
                     
-                        <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }}>
+                        <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} onClick={() => navigate(-1)}>
                             Cancelar
                         </button>
                     
