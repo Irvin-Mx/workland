@@ -213,6 +213,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             createFreelanceProfile: async (freelance_Profile, freelance_id) => {
+              
                 const token = localStorage.getItem("user_token");
 
                 try {
@@ -270,7 +271,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
-
             getMyFreelanceProfile: async (freelance_id) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {
@@ -372,6 +372,75 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const token = localStorage.getItem("user_token");
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/order`, {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + token,
+                        },
+                    });
+                    const data = await response.json();
+
+
+                    if (response.ok) {
+                        return data;
+                    } else {
+                        console.error("Error en la respuesta del servidor:", data);
+                    }
+                } catch (error) {
+                    console.error("Error al agregar producto:", error);
+                }
+            },
+
+            checkFavorite : async (body) => {
+                try{
+                    const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
+                        method: "POST",
+                        headers: {
+                            "Authorization": "Bearer " + token,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(body)
+                    })
+
+                    data = await response.json()
+                    console.log(data)
+
+                    if(response.ok){
+                        return data
+                    }
+
+
+
+                }catch(e){
+                    console.log("error", e)
+                }
+            },
+            addOrRemoveFavorite : async (body) => {
+                const token = localStorage.getItem("user_token");
+                try{
+                    const response = await fetch(process.env.BACKEND_URL + `/api/favorite/change`, {
+                        method: "POST",
+                        headers: {
+                            "Authorization": "Bearer " + token,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(body)
+                    })
+
+                    const data = await response.json()
+                    console.log(data)
+
+                    if(response.ok){
+                        return data
+                    }
+
+                }catch(e){
+                    console.log("err9or", e)
+                }
+            },
+            getAllFavorites: async () => {
+                const token = localStorage.getItem("user_token");
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/favorites/all`, {
                         method: "GET",
                         headers: {
                             "Authorization": "Bearer " + token,

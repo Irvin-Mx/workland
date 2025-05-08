@@ -572,22 +572,32 @@ def get_user_favorites():
 def create_favorite():
     try:
         current_user_id = get_jwt_identity()
+        print(current_user_id)
         data = request.get_json()
+        print(data)
         favorite_status = data.get('favorite_status')
 
         favorite_id = data.get('favorite_id')
 
         user = User.query.get(current_user_id)
         favorite_user = User.query.get(favorite_id)
+        print(user.serialize())
+        print(favorite_user.serialize())
 
         if not user or not favorite_user:
             return jsonify({"error": "Usuario o favorito no encontrado"}), 404
-
+        print(favorite_status)
+        print(favorite_id)
+        print(favorite_status == False)
         if favorite_status == False:
             # Verificar si el favorito ya existe
+            #print("A punto de agregar1")
+            #print(user.favoritos_agregados)
+            #print("A punto de agregar2")
             if favorite_user in user.favoritos_agregados:
                 return jsonify({"message": "El usuario ya está en la lista de favoritos"}), 200
 
+            #print("A punto de agregar3")
             # Agregar el favorito
             user.agregar_favorito(favorite_user)
             db.session.commit()
@@ -597,6 +607,7 @@ def create_favorite():
                 # "favoritos": [fav.id for fav in user.favoritos_agregados]
             }),201
         else:
+            #print("A punto de eliminar")
             # Eliminar el favorito
             user.eliminar_favorito(favorite_user)
             db.session.commit()
@@ -608,6 +619,7 @@ def create_favorite():
     
     except Exception as e:
         db.session.rollback()
+
         return jsonify({"error": str(e)}), 500
 
 
@@ -761,5 +773,4 @@ def get_comment_freelance(freelance_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
- 
 
