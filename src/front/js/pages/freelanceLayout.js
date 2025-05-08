@@ -4,9 +4,9 @@ import { Context } from "../store/appContext.js";
 export const FreelanceLayout = () => {
     const { actions } = useContext(Context);
     const [formData, setFormData] = useState({
-        basic: { title: "", description: "", price: "", img_url: "" },
-        pro: { title: "", description: "", price: "", img_url: "" },
-        enterprise: { title: "", description: "", price: "", img_url: "" },
+        basic: { title: "", description: "", price: "", time:"", img_url: "" },
+        pro: { title: "", description: "", price: "",time:"", img_url: "" },
+        enterprise: { title: "", description: "", time:"", price: "", img_url: "" },
     });
     const [activeCategory, setActiveCategory] = useState("basic");
     const [imagePreview, setImagePreview] = useState("");
@@ -29,7 +29,7 @@ export const FreelanceLayout = () => {
 
     const handleSubmit = async () => {
         const categoryData = formData[activeCategory];
-        if (!categoryData.title || !categoryData.description || !categoryData.price) {
+        if (!categoryData.title || !categoryData.description || !categoryData.price||!categoryData.time ) {
             alert("Por favor, completa todos los campos requeridos.");
             return;
         }
@@ -86,7 +86,7 @@ export const FreelanceLayout = () => {
                         </div>
 
                         {/* Subir imagen */}
-                        <div className="card-title border rounded shadow mb-4" style={{ background: "aliceblue" }}>
+                        <div className="card border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                                 ¿Qué Producto vas a vender?
                             </div>
@@ -115,7 +115,7 @@ export const FreelanceLayout = () => {
                         </div>
 
 
-                        <div className="card-description border rounded shadow mb-4" style={{ background: "aliceblue" }}>
+                        <div className="card border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                                 Información del Producto
                             </div>
@@ -131,25 +131,46 @@ export const FreelanceLayout = () => {
                                 ></textarea>
                             </div>
                         </div>
-
-
-                        <div className="card-package border rounded shadow mb-4" style={{ background: "aliceblue" }}>
-                            <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                Precio
+                        
+                            <div className="row justify-content-around ">
+                                <div className="col-6 d-flex aling-items-strech">
+                                    <div className=" card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
+                                        <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
+                                            Precio
+                                        </div>
+                                        <div className="card-body">
+                                            <label htmlFor="price">Precio</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="price"
+                                                name="price"
+                                                value={formData[activeCategory].price}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-6 d-flex aling-items-strech">
+                                    <div className="card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
+                                        <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
+                                            Tiempo de entrega estimado
+                                        </div>
+                                        <div className="card-body">
+                                            <label htmlFor="price">Tiempo estimado</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="time"
+                                                name="time"
+                                                value={formData[activeCategory].time}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="card-body">
-                                <label htmlFor="price">Precio</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="price"
-                                    name="price"
-                                    value={formData[activeCategory].price}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                        </div>
-
+                       
                         {/* Botones */}
                         <div className="d-flex justify-content-between">
                             <button
@@ -198,7 +219,7 @@ export const FreelanceLayout = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

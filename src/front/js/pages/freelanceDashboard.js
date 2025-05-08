@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
@@ -6,9 +6,7 @@ import NavbarLateral from "../component/NavbarLateral.jsx";
 const FreelanceDashboard = () => {
     const { store, actions } = useContext(Context);
 
-    // useEffect(() => {
-    //     actions.getMyProfile();
-    // }, []);
+   
 
     const user = store.userProfile || {};
     if (!user.name) return <p>Cargando datos del usuario...</p>;

@@ -1,14 +1,60 @@
-import React, { useContext, useEffect, } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
 
-const FreelanceDescrption = () => {
+const FreelanceDescription = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+    const [user, setUser] = useState(
+        store.userProfile
+    )
 
 
-    const user = store.userProfile || {};
-    if (!user.name) return <p>Cargando datos del usuario...</p>;
+    const [formData, setFormData] = useState({
+        service_title: '',
+        service_description: '',
+        profile_description: '',
+
+    });
+  useEffect(() => {
+    if (!store.userProfile) {
+        actions.getMyProfile(); // Obtiene el perfil si no está disponible
+    } else {
+        setUser(store.userProfile);
+        setFormData({
+            service_title: store.userProfile.service_title || "",
+            service_description: store.userProfile.service_description || "",
+            profile_description: store.userProfile.profile_description || "",
+        });
+    }
+}, [actions, store.userProfile]);
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const freelance_id = store.userProfile?.id; 
+    if (!freelance_id) {
+        alert("No se encontró el ID del perfil freelance");
+        return;
+    }
+
+    await actions.createFreelanceProfile(formData, freelance_id);
+    
+};
+
+
+
+
 
     return (
         <div className="d-flex">
@@ -32,63 +78,49 @@ const FreelanceDescrption = () => {
 
                 </div>
 
-
-                {/* <div className="user-card d-flex my-3 p-3 w-50 border rounded rounded shadow">
-                <div className="rounded-circle" style={{ height: "150px", width: "150px", marginLeft: "10px", marginRight: "10px" }}>
-                    <img
-                        className="rounded-circle"
-                        src={store.userProfile.img_url} alt="imagen perfil" style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover"
-                        }} />
-                </div>
-
-                <div className="col-md-6 d-flex flex-column align-items-start">
-
-                    <h5 className="name">{user.name}</h5>
-                    <h5 className="last_name">{user.last_name}</h5>
-                    <p className="adress"><i className="fa-solid fa-location-dot me-3"></i>{user.address}</p>
-                    <p className="phone"><i className="fa-solid fa-phone me-3"></i>{user.phone}</p>
-                    <p className="email"><i className="fa-solid fa-envelope me-3"></i>{user.email}</p>
-                </div>
-
-            </div> */}
-
-
                 <div className="card w-50 border rounded rounded shadow mb-4 " style={{ background: "aliceblue" }} >
 
                     <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                         Perfil Profesional
                     </div>
                     <div className="card-body">
-                        <p>Por favor describe tu profesión u oficio en un título</p>
-                        <div className="form-floating m-3">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Profesión u oficio</label>
-                        </div>
-                        <p>Por favor describe tu perfil</p>
-                        <div className="form-floating m-3">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Descripción</label>
-                        </div>
-                        <a href="#" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Guardar</a>
+                        <p>Escribe un título claro y directo que describa tu profesión u oficio. Este título será visible para quienes busquen tus servicios, por lo que debe ser específico y representativo.</p>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-floating m-3">
+                                <textarea className="form-control" placeholder="Profesion u oficio" id="service_title" name="service_title" value={formData.service_title}
+
+                                    onChange={handleChange} ></textarea>
+                                <label htmlFor="service_title">Profesión u oficio</label>
+                            </div>
+                            <p>Redacta una descripción concisa que resuma los servicios que ofreces. Esta descripción ayudará a los usuarios a entender rápidamente en qué consisten tus servicios.</p>
+                            <div className="form-floating m-3">
+                                <textarea className="form-control" placeholder="Leave a comment here" id="service_description" name="service_description" value={formData.service_description}
+
+                                    onChange={handleChange}></textarea>
+                                <label htmlFor="service_description">Descripción</label>
+                            </div>
+                            <p>Proporciona una descripción detallada de tu experiencia, habilidades y enfoque profesional. Incluye información relevante como años de experiencia, metodologías de trabajo y cualquier otro detalle que consideres importante para destacar tus servicios.</p>
+                            <div className="form-floating m-3">
+                                <textarea className="form-control" placeholder="Leave a comment here" id="profile_description" name="profile_description" value={formData.profile_description}
+
+                                    onChange={handleChange}></textarea>
+                                <label htmlFor="profile_description">Descripción detallada de tu perfil profesional</label>
+                            </div>
+                            <button type="submit" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Guardar</button>
+                        </form>
                     </div>
+
                 </div>
                 <Link to="/freeConfig">
                     <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} >Siguiente</button>
                 </Link>
-
-
-
-
-
-
-
+                <Link to="/freelanceDashboard">
+                    <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF6B6B", color: "aliceblue" }} >Cancelar</button>
+                </Link>
             </div>
-        </div>
+        </div >
     );
 };
 
-export default FreelanceDescrption;
+export default FreelanceDescription;
 

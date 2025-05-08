@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
@@ -6,9 +6,7 @@ import NavbarLateral from "../component/NavbarLateral.jsx";
 const FreelanceEdit = () => {
     const { store, actions } = useContext(Context);
 
-    // useEffect(() => {
-    //     actions.getMyProfile();
-    // }, []);
+  
 
     const user = store.userProfile || {};
     if (!user.name) return <p>Cargando datos del usuario...</p>;
@@ -79,7 +77,7 @@ const FreelanceEdit = () => {
                                         Métos de pago
                                     </h5>
                                     <p className="text-muted mb-2">Pra recibir los pagos de tus clientes de una manera directa, es necesario crear una cuenta Paypal para vincularla a nuestra plataforma</p>
-                                    <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>¡Da click aquí!  <i class="fa-brands fa-paypal fa-2"></i></a>
+                                    <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>¡Da click aquí!  <i className="fa-brands fa-paypal fa-2"></i></a>
                                     <h5 className="text-muted my-3">Te transferiremos a los servidores seguros de PayPal.</h5>
                                 
                             </div>

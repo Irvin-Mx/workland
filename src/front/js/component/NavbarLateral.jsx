@@ -14,7 +14,7 @@ const NavbarLateral = (props) => {
             <ul className={`navbar-nav sidebar accordion vh-100 d-none d-md-block ${styles.sidebar} `} id="accordionSidebar">
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                     <div className="sidebar-brand-icon rotate-n-15">
-                    <i class="fa-solid fa-house"></i>
+                    <i className="fa-solid fa-house"></i>
                     </div>
                     <div className="sidebar-brand-text mx-auto m-2">Workland</div>
                 </a>
@@ -45,7 +45,7 @@ const NavbarLateral = (props) => {
 
                 <li className="nav-item">
                     <Link className="nav-link" to="/freeCV">
-                    <i class="fa-solid fa-business-time m-2"></i>
+                    <i className="fa-solid fa-business-time m-2"></i>
                         <span>Mis servicios</span>
                     </Link>
                 </li>
