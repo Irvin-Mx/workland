@@ -25,6 +25,8 @@ import CommentTestPage from "./pages/CommentTestPage.jsx";
 import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 
+import Favorites from "./pages/Favorites.jsx"
+
 
 const initialOptions = {
     "client-id": `${process.env.PAYPAL_CLIENT_ID}`,
@@ -63,6 +65,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
                         <Route element={<Ordenes />} path="/ordenes" />
+                        <Route element={<Favorites />} path="/favoritos" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     {/* <Footer /> */}

@@ -10,6 +10,11 @@ export const FreelancePerfil = () => {
     const [data, setData] = useState({});
     const [servicesByCategory, setServicesByCategory] = useState({});
     const navigate = useNavigate();
+    const defaultFavoriteStatus = false
+
+    let [userRole,setUserRole] = useState("")
+
+
 
     const categories = {
         basic: "Básico",
@@ -20,6 +25,8 @@ export const FreelancePerfil = () => {
     useEffect(() => {
         actions.getMyFreelanceProfile(freelance_id)
             .then((data) => {
+                console.log("useEffect")
+                setUserRole(store.userProfile.rol)
                 if (data?.result?.services) {
                     const grouped = {
                         basic: [],
@@ -41,8 +48,28 @@ export const FreelancePerfil = () => {
                 console.error("Error al cargar el perfil freelance:", err);
                 alert("Hubo un problema al cargar el perfil. Por favor, inténtalo de nuevo.");
             });
+        console.log(store)
+        
+        if (store) {
+            console.log(store?.userProfile)
+        }
     }, [freelance_id]);
 
+    console.log(userRole, "before return")
+
+    const handleFavorite = async () => {
+        console.log("Will try to add a ")
+        try{
+            const res = await actions.addOrRemoveFavorite({
+                favorite_id : freelance_id,
+                favorite_status: defaultFavoriteStatus
+            })
+
+            console.log(res)
+        }catch(e){
+            console.log("Error", e)
+        }
+    }
     return (
         <div className="container my-5" style={{ alignItems: "center" }}>
             <div className="card mb-3 shadow-sm" style={{ maxWidth: "800px" }}>
@@ -60,6 +87,18 @@ export const FreelancePerfil = () => {
                             <h2>Profesión</h2>
                             <h4 className="card-title mb-1">{data.name}</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor rhoncus quam. Sed massa ligula, vehicula eget faucibus in, rhoncus eget justo. Cras hendrerit suscipit magna, nec aliquet turpis pharetra eget.</p>
+                            {console.log(store.userProfile)}
+                            {console.log(userRole)}
+                            {console.log("abcd")}
+                            
+                            {userRole === "user" ? (
+                                <div>
+                                    {/* <i className="fa-regular fa-heart"></i>
+                                    <span> Favorite</span> */}
+                                    <button onClick={handleFavorite} className="btn btn-primary"><i className="fa-regular fa-heart"></i>Favorite</button>
+                                </div>
+                            ) : null}
+
                         </div>
                     </div>
                 </div>
@@ -75,7 +114,7 @@ export const FreelancePerfil = () => {
                                 data-bs-target={`#${key}`}
                                 type="button"
                                 role="tab"
-                                
+
                             >
                                 {label}
                             </button>
@@ -143,7 +182,7 @@ export const FreelancePerfil = () => {
 
 
                     <p className="text-muted">No hay comentarios disponibles.</p>
-                    
+
                 </div>
             </div>
 
