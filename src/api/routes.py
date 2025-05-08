@@ -184,14 +184,14 @@ def get_user():
             "error":str(e)
         })
     
-@api.route('/profile/freelance/<int:freelance_id>', methods=['POST'])
+@api.route('/profile/freelance/', methods=['POST'])
 @jwt_required()
 def create_freelance_profile():
     try:
         data = request.get_json()
 
         required_fields = ["service_title", "service_description", "profile_description"]
-        missing_fields = [field for field in required_fields if not data.get(field)is None ]
+        missing_fields = [field for field in required_fields if not data.get(field)]
         if missing_fields:
             return jsonify({
                 "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",

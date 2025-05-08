@@ -215,12 +215,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             createFreelanceProfile: async (freelance_Profile, freelance_id) => {
               
                 const token = localStorage.getItem("user_token");
+                console.log("Token:", token);
+                console.log("Freelance ID:", freelance_id);
+                console.log("Freelance Profile:", freelance_Profile);
 
                 try {
-                    const response = await fetch(process.env.BACKEND_URL+`/api/profile/freelance/${freelance_id}`, { 
+                    const response = await fetch(process.env.BACKEND_URL+"/api/profile/freelance", { 
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
+                            // "Content-Type": "application/json",
                             "Authorization": "Bearer " + token
                         },
                         body: JSON.stringify(freelance_Profile)
