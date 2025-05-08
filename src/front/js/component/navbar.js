@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
-//syles
+//styles
 import styles from "./navbar.module.css"
 
 
@@ -70,14 +70,10 @@ export const Navbar = () => {
 									<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
 											<Link className="dropdown-item" to="/freeEdit">
-												Mi Perfil
+												Mi perfil
 											</Link>
 										</li>
-										<li>
-											<Link className="dropdown-item" to="/settings">
-												Configuración
-											</Link>
-										</li>
+										
 										<li>
 											<button className="dropdown-item" onClick={handleLogOut}>
 												Cerrar sesión
