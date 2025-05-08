@@ -41,6 +41,9 @@ class User(db.Model):
         backref=db.backref('favoritos_de', lazy='dynamic')
     )
 
+    comments_made = relationship("Comment", foreign_keys="[Comment.user_id]",back_populates="author")
+    comments_received = relationship("Comment",foreign_keys="[Comment.freelance_id]",back_populates="recipient")
+
     def agregar_favorito(self, usuario):
         """Agregar un usuario como favorito"""
         if usuario not in self.favoritos_agregados:
@@ -131,3 +134,26 @@ class Order(db.Model):
             "user_name": self.user_name
             # do not serialize the password, its a security breach
         }
+    
+class Comment(db.Model):
+    __tablename__="comments"
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    text = db.Column(db.String(200), nullable=False)
+    stars=db.Column(db.Integer, nullable=False,default=1)
+
+
+    user_id = db.Column(db.Integer, ForeignKey('users.id'))  
+    freelance_id = db.Column(db.Integer, ForeignKey('users.id'))  
+    author = relationship("User",foreign_keys=[user_id],back_populates="comments_made")
+    recipient = relationship("User",foreign_keys=[freelance_id],back_populates="comments_received")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "text": self.text,
+            "stars": self.stars,
+            "user_id":self.user_id,
+            "freelance_id":self.freelance_id,
+
+        }
+    

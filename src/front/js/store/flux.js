@@ -167,7 +167,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-
             checkLogInUser: () => {
                 let token = localStorage.getItem("user_token");
 
@@ -177,7 +176,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return true
                 }
             },
-
             logOut: () => {
                 localStorage.removeItem("user_token");
                 setStore({ ...getStore(), userProfile: {} })
@@ -214,7 +212,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
-
             createFreelanceProfile: async (freelance_Profile, freelance_id) => {
                 const token = localStorage.getItem("user_token");
 
@@ -274,8 +271,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-
-
             getMyFreelanceProfile: async (freelance_id) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {
@@ -306,7 +301,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-
             updateFreelanceProfile: async (updatedData) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance`, {
@@ -336,7 +330,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-
             getSingleService: async (serviceId) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/service/${serviceId}`);
@@ -395,7 +388,94 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error) {
                     console.error("Error al agregar producto:", error);
                 }
-            }
+            },
+            getAllComments: async (freelance_id) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/freelance/${freelance_id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+
+                    if (response.ok) {
+                        const data = await response.json()
+
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+            getAllCommentsMade: async () => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/user`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token")
+                        },
+                    })
+                    const data = await response.json()
+                    if (response.ok) {
+                        return data
+                    } else {
+                        return (data)
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+            postComment: async (body) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/add`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token"),
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+            deleteComment: async (body) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/delete`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token"),
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
         },
     };
 };
