@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User,Service,Order
+from api.models import db, User,Service,Order,Comment
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import timedelta
@@ -184,6 +184,44 @@ def get_user():
             "error":str(e)
         })
     
+@api.route('/profile/freelance/<int:freelance_id>', methods=['POST'])
+@jwt_required()
+def create_freelance_profile():
+    try:
+        data = request.get_json()
+
+        required_fields = ["service_title", "service_description", "profile_description"]
+        missing_fields = [field for field in required_fields if not data.get(field)is None ]
+        if missing_fields:
+            return jsonify({
+                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
+                "result": []
+            }), 400
+        
+        user_id = get_jwt_identity()
+        user = User.query.filter(User.id == int(user_id)).first()
+
+
+        if not User:
+            return jsonify({"msj":"No existe usuario"}), 400
+        
+        if user.service_title or user.service_description or user.profile_description:
+            return jsonify({"msj": "El perfil ya existe"}), 400
+        
+        user.service_title = data["service_title"]
+        user.service_description = data["service_description"]
+        user.profile_description = data["profile_description"]
+        db.session.commit()
+
+        return jsonify({
+        'msj': 'Perfil creado exitosamente',
+        'result': user.serialize()}), 200
+
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        })
+        
 @api.route('/service', methods=['POST'])
 @jwt_required()
 def post_service():
@@ -193,12 +231,13 @@ def post_service():
         title = data.get("title")
         price = data.get("price")
         description = data.get("description")
+        time= data.get("time")
         img_url = data.get("img_url")
         category = data.get("category")
         user_id=get_jwt_identity()
         print(type(user_id))
 
-        required_fields = ["title", "price", "description", "category"]
+        required_fields = ["title", "price", "time" "description", "category"]
         missing_fields = [field for field in required_fields if not data.get(field)]
         if missing_fields:
             return jsonify({
@@ -212,8 +251,7 @@ def post_service():
         if not existe_usuario:
             return jsonify({"msj":"No existe usuario"}), 400
         
-        nuevo_servicio=Service(title=title,price=int(price),description=description,img_url=img_url,category=category,user_id=int(user_id)
-        )
+        nuevo_servicio=Service(title=title,price=int(price),time=time, description=description,img_url=img_url,category=category,user_id=int(user_id))
         print(nuevo_servicio.serialize())
         db.session.add(nuevo_servicio)
         db.session.commit()
@@ -228,6 +266,8 @@ def post_service():
         return jsonify({
             "error":str(e)
         })
+    
+
 
 
 @api.route('/service/<int:service_id>', methods=['GET'])
@@ -249,6 +289,7 @@ def get_single_service(service_id):
             "id": servicio.serialize()["id"] ,
             "img_url":servicio.serialize()["img_url"] ,
             "price":servicio.serialize()["price"],
+            "time":servicio.serialize()["time"],
             "title": servicio.serialize()["title"],
             "user": {
                 "id":usuario.serialize()["id"],
@@ -578,4 +619,158 @@ def create_favorite():
     
     except Exception as e:
         db.session.rollback()
+
         return jsonify({"error": str(e)}), 500
+
+
+
+@api.route("/comment/delete",methods=["DELETE"])
+@jwt_required()
+def delete_comment():
+    try:
+        data = request.get_json()
+        user_id=int(get_jwt_identity())
+
+        # freelance_id=int(data.get("freelance_id"))
+        comment_id=int(data.get("comment_id"))
+
+        user=User.query.filter_by(id=user_id).first()
+        if not user:
+            return jsonify({"msj": "No se encuentra el usuario"}), 400
+        
+        # freelance=User.query.filter_by(id=freelance_id).first()
+        # if not freelance:
+        #     return jsonify({"msj": "No se encuentra el freelance"}), 400
+        
+        comment=Comment.query.filter_by(id=comment_id).first()
+        # comment_length=len(user.comments_made)
+
+        # if comment_length == 0:
+        #     return jsonify({"msj": "No hay commentarios que borrar"}), 400
+        
+        if not comment:
+            return jsonify({"msj": "No se encuentra el comentario"}), 400
+
+        db.session.delete(comment)
+        db.session.commit()
+
+        return jsonify({
+        "msj":"Comentario eliminado correctamente",
+        "result":comment.serialize()
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
+
+@api.route("/comment/add",methods=["POST"])
+@jwt_required()
+def add_comment():
+    try:
+        data = request.get_json()
+        user_id=int(get_jwt_identity())
+        text=data.get("text")
+        stars=data.get("stars")
+        freelance_id=int(data.get("freelance_id"))
+        print(data,user_id)
+
+        user=User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return jsonify({"msj": "No se encuentra el usuario"}), 400
+        freelance=User.query.filter_by(id=freelance_id).first()
+        if not freelance:
+            return jsonify({"msj": "No se encuentra el freelance"}), 400
+
+        comment = Comment(
+            text=text,
+            stars=stars,
+            user_id=user_id,
+            freelance_id=freelance_id
+        )
+        
+        db.session.add(comment)
+        db.session.commit()
+
+        return jsonify({
+        "msj":"Comentario creado correctamente",
+        "result":comment.serialize()
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
+ 
+@api.route("/comment/user",methods=["GET"])
+@jwt_required()
+def get_comment_user():
+    try:
+        user_id=int(get_jwt_identity())
+        user=User.query.filter_by(id=user_id).first()
+        comments_len=len(user.comments_made)
+
+        if comments_len ==0:
+            return jsonify({"msj": "No se han hecho comentarios","result":[]}), 200
+
+        if not user:
+            return jsonify({"msj": "No se encuentra el usuario","result":[]}), 400
+        
+        def extrat_data(com):
+            data=com.serialize()
+            author=User.query.filter_by(id=data["user_id"]).first().serialize()
+            autor_full_name=author["name"]+" "+ author["last_name"]
+            autor_img_url=author["img_url"]
+            result= {
+                "id":data["id"],
+                "text":data["text"],
+                "stars":data["stars"],
+                "author_full_name":autor_full_name,
+                "author_img_url":autor_img_url
+            }
+            return result
+
+        comentarios_hechos =[extrat_data(com) for com in user.comments_made] 
+        
+        return jsonify({
+        "msj":"Comentarios",
+        "result":comentarios_hechos
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+    
+
+@api.route("/comment/freelance/<int:freelance_id>",methods=["GET"])
+def get_comment_freelance(freelance_id):
+    try:
+        # user_id=int(get_jwt_identity())
+        user=User.query.filter_by(id=freelance_id).first()
+
+        if not user:
+            return jsonify({"msj": "No se encuentra el usuario"}), 400
+        
+        def extrat_data(com):
+            data=com.serialize()
+            author=User.query.filter_by(id=data["user_id"]).first().serialize()
+            autor_full_name=author["name"]+" "+ author["last_name"]
+            autor_img_url=author["img_url"]
+            result= {
+                "id":data["id"],
+                "text":data["text"],
+                "stars":data["stars"],
+                "author_full_name":autor_full_name,
+                "author_img_url":autor_img_url
+            }
+            return result
+
+        comentarios_recibidos =[extrat_data(com) for com in user.comments_received] 
+        
+        return jsonify({
+        "result":comentarios_recibidos
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+

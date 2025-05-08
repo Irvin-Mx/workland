@@ -2,6 +2,7 @@ import React, { useContext, useState, } from 'react'
 import { Context } from "../store/appContext.js";
 import { useForm } from "react-hook-form"
 import ImageLoader from './ImageLoader.jsx';
+import { toastExito, toastFallo } from './Toaster/toasterIndex.jsx';
 
 const StarComponent = ({ value, stars, setStarsState }) => {
     const [hover, setHover] = useState(false)
@@ -17,7 +18,7 @@ const StarComponent = ({ value, stars, setStarsState }) => {
     )
 }
 
-const CommentBox = () => {
+const CommentBox = ({freelance_id}) => {
     const { store, actions } = useContext(Context)
     const [starsState, setStarsState] = useState(1)
     const {
@@ -28,12 +29,18 @@ const CommentBox = () => {
     } = useForm()
 
     const MAX_CHARACTERS = 200
-    const msj = watch("texto")
+    const msj = watch("text")
 
-    const onSubmit = (data) =>{ 
-        console.log(data.texto)
-        console.log(starsState)
-        console.log(store.userProfile.id,"id user")
+    const onSubmit = (data) =>{
+
+        actions.postComment({
+            text:data.text,
+            stars:starsState,
+            freelance_id:freelance_id
+        })
+        .then((res)=>toastExito(res.msj))
+        .catch((err)=>toastFallo(err.msj))
+
     }
 
     return (
@@ -72,16 +79,16 @@ const CommentBox = () => {
                             </label>
                             <textarea
 
-                                {...register("texto", { required: true, maxLength: MAX_CHARACTERS })}
+                                {...register("text", { required: true, maxLength: MAX_CHARACTERS })}
                                 style={{ resize: 'none' }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
 
                         <div style={{ height: "30px" }} className='w-full'>
                             {
-                                errors.texto && errors.texto.type === "required" && <span className='text-white bg-danger'>Esto debe de ser incluido.</span>
+                                errors.text && errors.text.type === "required" && <span className='text-white bg-danger'>Esto debe de ser incluido.</span>
                             }
                             {
-                                errors.texto && errors.texto.type === "maxLength" && <span className='text-white bg-danger'>Sobrepasa el limite de carateres.</span>
+                                errors.text && errors.text.type === "maxLength" && <span className='text-white bg-danger'>Sobrepasa el limite de carateres.</span>
                             }
                         </div>
                         <button type='submit' className='btn btn-primary'>

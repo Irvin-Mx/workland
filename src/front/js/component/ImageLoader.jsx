@@ -58,7 +58,7 @@ const ImageLoader = ({
       <img
         src={src}
         alt={alt}
-        className={` ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+        className={` ${isLoading ? 'opacity-0' : 'opacity-100'} rounded-circle`}
         style={{ width, height ,objectFit: "cover"}}
       />
     </div>

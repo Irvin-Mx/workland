@@ -3,27 +3,40 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import PrivateRoute from "./component/PrivateRoute.jsx";
+import { Navbar } from "./component/navbar";
+
+//Herramientas
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import  { Toaster } from "react-hot-toast";
-import { Home } from "./pages/home";
+
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-import { Navbar } from "./component/navbar";
+
 import { Footer } from "./component/footer";
+
+// Vistas globales
+import { Home } from "./pages/home";
 import Registro from "./pages/registro";
-import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
-import  Ordenes  from "./pages/Ordenes.jsx";
 import Login from "./pages/Login.jsx";
+
+
+
+// Vistas user
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
 import FreelancePerfil  from "./pages/freelancePerfil.js";   
-import FreelanceEdit from "./pages/freelanceEdit.js";
-import FreelanceLayout from "./pages/freelanceLayout.js";
-
+import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
+import  Ordenes  from "./pages/Ordenes.jsx";
 import CommentTestPage from "./pages/CommentTestPage.jsx";
 
+
+// Vistas freelance
 import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
+import FreelanceEdit from "./pages/freelanceEdit.js";
+import FreelanceLayout from "./pages/freelanceLayout.js";
+import FreelanceDashboard from "./pages/freelanceDashboard.js";
+
 
 import Favorites from "./pages/Favorites.jsx"
 
@@ -52,20 +65,21 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<CommentTestPage />} path="/test-comment" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
-                        <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
-                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceEdit/></PrivateRoute>} path="/freeEdit"/>
-                        <Route element={<FreelanceDescrption/>} path="/freeCV"/>
-                        <Route element={<FreelanceFormulario/>} path="/freeForm"/>
-                        <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
-                        <Route element={<FreelanceLayout />} path="/freeConfig"/>
                         <Route element={<Login/>} path="/iniciar-sesion" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceEdit/></PrivateRoute>} path="/freeEdit"/>
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceDescrption/></PrivateRoute>} path="/freeCV"/>
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceFormulario/></PrivateRoute>} path="/freeForm"/>
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceLayout /></PrivateRoute>} path="/freeConfig"/>
+                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceDashboard /></PrivateRoute>} path="/freeDash"/>
+                        <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
+                        <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
+                        <Route element={<CommentTestPage />} path="/test-comment" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
                         <Route element={<Ordenes />} path="/ordenes" />
                         <Route element={<Favorites />} path="/favoritos" />
+                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     {/* <Footer /> */}

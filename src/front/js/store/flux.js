@@ -212,11 +212,38 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
-            createProduct: async (productData) => {
+            createFreelanceProfile: async (freelance_Profile, freelance_id) => {
+              
                 const token = localStorage.getItem("user_token");
 
+                try {
+                    const response = await fetch(process.env.BACKEND_URL+`/api/profile/freelance/${freelance_id}`, { 
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body: JSON.stringify(freelance_Profile)
+                    });
 
+                    const data = await response.json();
 
+                    if (response.ok) {
+                        toastExito("Perfil agregado correctamente ✅");
+                    
+                        return data;
+                    } else {
+                
+                        alert(data.error || "Error al agregar informacion del perfil");
+                    }
+                } catch (error) {
+                    console.error("Error al agregar perfil:", error);
+                    alert("Ocurrió un error al intentar añadir información al perfil");
+                }
+            },
+
+            createProduct: async (productData) => {
+                const token = localStorage.getItem("user_token");
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
                         method: "POST",
@@ -362,6 +389,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error al agregar producto:", error);
                 }
             },
+
             checkFavorite : async (body) => {
                 try{
                     const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
@@ -429,7 +457,94 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error) {
                     console.error("Error al agregar producto:", error);
                 }
-            }
+            },
+            getAllComments: async (freelance_id) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/freelance/${freelance_id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+
+                    if (response.ok) {
+                        const data = await response.json()
+
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+            getAllCommentsMade: async () => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/user`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token")
+                        },
+                    })
+                    const data = await response.json()
+                    if (response.ok) {
+                        return data
+                    } else {
+                        return (data)
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+            postComment: async (body) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/add`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token"),
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+            deleteComment: async (body) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/comment/delete`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token"),
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
         },
     };
 };
