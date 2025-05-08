@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import NavbarLateral from "../component/NavbarLateral.jsx";
 
 const FreelanceDescrption = () => {
     const { store, actions } = useContext(Context);
@@ -10,16 +11,29 @@ const FreelanceDescrption = () => {
     if (!user.name) return <p>Cargando datos del usuario...</p>;
 
     return (
-        <div className=" d-flex flex-column align-items-center vh-100" >
+        <div className="d-flex">
+            <div>
 
-            <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
-                <p>Bienvenido, proveedor
-                    En nuestra plataforma, tú eliges <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces. Nuestro compromiso es ayudarte a construir el trabajo de tus sueños, donde tú tienes el control, y tu talento encuentra las oportunidades que merece.</p>
-
+                <NavbarLateral />
             </div>
-            <h2>Mi perfil</h2>
 
-            <div className="user-card d-flex my-3 p-3 w-50 border rounded rounded shadow">
+            <div className=" flex-grow-1 p-4 align-items-center" >
+                <div className="user-card d-flex flex-column p-1 w-50 align-items-center border-rounded">
+                    <h3 className="m-3" >¡Estás a pocos pasos de conseguir el trabajo de tus sueños!</h3>
+                </div>
+                <h5>Completa la siguiente información para comenzar a ofrecer tus servicios.</h5>
+                <h5 className="card-title text-left">
+                    <span className="badge me-2" style={{ background: "#FF6B6B" }}>1</span>
+                    Paso:  Completa tu perfil
+                </h5>
+                <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
+
+                    <p>Usa un título breve y directo para indicar tu profesión u oficio, y luego cuéntanos más sobre tu experiencia, habilidades, logros o el tipo de servicios que ofreces. Recuerda que este perfil será tu carta de presentación, así que sé auténtico, profesional y enfócate en lo que te hace destacar.</p>
+
+                </div>
+
+
+                {/* <div className="user-card d-flex my-3 p-3 w-50 border rounded rounded shadow">
                 <div className="rounded-circle" style={{ height: "150px", width: "150px", marginLeft: "10px", marginRight: "10px" }}>
                     <img
                         className="rounded-circle"
@@ -39,55 +53,39 @@ const FreelanceDescrption = () => {
                     <p className="email"><i className="fa-solid fa-envelope me-3"></i>{user.email}</p>
                 </div>
 
-                <div className="col-md-3 d-flex justify-content-end align-items-start">
-                    <Link to="/freeForm">
-                        <button
-                            type="button"
-                            className="btn btn-link"
-                        >
-                            <i className="fa-solid fa-pen-to-square"></i>
-                        </button>
-                    </Link>
+            </div> */}
 
 
-                    <button
-                        type="button"
-                        className="btn btn-link">
-                        <i className="fa-solid fa-trash"></i>
-                    </button>
+                <div className="card w-50 border rounded rounded shadow mb-4 " style={{ background: "aliceblue" }} >
 
-
-                </div>
-            </div>
-
-
-            <div className="card w-50 border rounded rounded shadow ">
-                <div className="card-header">
-                    Perfil Profesional
-                </div>
-                <div className="card-body">
-                    <p>Por favor describe tu profesión u oficio en un título</p>
-                    <div className="form-floating m-3">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Profesión u oficio</label>
+                    <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
+                        Perfil Profesional
                     </div>
-                    <p>Por favor describe tu perfil</p>
-                    <div className="form-floating m-3">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Descripción</label>
+                    <div className="card-body">
+                        <p>Por favor describe tu profesión u oficio en un título</p>
+                        <div className="form-floating m-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Profesión u oficio</label>
+                        </div>
+                        <p>Por favor describe tu perfil</p>
+                        <div className="form-floating m-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Descripción</label>
+                        </div>
+                        <a href="#" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Guardar</a>
                     </div>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
                 </div>
+                <Link to="/freeConfig">
+                    <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} >Siguiente</button>
+                </Link>
+
+
+
+
+
+
+
             </div>
-            <div className="user-card d-flex flex-column p-1 w-50 align-items-center border-rounded">
-                <h3>¡Súmate hoy y haz que cada servicio cuente!</h3>
-            </div>
-            <p>¡Estás a pocos pasos de conseguir el trabajo de tus sueños! Completa la siguiente información para comenzar a ofrecer tus servicios.</p>
-
-
-
-
-
         </div>
     );
 };

@@ -53,12 +53,17 @@ export const FreelanceLayout = () => {
 
     return (
         <div className="container">
+
+            <h5 className="card-title m-3">
+                <span className="badge me-2" style={{ background: "#FF6B6B" }}>2</span>
+                Agrega tus servicios
+            </h5>
+            <p>Para ayudarte a ofrecer tus servicios de forma clara y atractiva, te pedimos que completes la información de tres paquetes: Básico, Pro y Empresarial. Cada paquete debe reflejar un nivel diferente de servicio, precio y valor.</p>
             <div className="row">
-                
                 <div className="col-md-8 mt-4">
                     <h2>Formulario para {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}</h2>
                     <div className="d-flex flex-column">
-                 
+
                         <div className="input-group w-100 mb-4">
                             <input
                                 type="text"
@@ -109,7 +114,7 @@ export const FreelanceLayout = () => {
                             </div>
                         </div>
 
-           
+
                         <div className="card-description border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                                 Información del Producto
@@ -127,7 +132,7 @@ export const FreelanceLayout = () => {
                             </div>
                         </div>
 
-                      
+
                         <div className="card-package border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                                 Precio
@@ -151,7 +156,7 @@ export const FreelanceLayout = () => {
                                 type="button"
                                 className="btn"
                                 onClick={handleNextCategory}
-                                style={{ width: "150px", background: "#1e266d", color:"aliceblue" }}
+                                style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
                             >
                                 Siguiente
                             </button>
@@ -159,7 +164,7 @@ export const FreelanceLayout = () => {
                                 type="button"
                                 className="btn"
                                 onClick={handleSubmit}
-                                style={{ width: "150px",  background: "#00D1B2", color: "aliceblue" }}
+                                style={{ width: "150px", background: "#00D1B2", color: "aliceblue" }}
                             >
                                 Guardar
                             </button>

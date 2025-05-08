@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
 
-const FreelanceEdit = () => {
+const FreelanceDashboard = () => {
     const { store, actions } = useContext(Context);
 
     // useEffect(() => {
@@ -19,23 +19,15 @@ const FreelanceEdit = () => {
 
                 <NavbarLateral />
             </div>
-
-            {/* Botón de colapso para dispositivos pequeños */}
-            <button
-                className="btn btn-primary d-md-none"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#accordionSidebar"
-                aria-expanded="false"
-                aria-controls="accordionSidebar"
-            >
-                <i className="fas fa-bars"></i>
-            </button>
             <div className=" flex-grow-1 p-4">
 
-                {/* texto principal */}
+                <h1 className="text-start m-5">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
+                <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
 
-                <h1 className="text-start m-5" style={{ marginLeft: "10px" }}>¡Bienvenido a Workland  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
+                    <p>
+                        En nuestra plataforma, tú eliges <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces. Nuestro compromiso es ayudarte a construir el trabajo de tus sueños, donde tú tienes el control, y tu talento encuentra las oportunidades que merece.</p>
+
+                </div>
 
                 <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
                     <div className="rounded-circle" style={{ height: "150px", width: "150px", marginLeft: "10px", marginRight: "10px" }}>
@@ -66,34 +58,20 @@ const FreelanceEdit = () => {
 
                         </Link>
 
+                        <button
+                            type="button"
+                            className="btn btn-link">
+                            <i className="fa-solid fa-trash"></i>
+                        </button>
 
 
                     </div>
                 </div>
-                <div className="container mt-4">
-                    <div className="row g-4">
-                        <div className="col-md-6">
-                            <div className="p-4">
-                                    <h5 className="mb-3 d-flex align-items-center">
-                                        
-                                        Métos de pago
-                                    </h5>
-                                    <p className="text-muted mb-2">Pra recibir los pagos de tus clientes de una manera directa, es necesario crear una cuenta Paypal para vincularla a nuestra plataforma</p>
-                                    <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>¡Da click aquí!  <i class="fa-brands fa-paypal fa-2"></i></a>
-                                    <h5 className="text-muted my-3">Te transferiremos a los servidores seguros de PayPal.</h5>
-                                
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
 
             </div>
         </div>
     );
 };
 
-export default FreelanceEdit;
+export default FreelanceDashboard;
 
