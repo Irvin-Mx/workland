@@ -9,6 +9,10 @@ import styles from "./navbar.module.css"
 export const Navbar = () => {
 	const { store, actions } = useContext(Context)
 
+	const handleSidebar = () => {
+		actions.toggleSideBar()
+	}
+
 	const navigate = useNavigate()
 
 	const handleLogOut = () => {
@@ -19,14 +23,18 @@ export const Navbar = () => {
 	return (
 		<nav className={`${styles.navbar__container} navbar navbar-expand-lg bg-body-tertiary`}>
 			<div className="container-fluid">
-				<div className="d-flex justify-content-between align-items-center w-100">
+				<div className="d-flex  align-items-center w-100">
 					<Link to="/" className={`${styles.navbar__brand} navbar-brand fs-2 `} >Workland</Link>
-					{/* {
-						store.userProfile?.name &&
+					<button onClick={handleSidebar} style={{width:"40px"}} className="btn btn-secondary">
+						{
+							store.sidebarOpen === false ?
+								<i className="fa-solid fa-bars"></i>
+								:
+								<i className="fa-solid fa-xmark"></i>
 
-					} */}
+						}
 
-
+					</button>
 				</div>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon">x</span>
@@ -73,7 +81,7 @@ export const Navbar = () => {
 												Mi perfil
 											</Link>
 										</li>
-										
+
 										<li>
 											<button className="dropdown-item" onClick={handleLogOut}>
 												Cerrar sesión

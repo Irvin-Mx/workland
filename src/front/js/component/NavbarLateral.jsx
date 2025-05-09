@@ -6,22 +6,27 @@ import styles from "./navbarLateral.module.css"
 
 
 const NavbarLateral = (props) => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false)
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [])
 
-    
 
     return (
         <div className="d-flex">
             <ul className={`navbar-nav sidebar accordion vh-100 d-none d-md-block ${styles.sidebar} `} id="accordionSidebar">
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                     <div className="sidebar-brand-icon rotate-n-15">
-                    <i className="fa-solid fa-house"></i>
+                        <i className="fa-solid fa-house"></i>
                     </div>
                     <div className="sidebar-brand-text mx-auto m-2">Workland</div>
                 </a>
                 <li className="w-100 p-0 m-0">
-                <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
+                    <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
                 </li>
-          
+
 
                 <li className="nav-item active">
                     <Link className="nav-link" to="/freeDash">
@@ -31,7 +36,7 @@ const NavbarLateral = (props) => {
                 </li>
 
                 <li className="w-100 p-0 m-0">
-                <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
+                    <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
                 </li>
 
                 <div className={`sidebar-heading my-0 ${styles.sidebarHeading}`}>Opciones</div>
@@ -45,7 +50,7 @@ const NavbarLateral = (props) => {
 
                 <li className="nav-item">
                     <Link className="nav-link" to="/freeCV">
-                    <i className="fa-solid fa-business-time m-2"></i>
+                        <i className="fa-solid fa-business-time m-2"></i>
                         <span>Mis servicios</span>
                     </Link>
                 </li>
@@ -58,7 +63,7 @@ const NavbarLateral = (props) => {
                 </li>
 
                 <li className="w-100 p-0 m-0">
-                <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
+                    <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
                 </li>
 
                 <div className="text-center d-none d-md-inline">
