@@ -12,7 +12,7 @@ export const FreelancePerfil = () => {
     const navigate = useNavigate();
     const defaultFavoriteStatus = false
 
-    let [userRole,setUserRole] = useState("")
+    let [isInFavorites, setIsInFavorites] = useState(false)
 
 
 
@@ -25,8 +25,7 @@ export const FreelancePerfil = () => {
     useEffect(() => {
         actions.getMyFreelanceProfile(freelance_id)
             .then((data) => {
-                console.log("useEffect")
-                setUserRole(store.userProfile.rol)
+
                 if (data?.result?.services) {
                     const grouped = {
                         basic: [],
@@ -48,27 +47,26 @@ export const FreelancePerfil = () => {
                 console.error("Error al cargar el perfil freelance:", err);
                 alert("Hubo un problema al cargar el perfil. Por favor, inténtalo de nuevo.");
             });
-        console.log(store)
-        
+
         if (store) {
-            console.log(store?.userProfile)
+    
         }
     }, [freelance_id]);
 
-    console.log(userRole, "before return")
+    useEffect(() => {
 
-    const handleFavorite = async () => {
-        console.log("Will try to add a ")
-        try{
-            const res = await actions.addOrRemoveFavorite({
-                favorite_id : freelance_id,
-                favorite_status: defaultFavoriteStatus
-            })
+        actions.checkFavorite({ favorite_id: freelance_id })
+            .then((res) => { setIsInFavorites(res.result) }).catch((err) => { console.log(err) })
+    }, [])
 
-            console.log(res)
-        }catch(e){
-            console.log("Error", e)
-        }
+
+    const handleFavorite =  () => {
+
+        actions.addOrRemoveFavorite({
+            favorite_id: freelance_id,
+            favorite_status: isInFavorites
+        }).then((res)=>{
+            setIsInFavorites(res.result)}).catch((e)=>{console.log("error",e)})
     }
     return (
         <div className="container my-5" style={{ alignItems: "center" }}>
@@ -87,15 +85,26 @@ export const FreelancePerfil = () => {
                             <h2>Profesión</h2>
                             <h4 className="card-title mb-1">{data.name}</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor rhoncus quam. Sed massa ligula, vehicula eget faucibus in, rhoncus eget justo. Cras hendrerit suscipit magna, nec aliquet turpis pharetra eget.</p>
-                            {console.log(store.userProfile)}
-                            {console.log(userRole)}
-                            {console.log("abcd")}
-                            
-                            {userRole === "user" ? (
+
+
+                            {store.userProfile?.rol === "user" ? (
                                 <div>
                                     {/* <i className="fa-regular fa-heart"></i>
                                     <span> Favorite</span> */}
-                                    <button onClick={handleFavorite} className="btn btn-primary"><i className="fa-regular fa-heart"></i>Favorite</button>
+                                    <button onClick={handleFavorite} className="btn btn-primary">
+                                        {
+                                            isInFavorites ?
+                                                <>
+                                                    <i className="fa-solid fa-heart"></i>
+                                                    <span> Esta en favoritos</span>
+                                                </>
+                                                :
+                                                <>
+                                                    <i className="fa-regular fa-heart"></i>
+                                                    <span> No esta en favoritos</span>
+                                                </>
+                                        }
+                                    </button>
                                 </div>
                             ) : null}
 

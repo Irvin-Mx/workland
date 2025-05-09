@@ -553,7 +553,7 @@ def check_favorite():
 @jwt_required()
 def get_user_favorites():
     user_id = int(get_jwt_identity())
-
+    print(user_id)
     if user_id <= 0:
         return jsonify({"error": "El ID del usuario debe ser un número positivo"}), 400
 
@@ -561,9 +561,20 @@ def get_user_favorites():
     if not user:
         return jsonify({"error": f"Usuario con ID {user_id} no encontrado"}), 404
 
-    favorites = user.favoritos_agregados
+    def nombre(objeto):
+        data = objeto.serialize()
+        name = data["name"]
+        last_name = data["last_name"]
+        id = data["id"]
+        return {"name": name,"last_name": last_name,"id": id}      
+
+    favorites = [nombre(fav) for fav in user.favoritos_agregados]
+
+    
+    print(favorites)
+   
     return jsonify({
-        "result": [fav.serialize() for fav in favorites]
+        "result": favorites
     }), 200
 
 

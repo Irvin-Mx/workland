@@ -394,8 +394,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             checkFavorite : async (body) => {
+                const token = localStorage.getItem("user_token");
                 try{
-                    const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/favorite/check`, {
                         method: "POST",
                         headers: {
                             "Authorization": "Bearer " + token,
@@ -404,8 +405,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(body)
                     })
 
-                    data = await response.json()
-                    console.log(data)
+                    const data = await response.json()
+                    
 
                     if(response.ok){
                         return data
@@ -430,7 +431,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
 
                     const data = await response.json()
-                    console.log(data)
+
 
                     if(response.ok){
                         return data
