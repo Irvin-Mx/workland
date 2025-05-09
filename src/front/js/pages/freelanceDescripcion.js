@@ -6,9 +6,7 @@ import NavbarLateral from "../component/NavbarLateral.jsx";
 const FreelanceDescription = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-    const [user, setUser] = useState(
-        store.userProfile
-    )
+ 
 
 
     const [formData, setFormData] = useState({
@@ -21,7 +19,7 @@ const FreelanceDescription = () => {
     if (!store.userProfile) {
         actions.getMyProfile(); // Obtiene el perfil si no está disponible
     } else {
-        setUser(store.userProfile);
+   
         setFormData({
             service_title: store.userProfile.service_title || "",
             service_description: store.userProfile.service_description || "",
@@ -39,17 +37,16 @@ const FreelanceDescription = () => {
         }));
     };
 
-   const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const freelance_id = store.userProfile?.id; 
-    if (!freelance_id) {
-        alert("No se encontró el ID del perfil freelance");
-        return;
-    }
-
-    await actions.createFreelanceProfile(formData, freelance_id);
-    
+    const freelanceData = {
+        service_title: formData.service_title,
+        service_description: formData.service_description,
+        profile_description: formData.profile_description,
+    };
+    console.log(freelanceData);
+    await actions.updateFreelanceProfile(freelanceData);
 };
 
 

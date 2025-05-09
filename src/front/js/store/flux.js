@@ -212,36 +212,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
-            createFreelanceProfile: async (freelance_Profile, freelance_id) => {
-              
+            
+            updateFreelanceProfile: async (freelanceData) => {
                 const token = localStorage.getItem("user_token");
-                console.log("Token:", token);
-                console.log("Freelance ID:", freelance_id);
-                console.log("Freelance Profile:", freelance_Profile);
 
                 try {
-                    const response = await fetch(process.env.BACKEND_URL+"/api/profile/freelance", { 
-                        method: "POST",
+                    const response = await fetch(process.env.BACKEND_URL + "/api/profile/freelance", {
+                        method: "PUT",
                         headers: {
-                            // "Content-Type": "application/json",
+                            "Content-Type": "application/json",
                             "Authorization": "Bearer " + token
                         },
-                        body: JSON.stringify(freelance_Profile)
+                        body: JSON.stringify(freelanceData)
                     });
 
                     const data = await response.json();
 
                     if (response.ok) {
-                        toastExito("Perfil agregado correctamente ✅");
-                    
-                        return data;
+                        toastExito("Perfil actualizado correctamente ✅");
+                        return data.result;
                     } else {
-                
-                        alert(data.error || "Error al agregar informacion del perfil");
+                        console.error("Error al actualizar perfil freelance:", data);
+                        alert(data.error || data.msg || "Error al actualizar perfil freelance");
                     }
                 } catch (error) {
-                    console.error("Error al agregar perfil:", error);
-                    alert("Ocurrió un error al intentar añadir información al perfil");
+                    console.error("Error de red al actualizar perfil freelance:", error);
+                    alert("Error de conexión con el servidor");
                 }
             },
 
@@ -316,12 +312,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     const data = await response.json();
-                    console.log("Datos recibidos:", data)
+              
 
                     if (response.ok) {
                         const store = getStore();
                         setStore({ ...store, freelancerProfile: data });
-                        toastExito(data.msj)
+                        
                         return data;
                     } else {
                         toast(data.error || "Error al actualizar el perfil del usuario");
@@ -393,8 +389,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            checkFavorite : async (body) => {
-                try{
+            checkFavorite: async (body) => {
+                try {
                     const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
                         method: "POST",
                         headers: {
@@ -407,19 +403,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     data = await response.json()
                     console.log(data)
 
-                    if(response.ok){
+                    if (response.ok) {
                         return data
                     }
 
 
 
-                }catch(e){
+                } catch (e) {
                     console.log("error", e)
                 }
             },
-            addOrRemoveFavorite : async (body) => {
+            addOrRemoveFavorite: async (body) => {
                 const token = localStorage.getItem("user_token");
-                try{
+                try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/favorite/change`, {
                         method: "POST",
                         headers: {
@@ -432,11 +428,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json()
                     console.log(data)
 
-                    if(response.ok){
+                    if (response.ok) {
                         return data
                     }
 
-                }catch(e){
+                } catch (e) {
                     console.log("err9or", e)
                 }
             },

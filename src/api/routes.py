@@ -184,43 +184,39 @@ def get_user():
             "error":str(e)
         })
     
-@api.route('/profile/freelance/', methods=['POST'])
-@jwt_required()
-def create_freelance_profile():
-    try:
-        data = request.get_json()
+# @api.route('/profile/freelance', methods=['PUT'])
+# @jwt_required()
+# def update_freelance_profile():
+#     try:
+#         user_id = get_jwt_identity()
+#         user = User.query.get(user_id)
 
-        required_fields = ["service_title", "service_description", "profile_description"]
-        missing_fields = [field for field in required_fields if not data.get(field)]
-        if missing_fields:
-            return jsonify({
-                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
-                "result": []
-            }), 400
-        
-        user_id = get_jwt_identity()
-        user = User.query.filter(User.id == int(user_id)).first()
+#         if not user:
+#             return jsonify({"msg": "Usuario no encontrado"}), 404
 
+#         data = request.get_json()
 
-        if not User:
-            return jsonify({"msj":"No existe usuario"}), 400
-        
-        if user.service_title or user.service_description or user.profile_description:
-            return jsonify({"msj": "El perfil ya existe"}), 400
-        
-        user.service_title = data["service_title"]
-        user.service_description = data["service_description"]
-        user.profile_description = data["profile_description"]
-        db.session.commit()
+#         # Actualiza solo los campos freelance si vienen en el body
+#         if "service_title" in data:
+#             user.service_title = data["service_title"]
+#         if "service_description" in data:
+#             user.service_description = data["service_description"]
+#         if "profile_description" in data:
+#             user.profile_description = data["profile_description"]
 
-        return jsonify({
-        'msj': 'Perfil creado exitosamente',
-        'result': user.serialize()}), 200
+#         db.session.commit()
+
+#         return jsonify({
+#             "msg": "Perfil freelance actualizado correctamente",
+#             "result": {
+#                 "service_title": user.service_title,
+#                 "service_description": user.service_description,
+#                 "profile_description": user.profile_description
+#             }
+#         }), 200
 
     except Exception as e:
-        return jsonify({
-            "error":str(e)
-        })
+        return jsonify({"error": str(e)}), 500
         
 @api.route('/service', methods=['POST'])
 @jwt_required()
@@ -237,7 +233,7 @@ def post_service():
         user_id=get_jwt_identity()
         print(type(user_id))
 
-        required_fields = ["title", "price", "time" "description", "category"]
+        required_fields = ["title", "price", "time", "description", "category"]
         missing_fields = [field for field in required_fields if not data.get(field)]
         if missing_fields:
             return jsonify({
@@ -245,6 +241,10 @@ def post_service():
                 "result": []
             }), 400
 
+        try:
+            price = int(price)
+        except ValueError:
+            return jsonify({"msj": "El precio debe ser un número"}), 400
         existe_usuario = User.query.filter(User.id == int(user_id)).first()
 
 
@@ -407,13 +407,17 @@ def get_order():
 @api.route('/freelance/<int:freelance_id>', methods=['GET'])
 def get_freelance(freelance_id):
     try:
-        print(freelance_id)
+    
         user_dict = User.query.filter_by(id=freelance_id).first()
+
         if not user_dict:
             return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
         services = [service.serialize() for service in user_dict.services]
         freelance_with ={
-            "name": user_dict.serialize()["name"],
+            "name": user_dict.name,
+            "service_title": user_dict.service_title,
+            "service_description": user_dict.service_description,
+            "profile_description": user_dict.profile_description,
             "services": services
         }
         return jsonify({
@@ -450,6 +454,9 @@ def update_freelance():
         user_to_update.email = data.get("email", user_to_update.email)
         user_to_update.phone = data.get("phone", user_to_update.phone)
         user_to_update.address = data.get("address", user_to_update.address)
+        user_to_update.service_title = data.get("service_title", user_to_update.service_title)
+        user_to_update.service_description = data.get("service_description", user_to_update.service_description)
+        user_to_update.profile_description = data.get("profile_description", user_to_update.profile_description)
 
         db.session.commit()
 
