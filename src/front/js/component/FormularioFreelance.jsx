@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 
-
+const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dph121s7p/image/upload/v1746471079/image_profile_placceholder_dfzbln.jpg";
 const FormularioFreelance = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-    const [user, setUser]= useState(
-        store.userProfile
-    )
+    const [user, setUser]= useState(store.userProfile);
+     const [photoFile, setPhotoFile] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
    
     if (!user) return <p>Cargando datos del usuario...</p>;
 
@@ -18,16 +18,30 @@ const FormularioFreelance = () => {
         setUser({ ...user, [name]: value }); 
     };
 
-    const handleSubmit = (e) => {
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file){
+            setPhotoFile(file); 
+            setPhotoPreview(URL.createObjectURL(file));
+
+        }
+ 
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const updateData ={
-            name: user.name,
-            last_name: user.last_name,
-            phone: user.phone,
-            address: user.address,
-            email: user.email
-        };
-        actions.updateFreelanceProfile(updateData);
+        const formData = new FormData()
+        formData.append("name", user.name);
+        formData.append("last_name", user.last_name);
+        formData.append("phone", user.phone);
+        formData.append("address", user.address);
+        formData.append("email", user.email);
+        
+        if (photoFile) {
+            formData.append("photo_profile", photoFile);
+   
+        }
+        await actions.updateFreelanceProfile(formData);
         navigate(-1);
     };
 
@@ -35,6 +49,28 @@ const FormularioFreelance = () => {
         <div className=" d-flex flex-column align-items-center vh-100 m-5">
             <div className="w-50 p-4 border rounded shadow" style={{ background: "aliceblue" }} >
                 <form onSubmit={handleSubmit}>
+                    <h2 className="text-center mb-4">Edita los datos de tu Perfil</h2>
+                    <div className="mb-3">
+                        <img src={photoPreview || user.img_url || DEFAULT_IMAGE_URL} 
+                        alt="Imagen de perfil" 
+                        className="rounded-circle mb-3" 
+                        style={{ width: "100px", height: "100px", objectFit: "cover" }} />
+
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputPhoto" className="form-label">Foto de perfil</label>
+                        <input
+                            id="inputPhoto"
+                            name="photo"
+                            type="file"
+                            className="form-control"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                        />
+                        <small className="form-text text-muted">Sube una imagen de perfil (opcional)</small>
+                    </div>
+
+
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Nombre</label>
                         <input
@@ -95,15 +131,7 @@ const FormularioFreelance = () => {
                             value={user.email}
                             onChange={handleChange}
                         />
-                        <div id="emailHelp" className="form-text">
-                            Tu correo está seguro con nosotros, no lo compartiremos con nadie.
-                        </div>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="inputPhoto" className="form-label">Subir Imagen </label>
-                        <input id="inputPhoto" name="photo" type="file" accept="image/*" className="form-control"  
-                            // value={photo}
-                            onChange={(e)=>setPhoto(e.target.files[0])} />
+                        
                     </div>
                     <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }}>
                         Guardar

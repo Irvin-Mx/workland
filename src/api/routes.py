@@ -184,36 +184,6 @@ def get_user():
             "error":str(e)
         })
     
-# @api.route('/profile/freelance', methods=['PUT'])
-# @jwt_required()
-# def update_freelance_profile():
-#     try:
-#         user_id = get_jwt_identity()
-#         user = User.query.get(user_id)
-
-#         if not user:
-#             return jsonify({"msg": "Usuario no encontrado"}), 404
-
-#         data = request.get_json()
-
-#         # Actualiza solo los campos freelance si vienen en el body
-#         if "service_title" in data:
-#             user.service_title = data["service_title"]
-#         if "service_description" in data:
-#             user.service_description = data["service_description"]
-#         if "profile_description" in data:
-#             user.profile_description = data["profile_description"]
-
-#         db.session.commit()
-
-#         return jsonify({
-#             "msg": "Perfil freelance actualizado correctamente",
-#             "result": {
-#                 "service_title": user.service_title,
-#                 "service_description": user.service_description,
-#                 "profile_description": user.profile_description
-#             }
-#         }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -222,50 +192,51 @@ def get_user():
 @jwt_required()
 def post_service():
     try:
-        data = request.get_json()
+        user_id= get_jwt_identity()
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"msg":"Freelance no encontrado"}), 404
 
-        title = data.get("title")
-        price = data.get("price")
-        description = data.get("description")
-        time= data.get("time")
-        img_url = data.get("img_url")
-        category = data.get("category")
-        user_id=get_jwt_identity()
-        print(type(user_id))
+        title = request.form.get("title")
+        price = request.form.get("price")
+        description = request.form.get("description")
+        time = request.form.get("time")
+        img_file = request.files.get("img_url")
+        category = request.form.get("category")
 
-        required_fields = ["title", "price", "time", "description", "category"]
-        missing_fields = [field for field in required_fields if not data.get(field)]
-        if missing_fields:
-            return jsonify({
-                "msj": f"faltan campos necesarios: {', '.join(missing_fields)}",
-                "result": []
-            }), 400
-
-        try:
-            price = int(price)
-        except ValueError:
-            return jsonify({"msj": "El precio debe ser un número"}), 400
-        existe_usuario = User.query.filter(User.id == int(user_id)).first()
-
-
-        if not existe_usuario:
-            return jsonify({"msj":"No existe usuario"}), 400
+        if not title or not price or not description or not time or not category:
+            return jsonify({"error": "Todos los campos son obligatorios"}),400
         
-        nuevo_servicio=Service(title=title,price=int(price),time=time, description=description,img_url=img_url,category=category,user_id=int(user_id))
-        print(nuevo_servicio.serialize())
-        db.session.add(nuevo_servicio)
+
+        image_url = None
+        if img_file:
+            upload_result = cloudinary.uploader.upload(img_file)
+            image_url = upload_result.get("secure_url")
+
+        new_service=Service(
+        user_id=int (user.id),
+        title=title,
+        description=description,
+        price=int(price),
+        time=time, 
+        category=category,
+        img_url=image_url,
+        )
+
+        db.session.add(new_service)
         db.session.commit()
 
         return jsonify({
         'msj': 'Servicio creado exitosamente',
-        'result': nuevo_servicio.serialize()}), 201
+        'result': new_service.serialize()}), 201
 
 
         
     except Exception as e:
-        return jsonify({
-            "error":str(e)
-        })
+        return jsonify({"error":f"Error interno del servidor: {str(e)}"
+        }
+    )
+      
     
 
 
@@ -428,41 +399,45 @@ def get_freelance(freelance_id):
         return jsonify({
             "error":str(e)
         }),
-
+# ruta para actualizr los datos solo de freelance
 @api.route('/freelance', methods=['PUT'])
 @jwt_required()
 def update_freelance(): 
     try:
-        data = request.get_json()
-        if not data:
-            return jsonify({"msg": "Faltan datos en la solicitud"}), 400
+        form_data = request.form
+        photo_profile= request.files.get('photo_profile')
+        photo_cover =request.files.get('photo_cover')
 
         user_id = get_jwt_identity()
         current_user = User.query.filter_by(id=user_id).first()
 
         if not current_user:
-            return jsonify({"msj": "Usuario no encontrado", "result": []}), 404
+            return jsonify({"msj":  "Perfil de Freelance no encontrado", "result": []}), 404
 
+       
 
-        user_to_update = User.query.filter_by(id=user_id).first()
+        if photo_profile:
+       
+            current_user.img_url = photo_uploader(photo_profile)
+        if photo_cover:
+           
+            current_user.cover_img_url = photo_uploader(photo_cover)
 
-        if not user_to_update:
-            return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
+        current_user.name =form_data.get("name", current_user.name)
+        current_user.last_name =form_data.get("last_name", current_user.last_name)
+        current_user.email =form_data.get("email", current_user.email)
+        current_user.phone =form_data.get("phone", current_user.phone)
+        current_user.address =form_data.get("address", current_user.address)
+        current_user.service_title =form_data.get("service_title", current_user.service_title)
+        current_user.service_description =form_data.get("service_description", current_user.service_description)
+        current_user.profile_description =form_data.get("profile_description", current_user.profile_description)
 
-        user_to_update.name = data.get("name", user_to_update.name)
-        user_to_update.last_name = data.get("last_name", user_to_update.last_name)
-        user_to_update.email = data.get("email", user_to_update.email)
-        user_to_update.phone = data.get("phone", user_to_update.phone)
-        user_to_update.address = data.get("address", user_to_update.address)
-        user_to_update.service_title = data.get("service_title", user_to_update.service_title)
-        user_to_update.service_description = data.get("service_description", user_to_update.service_description)
-        user_to_update.profile_description = data.get("profile_description", user_to_update.profile_description)
 
         db.session.commit()
 
         return jsonify({
             "msj": "Freelance actualizado correctamente",
-            "result": user_to_update.serialize()
+            "result": current_user.serialize()
         }), 200
 
     except Exception as e:
@@ -470,6 +445,9 @@ def update_freelance():
         return jsonify({
             "error": f"Error interno del servidor: {str(e)}"  
         }), 500
+
+
+# ruta para actualizar solo los datos del user
 
     
 

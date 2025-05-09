@@ -26,6 +26,7 @@ class User(db.Model):
     profile_description = db.Column(db.String(800), nullable=True)
     balance=db.Column(db.Integer(), nullable=True ,default=0)
     img_url=db.Column(db.String(), nullable=True)
+    cover_img_url=db.Column(db.String(), nullable=True)
 
     is_active = db.Column(db.Boolean(), nullable=False,default=True)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
@@ -72,6 +73,7 @@ class User(db.Model):
             "balance": self.balance,
             "services":  self.services,
             "img_url":  self.img_url,
+            "cover_img_url" : self.cover_img_url,
             "service_description": self.service_description,
             "service_title": self.service_title,
             "profile_description": self.profile_description,
@@ -82,7 +84,7 @@ class Service(db.Model):
     __tablename__="services"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=True)
-    price = db.Column(db.DECIMAL(precision=10, scale=2), nullable=True)
+    price = db.Column(db.Integer, nullable=True)
     time = db.Column(db.String(50), nullable=True)
     description = db.Column(db.String(200), nullable=True)
     img_url=db.Column(db.String(), nullable=True)
