@@ -1,23 +1,25 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext.js";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const FreelanceLayout = () => {
     const { actions } = useContext(Context);
     const [formData, setFormData] = useState({
-        basic: { title: "", description: "", price: "", time:"", img_url: "" },
-        pro: { title: "", description: "", price: "",time:"", img_url: "" },
-        enterprise: { title: "", description: "", time:"", price: "", img_url: "" },
+        basic: { title: "", description: "", price: "", time: "" },
+        pro: { title: "", description: "", price: "", time: "" },
+        enterprise: { title: "", description: "", time: "", price: "" },
     });
+
+
+    const [photo, setPhoto] = useState(null);
     const [activeCategory, setActiveCategory] = useState("basic");
     const [imagePreview, setImagePreview] = useState("");
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (name === "img_url" && files && files[0]) {
-            setFormData((prev) => ({
-                ...prev,
-                [activeCategory]: { ...prev[activeCategory], img_url: files[0] },
-            }));
+            setPhoto(files[0]);
             setImagePreview(URL.createObjectURL(files[0]));
         } else {
             setFormData((prev) => ({
@@ -27,29 +29,49 @@ export const FreelanceLayout = () => {
         }
     };
 
-    const handleSubmit = async () => {
-        const categoryData = formData[activeCategory];
-        if (!categoryData.title || !categoryData.description || !categoryData.price||!categoryData.time ) {
-            alert("Por favor, completa todos los campos requeridos.");
-            return;
-        }
-
-        try {
-            await actions.createProduct({ ...categoryData, category: activeCategory });
-            alert(`Producto en categoría ${activeCategory} creado correctamente ✅`);
-        } catch (error) {
-            console.error("Error al crear el producto:", error);
-            alert("Ocurrió un error al crear el producto");
-        }
-    };
-
     const handleNextCategory = () => {
         const categories = ["basic", "pro", "enterprise"];
         const currentIndex = categories.indexOf(activeCategory);
-        const nextIndex = (currentIndex + 1) % categories.length; // Cicla entre categorías
+        const nextIndex = (currentIndex + 1) % categories.length; 
         setActiveCategory(categories[nextIndex]);
-        setImagePreview(formData[categories[nextIndex]].img_url ? URL.createObjectURL(formData[categories[nextIndex]].img_url) : "");
+
     };
+
+    const handleSubmitAll= async () => {
+        const categories = ["basic", "pro", "enterprise"];
+        if (!photo){
+            toast.error("Por favor sube una imagen de portada");
+            return;
+        }
+
+        for (let cat of categories) {
+            const data = formData[cat];
+            if (!data.title || !data.description || !data.price || !data.time) {
+                toast.error(`Completa todos los datos del paquete ${cat}`);
+                return;
+            }
+
+            const fd = new FormData();
+            fd.append("title", data.title);
+            fd.append("description", data.description);
+            fd.append("price", parseInt(data.price));
+            fd.append("time", data.time);
+            fd.append("category", cat);
+            fd.append("img_url", photo);
+
+
+            try {
+                await actions.createProduct(fd);
+
+          } catch (err) {
+                console.error(`Error al guardar el paquete ${cat}:`, err);
+                toast.error(`Error al guardar el paquete ${cat}`);
+                return;
+            }
+        }
+        toast.success("Todos los paquetes han sido guardados exitosamente");
+    };
+ 
 
     return (
         <div className="container">
@@ -59,6 +81,18 @@ export const FreelanceLayout = () => {
                 Agrega tus servicios
             </h5>
             <p>Para ayudarte a ofrecer tus servicios de forma clara y atractiva, te pedimos que completes la información de tres paquetes: Básico, Pro y Empresarial. Cada paquete debe reflejar un nivel diferente de servicio, precio y valor.</p>
+            <div className="progress mb-3" style={{ height: "20px" }}>
+                <div
+                    className="progress-bar"
+                    role="progressbar"
+                    style={{
+                        width: `${((['basic', 'pro', 'enterprise'].indexOf(activeCategory) + 1) / 3) * 100}%`,
+                        backgroundColor: "#1E266D"
+                    }}
+                >
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}
+                </div>
+            </div>
             <div className="row">
                 <div className="col-md-8 mt-4">
                     <h2>Formulario para {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}</h2>
@@ -88,7 +122,7 @@ export const FreelanceLayout = () => {
                         {/* Subir imagen */}
                         <div className="card border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                ¿Qué Producto vas a vender?
+                                Foto de portada
                             </div>
                             <div className="card-body">
                                 <div className="border p-4 rounded" style={{ background: "white", justifyContent: "center" }}>
@@ -120,7 +154,7 @@ export const FreelanceLayout = () => {
                                 Información del Producto
                             </div>
                             <div className="card-body">
-                                <label htmlFor="description">Descripción del producto</label>
+                                <label htmlFor="description">Descripción</label>
                                 <textarea
                                     className="form-control"
                                     id="description"
@@ -141,7 +175,7 @@ export const FreelanceLayout = () => {
                                         <div className="card-body">
                                             <label htmlFor="price">Precio</label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 className="form-control"
                                                 id="price"
                                                 name="price"
@@ -181,10 +215,22 @@ export const FreelanceLayout = () => {
                             >
                                 Siguiente
                             </button>
+
+                            <Link to="/freeCV">
+                                   <button
+                                type="button"
+                                className="btn"
+                           
+                                style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
+                            >
+                                Atrás
+                            </button>             
+                            </Link>
+                             
                             <button
                                 type="button"
                                 className="btn"
-                                onClick={handleSubmit}
+                                onClick={handleSubmitAll}
                                 style={{ width: "150px", background: "#00D1B2", color: "aliceblue" }}
                             >
                                 Guardar
@@ -201,19 +247,8 @@ export const FreelanceLayout = () => {
                             <div className="card p-3 shadow-sm mb-3" key={category}>
                                 <h5>{formData[category].title || "Título no definido"}</h5>
                                 <h6>${formData[category].price || "0.00"}</h6>
-                                <p>{formData[category].description || "Descripción no definida"}</p>
-                                {formData[category].img_url && (
-                                    <img
-                                        src={
-                                            typeof formData[category].img_url === "string"
-                                                ? formData[category].img_url
-                                                : URL.createObjectURL(formData[category].img_url)
-                                        }
-                                        alt={`Vista previa de ${category}`}
-                                        className="img-thumbnail"
-                                        style={{ maxHeight: "150px" }}
-                                    />
-                                )}
+                                <p>{formData[category].time || "Escribe un tiempo aproximado"}</p>
+                                 <p>{formData[category].description || "Descripción no definida"}</p>
                             </div>
                         ))}
                     </div>

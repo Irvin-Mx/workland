@@ -14,6 +14,7 @@ from api.commands import setup_commands
 from flask_jwt_extended import  JWTManager
 from flask_bcrypt import Bcrypt
 
+
 # from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"

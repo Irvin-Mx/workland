@@ -85,12 +85,10 @@ export const FreelancePerfil = () => {
                     </div>
                     <div className="col">
                         <div className="card-body">
-                            <h2>Profesión</h2>
-                            <h4 className="card-title mb-1">{data.name}</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor rhoncus quam. Sed massa ligula, vehicula eget faucibus in, rhoncus eget justo. Cras hendrerit suscipit magna, nec aliquet turpis pharetra eget.</p>
-                            {console.log(store.userProfile)}
-                            {console.log(userRole)}
-                            {console.log("abcd")}
+                            <h2 className="card-title mb-1">{data?.service_title || "Profesión no especificada"}</h2>
+                            <h4 className="card-title mb-1">{data?.name}</h4>
+                            <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
+                           
                             
                             {userRole === "user" ? (
                                 <div>

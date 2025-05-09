@@ -205,36 +205,41 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
-            createFreelanceProfile: async (freelance_Profile, freelance_id) => {
+
+            
+            updateFreelanceProfile: async (formData) => {
 
                 const token = localStorage.getItem("user_token");
-                console.log("Token:", token);
-                console.log("Freelance ID:", freelance_id);
-                console.log("Freelance Profile:", freelance_Profile);
 
                 try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/profile/freelance", {
-                        method: "POST",
+
+                    const response = await fetch(process.env.BACKEND_URL + "/api/freelance", {
+                        method: "PUT",
+
+
                         headers: {
-                            // "Content-Type": "application/json",
+                          
                             "Authorization": "Bearer " + token
                         },
-                        body: JSON.stringify(freelance_Profile)
+                        body: formData
                     });
 
                     const data = await response.json();
 
                     if (response.ok) {
-                        toastExito("Perfil agregado correctamente ✅");
 
-                        return data;
+                        toastExito("Perfil actualizado correctamente ✅");
+                        setStore({ userProfile: data.result });
+                        return data.result;
                     } else {
+                        console.error("Error al actualizar perfil freelance:", data);
+                        alert(data.error || data.msg || "Error al actualizar perfil freelance");
 
-                        alert(data.error || "Error al agregar informacion del perfil");
+                       
                     }
                 } catch (error) {
-                    console.error("Error al agregar perfil:", error);
-                    alert("Ocurrió un error al intentar añadir información al perfil");
+                    console.error("Error de red al actualizar perfil freelance:", error);
+                    alert("Error de conexión con el servidor");
                 }
             },
             createProduct: async (productData) => {
@@ -243,22 +248,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
+                        
                             "Authorization": "Bearer " + token
                         },
-                        body: JSON.stringify(productData)
+                        body: productData
                     });
 
                     const data = await response.json();
 
                     if (response.ok) {
                         alert("Producto agregado correctamente ✅");
-                        // console.log("Producto creado:", data.new_product_created);
-                        // const store = getStore();
-                        // setStore({ ...store, products: [...(store.products || []), data.new_product_created] });
                         return data;
                     } else {
-                        // console.error("Error en la respuesta del servidor:", data);
+                        
                         alert(data.error || "Error al agregar producto");
                     }
                 } catch (error) {
@@ -266,6 +268,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
+
             getMyFreelanceProfile: async (freelance_id) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {
@@ -296,35 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-            updateFreelanceProfile: async (updatedData) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + `/api/freelance`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + localStorage.getItem("user_token")
-                        },
-                        body: JSON.stringify(updatedData)
-                    });
 
-                    const data = await response.json();
-                    console.log("Datos recibidos:", data)
-
-                    if (response.ok) {
-                        const store = getStore();
-                        setStore({ ...store, freelancerProfile: data });
-                        toastExito(data.msj)
-                        return data;
-                    } else {
-                        toast(data.error || "Error al actualizar el perfil del usuario");
-                        return null;
-                    }
-                } catch (e) {
-                    console.error("Error en la solicitud para actualizar el perfil de usuario:", e);
-                    alert("Ocurrió un error al actualizar los datos del perfil freelance");
-                    return null;
-                }
-            },
             getSingleService: async (serviceId) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/service/${serviceId}`);
@@ -384,6 +359,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error al agregar producto:", error);
                 }
             },
+
             checkFavorite: async (body) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
