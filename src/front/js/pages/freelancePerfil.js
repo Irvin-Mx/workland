@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import CommentSection from "../component/CommentSection.jsx";
 
 
 export const FreelancePerfil = () => {
@@ -165,24 +166,10 @@ export const FreelancePerfil = () => {
                 </div>
 
             </div>
-            <div className="container my-5">
-                <h3>Comentarios</h3>
-                <div className="row">
-                    <div className="col-md-4 mb-4">
-                        <div className="card shadow-sm">
-                            <div className="card-body">
-                                <h5 className="card-title">Nombre de quien deja comentarios</h5>
-                                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac mi massa. Quisque sed porta tellus, vitae placerat lorem. Vivamus molestie massa mauris, vel vehicula dolor posuere placerat.</p>
-                                <small className="text-muted">Publicado el fecha </small>
-                            </div>
-                        </div>
-                    </div>
+     
 
-
-                    <p className="text-muted">No hay comentarios disponibles.</p>
-
-                </div>
-            </div>
+            {/* aqui ponlo */}
+            <CommentSection freelance_id={freelance_id}/>
 
         </div>
     );

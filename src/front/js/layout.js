@@ -27,7 +27,6 @@ import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
 import FreelancePerfil  from "./pages/freelancePerfil.js";   
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
 import  Ordenes  from "./pages/Ordenes.jsx";
-import CommentTestPage from "./pages/CommentTestPage.jsx";
 
 
 // Vistas freelance
@@ -36,6 +35,7 @@ import FreelanceFormulario from "./pages/freelanceFormulario.js";
 import FreelanceEdit from "./pages/freelanceEdit.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
 import FreelanceDashboard from "./pages/freelanceDashboard.js";
+import Sidebar from "./component/Sidebar.jsx";
 
 
 import Favorites from "./pages/Favorites.jsx"
@@ -63,7 +63,9 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
+                     <Sidebar/>
                     <Routes>
+                       
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
@@ -75,7 +77,6 @@ const Layout = () => {
                         <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceDashboard /></PrivateRoute>} path="/freeDash"/>
                         <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
                         <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
-                        <Route element={<CommentTestPage />} path="/test-comment" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
                         <Route element={<Ordenes />} path="/ordenes" />
                         <Route element={<Favorites />} path="/favoritos" />

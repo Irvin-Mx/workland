@@ -3,23 +3,15 @@ import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import { useSearchParams } from 'react-router-dom';
 // Funcion que traduce los campos que faltan en sign-up si es que faltan
 function extraerCamposFaltantes(mensaje) {
-    // Verificar si el mensaje contiene el texto esperado
     if (!mensaje.includes("Faltan campos necesarios:")) {
         return [];
     }
-
-    // Separar después del texto fijo y eliminar espacios en blanco
     const partes = mensaje.split("Faltan campos necesarios:");
-
-    // Si solo hay una parte, significa que no hay campos faltantes
     if (partes.length === 1) {
         return [];
     }
-
-    // Obtener la segunda parte y procesarla
     const campos = partes[1].trim();
 
-    // Si hay campos, dividirlos por coma y espacio, y limpiar espacios
     if (campos) {
         const c = campos.split(",").map(campo => campo.trim());
         const camposTraduidos = c.map((elem) => {
@@ -56,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             resutadosBusqueda: [],
             userProfile: {},
-            terminoBusqueda: ""
+            terminoBusqueda: "",
+            sidebarOpen:false
         },
         actions: {
             signup: async (body) => {
@@ -212,13 +205,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
+
             
             updateFreelanceProfile: async (formData) => {
+
                 const token = localStorage.getItem("user_token");
 
                 try {
+
                     const response = await fetch(process.env.BACKEND_URL + "/api/freelance", {
                         method: "PUT",
+
+
                         headers: {
                           
                             "Authorization": "Bearer " + token
@@ -229,19 +227,21 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
+
                         toastExito("Perfil actualizado correctamente ✅");
                         setStore({ userProfile: data.result });
                         return data.result;
                     } else {
                         console.error("Error al actualizar perfil freelance:", data);
                         alert(data.error || data.msg || "Error al actualizar perfil freelance");
+
+                       
                     }
                 } catch (error) {
                     console.error("Error de red al actualizar perfil freelance:", error);
                     alert("Error de conexión con el servidor");
                 }
             },
-
             createProduct: async (productData) => {
                 const token = localStorage.getItem("user_token");
                 try {
@@ -327,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(body)
                     });
                     const data = await response.json();
-                    console.log(data)
+
 
                     if (response.ok) {
                         return data;
@@ -515,6 +515,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            toggleSideBar:()=>{
+                const value=getStore().sidebarOpen
+                setStore({...getStore(),sidebarOpen:!value})
+            }
         },
     };
 };
