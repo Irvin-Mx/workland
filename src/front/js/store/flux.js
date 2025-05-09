@@ -3,23 +3,15 @@ import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import { useSearchParams } from 'react-router-dom';
 // Funcion que traduce los campos que faltan en sign-up si es que faltan
 function extraerCamposFaltantes(mensaje) {
-    // Verificar si el mensaje contiene el texto esperado
     if (!mensaje.includes("Faltan campos necesarios:")) {
         return [];
     }
-
-    // Separar después del texto fijo y eliminar espacios en blanco
     const partes = mensaje.split("Faltan campos necesarios:");
-
-    // Si solo hay una parte, significa que no hay campos faltantes
     if (partes.length === 1) {
         return [];
     }
-
-    // Obtener la segunda parte y procesarla
     const campos = partes[1].trim();
 
-    // Si hay campos, dividirlos por coma y espacio, y limpiar espacios
     if (campos) {
         const c = campos.split(",").map(campo => campo.trim());
         const camposTraduidos = c.map((elem) => {
@@ -56,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             resutadosBusqueda: [],
             userProfile: {},
-            terminoBusqueda: ""
+            terminoBusqueda: "",
+            sidebarOpen:false
         },
         actions: {
             signup: async (body) => {
@@ -213,14 +206,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             createFreelanceProfile: async (freelance_Profile, freelance_id) => {
-              
+
                 const token = localStorage.getItem("user_token");
                 console.log("Token:", token);
                 console.log("Freelance ID:", freelance_id);
                 console.log("Freelance Profile:", freelance_Profile);
 
                 try {
-                    const response = await fetch(process.env.BACKEND_URL+"/api/profile/freelance", { 
+                    const response = await fetch(process.env.BACKEND_URL + "/api/profile/freelance", {
                         method: "POST",
                         headers: {
                             // "Content-Type": "application/json",
@@ -233,10 +226,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     if (response.ok) {
                         toastExito("Perfil agregado correctamente ✅");
-                    
+
                         return data;
                     } else {
-                
+
                         alert(data.error || "Error al agregar informacion del perfil");
                     }
                 } catch (error) {
@@ -244,7 +237,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir información al perfil");
                 }
             },
-
             createProduct: async (productData) => {
                 const token = localStorage.getItem("user_token");
                 try {
@@ -360,7 +352,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(body)
                     });
                     const data = await response.json();
-                    console.log(data)
+
 
                     if (response.ok) {
                         return data;
@@ -392,9 +384,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error al agregar producto:", error);
                 }
             },
-
-            checkFavorite : async (body) => {
-                try{
+            checkFavorite: async (body) => {
+                try {
                     const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
                         method: "POST",
                         headers: {
@@ -407,19 +398,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     data = await response.json()
                     console.log(data)
 
-                    if(response.ok){
+                    if (response.ok) {
                         return data
                     }
 
 
 
-                }catch(e){
+                } catch (e) {
                     console.log("error", e)
                 }
             },
-            addOrRemoveFavorite : async (body) => {
+            addOrRemoveFavorite: async (body) => {
                 const token = localStorage.getItem("user_token");
-                try{
+                try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/favorite/change`, {
                         method: "POST",
                         headers: {
@@ -432,11 +423,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json()
                     console.log(data)
 
-                    if(response.ok){
+                    if (response.ok) {
                         return data
                     }
 
-                }catch(e){
+                } catch (e) {
                     console.log("err9or", e)
                 }
             },
@@ -548,6 +539,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            toggleSideBar:()=>{
+                const value=getStore().sidebarOpen
+                setStore({...getStore(),sidebarOpen:!value})
+            }
         },
     };
 };
