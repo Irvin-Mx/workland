@@ -1,9 +1,7 @@
-
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
-import { Outlet } from "react-router-dom";
 
 const UserConfig = () => {
     const { store, actions } = useContext(Context);
@@ -15,7 +13,11 @@ const UserConfig = () => {
 
     return (
         <div className="d-flex">
-           
+            <div>
+
+                <NavbarLateral />
+            </div>
+
             {/* Botón de colapso para dispositivos pequeños */}
             <button
                 className="btn btn-primary d-md-none"
@@ -27,7 +29,9 @@ const UserConfig = () => {
             >
                 <i className="fas fa-bars"></i>
             </button>
-             {/* texto principal */}
+            <div className=" flex-grow-1 p-4">
+
+                {/* texto principal */}
 
                 <h1 className="text-start m-5" style={{ marginLeft: "10px" }}>¡Bienvenido a Workland  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
 
@@ -41,7 +45,7 @@ const UserConfig = () => {
                                 objectFit: "cover"
                             }} />
                     </div>
-                    <h1 className="text-start m-5" style={{ marginLeft: "10px" }}>¡Bienvenido a Workland  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
+
                     <div className="col-md-6 d-flex flex-column align-items-start">
                         <h5 className="name">{user.name}</h5>
                         <h5 className="last_name">{user.last_name}</h5>
@@ -51,7 +55,7 @@ const UserConfig = () => {
                     </div>
 
                     <div className="col-md-3 d-flex justify-content-end align-items-start">
-                        <Link to="/freeForm">
+                        <Link to="/form">
                             <button
                                 type="button"
                                 className="btn btn-link">
@@ -82,9 +86,8 @@ const UserConfig = () => {
                     </div>
                 </div>
 
-            
-            <div className="main-content">
-                <Outlet />
+
+
             </div>
         </div>
     );

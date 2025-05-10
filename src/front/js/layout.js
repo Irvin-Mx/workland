@@ -21,11 +21,10 @@ import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.js";
 import UserConfig from "./pages/userConfig.js";
 import Sidebar from "./component/Sidebar.jsx";
-
+import FreelancePerfil from "./pages/freelancePerfil.js";
 
 // Vistas user
 import ResutadoDeBusqueda from "./pages/ResutadoDeBusqueda.jsx";
-import FreelancePerfil from "./pages/freelancePerfil.js";
 import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
 import Ordenes from "./pages/Ordenes.jsx";
 import UserEdit from "./pages/userEdit.js";
@@ -73,6 +72,7 @@ const Layout = () => {
                             <Route element={<Login />} path="/iniciar-sesion" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<UserConfig/>} path="/config"/>
+                            <Route element={<FreelanceFormulario/>} path="/form"/>
                             <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id" />
                             <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
                             <Route element={<Single />} path="/single/:theid" />

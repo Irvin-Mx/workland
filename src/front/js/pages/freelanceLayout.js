@@ -216,7 +216,7 @@ export const FreelanceLayout = () => {
                                 Siguiente
                             </button>
 
-                            <Link to="/freeCV">
+                            <Link to="/free/cv">
                                    <button
                                 type="button"
                                 className="btn"

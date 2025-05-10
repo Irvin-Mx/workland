@@ -6,6 +6,7 @@ import styles from "./navbarLateral.module.css"
 
 
 const NavbarLateral = (props) => {
+    
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false)
@@ -29,7 +30,7 @@ const NavbarLateral = (props) => {
 
 
                 <li className="nav-item active">
-                    <Link className="nav-link" to="/freeDash">
+                    <Link className="nav-link" to="/dashboard">
                         <i className="fas fa-fw fa-tachometer-alt m-2"></i>
                         <span>Dashboard</span>
                     </Link>
@@ -42,14 +43,14 @@ const NavbarLateral = (props) => {
                 <div className={`sidebar-heading my-0 ${styles.sidebarHeading}`}>Opciones</div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to="/freeEdit">
+                    <Link className="nav-link" to="/config">
                         <i className="fas fa-fw fa-user-edit m-2"></i>
                         <span>Editar Perfil</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to="/freeCV">
+                    <Link className="nav-link" to="/free/cv">
                         <i className="fa-solid fa-business-time m-2"></i>
                         <span>Mis servicios</span>
                     </Link>

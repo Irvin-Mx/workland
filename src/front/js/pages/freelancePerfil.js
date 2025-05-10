@@ -61,14 +61,7 @@ export const FreelancePerfil = () => {
     }, [])
 
 
-    const handleFavorite =  () => {
-
-        actions.addOrRemoveFavorite({
-            favorite_id: freelance_id,
-            favorite_status: isInFavorites
-        }).then((res)=>{
-            setIsInFavorites(res.result)}).catch((e)=>{console.log("error",e)})
-    }
+   
     return (
         <div className="container my-5" style={{ alignItems: "center" }}>
             <div className="card mb-3 shadow-sm" style={{ maxWidth: "800px" }}>
@@ -90,26 +83,7 @@ export const FreelancePerfil = () => {
                             <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
                            
                             
-                            {userRole === "user" ? (
-                                <div>
-                                    {/* <i className="fa-regular fa-heart"></i>
-                                    <span> Favorite</span> */}
-                                    <button onClick={handleFavorite} className="btn btn-primary">
-                                        {
-                                            isInFavorites ?
-                                                <>
-                                                    <i className="fa-solid fa-heart"></i>
-                                                    <span> Esta en favoritos</span>
-                                                </>
-                                                :
-                                                <>
-                                                    <i className="fa-regular fa-heart"></i>
-                                                    <span> No esta en favoritos</span>
-                                                </>
-                                        }
-                                    </button>
-                                </div>
-                            ) : null}
+                    
 
                         </div>
                     </div>

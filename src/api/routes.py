@@ -406,7 +406,7 @@ def update_freelance():
     try:
         form_data = request.form
         photo_profile= request.files.get('photo_profile')
-        photo_cover =request.files.get('photo_cover')
+        photo_cover = request.files.get('photo_cover')
 
         user_id = get_jwt_identity()
         current_user = User.query.filter_by(id=user_id).first()
@@ -417,10 +417,8 @@ def update_freelance():
        
 
         if photo_profile:
-       
             current_user.img_url = photo_uploader(photo_profile)
         if photo_cover:
-           
             current_user.cover_img_url = photo_uploader(photo_cover)
 
         current_user.name =form_data.get("name", current_user.name)

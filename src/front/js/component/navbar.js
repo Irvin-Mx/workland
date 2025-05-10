@@ -77,7 +77,7 @@ export const Navbar = () => {
 									</div>
 									<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
-											<Link className="dropdown-item" to="/freeEdit">
+											<Link className="dropdown-item" to="/config">
 												Mi perfil
 											</Link>
 										</li>
