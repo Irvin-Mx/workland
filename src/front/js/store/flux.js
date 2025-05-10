@@ -582,6 +582,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(e)
                 }
             },
+            deleteReport: async (body) => {
+                // console.log(body)
+                let token=localStorage.getItem("user_token")
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/report/delete`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
         },
     };
 };
