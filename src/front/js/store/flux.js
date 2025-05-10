@@ -3,23 +3,15 @@ import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import { useSearchParams } from 'react-router-dom';
 // Funcion que traduce los campos que faltan en sign-up si es que faltan
 function extraerCamposFaltantes(mensaje) {
-    // Verificar si el mensaje contiene el texto esperado
     if (!mensaje.includes("Faltan campos necesarios:")) {
         return [];
     }
-
-    // Separar después del texto fijo y eliminar espacios en blanco
     const partes = mensaje.split("Faltan campos necesarios:");
-
-    // Si solo hay una parte, significa que no hay campos faltantes
     if (partes.length === 1) {
         return [];
     }
-
-    // Obtener la segunda parte y procesarla
     const campos = partes[1].trim();
 
-    // Si hay campos, dividirlos por coma y espacio, y limpiar espacios
     if (campos) {
         const c = campos.split(",").map(campo => campo.trim());
         const camposTraduidos = c.map((elem) => {
@@ -56,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             resutadosBusqueda: [],
             userProfile: {},
-            terminoBusqueda: ""
+            terminoBusqueda: "",
+            sidebarOpen:false
         },
         actions: {
             signup: async (body) => {
@@ -212,61 +205,62 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
             },
-            createFreelanceProfile: async (freelance_Profile, freelance_id) => {
-              
+
+            
+            updateFreelanceProfile: async (formData) => {
+
                 const token = localStorage.getItem("user_token");
-                console.log("Token:", token);
-                console.log("Freelance ID:", freelance_id);
-                console.log("Freelance Profile:", freelance_Profile);
 
                 try {
-                    const response = await fetch(process.env.BACKEND_URL+"/api/profile/freelance", { 
-                        method: "POST",
+
+                    const response = await fetch(process.env.BACKEND_URL + "/api/freelance", {
+                        method: "PUT",
+
+
                         headers: {
-                            // "Content-Type": "application/json",
+                          
                             "Authorization": "Bearer " + token
                         },
-                        body: JSON.stringify(freelance_Profile)
+                        body: formData
                     });
 
                     const data = await response.json();
 
                     if (response.ok) {
-                        toastExito("Perfil agregado correctamente ✅");
-                    
-                        return data;
+
+                        toastExito("Perfil actualizado correctamente ✅");
+                        setStore({ userProfile: data.result });
+                        return data.result;
                     } else {
-                
-                        alert(data.error || "Error al agregar informacion del perfil");
+                        console.error("Error al actualizar perfil freelance:", data);
+                        alert(data.error || data.msg || "Error al actualizar perfil freelance");
+
+                       
                     }
                 } catch (error) {
-                    console.error("Error al agregar perfil:", error);
-                    alert("Ocurrió un error al intentar añadir información al perfil");
+                    console.error("Error de red al actualizar perfil freelance:", error);
+                    alert("Error de conexión con el servidor");
                 }
             },
-
             createProduct: async (productData) => {
                 const token = localStorage.getItem("user_token");
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
+                        
                             "Authorization": "Bearer " + token
                         },
-                        body: JSON.stringify(productData)
+                        body: productData
                     });
 
                     const data = await response.json();
 
                     if (response.ok) {
                         alert("Producto agregado correctamente ✅");
-                        // console.log("Producto creado:", data.new_product_created);
-                        // const store = getStore();
-                        // setStore({ ...store, products: [...(store.products || []), data.new_product_created] });
                         return data;
                     } else {
-                        // console.error("Error en la respuesta del servidor:", data);
+                        
                         alert(data.error || "Error al agregar producto");
                     }
                 } catch (error) {
@@ -274,6 +268,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
+
             getMyFreelanceProfile: async (freelance_id) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {
@@ -304,35 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-            updateFreelanceProfile: async (updatedData) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + `/api/freelance`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + localStorage.getItem("user_token")
-                        },
-                        body: JSON.stringify(updatedData)
-                    });
 
-                    const data = await response.json();
-                    console.log("Datos recibidos:", data)
-
-                    if (response.ok) {
-                        const store = getStore();
-                        setStore({ ...store, freelancerProfile: data });
-                        toastExito(data.msj)
-                        return data;
-                    } else {
-                        toast(data.error || "Error al actualizar el perfil del usuario");
-                        return null;
-                    }
-                } catch (e) {
-                    console.error("Error en la solicitud para actualizar el perfil de usuario:", e);
-                    alert("Ocurrió un error al actualizar los datos del perfil freelance");
-                    return null;
-                }
-            },
             getSingleService: async (serviceId) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/service/${serviceId}`);
@@ -360,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(body)
                     });
                     const data = await response.json();
-                    console.log(data)
+
 
                     if (response.ok) {
                         return data;
@@ -393,10 +360,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            checkFavorite : async (body) => {
-                const token = localStorage.getItem("user_token");
-                try{
-                    const response = await fetch(process.env.BACKEND_URL + `/api/favorite/check`, {
+
+ 
+
+            checkFavorite: async (body) => {
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
+
                         method: "POST",
                         headers: {
                             "Authorization": "Bearer " + token,
@@ -408,19 +378,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json()
                     
 
-                    if(response.ok){
+                    if (response.ok) {
                         return data
                     }
 
 
 
-                }catch(e){
+                } catch (e) {
                     console.log("error", e)
                 }
             },
-            addOrRemoveFavorite : async (body) => {
+            addOrRemoveFavorite: async (body) => {
                 const token = localStorage.getItem("user_token");
-                try{
+                try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/favorite/change`, {
                         method: "POST",
                         headers: {
@@ -433,11 +403,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json()
 
 
-                    if(response.ok){
+                    if (response.ok) {
                         return data
                     }
 
-                }catch(e){
+                } catch (e) {
                     console.log("err9or", e)
                 }
             },
@@ -549,6 +519,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            toggleSideBar:()=>{
+                const value=getStore().sidebarOpen
+                setStore({...getStore(),sidebarOpen:!value})
+            }
         },
     };
 };

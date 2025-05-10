@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import CommentSection from "../component/CommentSection.jsx";
 
 
 export const FreelancePerfil = () => {
@@ -82,12 +83,14 @@ export const FreelancePerfil = () => {
                     </div>
                     <div className="col">
                         <div className="card-body">
-                            <h2>Profesión</h2>
-                            <h4 className="card-title mb-1">{data.name}</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor rhoncus quam. Sed massa ligula, vehicula eget faucibus in, rhoncus eget justo. Cras hendrerit suscipit magna, nec aliquet turpis pharetra eget.</p>
 
 
-                            {store.userProfile?.rol === "user" ? (
+                            <h2 className="card-title mb-1">{data?.service_title || "Profesión no especificada"}</h2>
+                            <h4 className="card-title mb-1">{data?.name}</h4>
+                            <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
+                           
+                            
+                            {userRole === "user" ? (
                                 <div>
                                     {/* <i className="fa-regular fa-heart"></i>
                                     <span> Favorite</span> */}
@@ -176,24 +179,10 @@ export const FreelancePerfil = () => {
                 </div>
 
             </div>
-            <div className="container my-5">
-                <h3>Comentarios</h3>
-                <div className="row">
-                    <div className="col-md-4 mb-4">
-                        <div className="card shadow-sm">
-                            <div className="card-body">
-                                <h5 className="card-title">Nombre de quien deja comentarios</h5>
-                                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac mi massa. Quisque sed porta tellus, vitae placerat lorem. Vivamus molestie massa mauris, vel vehicula dolor posuere placerat.</p>
-                                <small className="text-muted">Publicado el fecha </small>
-                            </div>
-                        </div>
-                    </div>
+     
 
-
-                    <p className="text-muted">No hay comentarios disponibles.</p>
-
-                </div>
-            </div>
+            {/* aqui ponlo */}
+            <CommentSection freelance_id={freelance_id}/>
 
         </div>
     );

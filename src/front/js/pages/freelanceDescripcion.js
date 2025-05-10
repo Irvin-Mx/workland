@@ -6,29 +6,25 @@ import NavbarLateral from "../component/NavbarLateral.jsx";
 const FreelanceDescription = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-    const [user, setUser] = useState(
-        store.userProfile
-    )
-
-
     const [formData, setFormData] = useState({
         service_title: '',
         service_description: '',
         profile_description: '',
 
     });
-  useEffect(() => {
-    if (!store.userProfile) {
-        actions.getMyProfile(); // Obtiene el perfil si no está disponible
-    } else {
-        setUser(store.userProfile);
-        setFormData({
-            service_title: store.userProfile.service_title || "",
-            service_description: store.userProfile.service_description || "",
-            profile_description: store.userProfile.profile_description || "",
-        });
-    }
-}, [actions, store.userProfile]);
+
+    useEffect(() => {
+        if (!store.userProfile) {
+            actions.getMyProfile(); // Obtiene el perfil si no está disponible
+        } else {
+
+            setFormData({
+                service_title: store.userProfile.service_title || "",
+                service_description: store.userProfile.service_description || "",
+                profile_description: store.userProfile.profile_description || "",
+            });
+        }
+    }, [actions, store.userProfile]);
 
 
     const handleChange = (e) => {
@@ -39,18 +35,16 @@ const FreelanceDescription = () => {
         }));
     };
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const freelance_id = store.userProfile?.id; 
-    if (!freelance_id) {
-        alert("No se encontró el ID del perfil freelance");
-        return;
-    }
-
-    await actions.createFreelanceProfile(formData, freelance_id);
-    
-};
+        const data = new FormData();
+            data.append("service_title" ,formData.service_title);
+            data.append("service_description", formData.service_description);
+            data.append("profile_description", formData.profile_description);
+            
+        };
+   
 
 
 
@@ -84,7 +78,7 @@ const FreelanceDescription = () => {
                         Perfil Profesional
                     </div>
                     <div className="card-body">
-                        <p>Escribe un título claro y directo que describa tu profesión u oficio. Este título será visible para quienes busquen tus servicios, por lo que debe ser específico y representativo.</p>
+                        <p>Usa un título claro y directo que describa tu profesión u oficio. Este título será visible para quienes busquen tus servicios, por lo que debe ser específico y representativo.</p>
                         <form onSubmit={handleSubmit}>
                             <div className="form-floating m-3">
                                 <textarea className="form-control" placeholder="Profesion u oficio" id="service_title" name="service_title" value={formData.service_title}
@@ -106,7 +100,7 @@ const FreelanceDescription = () => {
                                     onChange={handleChange}></textarea>
                                 <label htmlFor="profile_description">Descripción detallada de tu perfil profesional</label>
                             </div>
-                            <button type="submit" className="btn" style={{ background: "#00D1B2", color: "aliceblue" }}>Guardar</button>
+                            
                         </form>
                     </div>
 
