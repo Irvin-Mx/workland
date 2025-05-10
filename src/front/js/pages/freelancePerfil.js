@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import CommentSection from "../component/CommentSection.jsx";
-
+import ReportButton from "../component/ReportButton.jsx";
+import ReportModal from "../component/ReportModal.jsx";
 
 export const FreelancePerfil = () => {
     const { store, actions } = useContext(Context);
@@ -12,8 +13,21 @@ export const FreelancePerfil = () => {
     const [servicesByCategory, setServicesByCategory] = useState({});
     const navigate = useNavigate();
     const defaultFavoriteStatus = false
+    const [modalOpen,setModalOpen]=useState(false)
+    const [report,setReport]=useState(false)
 
     let [isInFavorites, setIsInFavorites] = useState(false)
+
+        useEffect(() => {
+        actions.checkReport({ freelance_id})
+            .then((res)=>{ 
+                setReport(res.result) })
+            .catch((err) => { console.log(err) })
+
+        actions.checkFavorite({ favorite_id: freelance_id })
+            .then((res) =>{ setIsInFavorites(res.result) })
+            .catch((err) => { console.log(err) })
+    }, [])
 
 
 
@@ -54,11 +68,7 @@ export const FreelancePerfil = () => {
         }
     }, [freelance_id]);
 
-    useEffect(() => {
 
-        actions.checkFavorite({ favorite_id: freelance_id })
-            .then((res) => { setIsInFavorites(res.result) }).catch((err) => { console.log(err) })
-    }, [])
 
 
     const handleFavorite =  () => {
@@ -90,7 +100,7 @@ export const FreelancePerfil = () => {
                             <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
                            
                             
-                            {userRole === "user" ? (
+                            {store.userProfile?.rol !== "freelance" ? (
                                 <div>
                                     {/* <i className="fa-regular fa-heart"></i>
                                     <span> Favorite</span> */}
@@ -108,6 +118,7 @@ export const FreelancePerfil = () => {
                                                 </>
                                         }
                                     </button>
+                                    <ReportButton report={report} setModalOpen={setModalOpen}/>
                                 </div>
                             ) : null}
 
@@ -183,6 +194,7 @@ export const FreelancePerfil = () => {
 
             {/* aqui ponlo */}
             <CommentSection freelance_id={freelance_id}/>
+            <ReportModal modalOpen={modalOpen} setModalOpen={setModalOpen} freelance_id={freelance_id} />
 
         </div>
     );

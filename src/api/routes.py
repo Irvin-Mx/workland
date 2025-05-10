@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User,Service,Order,Comment
+from api.models import db, User,Service,Order,Comment,Report
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import timedelta
@@ -238,9 +238,6 @@ def post_service():
     )
       
     
-
-
-
 @api.route('/service/<int:service_id>', methods=['GET'])
 def get_single_service(service_id):
     try:
@@ -400,6 +397,7 @@ def get_freelance(freelance_id):
             "error":str(e)
         }),
 # ruta para actualizr los datos solo de freelance
+
 @api.route('/freelance', methods=['PUT'])
 @jwt_required()
 def update_freelance(): 
@@ -770,3 +768,153 @@ def get_comment_freelance(freelance_id):
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+
+@api.route("/report/add",methods=["POST"])
+@jwt_required()
+def add_report():
+    try:
+        data = request.get_json()
+        user_id=int(get_jwt_identity())
+        text=data.get("text")
+        reason=data.get("reason")
+        freelance_id=int(data.get("freelance_id"))
+
+        new_report=Report(author_user_id=user_id,recipient_user_id=freelance_id,text=text,reason=reason)
+
+        db.session.add(new_report)
+        db.session.commit()
+
+        return jsonify({
+        "msj":"Reporte creado correctamente",
+        "result":new_report.serialize()
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
+    
+@api.route("/report/check",methods=["POST"])
+@jwt_required()
+def check_report():
+    try:
+        data = request.get_json()
+        user_id=int(get_jwt_identity())
+
+        freelance_id=int(data.get("freelance_id"))
+
+        reporte_check = Report.query.filter(Report.author_user_id == user_id,Report.recipient_user_id == freelance_id).first()
+        
+        if  not reporte_check:
+            return jsonify({"result":False }), 200
+
+        return jsonify({
+        "result":True
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
+    
+@api.route("/report/delete",methods=["POST"])
+@jwt_required()
+def delete_report():
+    try:
+        data = request.get_json()
+        report_id=int(data.get("report_id"))
+        admin_id=int(get_jwt_identity())
+        print(admin_id)
+
+        admin_user=User.query.filter_by(id=admin_id).first().serialize()
+    
+
+        if  not admin_user:
+            return jsonify({ "msj":"No hay cuenta" }), 400
+        
+        if  admin_user["rol"] != "admin":
+            return jsonify({ "msj":"No es cuenta admin" }), 400
+
+        report = Report.query.filter_by(id=report_id).first()
+        print(report)
+        
+        if  not report:
+            return jsonify({ "msj":"No hay reporte" }), 400
+        
+        db.session.delete(report)
+        db.session.commit()
+
+        return jsonify({
+        "msj":"Reporte eliminado",
+        "result":report.serialize()
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
+    
+
+    
+@api.route("/report/all",methods=["GET"])
+@jwt_required()
+def all_report():
+    try:
+        admin_id=int(get_jwt_identity())
+
+        admin_user=User.query.filter_by(id=admin_id).first().serialize()
+
+        if  not admin_user:
+            return jsonify({ "msj":"No hay cuenta" }), 400
+        
+        if  admin_user["rol"] != "admin":
+            return jsonify({ "msj":"No es cuenta admin" }), 400
+
+        all_report_raw = Report.query.all()
+       
+        if  not all_report_raw:
+            return jsonify({ "msj":"No hay reportes" }), 400
+        
+        def config(obj):
+            data=obj.serialize()
+            id=data["id"]
+            text=data["text"]
+            reason=data["reason"]
+            a=data["author_user_id"]
+            r=data["recipient_user_id"]
+
+            author_data=User.query.filter_by(id=a).first().serialize()
+            author_id=author_data["id"]
+            author_name=author_data["name"]
+            author_last_name=author_data["last_name"]
+
+            rec_data=User.query.filter_by(id=r).first().serialize()
+            rec_id=rec_data["id"]
+            rec_name=rec_data["name"]
+            rec_last_name=rec_data["last_name"]
+
+            result={
+                "id":id,
+                "text":text,
+                "reason":reason,
+                "author_info":{
+                    "id":author_id,
+                    "full_name":f"{author_name} {author_last_name}"
+                },
+                "recipient_info":{
+                    "id":rec_id,
+                    "full_name":f"{rec_name} {rec_last_name}"
+                }}
+
+
+            return result
+            
+        
+        all_report = [config(rep) for rep in all_report_raw]
+        print(all_report)
+        
+        return jsonify({
+        # "msj":"Reporte eliminado",
+        "result":all_report
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
