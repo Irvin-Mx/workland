@@ -1,9 +1,11 @@
+
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
+import { Outlet } from "react-router-dom";
 
-const FreelanceEdit = () => {
+const UserConfig = () => {
     const { store, actions } = useContext(Context);
 
   
@@ -13,11 +15,7 @@ const FreelanceEdit = () => {
 
     return (
         <div className="d-flex">
-            <div>
-
-                { <NavbarLateral />}
-            </div>
-
+           
             {/* Botón de colapso para dispositivos pequeños */}
             <button
                 className="btn btn-primary d-md-none"
@@ -29,9 +27,7 @@ const FreelanceEdit = () => {
             >
                 <i className="fas fa-bars"></i>
             </button>
-            <div className=" flex-grow-1 p-4">
-
-                {/* texto principal */}
+             {/* texto principal */}
 
                 <h1 className="text-start m-5" style={{ marginLeft: "10px" }}>¡Bienvenido a Workland  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
 
@@ -45,7 +41,7 @@ const FreelanceEdit = () => {
                                 objectFit: "cover"
                             }} />
                     </div>
-
+                    <h1 className="text-start m-5" style={{ marginLeft: "10px" }}>¡Bienvenido a Workland  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
                     <div className="col-md-6 d-flex flex-column align-items-start">
                         <h5 className="name">{user.name}</h5>
                         <h5 className="last_name">{user.last_name}</h5>
@@ -86,12 +82,13 @@ const FreelanceEdit = () => {
                     </div>
                 </div>
 
-
-
+            
+            <div className="main-content">
+                <Outlet />
             </div>
         </div>
     );
 };
 
-export default FreelanceEdit;
+export default UserConfig;
 
