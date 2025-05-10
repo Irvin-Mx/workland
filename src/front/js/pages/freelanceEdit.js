@@ -15,7 +15,7 @@ const FreelanceEdit = () => {
         <div className="d-flex">
             <div>
 
-                <NavbarLateral />
+                { <NavbarLateral />}
             </div>
 
             {/* Botón de colapso para dispositivos pequeños */}

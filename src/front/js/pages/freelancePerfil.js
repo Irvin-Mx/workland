@@ -147,14 +147,7 @@ export const FreelancePerfil = () => {
                                         <h5>{service.title}</h5>
                                         <h6>${service.price}</h6>
                                         <p>{service.description}</p>
-                                        {service.img_url && (
-                                            <img
-                                                src={service.img_url}
-                                                alt={`Vista de ${service.title}`}
-                                                className="img-thumbnail mb-3"
-                                                style={{ maxHeight: "150px" }}
-                                            />
-                                        )}
+                                       
                                         <button
                                             onClick={() => {
                                                 if (service.id) {

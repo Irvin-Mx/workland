@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import PrivateRoute from "./component/PrivateRoute.jsx";
+import LoadingSpinner from "./component/LoadingSpinner.jsx";
 import { Navbar } from "./component/navbar";
 
 //Herramientas
@@ -19,6 +20,7 @@ import { Footer } from "./component/footer";
 import { Home } from "./pages/home";
 import Registro from "./pages/registro";
 import Login from "./pages/Login.jsx";
+import Dashboard from "./pages/Dashboard.js";
 
 
 
@@ -34,7 +36,7 @@ import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 import FreelanceEdit from "./pages/freelanceEdit.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
-import FreelanceDashboard from "./pages/freelanceDashboard.js";
+// import FreelanceDashboard from "./pages/freelanceDashboard.js";
 import Sidebar from "./component/Sidebar.jsx";
 
 
@@ -74,7 +76,8 @@ const Layout = () => {
                         <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceDescrption/></PrivateRoute>} path="/freeCV"/>
                         <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceFormulario/></PrivateRoute>} path="/freeForm"/>
                         <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceLayout /></PrivateRoute>} path="/freeConfig"/>
-                        <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceDashboard /></PrivateRoute>} path="/freeDash"/>
+                        {/* <Route element={<PrivateRoute allowedRoles={ ["freelance"] }><FreelanceDashboard /></PrivateRoute>} path="/freeDash"/> */}
+                        <Route element={<Dashboard />} path="/dashboard"/>
                         <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id"/>
                         <Route element={<ResutadoDeBusqueda/>} path="/busqueda" />
                         <Route element={<DetalladoDeOrden />} path="/detallado-de-orden" />
