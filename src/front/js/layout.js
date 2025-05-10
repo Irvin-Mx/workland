@@ -36,6 +36,8 @@ import FreelanceEdit from "./pages/freelanceEdit.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
 import FreelanceDashboard from "./pages/freelanceDashboard.js";
 import Sidebar from "./component/Sidebar.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
+import AllReports from "./pages/AllReports.jsx";
 
 
 import Favorites from "./pages/Favorites.jsx"
@@ -67,6 +69,10 @@ const Layout = () => {
                     <Routes>
                        
                         <Route element={<Home />} path="/" />
+                        <Route element={<AdminPage />} path="/admin">
+                            <Route element={<AllReports />} path="" />
+                        
+                        </Route>
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Registro/>} path="/registro" />
                         <Route element={<Login/>} path="/iniciar-sesion" />

@@ -20,7 +20,7 @@ const Sidebar = () => {
             const timer = setTimeout(() => {
     
       setLoading(false)
-      console.log('¡Terminado!');
+   
     }, 1000);
 
     return () => clearTimeout(timer);
