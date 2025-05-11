@@ -86,7 +86,7 @@ export const Registro = () => {
 
     };
     return (
-        <div className=" d-flex flex-column align-items-center vh-100" >
+        <div className=" d-flex flex-column align-items-center " >
             <h1 className="text-center m-5">¡Bienvenido a Workland!</h1>
             <div className="w-50 p-4 border rounded shadow" style={{ background: "aliceblue" }} >
 

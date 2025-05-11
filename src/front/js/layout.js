@@ -66,7 +66,6 @@ const Layout = () => {
 
     return (
         <PayPalScriptProvider options={initialOptions}>
-
             <div>
                 <BrowserRouter basename={basename}>
                     <ScrollToTop>
@@ -104,7 +103,6 @@ const Layout = () => {
                     <Toaster />
                 </BrowserRouter>
             </div>
-
         </PayPalScriptProvider>
     );
 };

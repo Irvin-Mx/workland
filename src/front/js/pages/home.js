@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import "../../styles/home.css";
 
+import styles from "./home.module.css"
+
 
 export const Home = () => {
 	const navigate = useNavigate()
@@ -26,7 +28,7 @@ export const Home = () => {
 	return (
 		<div className="text-center">
 			<div>
-			<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+				<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
 					<ol className="carousel-indicators">
 						<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -79,10 +81,10 @@ export const Home = () => {
 				</div>
 				<div className="row align-items-center">
 					<div className="col">
-					Conexión rápida
+						Conexión rápida
 					</div>
 					<div className="col">
-					Gestión integral
+						Gestión integral
 					</div>
 					<div className="col">
 						One of three columns
@@ -98,8 +100,8 @@ export const Home = () => {
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<h5 className="card-title justify-content-start w-25  fs-3">Card title</h5>
-										<p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non mauris vehicula, laoreet dolor sed, fermentum ante. Proin eleifend molestie neque, pulvinar euismod sem. Pellentesque vel malesuada orci. Donec ornare convallis tincidunt. Curabitur vitae lobortis purus, et scelerisque ligula. Suspendisse et pretium ante. Pellentesque eget libero eget ex efficitur ultricies. Sed feugiat consequat tincidunt. Mauris elementum laoreet molestie. </p>
+										<h5 className="card-title justify-content-start w-100  fs-3">Publica tu trabajo</h5>
+										<p className="card-text">It's free and easy! Get lots of competitive bids that suit your budget in minutes. Start making your dreams reality.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>
@@ -111,8 +113,8 @@ export const Home = () => {
 							<div className="row g-0 ">
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<h5 className="card-title justify-content-start w-25  fs-3">Card title</h5>
-										<p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non mauris vehicula, laoreet dolor sed, fermentum ante. Proin eleifend molestie neque, pulvinar euismod sem. Pellentesque vel malesuada orci. Donec ornare convallis tincidunt. Curabitur vitae lobortis purus, et scelerisque ligula. Suspendisse et pretium ante. Pellentesque eget libero eget ex efficitur ultricies. Sed feugiat consequat tincidunt. Mauris elementum laoreet molestie. </p>
+										<h5 className="card-title justify-content-start w-100  fs-3">Encunetra freelancers</h5>
+										<p className="card-text">No job is too big or complex. We've got freelancers for jobs of any size or budget, across 2700+ skills. Let our talent bring your ideas to life.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>
@@ -121,6 +123,121 @@ export const Home = () => {
 								</div>
 							</div>
 						</div>
+
+						{/* Card */}
+						<div className="card mb-3 ">
+							<div className="row g-0 ">
+								<div className="col-md-5 d-flex flex-column justify-content-center align-items-center p-4">
+									<img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." />
+								</div>
+								<div className="col-md-7 d-flex align-items-center ">
+									<div className="card-body d-flex flex-column p-4">
+										<h5 className="card-title justify-content-start w-100  fs-3">Pagos seguros</h5>
+										<p className="card-text">Only pay for work when you are 100% satisfied with the outcome. Our milestone payment system protects you every step of the way.</p>
+										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{/* Reviews */}
+						<div className="card mb-3">
+							<div className="row g-0">
+								
+
+								<div className="col-4 ">
+									<div className="d-flex align-items-center w-100">
+										<div className="card-body d-flex flex-column p-4">
+											<h5 className="card-title justify-content-start fs-3">Lorem</h5>
+											<p className="card-text">"Excelente servicio de desarrollo web. La comunicación fue fluida y el resultado superó mis expectativas. Sin duda, recomendaría a este freelancer a otros." </p>
+											{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
+										</div>
+									</div>
+									<div className="w-100 d-flex flex-column align-items-center  p-4">
+										{/* <img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." /> */}
+										<div className=" d-flex justify-content-between w-50">
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`} ></i>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="col-4 ">
+									<div className="d-flex align-items-center w-100">
+										<div className="card-body d-flex flex-column p-4">
+											<h5 className="card-title justify-content-start fs-3">Lorem</h5>
+											<p className="card-text text-center">"Trabajo con Juan en varios proyectos y siempre ha cumplido con los plazos y la calidad. Recomiendo su servicio para cualquier tarea de diseño gráfico." </p>
+											{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
+										</div>
+									</div>
+									<div className="w-100 d-flex flex-column align-items-center  p-4 ">
+										{/* <img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." /> */}
+										<div className=" d-flex justify-content-between w-50">
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`} ></i>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="col-4 ">
+									<div className="d-flex align-items-center w-100">
+										<div className="card-body d-flex flex-column p-4">
+											<h5 className="card-title justify-content-start fs-3">Lorem</h5>
+											<p className="card-text">"Marta es una profesional increíble. Su habilidad para resolver problemas y su disposición para ayudar a los clientes son inigualables."</p>
+											{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
+										</div>
+									</div>
+									<div className="w-100 d-flex flex-column align-items-center  p-4 ">
+										{/* <img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." /> */}
+										<div className="d-flex justify-content-between w-50">
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`}></i>
+											</div>
+											<div>
+												<i className={`fa-solid fa-star  ${styles.staricons}`} ></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
 					</div>
 				</div>
 			</div>
