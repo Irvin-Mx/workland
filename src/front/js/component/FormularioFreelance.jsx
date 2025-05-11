@@ -42,7 +42,7 @@ const FormularioFreelance = () => {
    
         }
         await actions.updateFreelanceProfile(formData);
-        navigate(-1);
+        navigate("/config");
     };
 
     return (

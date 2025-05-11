@@ -1,19 +1,37 @@
-import React, {useContext} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import LoadingSpinner from "./LoadingSpinner.jsx";
+import { toastFallo } from "./Toaster/toasterIndex.jsx";
 
+const getUserStorage = ()=>{
+    const userProfile = JSON.parse(localStorage.getItem('userProfile'))
+    return userProfile.rol;
+};
 
-const PrivateRoute =({children, allowedRoles }) =>{
-    const {store} = useContext (Context);
-    const userRole = store.userProfile?.rol;
-    console.log(allowedRoles.includes(userRole));
-    console.log(allowedRoles);
-    console.log("Is Authorized:", allowedRoles.includes(userRole));
+const PrivateRoute = ({ children, allowedRoles }) => {
+    const { store } = useContext(Context);
+    const userRole = store.userProfile?.rol || getUserStorage();
+    const [loading, setLoading] = useState(true);
+    
+    
 
-    // if (!userRole) return <Navigate to= "/iniciar-sesion" />;
-    if (userRole === "user") return <Navigate to= "/iniciar-sesion" />;
-    if (!allowedRoles.includes(userRole)) return <Navigate to="/unauthorized" />;
-  
+    useEffect(() => {
+      const timer = setTimeout(() => {
+           
+            setLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) return <LoadingSpinner />;
+   
+    if (!userRole) return <Navigate to="/iniciar-sesion" />;
+   if (!allowedRoles.includes(userRole)) {
+        toastFallo("No tienes permiso para acceder a esta página.");
+        return <Navigate to="/unauthorized"/>;
+    }
+
     return children;
 };
 

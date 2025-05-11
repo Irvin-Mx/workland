@@ -103,8 +103,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         const store = getStore()
                         localStorage.setItem("user_token", data.token);
                         localStorage.setItem("userProfile", JSON.stringify(data.user_info));
+                        
                         setStore({ ...store, userProfile: data.user_info })
                         toastExito(data.msj)
+                        console.log("Rol del usuario:", store.userProfile?.rol);
 
                         return data;
                     } else {
@@ -142,6 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     const data = await response.json();
+                    console.log("Perfil recibido en getMyProfile:", data);
 
                     if (response.ok) {
 
@@ -272,7 +275,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            // Incluye el token si es necesario
+                        
                             "Authorization": "Bearer " + localStorage.getItem("user_token")
                         }
                     });
@@ -280,13 +283,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        // Almacena los datos en el estado global
+               
                         const store = getStore();
                         setStore({ ...store, freelancerProfile: data });
 
-                        return data; // Devuelve los datos si es necesario
+                        return data; 
                     } else {
-                        // console.error("Error al obtener los datos del usuario:", data);
+                    
                         alert(data.error || "Error al obtener el perfil de usuario");
                         return null;
                     }

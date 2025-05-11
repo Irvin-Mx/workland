@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
+import toast from "react-hot-toast";
+import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 
 const FreelanceDescription = () => {
     const { store, actions } = useContext(Context);
@@ -11,20 +13,22 @@ const FreelanceDescription = () => {
         service_description: '',
         profile_description: '',
 
+
     });
 
     useEffect(() => {
         if (!store.userProfile) {
-            actions.getMyProfile(); // Obtiene el perfil si no está disponible
+            actions.getMyProfile();
         } else {
 
             setFormData({
                 service_title: store.userProfile.service_title || "",
                 service_description: store.userProfile.service_description || "",
                 profile_description: store.userProfile.profile_description || "",
+
             });
         }
-    }, [actions, store.userProfile]);
+    }, [store.userProfile]);
 
 
     const handleChange = (e) => {
@@ -39,12 +43,18 @@ const FreelanceDescription = () => {
         e.preventDefault();
 
         const data = new FormData();
-            data.append("service_title" ,formData.service_title);
-            data.append("service_description", formData.service_description);
-            data.append("profile_description", formData.profile_description);
-            
-        };
-   
+        data.append("service_title", formData.service_title);
+        data.append("service_description", formData.service_description);
+        data.append("profile_description", formData.profile_description);
+        for (let [key, value] of data.entries()) {
+            console.log(key, value);
+        }
+
+        await actions.updateFreelanceProfile(data);
+        toastExito("Perfil actualizado correctamente");
+
+    };
+
 
 
 
@@ -52,10 +62,7 @@ const FreelanceDescription = () => {
 
     return (
         <div className="d-flex">
-            <div>
 
-                <NavbarLateral />
-            </div>
 
             <div className=" flex-grow-1 p-4 align-items-center" >
                 <div className="user-card d-flex flex-column p-1 w-50 align-items-center border-rounded">
@@ -100,15 +107,15 @@ const FreelanceDescription = () => {
                                     onChange={handleChange}></textarea>
                                 <label htmlFor="profile_description">Descripción detallada de tu perfil profesional</label>
                             </div>
-                            
+                            <button type="submit" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} onClick={handleSubmit} >Guardar</button>
                         </form>
                     </div>
 
                 </div>
-                <Link to="/freeConfig">
+                 <Link to ="/free/layout">
                     <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} >Siguiente</button>
                 </Link>
-                <Link to="/freelanceDashboard">
+                <Link to="/dashboard">
                     <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF6B6B", color: "aliceblue" }} >Cancelar</button>
                 </Link>
             </div>
