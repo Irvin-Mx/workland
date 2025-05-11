@@ -6,10 +6,11 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import db,User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+
 
 from flask_jwt_extended import  JWTManager
 from flask_bcrypt import Bcrypt
@@ -50,6 +51,15 @@ app.register_blueprint(api, url_prefix='/api')
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
+
+# def printm():
+#     new_user=User(name="Fredy",last_name="Apellido",phone="1234567890",address="Name",email="test@admin.com",rol="user",password="123")
+#     db.session.add(new_user)
+#     db.session.commit()
+#     print(new_user.serialize())
+
+# printm()
+
 
 # generate sitemap with all your endpoints
 

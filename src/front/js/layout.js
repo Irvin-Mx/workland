@@ -37,6 +37,12 @@ import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
 
+import FreelanceDashboard from "./pages/freelanceDashboard.js";
+import Sidebar from "./component/Sidebar.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
+import AllReports from "./pages/AllReports.jsx";
+
+
 
 
 
@@ -60,6 +66,7 @@ const Layout = () => {
 
     return (
         <PayPalScriptProvider options={initialOptions}>
+
             <div>
                 <BrowserRouter basename={basename}>
                     <ScrollToTop>
@@ -97,6 +104,7 @@ const Layout = () => {
                     <Toaster />
                 </BrowserRouter>
             </div>
+
         </PayPalScriptProvider>
     );
 };

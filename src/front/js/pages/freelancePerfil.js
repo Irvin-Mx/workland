@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import CommentSection from "../component/CommentSection.jsx";
-
+import ReportButton from "../component/ReportButton.jsx";
+import ReportModal from "../component/ReportModal.jsx";
 
 export const FreelancePerfil = () => {
     const { store, actions } = useContext(Context);
@@ -12,8 +13,25 @@ export const FreelancePerfil = () => {
     const [servicesByCategory, setServicesByCategory] = useState({});
     const navigate = useNavigate();
 
+    const defaultFavoriteStatus = false
+    const [modalOpen,setModalOpen]=useState(false)
+    const [report,setReport]=useState(false)
 
-  
+    let [isInFavorites, setIsInFavorites] = useState(false)
+
+        useEffect(() => {
+        actions.checkReport({ freelance_id})
+            .then((res)=>{ 
+                setReport(res.result) })
+            .catch((err) => { console.log(err) })
+
+        actions.checkFavorite({ favorite_id: freelance_id })
+            .then((res) =>{ setIsInFavorites(res.result) })
+            .catch((err) => { console.log(err) })
+    }, [])
+
+
+
     const categories = {
         basic: "Básico",
         pro: "Pro",
@@ -49,11 +67,7 @@ export const FreelancePerfil = () => {
      
     }, [freelance_id]);
 
-    useEffect(() => {
 
-        actions.checkFavorite({ favorite_id: freelance_id })
-            .then((res) => { setIsInFavorites(res.result) }).catch((err) => { console.log(err) })
-    }, [])
 
 
 
@@ -81,6 +95,7 @@ export const FreelancePerfil = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="container my-5">
                         <ul className="nav nav-tabs mb-3" id="pricingTab" role="tablist">
                             {Object.entries(categories).map(([key, label], index) => (
@@ -133,6 +148,36 @@ export const FreelancePerfil = () => {
                                     ) : (
                                         <p className="text-muted">No hay servicios en esta categoría.</p>
                                     )}
+
+                    <div className="col">
+                        <div className="card-body">
+
+
+                            <h2 className="card-title mb-1">{data?.service_title || "Profesión no especificada"}</h2>
+                            <h4 className="card-title mb-1">{data?.name}</h4>
+                            <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
+                           
+                            
+                            {store.userProfile?.rol !== "freelance" ? (
+                                <div>
+                                    {/* <i className="fa-regular fa-heart"></i>
+                                    <span> Favorite</span> */}
+                                    <button onClick={handleFavorite} className="btn btn-primary">
+                                        {
+                                            isInFavorites ?
+                                                <>
+                                                    <i className="fa-solid fa-heart"></i>
+                                                    <span> Esta en favoritos</span>
+                                                </>
+                                                :
+                                                <>
+                                                    <i className="fa-regular fa-heart"></i>
+                                                    <span> No esta en favoritos</span>
+                                                </>
+                                        }
+                                    </button>
+                                    <ReportButton report={report} setModalOpen={setModalOpen}/>
+
                                 </div>
                             ))}
                         </div>
@@ -167,6 +212,15 @@ export const FreelancePerfil = () => {
                 </div>
                 
             </div>
+
+
+     
+
+            {/* aqui ponlo */}
+            <CommentSection freelance_id={freelance_id}/>
+            <ReportModal modalOpen={modalOpen} setModalOpen={setModalOpen} freelance_id={freelance_id} />
+
+
         </div>
     );
 };
