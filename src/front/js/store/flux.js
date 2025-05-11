@@ -103,8 +103,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         const store = getStore()
                         localStorage.setItem("user_token", data.token);
                         localStorage.setItem("userProfile", JSON.stringify(data.user_info));
+                        
                         setStore({ ...store, userProfile: data.user_info })
                         toastExito(data.msj)
+                        console.log("Rol del usuario:", store.userProfile?.rol);
 
                         return data;
                     } else {
@@ -142,6 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     const data = await response.json();
+                    console.log("Perfil recibido en getMyProfile:", data);
 
                     if (response.ok) {
 
@@ -204,9 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (term == false) {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
-            },
-
-            
+            },       
             updateFreelanceProfile: async (formData) => {
 
                 const token = localStorage.getItem("user_token");
@@ -268,14 +269,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Ocurrió un error al intentar añadir producto");
                 }
             },
-
             getMyFreelanceProfile: async (freelance_id) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/freelance/${freelance_id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            // Incluye el token si es necesario
+                        
                             "Authorization": "Bearer " + localStorage.getItem("user_token")
                         }
                     });
@@ -283,13 +283,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        // Almacena los datos en el estado global
+               
                         const store = getStore();
                         setStore({ ...store, freelancerProfile: data });
 
-                        return data; // Devuelve los datos si es necesario
+                        return data; 
                     } else {
-                        // console.error("Error al obtener los datos del usuario:", data);
+                    
                         alert(data.error || "Error al obtener el perfil de usuario");
                         return null;
                     }
@@ -299,7 +299,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
-
             getSingleService: async (serviceId) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/service/${serviceId}`);
@@ -359,13 +358,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error al agregar producto:", error);
                 }
             },
-
-
- 
-
             checkFavorite: async (body) => {
+                const token = localStorage.getItem("user_token");
                 try {
-                    const response = await fetch(process.env.BACKEND_URL + `/favorite/check`, {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/favorite/check`, {
 
                         method: "POST",
                         headers: {
@@ -522,7 +518,99 @@ const getState = ({ getStore, getActions, setStore }) => {
             toggleSideBar:()=>{
                 const value=getStore().sidebarOpen
                 setStore({...getStore(),sidebarOpen:!value})
-            }
+            },
+            getAllReports:async()=>{
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/report/all`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token")
+                        },
+                    })
+                    const data = await response.json()
+                 
+                    if (response.ok) {
+                        
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            },
+            checkReport:async(body)=>{
+                let token=localStorage.getItem("user_token")
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/report/check`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body:JSON.stringify(body)
+                    })
+                    const data = await response.json()
+                 
+                    if (response.ok) {
+                        
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            },
+            addReport:async(body)=>{
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/report/add`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("user_token")
+                        },
+                        body:JSON.stringify(body)
+                    })
+                    const data = await response.json()
+                 
+                    if (response.ok) {
+                        
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            },
+            deleteReport: async (body) => {
+                // console.log(body)
+                let token=localStorage.getItem("user_token")
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/report/delete`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
         },
     };
 };

@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
 
-const FreelanceEdit = () => {
+const UserConfig = () => {
     const { store, actions } = useContext(Context);
 
   
@@ -55,7 +55,7 @@ const FreelanceEdit = () => {
                     </div>
 
                     <div className="col-md-3 d-flex justify-content-end align-items-start">
-                        <Link to="/freeForm">
+                        <Link to="/form">
                             <button
                                 type="button"
                                 className="btn btn-link">
@@ -93,5 +93,5 @@ const FreelanceEdit = () => {
     );
 };
 
-export default FreelanceEdit;
+export default UserConfig;
 

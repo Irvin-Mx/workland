@@ -156,6 +156,24 @@ class Comment(db.Model):
             "stars": self.stars,
             "user_id":self.user_id,
             "freelance_id":self.freelance_id,
+        }
 
+class Report(db.Model):
+    __tablename__="reports"
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    text = db.Column(db.String(200), nullable=False)
+    reason=db.Column(db.String(200), nullable=False)
+
+    author_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    recipient_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "text": self.text,
+            "reason": self.reason,
+            "author_user_id":self.author_user_id,
+            "recipient_user_id":self.recipient_user_id,
         }
     
