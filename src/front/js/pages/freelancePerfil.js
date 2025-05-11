@@ -20,16 +20,22 @@ export const FreelancePerfil = () => {
     let [isInFavorites, setIsInFavorites] = useState(false)
 
     useEffect(() => {
-        actions.checkReport({ freelance_id })
-            .then((res) => {
-                setReport(res.result)
-            })
-            .catch((err) => { console.log(err) })
+    actions.checkReport({ freelance_id })
+        .then((res) => {
+            setReport(res.result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
-        actions.checkFavorite({ favorite_id: freelance_id })
-            .then((res) => { setIsInFavorites(res.result) })
-            .catch((err) => { console.log(err) })
-    }, [])
+    actions.checkFavorite({ favorite_id: freelance_id })
+        .then((res) => {
+            setIsInFavorites(res.result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}, []);
 
     const handleFavorite = () => {
     actions.toggleFavorite({ favorite_id: freelance_id })
