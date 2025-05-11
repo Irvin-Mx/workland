@@ -815,14 +815,15 @@ def check_report():
         db.session.rollback()
         return jsonify({"msj": str(e)}), 500
     
-@api.route("/report/delete",methods=["POST"])
+@api.route("/report/delete",methods=["DELETE"])
 @jwt_required()
 def delete_report():
     try:
         data = request.get_json()
+        # print(data)
         report_id=int(data.get("report_id"))
         admin_id=int(get_jwt_identity())
-        print(admin_id)
+   
 
         admin_user=User.query.filter_by(id=admin_id).first().serialize()
     
@@ -862,15 +863,15 @@ def all_report():
         admin_user=User.query.filter_by(id=admin_id).first().serialize()
 
         if  not admin_user:
-            return jsonify({ "msj":"No hay cuenta" }), 400
+            return jsonify({ "msj":"No hay cuenta","result":[] }), 400
         
         if  admin_user["rol"] != "admin":
-            return jsonify({ "msj":"No es cuenta admin" }), 400
+            return jsonify({ "msj":"No es cuenta admin" ,"result":[]}), 400
 
         all_report_raw = Report.query.all()
        
         if  not all_report_raw:
-            return jsonify({ "msj":"No hay reportes" }), 400
+            return jsonify({ "msj":"No hay reportes","result":[] }), 200
         
         def config(obj):
             data=obj.serialize()

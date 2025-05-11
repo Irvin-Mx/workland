@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Context } from '../store/appContext'
+import { toastExito,toastFallo } from '../component/Toaster/toasterIndex.jsx'
 
-const ReportCard = ({ id, reason, text, author_info, recipient_info }) => {
+const ReportCard = ({ id, reason, text, author_info, recipient_info,setData }) => {
     const { store, actions } = useContext(Context)
 
 
-    // const deleteHandle = (id) => {
-    //     actions.deleteComment({ comment_id: id })
-    //         .then((res) => {
-    //             toastExito(res.msj)
-    //             actions.getAllCommentsMade().then((res) => setData(res.result))
-    //         })
-    //         .catch((err) => toastFallo(err.msj))
-    // }
+    const deleteHandle = (id) => {
+        actions.deleteReport({ report_id: id })
+            .then((res) => {
+                toastExito(res.msj)
+                actions.getAllReports().then((res) => setData(res.result))
+            })
+            .catch((err) => toastFallo(err.msj))
+    }
 
     return (
         <div style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }} className="card container-fluid" >
@@ -33,16 +34,21 @@ const ReportCard = ({ id, reason, text, author_info, recipient_info }) => {
                             </h5>
                         </div>
                     </div>
+                    <button
+                        onClick={() => deleteHandle(id)}
+                        className='btn btn-danger'>
+                        <i className="fa-solid fa-trash"></i>
+                    </button>
 
                 </div>
                 <hr />
                 <div>
                     <div className='d-flex justify-content-start align-content-center flex-row gap-2'>
-                            <p className='m-0 '>Razon: </p>
-                            <h5 className='m-0'>
-                                {`${reason}  `}
-                            </h5>
-                        </div>
+                        <p className='m-0 '>Razon: </p>
+                        <h5 className='m-0'>
+                            {`${reason}  `}
+                        </h5>
+                    </div>
                     <p style={{ fontSize: "1.5rem" }} className="w-full ">
                         {text}
                     </p>
@@ -59,7 +65,6 @@ const AllReports = () => {
     useEffect(() => {
         actions.getAllReports()
             .then((res) => {
-              
                 setData(res.result)
             })
             .catch((err) => { console.log(err) })
@@ -78,12 +83,12 @@ const AllReports = () => {
         <div className='w-100 h-100  d-flex align-content-center flex-column gap-1'>
             <h2>Lista de reportes</h2>
             {
-                data.length == 0 ?
+                data?.length == 0 ?
                     <h2>
                         No hay reportes.
                     </h2>
                     :
-                    data.map((elem) => <ReportCard key={elem.id} {...elem} />)
+                    data?.map((elem) => <ReportCard key={elem.id} {...elem} setData={setData} />)
 
             }
         </div>

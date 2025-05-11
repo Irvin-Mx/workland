@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 const ReportBox = ({ freelance_id, setModalOpen }) => {
     const { store, actions } = useContext(Context)
 
-    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -36,7 +35,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
 
             })
             .catch((err) => toastFallo(err.msj))
-        // .finally(()=> navigate("/ordenes"))
+      
 
     }
 
@@ -70,7 +69,6 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                             <select
                                 {...register("reason")}
                                 id="disabledSelect" name="rol" className="form-select" 
-                       
                                >
                                 <option value="">Selecciona una opción</option>
                                 <option value="No pago.">No pago.</option>
