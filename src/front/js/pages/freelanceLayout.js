@@ -32,20 +32,19 @@ export const FreelanceLayout = () => {
     const handleNextCategory = () => {
         const categories = ["basic", "pro", "enterprise"];
         const currentIndex = categories.indexOf(activeCategory);
-        const nextIndex = (currentIndex + 1) % categories.length; 
+        const nextIndex = (currentIndex + 1) % categories.length;
         setActiveCategory(categories[nextIndex]);
 
     };
 
-    const handleSubmitAll= async () => {
+    const handleSubmitAll = async () => {
         const categories = ["basic", "pro", "enterprise"];
-        if (!photo){
+        if (!photo) {
             toast.error("Por favor sube una imagen de portada");
             return;
         }
-        console.log("Archivo a enviar:", photo);
+       
         for (let cat of categories) {
-            console.log(pair[0] + ', ', pair[1]);
             const data = formData[cat];
             if (!data.title || !data.description || !data.price || !data.time) {
                 toast.error(`Completa todos los datos del paquete ${cat}`);
@@ -58,13 +57,16 @@ export const FreelanceLayout = () => {
             fd.append("price", parseInt(data.price));
             fd.append("time", data.time);
             fd.append("category", cat);
-            fd.append("photo_cover", photo);
+            fd.append("img_url", photo);
 
+            for (const [key, value] of fd.entries()) {
+                console.log(`${key}: ${value}`);
+            }
 
             try {
                 await actions.createProduct(fd);
 
-          } catch (err) {
+            } catch (err) {
                 console.error(`Error al guardar el paquete ${cat}:`, err);
                 toast.error(`Error al guardar el paquete ${cat}`);
                 return;
@@ -72,7 +74,7 @@ export const FreelanceLayout = () => {
         }
         toast.success("Todos los paquetes han sido guardados exitosamente");
     };
- 
+
 
     return (
         <div className="container">
@@ -166,46 +168,46 @@ export const FreelanceLayout = () => {
                                 ></textarea>
                             </div>
                         </div>
-                        
-                            <div className="row justify-content-around ">
-                                <div className="col-6 d-flex aling-items-strech">
-                                    <div className=" card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
-                                        <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                            Precio
-                                        </div>
-                                        <div className="card-body">
-                                            <label htmlFor="price">Precio</label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                id="price"
-                                                name="price"
-                                                value={formData[activeCategory].price}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+
+                        <div className="row justify-content-around ">
+                            <div className="col-6 d-flex aling-items-strech">
+                                <div className=" card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
+                                    <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
+                                        Precio
                                     </div>
-                                </div>
-                                <div className="col-6 d-flex aling-items-strech">
-                                    <div className="card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
-                                        <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                            Tiempo de entrega estimado
-                                        </div>
-                                        <div className="card-body">
-                                            <label htmlFor="price">Tiempo estimado</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="time"
-                                                name="time"
-                                                value={formData[activeCategory].time}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                    <div className="card-body">
+                                        <label htmlFor="price">Precio</label>
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="price"
+                                            name="price"
+                                            value={formData[activeCategory].price}
+                                            onChange={handleChange}
+                                        />
                                     </div>
                                 </div>
                             </div>
-                       
+                            <div className="col-6 d-flex aling-items-strech">
+                                <div className="card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
+                                    <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
+                                        Tiempo de entrega estimado
+                                    </div>
+                                    <div className="card-body">
+                                        <label htmlFor="price">Tiempo estimado</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="time"
+                                            name="time"
+                                            value={formData[activeCategory].time}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Botones */}
                         <div className="d-flex justify-content-between">
                             <button
@@ -218,16 +220,16 @@ export const FreelanceLayout = () => {
                             </button>
 
                             <Link to="/free/cv">
-                                   <button
-                                type="button"
-                                className="btn"
-                           
-                                style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
-                            >
-                                Atrás
-                            </button>             
+                                <button
+                                    type="button"
+                                    className="btn"
+
+                                    style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
+                                >
+                                    Atrás
+                                </button>
                             </Link>
-                             
+
                             <button
                                 type="button"
                                 className="btn"
@@ -249,7 +251,7 @@ export const FreelanceLayout = () => {
                                 <h5>{formData[category].title || "Título no definido"}</h5>
                                 <h6>${formData[category].price || "0.00"}</h6>
                                 <p>{formData[category].time || "Escribe un tiempo aproximado"}</p>
-                                 <p>{formData[category].description || "Descripción no definida"}</p>
+                                <p>{formData[category].description || "Descripción no definida"}</p>
                             </div>
                         ))}
                     </div>
