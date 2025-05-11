@@ -43,8 +43,9 @@ export const FreelanceLayout = () => {
             toast.error("Por favor sube una imagen de portada");
             return;
         }
-
+        console.log("Archivo a enviar:", photo);
         for (let cat of categories) {
+            console.log(pair[0] + ', ', pair[1]);
             const data = formData[cat];
             if (!data.title || !data.description || !data.price || !data.time) {
                 toast.error(`Completa todos los datos del paquete ${cat}`);
@@ -57,7 +58,7 @@ export const FreelanceLayout = () => {
             fd.append("price", parseInt(data.price));
             fd.append("time", data.time);
             fd.append("category", cat);
-            fd.append("img_url", photo);
+            fd.append("photo_cover", photo);
 
 
             try {

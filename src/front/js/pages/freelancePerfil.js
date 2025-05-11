@@ -6,7 +6,7 @@ import CommentSection from "../component/CommentSection.jsx";
 
 
 export const FreelancePerfil = () => {
-    const {  actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
     const { freelance_id } = useParams();
     const [data, setData] = useState({});
     const [servicesByCategory, setServicesByCategory] = useState({});
@@ -65,11 +65,12 @@ export const FreelancePerfil = () => {
                         <div className="row no-gutters g-0 align-items-center">
                             <div className="col-auto p-3">
                                 <img
-                                    src={rigoImageUrl}
+                                    src={store.userProfile.img_url}
                                     alt={`Imagen de ${data.name || "freelancer"}`}
                                     className="rounded-circle"
                                     style={{ width: "80px", height: "80px", objectFit: "cover" }}
                                 />
+                                				
                             </div>
                             <div className="col">
                                 <div className="card-body">
