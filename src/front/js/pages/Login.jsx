@@ -40,9 +40,11 @@ const Login = () => {
                 console.log("ROL del usuario:", rol);
     
                 if (rol === "freelance") {
-                    navigate("/freeDash");
+                    navigate("/free/dashboard");
                 } else if (rol === "user") {
-                    navigate("/dashboard-usuario");
+                    navigate("/user/dashboard");
+                } else if (rol === "admin") {
+                    navigate("/admin");
                 } else {
                     navigate("/")}
 

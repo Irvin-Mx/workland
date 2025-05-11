@@ -29,6 +29,7 @@ import DetalladoDeOrden from "./pages/DetalladoDeOrden.jsx";
 import Ordenes from "./pages/Ordenes.jsx";
 import UserEdit from "./pages/userEdit.js";
 import Favorites from "./pages/Favorites.jsx"
+import CommentsMade from "./pages/CommentsMade.jsx";
 
 
 // Vistas freelance
@@ -70,32 +71,42 @@ const Layout = () => {
                 <BrowserRouter basename={basename}>
                     <ScrollToTop>
                         <Navbar />
-    
+
                         <Routes>
                             <Route element={<Home />} path="/" />
-                            <Route element={<Demo />} path="/demo" />
                             <Route element={<Registro />} path="/registro" />
                             <Route element={<Login />} path="/iniciar-sesion" />
-                            <Route element={<Dashboard />} path="/dashboard" />
-                            <Route element={<UserConfig/>} path="/config"/>
-                            <Route element={<FreelanceFormulario/>} path="/form"/>
                             <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id" />
                             <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
-                            <Route element={<Single />} path="/single/:theid" />
-                            <Route element={<h1>Not found!</h1>} />
 
-                            <Route path="/free" element={<PrivateRoute allowedRoles={["freelance"]}><FreelanceTemplate/></PrivateRoute>}>
-                                
+                            {/* <Route element={<Dashboard />} path="/dashboard" /> */}
+
+                            <Route element={<PrivateRoute allowedRoles={["freelance", "user","admin"]}><UserConfig /></PrivateRoute>} path="/config" />
+                            <Route element={<PrivateRoute allowedRoles={["freelance", "user","admin"]}><FreelanceFormulario /></PrivateRoute>} path="/form" />
+                            {/* <Route element={<FreelanceFormulario />} path="/form" /> */}
+
+                            <Route path="/free" element={<PrivateRoute allowedRoles={["freelance"]}><FreelanceTemplate /></PrivateRoute>}>
+                                <Route element={<Dashboard />} path="dashboard" />
                                 <Route element={<FreelanceDescrption />} path="cv" />
-                                <Route element={ <FreelanceLayout />} path="layout" />
+                                <Route element={<FreelanceLayout />} path="layout" />
+                            </Route>
+
+                            <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminPage /></PrivateRoute>}>
+                                <Route element={<AllReports />} path="" />
+                            </Route>
+
+                            <Route path="/user" element={<PrivateRoute allowedRoles={["user"]}><UserEdit /></PrivateRoute>}>
+                                <Route element={<Dashboard />} path="dashboard" />
+                                {/* <Route element={<UserEdit />} path="userEdit" /> */}
+                                <Route element={<DetalladoDeOrden />} path="detallado-de-orden" />
+                                <Route element={<Ordenes />} path="ordenes" />
+                                <Route element={<Favorites />} path="favoritos" />
+                                <Route element={<CommentsMade />} path="comentarios" />
                             </Route>
 
 
 
-                            {/* <Route element={<PrivateRoute allowedRoles={["user"]}><UserEdit/></PrivateRoute>} path="/userEdit" /> */}
-                            <Route element={<PrivateRoute allowedRoles={["user"]}><DetalladoDeOrden /></PrivateRoute>} path="/detallado-de-orden" />
-                            <Route element={<PrivateRoute allowedRoles={["user"]}><Ordenes /></PrivateRoute>} path="/ordenes" />
-                            <Route element={<PrivateRoute allowedRoles={["user"]}><Favorites /></PrivateRoute>} path="/favoritos" />
+                            <Route element={<h1>Not found!</h1>} />
 
                         </Routes>
                         {/* <Footer /> */}

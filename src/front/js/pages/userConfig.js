@@ -13,10 +13,10 @@ const UserConfig = () => {
 
     return (
         <div className="d-flex">
-            <div>
+            {/* <div>
 
                 <NavbarLateral />
-            </div>
+            </div> */}
 
             {/* Botón de colapso para dispositivos pequeños */}
             <button
