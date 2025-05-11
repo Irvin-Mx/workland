@@ -15,7 +15,7 @@ const freelanceTemplate = () => {
     return (
         <div className="d-flex">
             <div>
-                <NavbarLateral/>
+                <NavbarLateral user={"freelance"}/>
             </div>
             {/* Botón de colapso para dispositivos pequeños */}
             <button
