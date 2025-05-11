@@ -93,7 +93,7 @@ const Layout = () => {
 
 
 
-                            <Route element={<PrivateRoute allowedRoles={["user"]}><UserEdit/></PrivateRoute>} path="/userEdit" />
+                            {/* <Route element={<PrivateRoute allowedRoles={["user"]}><UserEdit/></PrivateRoute>} path="/userEdit" /> */}
                             <Route element={<PrivateRoute allowedRoles={["user"]}><DetalladoDeOrden /></PrivateRoute>} path="/detallado-de-orden" />
                             <Route element={<PrivateRoute allowedRoles={["user"]}><Ordenes /></PrivateRoute>} path="/ordenes" />
                             <Route element={<PrivateRoute allowedRoles={["user"]}><Favorites /></PrivateRoute>} path="/favoritos" />
