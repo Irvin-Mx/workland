@@ -611,6 +611,30 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            toggleFavorite:async(body)=>{
+                let token=localStorage.getItem("user_token")
+                 try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/favorite/change`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body: JSON.stringify(body)
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            }
         },
     };
 };

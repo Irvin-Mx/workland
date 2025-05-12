@@ -145,7 +145,7 @@ export const FreelancePerfil = () => {
                                             <h6>${service.price}</h6>
                                             <p>{service.description}</p>
                                             <button
-                                                onClick={() => navigate(`/detallado-de-orden?service=${service.id}`)}
+                                                onClick={() => navigate(`/user/detallado-de-orden?service=${service.id}`)}
                                                 type="button"
                                                 className="btn btn-sm btn-comprar-paquete"
                                                 style={{ background: "#00D1B2", color: "aliceblue", width: "150px" }}
@@ -166,7 +166,7 @@ export const FreelancePerfil = () => {
                         <div className="mt-4">
                             <i className="fa-regular fa-heart"></i>
                             <span> Favorite</span>
-                            <button onClick={handleFavorite} className="btn btn-primary ms-2">
+                            <button onClick={()=>handleFavorite(freelance_id)} className="btn btn-primary ms-2">
                                 {isInFavorites ? (
                                     <>
                                         <i className="fa-solid fa-heart"></i>

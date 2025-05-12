@@ -9,6 +9,7 @@ from flask_cors import CORS
 from datetime import timedelta
 from flask_jwt_extended import  JWTManager,create_access_token, jwt_required, get_jwt_identity
 from flask_bcrypt import Bcrypt
+from api.user_data_dummy import usuarios
 
 import cloudinary
 from cloudinary.uploader import upload
@@ -34,8 +35,61 @@ IMAGE_PROFILE_URL="https://res.cloudinary.com/dph121s7p/image/upload/v1746471079
 def photo_uploader(photo,height=300,width=300):
     upload_result = upload(photo)
     cloud_url, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=height,height=height)
-
     return cloud_url
+
+def procesar_usuarios(usuarios):
+            for usuario in usuarios:
+                existing_user = User.query.filter_by(email=usuario["email"]).first()
+
+                if not existing_user:
+                    password_hasheada=bcrypt.generate_password_hash(usuario["password"]).decode("utf-8")
+                    if usuario["rol"] == "freelance":
+                        nuevo_usuario = User(
+                            name=usuario["name"],
+                            last_name=usuario["last_name"],
+                            email=usuario["email"],
+                            password=password_hasheada,
+                            phone=usuario["phone"],
+                            address=usuario["address"],
+                            rol=usuario["rol"],
+                            service_title=usuario["service_title"],
+                            profile_description=usuario["profile_description"],
+                            service_description=usuario["service_description"],
+                            img_url=usuario["img_url"]
+                        )
+                        db.session.add(nuevo_usuario)
+                        db.session.commit()
+
+                        freelance_id = User.query.filter_by(email=usuario["email"]).first().serialize()["id"]
+
+                        for servicio in usuario["services"]:
+                            nuevo_servicio=Service(title=servicio["title"],price=servicio["price"],time=servicio["time"],description=servicio["description"],category=servicio["category"],user_id=freelance_id)
+                            db.session.add(nuevo_servicio)
+                            db.session.commit()
+
+
+                    else: 
+                        nuevo_usuario = User(
+                            name=usuario["name"],
+                            last_name=usuario["last_name"],
+                            email=usuario["email"],
+                            password=password_hasheada,
+                            phone=usuario["phone"],
+                            address=usuario["address"],
+                            rol=usuario["rol"],
+                            img_url=usuario["img_url"]
+                        )
+                        db.session.add(nuevo_usuario)
+                        db.session.commit()
+
+                    # db.session.add(nuevo_usuario)
+                    print(f"Usuario creado: {usuario['email']}")
+                else:
+                    print(f"Email ya existe, saltando: {usuario['email']}")
+                db.session.commit()
+                print("Proceso completado")
+
+# ==============AQUI INICIAN LAS RUTAS========
 
 @api.route('/test/sign-up', methods=['POST'])
 def sign_up():
@@ -567,43 +621,26 @@ def get_user_favorites():
 def create_favorite():
     try:
         current_user_id = get_jwt_identity()
-        print(current_user_id)
         data = request.get_json()
-        print(data)
         favorite_status = data.get('favorite_status')
-
         favorite_id = data.get('favorite_id')
-
         user = User.query.get(current_user_id)
         favorite_user = User.query.get(favorite_id)
-        print(user.serialize())
-        print(favorite_user.serialize())
-
+  
         if not user or not favorite_user:
             return jsonify({"error": "Usuario o favorito no encontrado"}), 404
-        print(favorite_status)
-        print(favorite_id)
-        print(favorite_status == False)
-        if favorite_status == False:
-            # Verificar si el favorito ya existe
-            #print("A punto de agregar1")
-            #print(user.favoritos_agregados)
-            #print("A punto de agregar2")
-            if favorite_user in user.favoritos_agregados:
-                return jsonify({"message": "El usuario ya está en la lista de favoritos"}), 200
-
-            #print("A punto de agregar3")
-            # Agregar el favorito
+        
+        fav_check=favorite_user in user.favoritos_agregados
+ 
+        if fav_check == False:
             user.agregar_favorito(favorite_user)
             db.session.commit()
             return jsonify({
                 "result": True,
                 "message": "Favorito agregado correctamente"
-                # "favoritos": [fav.id for fav in user.favoritos_agregados]
             }),201
         else:
-            #print("A punto de eliminar")
-            # Eliminar el favorito
+
             user.eliminar_favorito(favorite_user)
             db.session.commit()
             return jsonify({
@@ -915,6 +952,23 @@ def all_report():
         return jsonify({
         # "msj":"Reporte eliminado",
         "result":all_report
+        }),200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msj": str(e)}), 500
+    
+
+@api.route("/create-user",methods=["GET"])
+def cretae_users():
+
+    try:
+
+        procesar_usuarios(usuarios)
+
+        return jsonify({
+        # "msj":"Reporte eliminado",
+        "result":"Creado exitosamente"
         }),200
 
     except Exception as e:

@@ -41,6 +41,14 @@ const freelanceLinks = [
         icon: <i className="fas fa-fw fa-wallet m-2"></i>
     },
 ]
+const adminLink = [
+    {
+        name: "Reports",
+        path: "/admin",
+        icon: <i className="fa-solid fa-business-time m-2"></i>
+    }
+    
+]
 
 
 
@@ -93,7 +101,17 @@ const NavbarLateral = ({ user }) => {
             name: "Dashboard",
             path: `/${genLink}/dashboard`,
             icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
-        }
+        },
+        {
+            name: "Profile",
+            path: `/${genLink}/config`,
+            icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+        },
+        // {
+        //     name: "Edit",
+        //     path: `/${genLink}/form`,
+        //     icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+        // },
     ]
     // useEffect(() => {
     //     const timer = setTimeout(() => {
