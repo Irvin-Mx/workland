@@ -27,7 +27,6 @@ class User(db.Model):
     balance=db.Column(db.Integer(), nullable=True ,default=0)
     img_url=db.Column(db.String(), nullable=True)
     cover_img_url=db.Column(db.String(), nullable=True)
-
     is_active = db.Column(db.Boolean(), nullable=False,default=True)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
 

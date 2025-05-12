@@ -77,31 +77,33 @@ const Layout = () => {
                             <Route element={<Registro />} path="/registro" />
                             <Route element={<Login />} path="/iniciar-sesion" />
                             <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id" />
-                            <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
-
-                            {/* <Route element={<Dashboard />} path="/dashboard" /> */}
-
-                            <Route element={<PrivateRoute allowedRoles={["freelance", "user","admin"]}><UserConfig /></PrivateRoute>} path="/config" />
-                            <Route element={<PrivateRoute allowedRoles={["freelance", "user","admin"]}><FreelanceFormulario /></PrivateRoute>} path="/form" />
-                            {/* <Route element={<FreelanceFormulario />} path="/form" /> */}
+                            {/* <Route element={<ResutadoDeBusqueda />} path="/busqueda" /> */}
 
                             <Route path="/free" element={<PrivateRoute allowedRoles={["freelance"]}><FreelanceTemplate /></PrivateRoute>}>
                                 <Route element={<Dashboard />} path="dashboard" />
                                 <Route element={<FreelanceDescrption />} path="cv" />
                                 <Route element={<FreelanceLayout />} path="layout" />
+                                   <Route element={<UserConfig />} path="config" />
+                            <Route element={<FreelanceFormulario />} path="form" />
+                             <Route element={<ResutadoDeBusqueda />} path="busqueda" />
                             </Route>
 
                             <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminPage /></PrivateRoute>}>
                                 <Route element={<AllReports />} path="" />
+                                <Route element={<UserConfig />} path="config" />
+                                <Route element={<FreelanceFormulario />} path="form" />
+                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
                             </Route>
 
                             <Route path="/user" element={<PrivateRoute allowedRoles={["user"]}><UserEdit /></PrivateRoute>}>
                                 <Route element={<Dashboard />} path="dashboard" />
-                                {/* <Route element={<UserEdit />} path="userEdit" /> */}
                                 <Route element={<DetalladoDeOrden />} path="detallado-de-orden" />
                                 <Route element={<Ordenes />} path="ordenes" />
                                 <Route element={<Favorites />} path="favoritos" />
                                 <Route element={<CommentsMade />} path="comentarios" />
+                                <Route element={<UserConfig />} path="config" />
+                            <Route element={<FreelanceFormulario />} path="form" />
+                             <Route element={<ResutadoDeBusqueda />} path="busqueda" />
                             </Route>
 
 

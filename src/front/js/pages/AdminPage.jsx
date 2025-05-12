@@ -1,16 +1,38 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-const AdminPage = () => {
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+import NavbarLateral from "../component/NavbarLateral.jsx";
+import { Outlet } from "react-router-dom";
+
+const userEdit = () => {
+    const { store, actions } = useContext(Context);
+
+    const user = store.userProfile || {};
+    if (!user.name) return <p>Cargando datos del usuario...</p>;
+
     return (
-        <div style={{height:"100vh"}} className='container-fluid  d-flex align-items-center justify-content-start flex-row p-0'>
-            <div className=' h-100' style={{ width: "300px" }}>
-                sidebar
+        <div className="d-flex">
+            <div>
+                <NavbarLateral user={"admin"}/>
             </div>
-            <div className='h-100 container-fluid' style={{width:"100%"}}>
+            {/* Botón de colapso para dispositivos pequeños */}
+            <button
+                className="btn btn-primary d-md-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#accordionSidebar"
+                aria-expanded="false"
+                aria-controls="accordionSidebar"
+            >
+                <i className="fas fa-bars"></i>
+            </button>
+            
+            <div className="main-content">
                 <Outlet />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default AdminPage
+export default userEdit;
+

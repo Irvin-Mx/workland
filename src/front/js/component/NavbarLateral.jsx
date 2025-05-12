@@ -41,8 +41,14 @@ const freelanceLinks = [
         icon: <i className="fas fa-fw fa-wallet m-2"></i>
     },
 ]
-
-
+const adminLink = [
+    {
+        name: "Reports",
+        path: "/admin",
+        icon: <i className="fa-solid fa-business-time m-2"></i>
+    }
+    
+]
 
 const LinkItem = ({ name, path, icon }) => {
       const isExternal = name === "Vincular a Paypal";
@@ -93,7 +99,22 @@ const NavbarLateral = ({ user }) => {
             name: "Dashboard",
             path: `/${genLink}/dashboard`,
             icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
-        }
+        },
+        {
+            name: "Profile",
+            path: `/${genLink}/config`,
+            icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+        },
+        {
+            name: "Busqueda",
+            path: `/${genLink}/busqueda`,
+            icon: <i className="fa-solid fa-magnifying-glass m-2"></i>
+        },
+        // {
+        //     name: "Edit",
+        //     path: `/${genLink}/form`,
+        //     icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+        // },
     ]
     // useEffect(() => {
     //     const timer = setTimeout(() => {
@@ -151,85 +172,30 @@ const NavbarLateral = ({ user }) => {
                     </div>
                 </ul>
 
-                {/* Botón de colapso para dispositivos pequeños */}
-                {/* <button
-                    className="btn btn-primary d-md-none"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordionSidebar"
-                    aria-expanded="false"
-                    aria-controls="accordionSidebar"
-                >
-                    <i className="fas fa-bars"></i>
-                </button> */}
             </div>
-            // <div className="d-flex">
-            //     <ul className={`navbar-nav sidebar accordion vh-100 d-none d-md-block ${styles.sidebar} `} id="accordionSidebar">
-            //         <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-            //             <div className="sidebar-brand-icon rotate-n-15">
-            //                 <i className="fa-solid fa-house"></i>
-            //             </div>
-            //             <div className="sidebar-brand-text mx-auto m-2">Workland</div>
-            //         </a>
-            //         <li className="w-100 p-0 m-0">
-            //             <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
-            //         </li>
+          
+        );
+    }
+    if (user == "admin") {
+        return (
 
+            <div className="d-flex">
+                <ul className={`navbar-nav sidebar accordion vh-100 d-none d-md-block ${styles.sidebar} `} id="accordionSidebar">
+                    <div >
+                        {
+                            generalLinks.map((elem) => <LinkItem key={elem.name} {...elem} />)
+                        }
+                    </div>
+                    {/* <div >
+                        <div className={`sidebar-heading my-0 ${styles.sidebarHeading}`}><h5>Opciones</h5> </div>
+                        {
+                            freelanceLinks.map((elem) => <LinkItem key={elem.name} {...elem} />)
+                        }
+                    </div> */}
+                </ul>
 
-            //         <li className="nav-item active">
-            //             <Link className="nav-link" to="/dashboard">
-            //                 <i className="fas fa-fw fa-tachometer-alt m-2"></i>
-            //                 <span>Dashboard</span>
-            //             </Link>
-            //         </li>
-
-            //         <li className="w-100 p-0 m-0">
-            //             <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
-            //         </li>
-
-            //         <div className={`sidebar-heading my-0 ${styles.sidebarHeading}`}>Opciones</div>
-
-            //         <li className="nav-item">
-            //             <Link className="nav-link" to="/config">
-            //                 <i className="fas fa-fw fa-user-edit m-2"></i>
-            //                 <span>Editar Perfil</span>
-            //             </Link>
-            //         </li>
-
-            //         <li className="nav-item">
-            //             <Link className="nav-link" to="/free/cv">
-            //                 <i className="fa-solid fa-business-time m-2"></i>
-            //                 <span>Mis servicios</span>
-            //             </Link>
-            //         </li>
-
-            //         <li className="nav-item">
-            //             <a className="nav-link" href="https://www.paypal.com" target="_blank" rel="noopener noreferrer">
-            //                 <i className="fas fa-fw fa-wallet m-2"></i>
-            //                 <span>Vincular PayPal</span>
-            //             </a>
-            //         </li>
-
-            //         <li className="w-100 p-0 m-0">
-            //             <hr className={`sidebar-divider my-0 ${styles.sidebarDivider}`} />
-            //         </li>
-
-            //         <div className="text-center d-none d-md-inline">
-            //             <button className="rounded-circle border-0" id="sidebarToggle"></button>
-            //         </div>
-            //     </ul>
-
-            //     <button
-            //         className="btn btn-primary d-md-none"
-            //         type="button"
-            //         data-bs-toggle="collapse"
-            //         data-bs-target="#accordionSidebar"
-            //         aria-expanded="false"
-            //         aria-controls="accordionSidebar"
-            //     >
-            //         <i className="fas fa-bars"></i>
-            //     </button>
-            // </div>
+            </div>
+          
         );
     }
 
