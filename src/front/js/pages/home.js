@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { toastFallo } from "../component/Toaster/toasterIndex.jsx";
 import "../../styles/home.css";
 
+// import "../../../../public/homeSlider1.jpg"
+
 import styles from "./home.module.css"
 
 
@@ -36,7 +38,10 @@ export const Home = () => {
 					</ol>
 					<div className="carousel-inner">
 						<div className="carousel-item active">
-							<img className="d-block w-100" src="https://placehold.co/500x200" alt="First slide" />
+							<img className="d-block w-100" src="https://placehold.co/500x200" alt="Second slide" />
+							{/* <img className="d-block w-100" src="/home-slider-one.jpg" alt="First slide" /> */}
+							{/* <img className="d-block w-100" src="https://img.freepik.com/foto-gratis/reunion-equipo-oficina_23-2148825879.jpg?semt=ais_hybrid&w=740" alt="First slide" /> */}
+							
 						</div>
 						<div className="carousel-item">
 							<img className="d-block w-100" src="https://placehold.co/500x200" alt="Second slide" />
@@ -79,29 +84,41 @@ export const Home = () => {
 						<span className="sr-only">Next</span>
 					</a>
 				</div>
-				<div className="row align-items-center">
+				<div className="row align-items-center my-5">
 					<div className="col">
-						Conexión rápida
+						<div>
+							<i class="fa-brands fa-searchengin fs-1"></i>
+							<h3>Conexion rapida</h3>
+						</div>
 					</div>
 					<div className="col">
-						Gestión integral
+						<div>
+							<i class="fa-brands fa-searchengin fs-1"></i>
+							<h3>Gestión integral</h3>
+						</div>
 					</div>
 					<div className="col">
-						One of three columns
+						<div>
+							<i class="fa-brands fa-searchengin fs-1"></i>
+							<h3>One of three columns</h3>
+						</div>
+						
 					</div>
 				</div>
+
 				<div className="d-flex flex-column justify-content-center align-items-center">
 					<div className="w-75">
 						{/* Card */}
-						<div className="card mb-3 ">
+						<div className="card mb-4 ">
 							<div className="row g-0 ">
 								<div className="col-md-5 d-flex flex-column justify-content-center align-items-center p-4">
-									<img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." />
+									{/* <img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." /> */}
+									<i class="fa-regular fa-clipboard fs-1"></i>
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
 										<h5 className="card-title justify-content-start w-100  fs-3">Publica tu trabajo</h5>
-										<p className="card-text">It's free and easy! Get lots of competitive bids that suit your budget in minutes. Start making your dreams reality.</p>
+										<p className="card-text">¡Es gratis y fácil! Obtén muchas ofertas competitivas que se ajusten a tu presupuesto en minutos. Comienza a hacer realidad tus sueños..</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>
@@ -109,31 +126,33 @@ export const Home = () => {
 						</div>
 
 						{/* Card */}
-						<div className="card mb-3">
+						<div className="card mb-4 border">
 							<div className="row g-0 ">
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
 										<h5 className="card-title justify-content-start w-100  fs-3">Encunetra freelancers</h5>
-										<p className="card-text">No job is too big or complex. We've got freelancers for jobs of any size or budget, across 2700+ skills. Let our talent bring your ideas to life.</p>
+										<p className="card-text">Ningún trabajo es demasiado grande o complejo. Contamos con freelancers para trabajos de cualquier tamaño o presupuesto, en más de 2700 habilidades. Deja que nuestro talento haga realidad tus ideas.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>
 								<div className="col-md-5 d-flex flex-column justify-content-center align-items-center p-4">
-									<img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." />
+									{/* <img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." /> */}
+									<i class="fa-solid fa-users fs-1"></i>
 								</div>
 							</div>
 						</div>
 
 						{/* Card */}
-						<div className="card mb-3 ">
+						<div className="card mb-4 ">
 							<div className="row g-0 ">
 								<div className="col-md-5 d-flex flex-column justify-content-center align-items-center p-4">
-									<img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." />
+									{/* <img src="https://placehold.co/500x200" className="img-fluid rounded-start object-fit-contain" alt="..." /> */}
+									<i class="fa-regular fa-credit-card fs-1"></i>
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
 										<h5 className="card-title justify-content-start w-100  fs-3">Pagos seguros</h5>
-										<p className="card-text">Only pay for work when you are 100% satisfied with the outcome. Our milestone payment system protects you every step of the way.</p>
+										<p className="card-text">Solo paga por el trabajo cuando estés 100% satisfecho con el resultado. Nuestro sistema de pagos por hitos te protege en cada paso del camino..</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>
