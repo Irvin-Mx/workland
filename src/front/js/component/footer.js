@@ -4,10 +4,11 @@ import {Link} from "react-router-dom"
 import styles from "./footer.module.css"
 
 export const Footer = () => (
-	<footer className={`footer mt-auto text-center p-5 border d-flex flex-column justify-content-center align-items-center ${styles.footer__container}`}>
+	<footer className={`footer mt-auto text-center p-4 border d-flex flex-column justify-content-center align-items-center text-white ${styles.footer__container}`}>
 		<div className="d-flex justify-content-around w-100">
+			{/* Logo */}
 			<div className="d-flex flex-column">
-				<h2 className="text-white">Workland</h2>
+				<h2 className="">Workland</h2>
 				<div className="d-flex justify-content-between">
 					<div>
 						<i class="fa-brands fa-twitter fs-4"></i>
@@ -22,53 +23,53 @@ export const Footer = () => (
 					</div>
 				</div>
 			</div>
-
+			{/* Enlaces */}
 			<div>
-				<h3>Enlaces</h3>
-				<ul>
-					<li>
-						<Link role="button" to="/">Home</Link>
+				<h4>Enlaces</h4>
+				<ul className={` ${styles.footer__ul}`}>
+					<li >
+						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Home</Link>
 					</li>
 					<li>
-						<Link role="button" to="/">Buscar</Link>
+						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Buscar</Link>
 					</li>
 					<li>
-						<p>Nosotros</p>
+						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Nosotros</Link>
 					</li>
 				</ul>
 			</div>
-
+			{/* Preguntas frecuntes */}
 			<div>
-				<h3>Preguntas frecuentes</h3>
-				<ul>
+				<h4>Preguntas frecuentes</h4>
+				<ul className={` ${styles.footer__ul}`} >
 					<li>
-						<p>Link1</p>
+						<Link className={` ${styles.footer__links}`} role="button" to="/">¿Cómo funciona el proceso de contratación?</Link>
 					</li>
 					<li>
-						<p>Link2</p>
+						<Link className={` ${styles.footer__links}`} role="button" to="/">¿Qué tipos de trabajos o servicios pueden realizarse en la plataforma?</Link>
 					</li>
 					<li>
-						<p>Link3</p>
+						<Link className={` ${styles.footer__links}`} role="button" to="/">¿Cómo me protege el sistema de pagos seguro?</Link>
 					</li>
 				</ul>
 			</div>
-
+			{/* Legal*/}
 			<div>
-				<h3>Legal</h3>
-				<ul>
+				<h4>Legal</h4>
+				<ul className={` ${styles.footer__ul}`} >
 					<li>
-						<p>Link1</p>
+						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Terminos y condiciones</Link>
 					</li>
 					<li>
-						<p>Link2</p>
+						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Politica de privacidad</Link>
 					</li>
 					<li>
-						<p>Link3</p>
+						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Contrato de servicios</Link>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<p>
+		<p className="">
 			Made with <i className="fa fa-heart text-danger" /> by{" Irvin, Fredy, Sebas "}
 		</p>
 	</footer>
