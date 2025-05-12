@@ -196,12 +196,12 @@ export const FreelancePerfil = () => {
                             Imagen de portada
                         </div>
                         <div className="card-body text-center">
-                            {data?.cover_image ? (
+                            {data.img_url ? (
                                 <img
-                                    src={data.cover_image}
+                                    src={data.img_url}
                                     alt="Imagen de portada"
                                     className="img-fluid rounded"
-                                    style={{ width: "100%", height: "auto", objectFit: "cover" }}
+                                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
                                 />
                             ) : (
                                 <p>No se ha cargado una imagen de portada</p>

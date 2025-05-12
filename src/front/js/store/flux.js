@@ -243,7 +243,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Error de conexión con el servidor");
                 }
             },
-            createProduct: async (productData) => {
+            createProduct: async (formData) => {
                 const token = localStorage.getItem("user_token");
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
@@ -252,7 +252,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         
                             "Authorization": "Bearer " + token
                         },
-                        body: productData
+                        body: formData,
                     });
 
                     const data = await response.json();
