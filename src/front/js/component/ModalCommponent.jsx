@@ -2,7 +2,8 @@ import React from 'react'
 import CommentBox from "./CommentBox.jsx"
 import { useNavigate } from 'react-router-dom';
 
-const ModalCommponent = ({modalOpen,setModalOpen,freelance_id}) => {
+const ModalCommponent = ({modalOpen,setModalOpen,freelance_id,order_id,setModalInfoId,setOrdenes}) => {
+
    const navigate=useNavigate()
 
     const styleModal={
@@ -31,7 +32,6 @@ const ModalCommponent = ({modalOpen,setModalOpen,freelance_id}) => {
           <button 
           onClick={()=>{
             setModalOpen((prev)=>!prev)
-           navigate("/ordenes")
           }}
           
           className='btn rounded-circle   d-flex justify-content-center align-items-center' style={styleButton}>
@@ -39,7 +39,7 @@ const ModalCommponent = ({modalOpen,setModalOpen,freelance_id}) => {
           </button>
           <div className='d-flex  justify-content-center align-items-center flex-column'>
             <h5 className='text-white' >Agrega un comentario.</h5>
-                      <CommentBox freelance_id={freelance_id} setModalOpen={setModalOpen}/>
+                      <CommentBox freelance_id={freelance_id} setModalOpen={setModalOpen} order_id={order_id} setModalInfoId={setModalInfoId} setOrdenes={setOrdenes}/>
           </div>
         </div>
 
