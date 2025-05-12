@@ -411,10 +411,12 @@ def get_order():
                 "id":x["id"],
                 "freelance_name":frelance_name["name"],
                 "freelance_email":frelance_name["email"],
+                "freelance_id":frelance_name["id"],
                 "freelance_phone":frelance_name["phone"],
                 "user_name":x["user_name"],
                 "price":x["price"],
                 "is_payed":x["is_payed"],
+                "comment_id":x["comment_id"]
             }
         
         raw= list(map(info, data))
@@ -704,24 +706,37 @@ def add_comment():
         text=data.get("text")
         stars=data.get("stars")
         freelance_id=int(data.get("freelance_id"))
-        print(data,user_id)
+        order_id=data.get("order_id")
+        print(order_id)
 
         user=User.query.filter_by(id=user_id).first()
 
         if not user:
             return jsonify({"msj": "No se encuentra el usuario"}), 400
+
         freelance=User.query.filter_by(id=freelance_id).first()
+
         if not freelance:
             return jsonify({"msj": "No se encuentra el freelance"}), 400
+        
+        order=Order.query.filter_by(id=order_id).first()
+
+        if not order:
+            return jsonify({"msj": "No se encuentra  la orden"}), 400
+        
+        
 
         comment = Comment(
             text=text,
             stars=stars,
             user_id=user_id,
-            freelance_id=freelance_id
+            freelance_id=freelance_id,
         )
-        
+
         db.session.add(comment)
+        db.session.flush()  # Esto genera el ID del comentario sin hacer commit
+
+        order.comment_id = comment.id
         db.session.commit()
 
         return jsonify({

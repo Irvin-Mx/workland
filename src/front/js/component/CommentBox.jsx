@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StarComponent = ({ value, stars, setStarsState }) => {
     const [hover, setHover] = useState(false)
- 
+
     return (
         <div
             onMouseEnter={() => setHover(true)}
@@ -20,14 +20,15 @@ const StarComponent = ({ value, stars, setStarsState }) => {
     )
 }
 
-const CommentBox = ({freelance_id,setModalOpen}) => {
+const CommentBox = ({ freelance_id, setModalOpen, order_id, setModalInfoId, setOrdenes }) => {
     const { store, actions } = useContext(Context)
     const [starsState, setStarsState] = useState(1)
-       const navigate=useNavigate()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm()
 
@@ -35,26 +36,41 @@ const CommentBox = ({freelance_id,setModalOpen}) => {
     const MIN_CHARACTERS = 0
     const msj = watch("text")
 
-    const onSubmit = (data) =>{
+    const onSubmit = (data) => {
+
 
         actions.postComment({
-            text:data.text,
-            stars:starsState,
-            freelance_id:freelance_id
+            text: data.text,
+            stars: starsState,
+            freelance_id: freelance_id,
+            order_id: order_id
         })
-        .then((res)=>{
-            console.log(res)
-            toastExito(res.msj)
-            setModalOpen(false)
-           
-        })
-        .catch((err)=>toastFallo(err.msj))
-        .finally(()=> navigate("/ordenes"))
+            .then((res) => {
+
+                actions.getOrders()
+                    .then((res) => setOrdenes(res.result))
+                    .catch((err) => toastFallo(err.msj))
+
+
+                toastExito(res.msj)
+                setModalOpen(false)
+
+            })
+            .catch((err) => toastFallo(err.msj))
+            .finally(() => {
+                reset({
+                    data: 'text'
+                })
+                setStarsState(1)
+                
+                setModalOpen(false)
+                setModalInfoId(0)
+            })
 
     }
 
     return (
-        <div style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}} className="card container-fluid" >
+        <div style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }} className="card container-fluid" >
             <div className="card-body">
                 <div className='d-flex justify-content-start align-content-center flex-row'>
                     <div className="rounded-circle" style={{ height: "50px", width: "50px", marginRight: "10px" }}>
@@ -89,7 +105,7 @@ const CommentBox = ({freelance_id,setModalOpen}) => {
                             </label>
                             <textarea
 
-                                {...register("text", { required: true, maxLength: MAX_CHARACTERS,pattern: /.+/ })}
+                                {...register("text", { required: true, maxLength: MAX_CHARACTERS, pattern: /.+/ })}
                                 style={{ resize: 'none' }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
 
