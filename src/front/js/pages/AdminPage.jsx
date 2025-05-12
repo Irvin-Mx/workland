@@ -13,7 +13,7 @@ const userEdit = () => {
     return (
         <div className="d-flex">
             <div>
-                <NavbarLateral user={"user"}/>
+                <NavbarLateral user={"admin"}/>
             </div>
             {/* Botón de colapso para dispositivos pequeños */}
             <button
