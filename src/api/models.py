@@ -115,12 +115,14 @@ class Order(db.Model):
     is_payed = db.Column(db.Boolean(),default=False)
     price = db.Column(db.Float)
     user_name = db.Column(db.String(30), nullable=False)
+    comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'), unique=True)
+    comment = relationship("Comment", backref="order", uselist=False)
 
+
+    
     user_id = Column(Integer, ForeignKey('users.id'))
     service_id = Column(Integer, ForeignKey('services.id'))
-
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), nullable=False)
-
     services = relationship("Service", back_populates="orders")
     user = relationship("User", back_populates="orders")
 
@@ -132,7 +134,8 @@ class Order(db.Model):
             "is_payed": self.is_payed,
             "user_id": self.user_id,
             "service_id": self.service_id,
-            "user_name": self.user_name
+            "user_name": self.user_name,
+            "comment_id": self.comment_id
             # do not serialize the password, its a security breach
         }
     
@@ -141,6 +144,8 @@ class Comment(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     text = db.Column(db.String(200), nullable=False)
     stars=db.Column(db.Integer, nullable=False,default=1)
+
+
 
 
     user_id = db.Column(db.Integer, ForeignKey('users.id'))  
