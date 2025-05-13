@@ -12,7 +12,7 @@ const UserConfig = () => {
     if (!user.name) return <p>Cargando datos del usuario...</p>;
 
     return (
-        <div className="d-flex">
+        <div className="d-flex ">
             {/* <div>
 
                 <NavbarLateral />
@@ -29,7 +29,7 @@ const UserConfig = () => {
             >
                 <i className="fas fa-bars"></i>
             </button>
-            <div className=" flex-grow-1 p-4">
+            <div className=" flex-grow-1 ">
 
                 {/* texto principal */}
 

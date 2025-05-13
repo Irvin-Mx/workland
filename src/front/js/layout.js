@@ -84,10 +84,7 @@ const Layout = () => {
 
                             <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
 
-                            {/* <Route element={<FreelanceFormulario />} path="form" /> */}
 
-                 {/* <Route element={<UserConfig />} path="config" /> */}
-                            {/* <Route element={<ResutadoDeBusqueda />} path="/busqueda" /> */}
 
                             
 
