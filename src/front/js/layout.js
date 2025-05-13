@@ -37,6 +37,7 @@ import FreelanceTemplate from "./pages/freelanceTemplate.js";
 import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
+import FreelanceOrders from "./pages/FreelanceOrders.jsx";
 
 import FreelanceDashboard from "./pages/freelanceDashboard.js";
 
@@ -93,6 +94,7 @@ const Layout = () => {
                                 <Route element={<UserConfig />} path="config" />
                                 <Route element={<FreelanceFormulario />} path="form" />
                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+                                <Route element={<FreelanceOrders />} path="ordenes" />
                             </Route>
 
                             <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminPage /></PrivateRoute>}>
