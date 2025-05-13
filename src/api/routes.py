@@ -427,6 +427,82 @@ def get_order():
     except Exception as e:
         return jsonify({
             "error":str(e)
+        })
+
+@api.route('/order/freelance', methods=['GET'])
+@jwt_required()
+def get_orders_freelance():
+    try:
+        freelance_id=int(get_jwt_identity())
+        # orders = Order.query.filter_by(user_id=get_jwt_identity()).all()
+        freelance= User.query.get(freelance_id)
+
+        if not freelance:
+            return jsonify({"msj": "No existe el usuario.","result":[] }),400
+ 
+        if len(freelance.services)==0:
+            return jsonify({"msj": "No hay usuarios.","result":[] }),400
+        
+        def extract_orders(services):
+            if len(services)==0:
+                return []
+            
+            raw_array=[]
+            for service in services:
+                data_freelance=service.serialize()
+                data_freelance_id=data_freelance["id"]
+
+                orders = Order.query.filter(Order.service_id == data_freelance_id).all()
+                for order in orders:
+                    order_dara=order.serialize()
+                    price=order_dara["price"]
+                   
+                    is_payed=order_dara["is_payed"]
+                    id=order_dara["id"]
+                    is_payed=order_dara["is_payed"]
+                    comment_id=order_dara["comment_id"]
+                    user_id=order_dara["user_id"]
+
+                    buyer_data=User.query.get(user_id).serialize()
+                    buyer_full_name=buyer_data["name"]
+                    buyer_full_last_name=buyer_data["last_name"]
+                    buyer_info={
+                        "buyer_full_name":buyer_full_name +" "+buyer_full_last_name,
+                        "buyer_id":buyer_data["id"]
+                    }
+                    comment_order={}
+
+                    if comment_id:
+                        comment_order=Comment.query.get(comment_id).serialize()
+
+                    service=Service.query.get(int(order_dara["service_id"])).serialize()
+                    service_title=service["title"]
+                    service_id=service["id"]
+                    service_category=service["category"]
+
+                    result_obj={
+                        "id":id,
+                        "price":price,
+                        "is_payed":is_payed,
+                        "service":{
+                            "service_id":service_id,
+                            "service_title":service_title,
+                            "service_category":service_category
+                        },
+                        "comment":comment_order,
+                        "buyer_info":buyer_info
+                    }
+                    raw_array.append(result_obj)
+            
+            return raw_array
+
+        result=extract_orders(freelance.services)
+
+        return jsonify({"result": result }),200
+
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
         }),
 
 @api.route('/freelance/<int:freelance_id>', methods=['GET'])

@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             resutadosBusqueda: [],
             userProfile: {},
             terminoBusqueda: "",
-            sidebarOpen:false
+            sidebarOpen: false
         },
         actions: {
             signup: async (body) => {
@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         const store = getStore()
                         localStorage.setItem("user_token", data.token);
                         localStorage.setItem("userProfile", JSON.stringify(data.user_info));
-                        
+
                         setStore({ ...store, userProfile: data.user_info })
                         toastExito(data.msj)
                         console.log("Rol del usuario:", store.userProfile?.rol);
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             logOut: () => {
                 localStorage.removeItem("user_token");
                 localStorage.removeItem("userProfile");
-   
+
                 setStore({ ...getStore(), userProfile: {} })
                 toastExito("Cerraste exitosamente la sesion.")
 
@@ -209,9 +209,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (term == false) {
                     setStore({ ...getStore(), terminoBusqueda: "" })
                 }
-            },       
+            },
             updateFreelanceProfile: async (formData) => {
-            
+
                 const token = localStorage.getItem("user_token");
 
                 try {
@@ -221,7 +221,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
                         headers: {
-                          
+
                             "Authorization": "Bearer " + token
                         },
                         body: formData
@@ -233,13 +233,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.ok) {
 
                         toastExito("Perfil actualizado correctamente ✅");
-                        setStore({ userProfile:data.result });
+                        setStore({ userProfile: data.result });
                         return data.result;
                     } else {
                         console.error("Error al actualizar perfil freelance:", data);
                         alert(data.error || data.msg || "Error al actualizar perfil freelance");
 
-                       
+
                     }
                 } catch (error) {
                     console.error("Error de red al actualizar perfil freelance:", error);
@@ -252,7 +252,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const response = await fetch(process.env.BACKEND_URL + "/api/service", {
                         method: "POST",
                         headers: {
-                        
+
                             "Authorization": "Bearer " + token
                         },
                         body: formData,
@@ -264,7 +264,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         alert("Producto agregado correctamente ✅");
                         return data;
                     } else {
-                        
+
                         alert(data.error || "Error al agregar producto");
                     }
                 } catch (error) {
@@ -278,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                        
+
                             "Authorization": "Bearer " + localStorage.getItem("user_token")
                         }
                     });
@@ -286,13 +286,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-               
+
                         const store = getStore();
                         setStore({ ...store, freelancerProfile: data });
 
-                        return data; 
+                        return data;
                     } else {
-                    
+
                         alert(data.error || "Error al obtener el perfil de usuario");
                         return null;
                     }
@@ -375,7 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
 
                     const data = await response.json()
-                    
+
 
                     if (response.ok) {
                         return data
@@ -518,11 +518,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            toggleSideBar:()=>{
-                const value=getStore().sidebarOpen
-                setStore({...getStore(),sidebarOpen:!value})
+            toggleSideBar: () => {
+                const value = getStore().sidebarOpen
+                setStore({ ...getStore(), sidebarOpen: !value })
             },
-            getAllReports:async()=>{
+            getAllReports: async () => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/report/all`, {
                         method: "GET",
@@ -532,9 +532,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         },
                     })
                     const data = await response.json()
-                 
+
                     if (response.ok) {
-                        
+
                         return data
                     } else {
                         return data
@@ -543,8 +543,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(e)
                 }
             },
-            checkReport:async(body)=>{
-                let token=localStorage.getItem("user_token")
+            checkReport: async (body) => {
+                let token = localStorage.getItem("user_token")
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/report/check`, {
                         method: "POST",
@@ -552,12 +552,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Content-Type": "application/json",
                             "Authorization": "Bearer " + token
                         },
-                        body:JSON.stringify(body)
+                        body: JSON.stringify(body)
                     })
                     const data = await response.json()
-                 
+
                     if (response.ok) {
-                        
+
                         return data
                     } else {
                         return data
@@ -566,7 +566,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(e)
                 }
             },
-            addReport:async(body)=>{
+            addReport: async (body) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/report/add`, {
                         method: "POST",
@@ -574,12 +574,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Content-Type": "application/json",
                             "Authorization": "Bearer " + localStorage.getItem("user_token")
                         },
-                        body:JSON.stringify(body)
+                        body: JSON.stringify(body)
                     })
                     const data = await response.json()
-                 
+
                     if (response.ok) {
-                        
+
                         return data
                     } else {
                         return data
@@ -590,7 +590,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             deleteReport: async (body) => {
                 // console.log(body)
-                let token=localStorage.getItem("user_token")
+                let token = localStorage.getItem("user_token")
                 try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/report/delete`, {
                         method: "DELETE",
@@ -614,9 +614,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            toggleFavorite:async(body)=>{
-                let token=localStorage.getItem("user_token")
-                 try {
+            toggleFavorite: async (body) => {
+                let token = localStorage.getItem("user_token")
+                try {
                     const response = await fetch(process.env.BACKEND_URL + `/api/favorite/change`, {
                         method: "POST",
                         headers: {
@@ -630,6 +630,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     if (response.ok) {
 
+                        return data
+                    } else {
+                        return data
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            },
+            getOrdersFreelance: async () => {
+                let token = localStorage.getItem("user_token")
+                try {
+                    const response = await fetch(process.env.BACKEND_URL + `/api/order/freelance`, {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        },
+                    });
+
+                    const data = await response.json()
+
+                    if (response.ok) {
                         return data
                     } else {
                         return data
