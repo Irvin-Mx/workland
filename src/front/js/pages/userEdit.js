@@ -29,7 +29,7 @@ const userEdit = () => {
                 <i className="fas fa-bars"></i>
             </button>
             
-            <div className="main-content">
+            <div className="container-fluid ">
                 <Outlet />
             </div>
         </div>

@@ -18,34 +18,35 @@ export const FreelancePerfil = () => {
     const [report, setReport] = useState(false)
 
     let [isInFavorites, setIsInFavorites] = useState(false)
+    console.log(actions.checkLogInUser())
 
     useEffect(() => {
-    actions.checkReport({ freelance_id })
-        .then((res) => {
-            setReport(res.result);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+        actions.checkReport({ freelance_id })
+            .then((res) => {
+                setReport(res.result);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
-    actions.checkFavorite({ favorite_id: freelance_id })
-        .then((res) => {
-            setIsInFavorites(res.result);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}, []);
+        actions.checkFavorite({ favorite_id: freelance_id })
+            .then((res) => {
+                setIsInFavorites(res.result);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     const handleFavorite = () => {
-    actions.toggleFavorite({ favorite_id: freelance_id })
-        .then((res) => {
-            setIsInFavorites(res.result);
-        })
-        .catch((err) => {
-            console.error("Error al marcar favorito:", err);
-        });
-};
+        actions.toggleFavorite({ favorite_id: freelance_id })
+            .then((res) => {
+                setIsInFavorites(res.result);
+            })
+            .catch((err) => {
+                console.error("Error al marcar favorito:", err);
+            });
+    };
 
 
     const categories = {
@@ -70,7 +71,7 @@ export const FreelancePerfil = () => {
                             grouped[service.category].push(service);
                         }
                     });
-                    console.log(data.result)
+                    // console.log(data.result)
 
                     setData(data.result);
                     setServicesByCategory(grouped);
@@ -161,28 +162,33 @@ export const FreelancePerfil = () => {
                             </div>
                         ))}
                     </div>
+         
 
                     {/* Solo para clientes */}
-                    {store.userProfile?.rol !== "freelance" && (
-                        <div className="mt-4">
-                            <i className="fa-regular fa-heart"></i>
-                            <span> Favorite</span>
-                            <button onClick={()=>handleFavorite(freelance_id)} className="btn btn-primary ms-2">
-                                {isInFavorites ? (
-                                    <>
-                                        <i className="fa-solid fa-heart"></i>
-                                        <span> Está en favoritos</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <i className="fa-regular fa-heart"></i>
-                                        <span> No está en favoritos</span>
-                                    </>
-                                )}
-                            </button>
-                            <ReportButton report={report} setModalOpen={setModalOpen} />
-                        </div>
-                    )}
+                    {actions.checkLogInUser() === true ? (
+                        store.userProfile.rol === "user" || store.userProfile.rol === "admin" ?
+                            <div className="mt-4">
+                                <button onClick={() => handleFavorite(freelance_id)} className="btn btn-primary ms-2">
+                                    {isInFavorites ? (
+                                        <>
+                                            <i className="fa-solid fa-heart"></i>
+                                            <span> Está en favoritos</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <i className="fa-regular fa-heart"></i>
+                                            <span> No está en favoritos</span>
+                                        </>
+                                    )}
+                                </button>
+                                <ReportButton report={report} setModalOpen={setModalOpen} />
+                            </div>
+                            :
+                            null
+                    )
+                        :
+                        null
+                    }
 
                     {/* Comentarios */}
                     <div className="col-12 mt-4">
