@@ -13,20 +13,20 @@ const ResutadoDeBusqueda = () => {
   }, [])
 
   return (
-    <div className=" d-flex flex-column align-items-start vh-100  p-3" >
+    <div className=" d-flex flex-column align-items-start h-100 p-3" >
       <div>
         <SearchBar />
         <div className='w-100'>
-          <h2>Resultado de busqueda</h2>
+          <h2>Resultado de búsqueda</h2>
         </div>
-        <div className='w-100 d-flex justify-content-between align-items-center flex-row flex-wrap'>
+        <div className='w-100 h-100 d-flex justify-content-around flex-row flex-wrap'>
           {
             store.resutadosBusqueda.length ?
               store.resutadosBusqueda.map((elem) => <FreelanceCard key={elem.id} {...elem} />)
               :
 
-              <div>
-              <h3>No hay resultados de busqueda</h3>
+              <div className='w-100 h-100 d-flex justify-content-around align-items-center flex-row flex-wrap' >
+                <h3 className='text-secondary'>No hay resultados de búsqueda</h3>
               </div>
           }
         </div>

@@ -37,6 +37,7 @@ import FreelanceTemplate from "./pages/freelanceTemplate.js";
 import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
+import FreelanceOrders from "./pages/FreelanceOrders.jsx";
 
 import FreelanceDashboard from "./pages/freelanceDashboard.js";
 
@@ -77,12 +78,18 @@ const Layout = () => {
                             <Route element={<Registro />} path="/registro" />
                             <Route element={<Login />} path="/iniciar-sesion" />
                             <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id" />
+
                             <Route element={<FreelanceDashboard />} path="/freelanceDashboard" />
                             <Route element={<FreelanceFormulario />} path="form" />
-                            {/* <Route element={<UserConfig />} path="config" /> */}
-                            {/* <Route element={<ResutadoDeBusqueda />} path="/busqueda" /> */}
 
                             <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
+
+                            {/* <Route element={<FreelanceFormulario />} path="form" /> */}
+
+                 {/* <Route element={<UserConfig />} path="config" /> */}
+                            {/* <Route element={<ResutadoDeBusqueda />} path="/busqueda" /> */}
+
+                            
 
 
                             <Route path="/free" element={<PrivateRoute allowedRoles={["freelance"]}><FreelanceTemplate /></PrivateRoute>}>
@@ -90,25 +97,17 @@ const Layout = () => {
                                 <Route element={<FreelanceDescrption />} path="cv" />
                                 <Route element={<FreelanceLayout />} path="layout" />
                                 <Route element={<UserConfig />} path="config" />
-
                                 <Route element={<FreelanceFormulario />} path="form" />
                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
-
-                            
-                   
-
+                                <Route element={<FreelanceOrders />} path="ordenes" />
                             </Route>
 
                             <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminPage /></PrivateRoute>}>
                                 <Route element={<AllReports />} path="" />
                                 <Route element={<UserConfig />} path="config" />
-
                                 <Route element={<FreelanceFormulario />} path="form" />
                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
                                 <Route element={<Dashboard />} path="dashboard" />
-
-                           
-                 
                             </Route>
 
                             <Route path="/user" element={<PrivateRoute allowedRoles={["user"]}><UserEdit /></PrivateRoute>}>
@@ -118,13 +117,11 @@ const Layout = () => {
                                 <Route element={<Favorites />} path="favoritos" />
                                 <Route element={<CommentsMade />} path="comentarios" />
                                 <Route element={<UserConfig />} path="config" />
-
                                 <Route element={<FreelanceFormulario />} path="form" />
+
                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
 
-                          
-              
-
+                                <Route element={<Dashboard />} path="dashboard" />
                             </Route>
 
 

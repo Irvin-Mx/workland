@@ -42,12 +42,12 @@ const FormularioFreelance = () => {
    
         }
         await actions.updateFreelanceProfile(formData);
-        navigate("/config");
+        navigate(`/${store.userProfile?.rol=="freelance" ?"free":store.userProfile?.rol}/config`);
     };
 
     return (
-        <div className=" d-flex flex-column align-items-center vh-100 m-5">
-            <div className="w-50 p-4 border rounded shadow" style={{ background: "aliceblue" }} >
+        <div className=" d-flex flex-column align-items-center w-100">
+            <div className="w-100 p-4 border rounded shadow" style={{ background: "aliceblue" }} >
                 <form onSubmit={handleSubmit}>
                     <h2 className="text-center mb-4">Edita los datos de tu Perfil</h2>
                     <div className="mb-3">

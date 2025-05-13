@@ -1,6 +1,8 @@
 
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaBagShopping } from "react-icons/fa6";
+
 
 import styles from "./navbarLateral.module.css"
 
@@ -34,6 +36,11 @@ const freelanceLinks = [
         name: "Mis servicios",
         path: "/free/layout",
         icon: <i className="fa-solid fa-xl fa-business-time m-2"></i>
+    },
+    {
+        name: "Mis Ordenes",
+        path: "/free/ordenes",
+        icon: <i class="fa-solid fa-bag-shopping  fa-xl m-2"></i>
     },
     {
         name: "Paypal",
