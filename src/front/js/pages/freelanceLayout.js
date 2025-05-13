@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -12,38 +12,69 @@ export const FreelanceLayout = () => {
     });
 
 
-    const [photo, setPhoto] = useState(null);
+    
     const [activeCategory, setActiveCategory] = useState("basic");
-    const [imagePreview, setImagePreview] = useState("");
+    const [savedPackages, setSavedPackages] = useState([]);
+    const [packageIds, setPackagesIds] = useState({});
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === "img_url" && files && files[0]) {
-            setPhoto(files[0]);
-            setImagePreview(URL.createObjectURL(files[0]));
-        } else {
-            setFormData((prev) => ({
-                ...prev,
-                [activeCategory]: { ...prev[activeCategory], [name]: value },
-            }));
-        }
+    const categories = ["basic", "pro", "enterprise"];
+
+    useEffect(() => {
+        const saved = localStorage.getItem("savePackages");
+        const data = localStorage.getItem("formData");
+        const ids = localStorage.getItem("packageIds");
+      
+
+        if (saved) setSavedPackages(JSON.parse(saved));
+        if (data) setFormData(JSON.parse(data));
+        if (ids) setPackagesIds(JSON.parse(ids));
+
+
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("savePackages", JSON.stringify(savedPackages));
+    }, [savedPackages]);
+
+    useEffect(() => {
+        localStorage.setItem("formData", JSON.stringify(formData));
+    }, [formData]);
+
+
+    useEffect(() => {
+        localStorage.setItem("packagesIds", JSON.stringify(packageIds));
+    }, [packageIds]);
+
+    const clearStorage = () => {
+        localStorage.removeItem("savePackages");
+        localStorage.removeItem("formData");
+        localStorage.removeItem("packageIds");
+        setSavedPackages([]);
+        setPackagesIds({});
+
     };
 
+    
+
     const handleNextCategory = () => {
-        const categories = ["basic", "pro", "enterprise"];
         const currentIndex = categories.indexOf(activeCategory);
         const nextIndex = (currentIndex + 1) % categories.length;
         setActiveCategory(categories[nextIndex]);
 
     };
 
-    const handleSubmitAll = async () => {
-        const categories = ["basic", "pro", "enterprise"];
-        if (!photo) {
-            toast.error("Por favor sube una imagen de portada");
-            return;
-        }
-       
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [activeCategory]: {
+                ...formData[activeCategory],
+                [name]: value
+            }
+        });
+    };
+
+const handleSubmitAll = async () => {
         for (let cat of categories) {
             const data = formData[cat];
             if (!data.title || !data.description || !data.price || !data.time) {
@@ -57,15 +88,21 @@ export const FreelanceLayout = () => {
             fd.append("price", parseInt(data.price));
             fd.append("time", data.time);
             fd.append("category", cat);
-            fd.append("img_url", photo);
+    
 
-            for (const [key, value] of fd.entries()) {
-                console.log(`${key}: ${value}`);
-            }
 
             try {
-                await actions.createProduct(fd);
-
+                if (packageIds[cat]) {
+                    await actions.updateProduct(packageIds[cat], fd);
+                    toast.success(`Paquete ${cat} actualizado`);
+                } else {
+                    const result = await actions.createProduct(fd);
+                    if (result && result.id) {
+                        setSavedPackages((prev) => [...new Set([...prev, cat])]);
+                        setPackagesIds((prev) => ({ ...prev, [cat]: result.id }));
+                        toast.success(`Paquete ${cat} guardado`);
+                    }
+                }
             } catch (err) {
                 console.error(`Error al guardar el paquete ${cat}:`, err);
                 toast.error(`Error al guardar el paquete ${cat}`);
@@ -73,8 +110,12 @@ export const FreelanceLayout = () => {
             }
         }
         toast.success("Todos los paquetes han sido guardados exitosamente");
+        clearStorage();
+
+
     };
 
+    const allSaved = categories.every(cat => savedPackages.includes(cat));
 
     return (
         <div className="container">
@@ -83,14 +124,14 @@ export const FreelanceLayout = () => {
                 <span className="badge me-2" style={{ background: "#FF6B6B" }}>2</span>
                 Agrega tus servicios
             </h5>
-            <p>Para ayudarte a ofrecer tus servicios de forma clara y atractiva, te pedimos que completes la información de tres paquetes: Básico, Pro y Empresarial. Cada paquete debe reflejar un nivel diferente de servicio, precio y valor.</p>
+            
             <div className="progress mb-3" style={{ height: "20px" }}>
                 <div
                     className="progress-bar"
                     role="progressbar"
                     style={{
-                        width: `${((['basic', 'pro', 'enterprise'].indexOf(activeCategory) + 1) / 3) * 100}%`,
-                        backgroundColor: "#1E266D"
+                        width: `${((categories.indexOf(activeCategory) + 1) / 3) * 100}%`,
+                        backgroundColor: allSaved ? "green" : "#1E266D"
                     }}
                 >
                     {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}
@@ -109,6 +150,7 @@ export const FreelanceLayout = () => {
                                 placeholder="Título del producto"
                                 value={formData[activeCategory].title}
                                 onChange={handleChange}
+                                disabled={savedPackages.includes(activeCategory)}
                                 style={{
                                     border: "none",
                                     borderBottom: "2px solid #1E266D",
@@ -123,33 +165,7 @@ export const FreelanceLayout = () => {
                         </div>
 
                         {/* Subir imagen */}
-                        <div className="card border rounded shadow mb-4" style={{ background: "aliceblue" }}>
-                            <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                Foto de portada
-                            </div>
-                            <div className="card-body">
-                                <div className="border p-4 rounded" style={{ background: "white", justifyContent: "center" }}>
-                                    <i className="fa-solid fa-image fa-8x" style={{ opacity: 0.5 }}></i>
-                                    <div className="custom-file mb-4">
-                                        <input
-                                            type="file"
-                                            className="form-control"
-                                            name="img_url"
-                                            accept="image/*"
-                                            onChange={handleChange}
-                                        />
-                                        {imagePreview && (
-                                            <img
-                                                src={imagePreview}
-                                                alt="Vista previa"
-                                                className="img-thumbnail mt-3"
-                                                style={{ maxHeight: "200px" }}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
 
                         <div className="card border rounded shadow mb-4" style={{ background: "aliceblue" }}>
@@ -164,13 +180,14 @@ export const FreelanceLayout = () => {
                                     name="description"
                                     value={formData[activeCategory].description}
                                     onChange={handleChange}
+                                    disabled={savedPackages.includes(activeCategory)}
                                     rows="3"
                                 ></textarea>
                             </div>
                         </div>
 
                         <div className="row justify-content-around ">
-                            <div className="col-6 d-flex aling-items-strech">
+                            <div className="col-6 d-flex align-items-strech">
                                 <div className=" card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
                                     <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                                         Precio
@@ -184,6 +201,7 @@ export const FreelanceLayout = () => {
                                             name="price"
                                             value={formData[activeCategory].price}
                                             onChange={handleChange}
+                                            disabled={savedPackages.includes(activeCategory)}
                                         />
                                     </div>
                                 </div>
@@ -202,6 +220,7 @@ export const FreelanceLayout = () => {
                                             name="time"
                                             value={formData[activeCategory].time}
                                             onChange={handleChange}
+                                            disabled={savedPackages.includes(activeCategory)}
                                         />
                                     </div>
                                 </div>
@@ -246,12 +265,15 @@ export const FreelanceLayout = () => {
                 <div className="col-md-4 mt-4">
                     <h3>Vista previa de paquetes</h3>
                     <div className="row">
-                        {["basic", "pro", "enterprise"].map((category) => (
-                            <div className="card p-3 shadow-sm mb-3" key={category}>
+                        {categories.map((category) => (
+                            <div className={`card p-3 shadow-sm mb-3 border-${savedPackages.includes(category) ? "success" : "secondary"}`} key={category}>
                                 <h5>{formData[category].title || "Título no definido"}</h5>
                                 <h6>${formData[category].price || "0.00"}</h6>
                                 <p>{formData[category].time || "Escribe un tiempo aproximado"}</p>
                                 <p>{formData[category].description || "Descripción no definida"}</p>
+                                {savedPackages.includes(category) && (
+                                    <span className="badge bg-success">Guardado</span>
+                                )}
                             </div>
                         ))}
                     </div>

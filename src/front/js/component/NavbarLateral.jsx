@@ -31,7 +31,7 @@ const freelanceLinks = [
         icon: <i className="fa-solid fa-business-time m-2"></i>
     },
     {
-        name: "Layout",
+        name: "Mis servicios",
         path: "/free/layout",
         icon: <i className="fa-solid fa-bag-shopping m-2"></i>
     },
