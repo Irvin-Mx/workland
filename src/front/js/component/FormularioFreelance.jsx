@@ -46,7 +46,7 @@ const FormularioFreelance = () => {
     };
 
     return (
-        <div className=" d-flex flex-column align-items-center vh-100 m-5 w-100">
+        <div className=" d-flex flex-column align-items-center w-100">
             <div className="w-100 p-4 border rounded shadow" style={{ background: "aliceblue" }} >
                 <form onSubmit={handleSubmit}>
                     <h2 className="text-center mb-4">Edita los datos de tu Perfil</h2>

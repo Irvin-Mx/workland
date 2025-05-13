@@ -45,7 +45,7 @@ const Favorites = () => {
         return (
             <div>
                 <div>
-                    <h1>favoritos aqui</h1>
+                    <h1>Favoritos aqui</h1>
                     <p>cargando</p>
                 </div>
             </div>
@@ -55,7 +55,7 @@ const Favorites = () => {
     return (
         <div>
             <div>
-                <h1>favoritos aqui</h1>
+                <h1>Favoritos aqui</h1>
                 {usersFavoritesArray.length > 0 ? usersFavoritesArray.map((item) => {
                     return (
                         <div className='border m-2 w-25' key={item.id}>

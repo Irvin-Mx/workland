@@ -299,7 +299,7 @@ def get_single_service(service_id):
         servicio = Service.query.filter(Service.id == int(service_id)).first()
 
         if not servicio:
-            return jsonify({"msj":"No existe servicio"}), 400
+            return jsonify({"msj":"No existe servicio","result":[]}), 200
 
 
         usuario = User.query.filter(User.id == int(servicio.user_id)).first()
@@ -316,7 +316,8 @@ def get_single_service(service_id):
             "title": servicio.serialize()["title"],
             "user": {
                 "id":usuario.serialize()["id"],
-                "name":usuario.serialize()["name"]
+                "name":usuario.serialize()["name"],
+                "last_name":usuario.serialize()["last_name"],
             }
         }
         

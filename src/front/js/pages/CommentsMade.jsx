@@ -25,9 +25,9 @@ const CommentsMade = ({deleteButton}) => {
     if (isLoading == false) {
 
         return (<div className='my-2 py-3 rounded-2 bg-white d-flex justify-content-center align-items-center container-fluid flex-column gap-2'>
-            <h4>
+            <h1 className=" w-100">
                 Comentarios.
-            </h4>
+            </h1>
             {
                 data?.length !== 0 ?
                     data?.map(({ author_full_name, id, stars, author_img_url, text }) => <CommentCard key={id} text={text} userName={author_full_name} img_url={author_img_url} stars={stars} deleteButton  id={id} setData={setData}/>)
@@ -40,9 +40,9 @@ const CommentsMade = ({deleteButton}) => {
     } else {
         return (
             <div className='my-2 py-3 rounded-2 bg-white d-flex justify-content-center align-items-center container-fluid flex-column gap-2'>
-                <h4>
+                <h1 className=" w-100">
                     Comentarios.
-                </h4>
+                </h1>
                 <h5>No hay comentarios</h5>
 
             </div>
