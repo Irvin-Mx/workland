@@ -186,7 +186,9 @@ def log_in():
 @api.route("/search",methods=["POST"])
 def search_results():
     try:
+        search_results_list = []
         busqueda=request.get_json()
+        
         
         if not busqueda:
             return jsonify({
@@ -194,9 +196,21 @@ def search_results():
             "result":[]
         }),400
 
-        resultados = User.query.filter(
+        resultados_service_description = User.query.filter(
             User.service_description.ilike(f'%{busqueda}%')
         ).all()
+
+
+        resultados_service_title = User.query.filter(
+            User.service_title.ilike(f'%{busqueda}%')
+        ).all()
+
+
+        resultados_profile_description = User.query.filter(
+            User.profile_description.ilike(f'%{busqueda}%')
+        ).all()
+
+        combined_results_lists = list(set(resultados_service_description + resultados_service_title + resultados_profile_description))
 
         data = [{
             'id': resultado.id,
@@ -204,7 +218,9 @@ def search_results():
             "user_name":f'{resultado.name} {resultado.last_name}',
             "img_url":resultado.img_url
             # Agrega otros campos que necesites mostrar
-        } for resultado in resultados]
+        } for resultado in combined_results_lists]
+
+        #print(data)
 
         return jsonify({
             'msj': True,

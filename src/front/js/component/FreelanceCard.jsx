@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const FreelanceCard = ({user_name,title,id}) => {
     const navigate=useNavigate()
     return (
-        <div className="card" style={{width: "18rem"}}>
+        <div className="card m-2" style={{width: "18rem",heigth: "15rem"}}>
             <img src="https://dummyimage.com/350x200/000/fff.jpg" className="card-img-top" alt="alt image"/>
                 <div className="card-body">
                     <h5>{user_name}</h5>
