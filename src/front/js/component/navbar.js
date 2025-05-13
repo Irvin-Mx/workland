@@ -1,6 +1,7 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 //styles
 import styles from "./navbar.module.css"
@@ -8,6 +9,19 @@ import styles from "./navbar.module.css"
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context)
+	 const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+
+			 setLoading(false)
+
+
+		}, 1000);
+		return () => clearTimeout(timer);
+	}, [])
+
+
 
 	const handleSidebar = () => {
 		actions.toggleSideBar()
@@ -19,6 +33,9 @@ export const Navbar = () => {
 		actions.logOut()
 		navigate("/")
 	}
+
+	
+    if (loading) return <LoadingSpinner />;
 
 	return (
 		<nav className={`${styles.navbar__container} navbar navbar-expand-lg bg-body-tertiary`}>
@@ -77,7 +94,7 @@ export const Navbar = () => {
 									</div>
 									<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
-											<Link className="dropdown-item" to="/config">
+											<Link className="dropdown-item" to={`/${store.userProfile.rol}/config`}>
 												Mi perfil
 											</Link>
 										</li>

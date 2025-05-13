@@ -144,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     const data = await response.json();
-                    console.log("Perfil recibido en getMyProfile:", data);
+                    // console.log("Perfil recibido en getMyProfile:", data);
 
                     if (response.ok) {
 
@@ -174,6 +174,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             logOut: () => {
                 localStorage.removeItem("user_token");
+                localStorage.removeItem("userProfile");
+   
                 setStore({ ...getStore(), userProfile: {} })
                 toastExito("Cerraste exitosamente la sesion.")
 

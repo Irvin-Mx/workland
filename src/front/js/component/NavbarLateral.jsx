@@ -43,7 +43,7 @@ const freelanceLinks = [
 ]
 const adminLink = [
     {
-        name: "Reports",
+        name: "Reportes",
         path: "/admin",
         icon: <i className="fa-solid fa-business-time m-2"></i>
     }
@@ -82,26 +82,26 @@ const NavbarLateral = ({ user }) => {
 
     if (user === "freelance") {
         genLink = "free"
-    } else if (user == "admin") {
+    } else if (user == "user") {
         genLink = "user"
     }
     else {
-        genLink = user
+        genLink = "admin"
     }
 
     const generalLinks = [
+        // {
+        //     name: "Inicio",
+        //     path: "/",
+        //     icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+        // },
         {
-            name: "Home",
-            path: "/",
-            icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
-        },
-        {
-            name: "Dashboard",
+            name: "Perfiles",
             path: `/${genLink}/dashboard`,
             icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
         },
         {
-            name: "Profile",
+            name: "Perfil",
             path: `/${genLink}/config`,
             icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
         },

@@ -3,30 +3,30 @@ import styles from "./Tabla.module.css"
 // import ModalCommponent from "../component/ModalCommponent.jsx";
 import ModalCommponent from "../component/ModalCommponent.jsx"
 
-const ButtonComment = ({ valor, setModalOpen, id,setModalInfoId,setModalOrderId,orderId }) => {
+const ButtonComment = ({ valor, setModalOpen, id, setModalInfoId, setModalOrderId, orderId }) => {
     if (!valor) {
         return (
-            <button className='btn btn-success' onClick={()=>{
+            <p style={{textDecoration: 'underline' ,cursor:"pointer"}} onClick={() => {
                 setModalOpen(true)
                 setModalInfoId(id)
                 setModalOrderId(orderId)
-                
-                }}>
+
+            }}>
                 Comenta tu servicio
-            </button>
+            </p>
         )
 
     }
     return (
-        <button className='btn btn-danger'>
-            Ya calificaste tu servicio
-        </button>
+        <p className=''>
+            Calificado
+        </p>
     )
 }
 
 
 
-const Tabla = ({ lista,setOrdenes }) => {
+const Tabla = ({ lista, setOrdenes }) => {
     const [modalOpen, setModalOpen] = useState(false)
     const [modalInfoId, setModalInfoId] = useState(0)
     const [modalOrderId, setModalOrderId] = useState(0)
@@ -49,6 +49,17 @@ const Tabla = ({ lista,setOrdenes }) => {
                             </th>
                         );
                     }
+                    if (column === "price") {
+                        return (
+                            <th
+                                scope="row"
+                                className={`${styles.tabla_td}`}
+                                key={valor}
+                            >
+                                {`$ ${valor}`}
+                            </th>
+                        );
+                    }
                     if (column === "comment_id") {
                         return (
                             <td
@@ -56,7 +67,7 @@ const Tabla = ({ lista,setOrdenes }) => {
                                 className={`${styles.tabla_td}`}
                                 key={valor}
                             >
-                                <ButtonComment valor={valor} setModalOpen={setModalOpen} id={data["freelance_id"]} orderId={data["id"]} setModalOrderId={setModalOrderId}  setModalInfoId={setModalInfoId} />
+                                <ButtonComment valor={valor} setModalOpen={setModalOpen} id={data["freelance_id"]} orderId={data["id"]} setModalOrderId={setModalOrderId} setModalInfoId={setModalInfoId} />
                             </td>
                         );
                     }
@@ -80,7 +91,7 @@ const Tabla = ({ lista,setOrdenes }) => {
                 <thead style={{ backgroundColor: "#1E266D", color: "white" }} >
                     <tr >
                         <td scope="col" className={`${styles.tabla_td} `} >
-                            id
+                            Id
                         </td>
                         <td scope="col" className={`${styles.tabla_td} `} >
                             Nombre de freelance
@@ -89,17 +100,17 @@ const Tabla = ({ lista,setOrdenes }) => {
                             Nombre de consumidor
                         </td>
                         <td scope="col" className={`${styles.tabla_td} `} >
-                            precio
+                            Precio
                         </td>
 
                         <td scope="col" className={`${styles.tabla_td} `} >
-                            correo
+                            Correo Electronico
                         </td>
                         <td scope="col" className={`${styles.tabla_td} `} >
-                            telefono
+                            Teléfono
                         </td>
                         <td scope="col" className={`${styles.tabla_td} `} >
-                            comentario
+                            Comentario
                         </td>
                     </tr>
                 </thead>
