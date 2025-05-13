@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
-import NavbarLateral from "../component/NavbarLateral.jsx";
+
 import toast from "react-hot-toast";
 import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 
 const FreelanceDescription = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-    const [user, setUser] = useState(store.userProfile);
-    const [photoFile, setPhotoFile] = useState(null);
 
+    const [photoFile, setPhotoFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
 
     const [formData, setFormData] = useState({
         service_title: '',
@@ -39,37 +39,36 @@ const FreelanceDescription = () => {
         const file = e.target.files[0];
         if (file) {
             setPhotoFile(file);
-
+            setPreviewUrl(URL.createObjectURL(file));
         }
 
     };
 
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    // Crear una nueva instancia de FormData
-    const data = new FormData();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-   
-    data.append("service_title", formData.service_title);
-    data.append("service_description", formData.service_description);
-    data.append("profile_description", formData.profile_description);
+        const data = new FormData();
 
 
-    if (photoFile) {
-        data.append("photo_cover", photoFile);
-    }
+        data.append("service_title", formData.service_title);
+        data.append("service_description", formData.service_description);
+        data.append("profile_description", formData.profile_description);
 
-    try {
- 
-        await actions.updateFreelanceProfile(data);
-        toastExito("Perfil actualizado correctamente");
-    } catch (error) {
-        toastFallo("Hubo un problema al actualizar el perfil");
-        console.error("Error al actualizar perfil:", error);
-    }
-};
+
+        if (photoFile) {
+            data.append("photo_cover", photoFile);
+        }
+
+        try {
+
+            await actions.updateFreelanceProfile(data);
+            toastExito("Perfil actualizado correctamente");
+        } catch (error) {
+            toastFallo("Hubo un problema al actualizar el perfil");
+            console.error("Error al actualizar perfil:", error);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -133,7 +132,7 @@ const FreelanceDescription = () => {
                                 <label htmlFor="inputPhoto" className="form-label">Foto de pe portada</label>
                                 <input
                                     id="inputPhoto"
-                                    name="photo"
+                                    name="photo_cover"
                                     type="file"
                                     className="form-control"
                                     accept="image/*"
@@ -141,6 +140,11 @@ const FreelanceDescription = () => {
                                 />
                                 <small className="form-text text-muted">Sube una imagen de portada</small>
                             </div>
+                            {previewUrl && (
+                                <div className="mt-3">
+                                    <img src={previewUrl} alt="Vista previa" className="img-preview" style={{width:'100px', height:'100px',objectFit:'cover'}} />
+                                </div>
+                            )}
                             <button type="submit" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} onClick={handleSubmit} >Guardar</button>
                         </form>
                     </div>

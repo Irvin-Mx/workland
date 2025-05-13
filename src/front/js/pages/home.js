@@ -61,7 +61,7 @@ export const Home = () => {
 					</div>
 					<div className="position-absolute start-0 top-0 h-100 w-100 d-flex flex-column justify-content-center">
 						<h2 className="display-1 fw-bolder text-white mb-5">Workland</h2>
-						<h4 className="text-white mt-4 fw-bold">Trabaja.Contrata.Conecta.</h4>
+						<h4 className="text-white display-5 mt-4 fw-bold">Trabaja.Contrata.Conecta.</h4>
 					</div>
 					<div className="input-group mb-3 mt-2 w-50 position-absolute top-50 start-50 translate-middle">
 						<input
@@ -73,6 +73,7 @@ export const Home = () => {
 							placeholder="Search"
 							aria-label="Recipient's username"
 							aria-describedby="button-addon2"
+							style={{ borderRadius: "5px", height: "50px", backgroundColor: "#f8f9fa", fontSize: "20px"}}
 						/>
 						<button
 							onClick={() => {
@@ -84,11 +85,12 @@ export const Home = () => {
 								store?.userProfile?.rol == "admin" ? navigate(`${store?.userProfile?.rol}/busqueda`) : null
 								!store?.userProfile?.rol ? navigate(`/busqueda`) : null
 							}}
-							className="btn btn-outline-secondary"
+							className="btn "
 							type="button"
 							id="button-addon2"
+							style={{ backgroundColor: "#1e266d", color: "white"  }}
 						>
-							<i className="fa-solid fa-magnifying-glass"></i>
+							<i className="fa-solid fa-magnifying-glass fa-xl"></i>
 						</button>
 					</div>
 
@@ -107,20 +109,35 @@ export const Home = () => {
 				<div className="row align-items-center my-5">
 					<div className="col">
 						<div>
-							<i className="fa-brands fa-searchengin fs-2 mb-3"></i>
-							<h3>Conexión rápida</h3>
+							<img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747171959/indicadores-07_c8ynkt.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '150px' }}
+                                />
+							<h3 className="display-6"><strong>Conexión rápida</strong></h3>
 						</div>
 					</div>
 					<div className="col">
 						<div>
-							<i className="fa-solid fa-list-check fs-2 mb-3"></i>
-							<h3>Gestión integral</h3>
+							<img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747171959/indicadores-06_dsquob.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '150px' }}
+                                />
+							<h3 className="display-6"><strong>Gestión integral</strong></h3>
 						</div>
 					</div>
 					<div className="col">
 						<div>
-							<i className="fa-solid fa-dollar-sign fs-2 mb-3"></i>
-							<h3>Precios justos</h3>
+							<img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747171959/indicadores-05_sgjbiq.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '150px' }}
+                                />
+							<h3 className="display-6"><strong>Precios justos</strong></h3>
 						</div>
 
 					</div>
@@ -137,8 +154,8 @@ export const Home = () => {
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<h5 className="card-title justify-content-start w-100  fs-3"><span><i className="fa-regular fa-clipboard fs-3"></i></span> Publica tu trabajo</h5>
-										<p className="card-text">¡Es gratis y fácil! Obtén muchas ofertas competitivas que se ajusten a tu presupuesto en minutos. Comienza a hacer realidad tus sueños.</p>
+										<h5 className="card-title justify-content-start w-100 display-6 fs-3"><span><i className="fa-regular fa-clipboard fs-3"></i></span> <strong>Publica tu trabajo</strong></h5>
+										<p className="card-text lead">¡Es gratis y fácil! Obtén muchas ofertas competitivas que se ajusten a tu presupuesto en minutos. Comienza a hacer realidad tus sueños.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>
@@ -150,8 +167,8 @@ export const Home = () => {
 							<div className="row g-0 ">
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<h5 className="card-title justify-content-start w-100  fs-3"><span><i className="fa-solid fa-users fs-3"></i> </span> Encuentra freelancers</h5>
-										<p className="card-text">Ningún trabajo es demasiado grande o complejo. Contamos con freelancers para trabajos de cualquier tamaño o presupuesto, en más de 2700 habilidades. Deja que nuestro talento haga realidad tus ideas.</p>
+										<h5 className="card-title justify-content-start w-100 display-6 fs-3"><span><i className="fa-solid fa-users fs-3"></i> </span><strong>Encuentra freelancers</strong></h5>
+										<p className="card-text lead">Ningún trabajo es demasiado grande o complejo. Contamos con freelancers para trabajos de cualquier tamaño o presupuesto, en más de 2700 habilidades. Deja que nuestro talento haga realidad tus ideas.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div> 
@@ -171,8 +188,8 @@ export const Home = () => {
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<h5 className="card-title justify-content-start w-100  fs-3"><span><i className="fa-regular fa-credit-card fs-3"></i></span> Pagos seguros</h5>
-										<p className="card-text">Solo paga por el trabajo cuando estés 100% satisfecho con el resultado. Nuestro sistema de pagos por hitos te protege en cada paso del camino..</p>
+										<h5 className="card-title justify-content-start w-100 display-6 fs-3"><span><i className="fa-regular fa-credit-card fs-3"></i></span><strong>Pagos seguros</strong></h5>
+										<p className="card-text lead">Solo paga por el trabajo cuando estés 100% satisfecho con el resultado. Nuestro sistema de pagos por hitos te protege en cada paso del camino..</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
 								</div>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import NavbarLateral from "../component/NavbarLateral.jsx";
-
+import rigoImageUrl from "../../img/rigo-baby.jpg";
 const FreelanceDashboard = () => {
     const { store, actions } = useContext(Context);
 
@@ -19,44 +19,101 @@ const FreelanceDashboard = () => {
             </div> */}
             <div className=" flex-grow-1 p-4">
 
-                <h1 className="text-start m-5">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
-                <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
+                <h3 className="m-2 display-4">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
+               
 
-                    <h5>
-                        En nuestra plataforma, tú eliges <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces. Nuestro compromiso es ayudarte a construir el trabajo de tus sueños, donde tú tienes el control, y tu talento encuentra las oportunidades que merece.</h5>
-                    <hr className="my-4" />
-                </div>
-                <div><h4 className="mb-3 text-primary">📌 ¿Cómo funciona?</h4>
-                    <p>
-                        Solo aplicamos una comisión por cada trabajo vendido. ¡Sin costos ocultos!
+                <div>
+                    <div class="card mb-3 w-80 border-0">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747168878/emprendedor-01_spuvcr.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '400px' }}
+                                />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title display-5">¿Listo para comenzar?</h5>
+                                    <p class="card-text lead">
+                                       
+                                        ¡Bienvenido a nuestra comunidad de emprendedores! Aquí, tienes la oportunidad de ofrecer tus servicios y conectar con personas que buscan lo que tú ofreces.
+                                        Recuerda que en nuestra plataforma, tú decides <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces.
+                                        <br /> Nuestro compromiso es ayudarte a construir el trabajo de tus sueños, donde tú tienes el control, y tu talento encuentra las oportunidades que merece.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 className="mt-4 display-6">¿Cómo empezar?</h4>
+                    <p class=" lead">
+                        Estás a pocos pasos de conseguir el trabajo de tus sueños. <br/>
+                        Aquí tienes una guía rápida para que puedas empezar a ofrecer tus servicios y conectar con clientes potenciales.
                     </p>
-                    <h5 className="mt-4 text-success">🛠️ Para comenzar, sigue estos 3 pasos:</h5>
-                    <ol className="list-group list-group-numbered my-3">
-                        <li className="list-group-item">
-                            <strong>Completa tu perfil profesional:</strong> Cuéntanos sobre ti, tus habilidades y tu experiencia.
-                        </li>
-                        <li className="list-group-item">
-                            <strong>Sube tus primeros 3 productos:</strong> Crea tus paquetes de servicio:
-                            <ul className="mt-2">
-                                <li><strong>Básico:</strong> Una opción simple y accesible.</li>
-                                <li><strong>Medio:</strong> Un servicio más completo.</li>
-                                <li><strong>Profesional:</strong> Un paquete premium con todo incluido.</li>
-                            </ul>
-                        </li>
-                        <li className="list-group-item">
-                            <strong>Conecta tu cuenta PayPal:</strong> Así podrás recibir tus pagos de manera segura y directa.
-                        </li>
-                    </ol>
 
-                    <p className="mt-4 text-muted">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 col-md-6 col-lg-4 mb-3">
+                                <div className="card border-0">
+                                    <div className="card-body text-center">
+                                        <img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747170250/emprendedor-03_jb8vpi.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '250px' }}
+                                />
+                                        <h3 className="card-title">Completa tu perfil</h3>
+                                        <p className="card-text ">Cuéntanos sobre ti, tus habilidades y tu experiencia.</p>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                                <div className="col-12 col-md-6 col-lg-4 mb-3">
+                                    <div className="card border-0">
+                                        <div className="card-body text-center">
+                                             <img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747170687/emprendedor-02_lv2owo.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '250px' }}
+                                />
+                                            <h3 className="card-title">Sube tus productos</h3>
+                                            <p className="card-text">Crea paquetes para ofrecer tus servicios : <strong>Básico</strong>,<strong>Medio</strong> Y <strong>Profesional</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                         
+                                <div className="col-12 col-md-6 col-lg-4 mb-3">
+                                    <div className="card border-0">
+                                        <div className="card-body text-center">
+                                           <img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747170856/emprendedor-04_jsxdaa.png"
+                                    alt="Trendy Pants and Shoes"
+                                    class="img-fluid rounded-start"
+                                    style={{ width: '250px' }}
+                                />
+                                            <h3 className="card-title">Conecta tu PayPal</h3>
+                                            <p className="card-text">Crea una cuenta de PayPal Y recibe tus pagos de manera segura y directa, pagando una mínima comisión a la plataforma</p>
+                                        </div>
+                                    </div>
+                                </div>
+                           
+
+                        </div>
+
+                    </div>
+                    <p className="lead">
                         Una vez completes estos pasos, estarás listo para comenzar a recibir propuestas y conectar con clientes.
+                        En nuestra plataforma, respaldamos a emprendedores como tú. Por ello, solo aplicamos una comisión baja por cada trabajo vendido, sin tarifas ocultas ni costos mensuales, para que puedas enfocarte en hacer crecer tu negocio.
                     </p>
                 </div>
 
 
 
             </div>
-        </div>
+        </div >
     );
 };
 
