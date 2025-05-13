@@ -6,31 +6,62 @@ import NavbarLateral from "../component/NavbarLateral.jsx";
 const Dashboard = () => {
     const { store, actions } = useContext(Context);
 
-   
+
 
     const user = store.userProfile || {};
     if (!user.name) return <p>Cargando datos del usuario...</p>;
 
     return (
         <div className="d-flex">
-            {/* <div>
 
-                <NavbarLateral />
-            </div> */}
             <div className=" flex-grow-1 p-4">
-
-                <h1 className="text-start m-5">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h1>
-                <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
-
-                    <p>
-                        En nuestra plataforma, tú eliges <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces. Nuestro compromiso es ayudarte a construir el trabajo de tus sueños, donde tú tienes el control, y tu talento encuentra las oportunidades que merece.</p>
-
+                <div className="banner-container" style={{ position: 'relative', backgroundColor: '#1E266D', color: 'white', padding: '60px 0', textAlign: 'center' }}>
+                    <div className="container">
+                        <h1 className="display-4">Buen día {user.name} {user.last_name}</h1>
+                        <p className="lead mb-4">
+                            Conecta con los mejores profesionales que se ajustan a tus necesidades.
+                        </p>
+                    </div>
                 </div>
 
-                
 
+                <div className="col-md-4 mb-4">
+                    <div className="card shadow-sm border-light rounded">
+                        <div className="card-body text-center">
+                            <i className="bi bi-credit-card-fill" style={{ fontSize: '3rem', color: '#00D1B2' }}></i>
+                            <h5 className="mt-3">Realiza pagos seguros</h5>
+                            <p>Realiza tus pagos de manera rápida y sin preocupaciones. ¡Tu seguridad es lo primero!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-4">
+                    <div className="card shadow-sm border-light rounded">
+                        <div className="card-body text-center">
+                            <i className="bi bi-star-fill" style={{ fontSize: '3rem', color: '#FFC107' }}></i>
+                            <h5 className="mt-3">Califica el servicio</h5>
+                            <p>Tu opinión cuenta. Ayuda a la comunidad calificando los servicios que recibes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-light py-5 text-center">
+                <div className="container">
+                    <h2>¿Estás listo para empezar?</h2>
+                    <p>Da el siguiente paso para construir el futuro que deseas. ¡Publica tus servicios o encuentra el talento que necesitas!</p>
+                    <Link to="/freelance" className="btn btn-primary btn-lg">Empieza ahora</Link>
+                </div>
             </div>
+            </div>
+
+            
+
         </div>
+
+
+
+
+
+
     );
 };
 
