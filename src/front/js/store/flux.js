@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         
                         setStore({ ...store, userProfile: data.user_info })
                         toastExito(data.msj)
-                        console.log("Rol del usuario:", store.userProfile?.rol);
+                        
 
                         return data;
                     } else {

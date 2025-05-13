@@ -83,6 +83,11 @@ export const FreelancePerfil = () => {
 
     }, [freelance_id]);
 
+    const handleImageError = (e) => {
+        e.target.onerror = null; 
+        e.target.src = rigoImageUrl;
+    };
+
 
 
 
@@ -196,12 +201,12 @@ export const FreelancePerfil = () => {
                             Imagen de portada
                         </div>
                         <div className="card-body text-center">
-                            {data.img_url ? (
+                            {store.userProfile.cover_img_url? (
                                 <img
-                                    src={data.img_url}
+                                    src={store.userProfile.cover_img_url}
                                     alt="Imagen de portada"
-                                    className="img-fluid rounded"
-                                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
+                                    className="img-fluid"
+                                    style={{height: "200px", objectFit: "cover" }}
                                 />
                             ) : (
                                 <p>No se ha cargado una imagen de portada</p>
