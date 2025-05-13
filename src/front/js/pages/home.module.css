@@ -3,3 +3,12 @@
     font-size: larger;
 
 }
+
+.slider__container{
+    background-color: #e0e0e0;
+    height: 75dvh;
+}
+
+.objectFit{
+    object-fit: cover;
+}
