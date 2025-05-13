@@ -70,7 +70,7 @@ class User(db.Model):
             "rol": self.rol,
             "is_active": self.is_active,
             "balance": self.balance,
-            "services":  self.services,
+            # "services":  self.services,
             "img_url":  self.img_url,
             "cover_img_url" : self.cover_img_url,
             "service_description": self.service_description,

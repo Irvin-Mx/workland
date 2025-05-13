@@ -209,7 +209,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },       
             updateFreelanceProfile: async (formData) => {
-
+            
                 const token = localStorage.getItem("user_token");
 
                 try {
@@ -226,11 +226,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     const data = await response.json();
+                    console.log(data);
 
                     if (response.ok) {
 
                         toastExito("Perfil actualizado correctamente ✅");
-                        setStore({ userProfile: data.result });
+                        setStore({ userProfile:data.result });
                         return data.result;
                     } else {
                         console.error("Error al actualizar perfil freelance:", data);

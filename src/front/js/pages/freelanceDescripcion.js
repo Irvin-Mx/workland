@@ -8,6 +8,10 @@ import { toastExito, toastFallo } from "../component/Toaster/toasterIndex.jsx";
 const FreelanceDescription = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    const [user, setUser] = useState(store.userProfile);
+    const [photoFile, setPhotoFile] = useState(null);
+
+
     const [formData, setFormData] = useState({
         service_title: '',
         service_description: '',
@@ -31,6 +35,42 @@ const FreelanceDescription = () => {
     }, [store.userProfile]);
 
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setPhotoFile(file);
+
+        }
+
+    };
+
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Crear una nueva instancia de FormData
+    const data = new FormData();
+
+   
+    data.append("service_title", formData.service_title);
+    data.append("service_description", formData.service_description);
+    data.append("profile_description", formData.profile_description);
+
+
+    if (photoFile) {
+        data.append("photo_cover", photoFile);
+    }
+
+    try {
+ 
+        await actions.updateFreelanceProfile(data);
+        toastExito("Perfil actualizado correctamente");
+    } catch (error) {
+        toastFallo("Hubo un problema al actualizar el perfil");
+        console.error("Error al actualizar perfil:", error);
+    }
+};
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -38,25 +78,6 @@ const FreelanceDescription = () => {
             [name]: value
         }));
     };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const data = new FormData();
-        data.append("service_title", formData.service_title);
-        data.append("service_description", formData.service_description);
-        data.append("profile_description", formData.profile_description);
-        for (let [key, value] of data.entries()) {
-            console.log(key, value);
-        }
-
-        await actions.updateFreelanceProfile(data);
-        toastExito("Perfil actualizado correctamente");
-
-    };
-
-
-
 
 
 
@@ -107,12 +128,25 @@ const FreelanceDescription = () => {
                                     onChange={handleChange}></textarea>
                                 <label htmlFor="profile_description">Descripción detallada de tu perfil profesional</label>
                             </div>
+
+                            <div className="mb-3">
+                                <label htmlFor="inputPhoto" className="form-label">Foto de pe portada</label>
+                                <input
+                                    id="inputPhoto"
+                                    name="photo"
+                                    type="file"
+                                    className="form-control"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                />
+                                <small className="form-text text-muted">Sube una imagen de portada</small>
+                            </div>
                             <button type="submit" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} onClick={handleSubmit} >Guardar</button>
                         </form>
                     </div>
 
                 </div>
-                 <Link to ="/free/layout">
+                <Link to="/free/layout">
                     <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#1e266d", color: "aliceblue" }} >Siguiente</button>
                 </Link>
                 <Link to="/dashboard">
@@ -124,4 +158,5 @@ const FreelanceDescription = () => {
 };
 
 export default FreelanceDescription;
+
 
