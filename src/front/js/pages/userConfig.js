@@ -55,7 +55,7 @@ const UserConfig = () => {
                     </div>
 
                     <div className="col-md-3 d-flex justify-content-end align-items-start">
-                        <Link to="/form">
+                        <Link to={`/${store.userProfile?.rol=="freelance" ?"free":store.userProfile?.rol}/form`}>
                             <button
                                 type="button"
                                 className="btn btn-link">

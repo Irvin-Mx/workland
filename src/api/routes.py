@@ -201,7 +201,8 @@ def search_results():
         data = [{
             'id': resultado.id,
             'title': resultado.service_description,
-            "user_name":f'{resultado.name} {resultado.last_name}'
+            "user_name":f'{resultado.name} {resultado.last_name}',
+            "img_url":resultado.img_url
             # Agrega otros campos que necesites mostrar
         } for resultado in resultados]
 
@@ -437,11 +438,13 @@ def get_freelance(freelance_id):
         if not user_dict:
             return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
         services = [service.serialize() for service in user_dict.services]
+        full_name=user_dict.name+" "+user_dict.last_name
         freelance_with ={
-            "name": user_dict.name,
+            "name": full_name,
             "service_title": user_dict.service_title,
             "service_description": user_dict.service_description,
             "profile_description": user_dict.profile_description,
+            "img_url": user_dict.img_url,
             "services": services
         }
         return jsonify({

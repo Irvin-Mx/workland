@@ -70,6 +70,7 @@ export const FreelancePerfil = () => {
                             grouped[service.category].push(service);
                         }
                     });
+                    console.log(data.result)
 
                     setData(data.result);
                     setServicesByCategory(grouped);
@@ -96,7 +97,7 @@ export const FreelancePerfil = () => {
                         <div className="row no-gutters g-0 align-items-center">
                             <div className="col-auto p-3">
                                 <img
-                                    src={store.userProfile.img_url || rigoImageUrl}
+                                    src={data?.img_url || rigoImageUrl}
                                     alt={`Imagen de ${data.name || "freelancer"}`}
                                     className="rounded-circle"
                                     style={{ width: "80px", height: "80px", objectFit: "cover" }}

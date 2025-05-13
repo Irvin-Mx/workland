@@ -4,7 +4,7 @@ import { Context } from '../store/appContext.js'
 
 const FreelanceFormulario = () => {
     return (
-        <div>
+        <div className=''>
             
             <FormularioFreelance />
         </div>
