@@ -46,7 +46,7 @@ const FreelanceDashboard = () => {
                         </div>
                     </div>
 
-                    <h4 className="mt-4 display-5">¿Cómo empezar?</h4>
+                    <h4 className="mt-4 display-6">¿Cómo empezar?</h4>
                     <p class=" lead">
                         Estás a pocos pasos de conseguir el trabajo de tus sueños. <br/>
                         Aquí tienes una guía rápida para que puedas empezar a ofrecer tus servicios y conectar con clientes potenciales.
@@ -63,7 +63,7 @@ const FreelanceDashboard = () => {
                                     class="img-fluid rounded-start"
                                     style={{ width: '250px' }}
                                 />
-                                        <h5 className="card-title display-6">Completa tu perfil</h5>
+                                        <h3 className="card-title">Completa tu perfil</h3>
                                         <p className="card-text ">Cuéntanos sobre ti, tus habilidades y tu experiencia.</p>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@ const FreelanceDashboard = () => {
                                     class="img-fluid rounded-start"
                                     style={{ width: '250px' }}
                                 />
-                                            <h5 className="card-title display-6">Sube tus productos</h5>
+                                            <h3 className="card-title">Sube tus productos</h3>
                                             <p className="card-text">Crea paquetes para ofrecer tus servicios : <strong>Básico</strong>,<strong>Medio</strong> Y <strong>Profesional</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@ const FreelanceDashboard = () => {
                                     class="img-fluid rounded-start"
                                     style={{ width: '250px' }}
                                 />
-                                            <h5 className="card-title display-6">Conecta tu PayPal</h5>
+                                            <h3 className="card-title">Conecta tu PayPal</h3>
                                             <p className="card-text">Crea una cuenta de PayPal Y recibe tus pagos de manera segura y directa, pagando una mínima comisión a la plataforma</p>
                                         </div>
                                     </div>

@@ -197,9 +197,7 @@ export const FreelancePerfil = () => {
                 {/* Imagen de portada */}
                 <div className="col-md-4">
                     <div className="card mb-3 shadow-sm">
-                        <div className="card-header" style={{ background: "#1E266D", color: "white" }}>
-                            Imagen de portada
-                        </div>
+                    
                         <div className="card-body text-center">
                             {store.userProfile.cover_img_url? (
                                 <img
