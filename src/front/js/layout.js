@@ -111,7 +111,9 @@ const Layout = () => {
                                 <Route element={<CommentsMade />} path="comentarios" />
                                 <Route element={<UserConfig />} path="config" />
                                 <Route element={<FreelanceFormulario />} path="form" />
-                                <Route element={<ResutadoDeBusqueda />} path="busqueda" />   
+
+                                <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+
                                 <Route element={<Dashboard />} path="dashboard" />
                             </Route>
 

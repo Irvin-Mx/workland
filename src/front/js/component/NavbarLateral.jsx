@@ -10,17 +10,17 @@ const userLinks = [
     {
         name: "Favoritos",
         path: "/user/favoritos",
-        icon: <i className="fa-solid fa-heart m-2"></i>
+        icon: <i className="fa-solid fa-xl fa-heart m-2"></i>
     },
     {
         name: "Ordenes",
         path: "/user/ordenes",
-        icon: <i className="fa-solid fa-sheet-plastic m-2"></i>
+        icon: <i className="fa-solid fa-xl fa-sheet-plastic m-2"></i>
     },
     {
         name: "Comentarios",
         path: "/user/comentarios",
-        icon: <i className="fa-solid fa-comment m-2"></i>
+        icon: <i className="fa-solid fa-xl fa-comment m-2"></i>
     },
 ]
 
@@ -28,24 +28,24 @@ const freelanceLinks = [
     {
         name: "CV",
         path: "/free/cv",
-        icon: <i className="fa-solid fa-business-time m-2"></i>
+        icon: <i className="fa-solid fa-id-badge fa-xl m-2"></i>
     },
     {
         name: "Mis servicios",
         path: "/free/layout",
-        icon: <i className="fa-solid fa-bag-shopping m-2"></i>
+        icon: <i className="fa-solid fa-xl fa-business-time m-2"></i>
     },
     {
-        name: "Vincular a Paypal",
+        name: "Paypal",
         path: "https://www.paypal.com",
-        icon: <i className="fas fa-fw fa-wallet m-2"></i>
+        icon: <i className="fa-brands fa-paypal fa-xl m-2"></i>
     },
 ]
 const adminLink = [
     {
         name: "Reportes",
         path: "/admin",
-        icon: <i className="fa-solid fa-business-time m-2"></i>
+        icon: <i className="fa-solid fa-xl fa-business-time m-2"></i>
     }
     
 ]
@@ -96,19 +96,19 @@ const NavbarLateral = ({ user }) => {
         //     icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
         // },
         {
-            name: "Perfiles",
+            name: "Panel principal",
             path: `/${genLink}/dashboard`,
-            icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+            icon: <i className="fas fa-xl fa-tachometer-alt m-2"></i>
         },
         {
             name: "Perfil",
             path: `/${genLink}/config`,
-            icon: <i className="fas fa-fw fa-tachometer-alt m-2"></i>
+            icon: <i className="fa-solid fa-address-card fa-xl m-2"></i>
         },
         {
             name: "Busqueda",
             path: `/${genLink}/busqueda`,
-            icon: <i className="fa-solid fa-magnifying-glass m-2"></i>
+            icon: <i className="fa-solid fa-xl fa-magnifying-glass m-2"></i>
         },
         // {
         //     name: "Edit",

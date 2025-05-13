@@ -1,0 +1,40 @@
+[33mab98b78[m[33m ([m[1;36mHEAD -> [m[1;32mcambios_visuales[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{0}: checkout: moving from develop to cambios_visuales
+[33mab98b78[m[33m ([m[1;36mHEAD -> [m[1;32mcambios_visuales[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{1}: reset: moving to origin/develop
+[33mab98b78[m[33m ([m[1;36mHEAD -> [m[1;32mcambios_visuales[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{2}: checkout: moving from cambios_visuales to develop
+[33mab98b78[m[33m ([m[1;36mHEAD -> [m[1;32mcambios_visuales[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{3}: checkout: moving from develop to cambios_visuales
+[33mab98b78[m[33m ([m[1;36mHEAD -> [m[1;32mcambios_visuales[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{4}: pull: Fast-forward
+[33m6295b8f[m HEAD@{5}: checkout: moving from nuevos_cambios to develop
+[33m26d773f[m[33m ([m[1;31morigin/nuevos_cambios[m[33m, [m[1;32mnuevos_cambios[m[33m)[m HEAD@{6}: commit: perfil con foto
+[33m6295b8f[m HEAD@{7}: checkout: moving from develop to nuevos_cambios
+[33m6295b8f[m HEAD@{8}: checkout: moving from detalle_navegacion to develop
+[33maeb4e00[m HEAD@{9}: commit: arreglos
+[33m6295b8f[m HEAD@{10}: checkout: moving from develop to detalle_navegacion
+[33m6295b8f[m HEAD@{11}: reset: moving to HEAD
+[33m6295b8f[m HEAD@{12}: checkout: moving from detalle_navegacion to develop
+[33m6295b8f[m HEAD@{13}: checkout: moving from develop to detalle_navegacion
+[33m6295b8f[m HEAD@{14}: pull: Fast-forward
+[33m155b009[m HEAD@{15}: checkout: moving from imagen_agregada to develop
+[33m2a094bf[m[33m ([m[1;31morigin/imagen_agregada[m[33m, [m[1;32mimagen_agregada[m[33m)[m HEAD@{16}: commit: ya sube imagenes
+[33m155b009[m HEAD@{17}: checkout: moving from develop to imagen_agregada
+[33m155b009[m HEAD@{18}: pull: Fast-forward
+[33mded8d52[m HEAD@{19}: checkout: moving from correciones_freelance to develop
+[33mded8d52[m HEAD@{20}: checkout: moving from develop to correciones_freelance
+[33mded8d52[m HEAD@{21}: pull: Fast-forward
+[33m7efde04[m HEAD@{22}: pull: Fast-forward
+[33m76328af[m HEAD@{23}: checkout: moving from autorizaciones_por_paginas to develop
+[33md3099c8[m[33m ([m[1;31morigin/autorizaciones_por_paginas[m[33m, [m[1;32mautorizaciones_por_paginas[m[33m)[m HEAD@{24}: checkout: moving from develop to autorizaciones_por_paginas
+[33m76328af[m HEAD@{25}: checkout: moving from develop to develop
+[33m76328af[m HEAD@{26}: pull: Fast-forward
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{27}: checkout: moving from reparaciones to develop
+[33m6e6366b[m[33m ([m[1;31morigin/reparaciones[m[33m)[m HEAD@{28}: commit: reparaciones perfil
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{29}: checkout: moving from develop to reparaciones
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{30}: checkout: moving from fixes to develop
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{31}: checkout: moving from develop to fixes
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{32}: checkout: moving from fixes to develop
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{33}: checkout: moving from develop to fixes
+[33ma22a572[m[33m ([m[1;31morigin/fixes[m[33m)[m HEAD@{34}: commit: perfil corregido freelance
+[33mf3e235a[m HEAD@{35}: pull: Fast-forward
+[33mc3c93cb[m HEAD@{36}: checkout: moving from autorizaciones_por_paginas to develop
+[33md3099c8[m[33m ([m[1;31morigin/autorizaciones_por_paginas[m[33m, [m[1;32mautorizaciones_por_paginas[m[33m)[m HEAD@{37}: commit: falta que salga la portada
+[33mef2d299[m HEAD@{38}: commit: vista perfil falta mostrar imagen
+[33m704d329[m HEAD@{39}: commit: freelance completo

@@ -12,7 +12,7 @@ export const FreelanceLayout = () => {
     });
 
 
-    
+
     const [activeCategory, setActiveCategory] = useState("basic");
     const [savedPackages, setSavedPackages] = useState([]);
     const [packageIds, setPackagesIds] = useState({});
@@ -23,7 +23,7 @@ export const FreelanceLayout = () => {
         const saved = localStorage.getItem("savePackages");
         const data = localStorage.getItem("formData");
         const ids = localStorage.getItem("packageIds");
-      
+
 
         if (saved) setSavedPackages(JSON.parse(saved));
         if (data) setFormData(JSON.parse(data));
@@ -54,7 +54,7 @@ export const FreelanceLayout = () => {
 
     };
 
-    
+
 
     const handleNextCategory = () => {
         const currentIndex = categories.indexOf(activeCategory);
@@ -74,7 +74,7 @@ export const FreelanceLayout = () => {
         });
     };
 
-const handleSubmitAll = async () => {
+    const handleSubmitAll = async () => {
         for (let cat of categories) {
             const data = formData[cat];
             if (!data.title || !data.description || !data.price || !data.time) {
@@ -88,7 +88,7 @@ const handleSubmitAll = async () => {
             fd.append("price", parseInt(data.price));
             fd.append("time", data.time);
             fd.append("category", cat);
-    
+
 
 
             try {
@@ -124,18 +124,20 @@ const handleSubmitAll = async () => {
                 <span className="badge me-2" style={{ background: "#FF6B6B" }}>2</span>
                 Agrega tus servicios
             </h5>
-            
-            <div className="progress mb-3" style={{ height: "20px" }}>
-                <div
-                    className="progress-bar"
-                    role="progressbar"
-                    style={{
-                        width: `${((categories.indexOf(activeCategory) + 1) / 3) * 100}%`,
-                        backgroundColor: allSaved ? "green" : "#1E266D"
-                    }}
-                >
-                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}
-                </div>
+
+             <div className="d-flex justify-content-around mb-4">
+                {categories.map((cat, i) => (
+                    <div
+                        key={cat}
+                        className={`text-center ${cat === activeCategory ? "fw-bold text-primary" : "text-muted"}`}
+                    >
+                        <div className={`rounded-circle mx-auto mb-1 ${cat === activeCategory ? "bg-primary" : "bg-secondary"}`}
+                            style={{ width: 30, height: 30, lineHeight: "30px", color: "white" }}>
+                            {i + 1}
+                        </div>
+                        <div className="text-capitalize">{cat}</div>
+                    </div>
+                ))}
             </div>
             <div className="row">
                 <div className="col-md-8 mt-4">
@@ -209,7 +211,7 @@ const handleSubmitAll = async () => {
                             <div className="col-6 d-flex aling-items-strech">
                                 <div className="card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
                                     <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
-                                        Tiempo de entrega estimado
+                                        Tiempo estimado
                                     </div>
                                     <div className="card-body">
                                         <label htmlFor="price">Tiempo estimado</label>
@@ -235,20 +237,9 @@ const handleSubmitAll = async () => {
                                 onClick={handleNextCategory}
                                 style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
                             >
+                                <i className="bi bi-chevron-double-right me-1"></i>
                                 Siguiente
                             </button>
-
-                            <Link to="/free/cv">
-                                <button
-                                    type="button"
-                                    className="btn"
-
-                                    style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
-                                >
-                                    Atrás
-                                </button>
-                            </Link>
-
                             <button
                                 type="button"
                                 className="btn"
@@ -257,6 +248,7 @@ const handleSubmitAll = async () => {
                             >
                                 Guardar
                             </button>
+                           
                         </div>
                     </div>
                 </div>
@@ -272,7 +264,7 @@ const handleSubmitAll = async () => {
                                 <p>{formData[category].time || "Escribe un tiempo aproximado"}</p>
                                 <p>{formData[category].description || "Descripción no definida"}</p>
                                 {savedPackages.includes(category) && (
-                                    <span className="badge bg-success">Guardado</span>
+                                    <span className="badge bg-success"> <i className="bi bi-check2-circle me-1"></i>Guardado</span>
                                 )}
                             </div>
                         ))}
