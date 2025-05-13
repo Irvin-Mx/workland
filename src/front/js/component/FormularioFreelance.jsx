@@ -8,7 +8,7 @@ const FormularioFreelance = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const [user, setUser]= useState(store.userProfile);
-     const [photoFile, setPhotoFile] = useState(null);
+    const [photoFile, setPhotoFile] = useState(null);
     const [photoPreview, setPhotoPreview] = useState(null);
    
     if (!user) return <p>Cargando datos del usuario...</p>;

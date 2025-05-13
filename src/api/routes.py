@@ -459,6 +459,7 @@ def get_freelance(freelance_id):
 def update_freelance(): 
     try:
         form_data = request.form
+        print(form_data.get("name"))
         photo_profile= request.files.get('photo_profile')
         photo_cover = request.files.get('photo_cover')
 
@@ -474,10 +475,7 @@ def update_freelance():
             current_user.img_url = photo_uploader(photo_profile)
         if photo_cover:
             current_user.cover_img_url = photo_uploader(photo_cover)
-            print("request.files:", request.files)
-            print("photo_cover:", photo_cover)
-            print("photo_profile:", photo_profile)
-
+           
         current_user.name =form_data.get("name", current_user.name)
         current_user.last_name =form_data.get("last_name", current_user.last_name)
         current_user.email =form_data.get("email", current_user.email)

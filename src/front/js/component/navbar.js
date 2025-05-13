@@ -94,6 +94,7 @@ export const Navbar = () => {
 									</div>
 									<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
+
 											<Link className="dropdown-item" to={`/${store.userProfile.rol}/config`}>
 												Mi perfil
 											</Link>
