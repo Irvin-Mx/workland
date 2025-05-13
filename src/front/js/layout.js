@@ -77,7 +77,7 @@ const Layout = () => {
                             <Route element={<Registro />} path="/registro" />
                             <Route element={<Login />} path="/iniciar-sesion" />
                             <Route element={<FreelancePerfil />} path="/freelancePerfil/:freelance_id" />
-                            {/* <Route element={<ResutadoDeBusqueda />} path="/busqueda" /> */}
+                            <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
 
                             <Route path="/free" element={<PrivateRoute allowedRoles={["freelance"]}><FreelanceTemplate /></PrivateRoute>}>
                                 <Route element={<Dashboard />} path="dashboard" />
