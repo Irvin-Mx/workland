@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import LoadingSpinner from "./LoadingSpinner.jsx";
 import { toastFallo } from "./Toaster/toasterIndex.jsx";
 
+
 const getUserStorage = ()=>{
     const userProfile = JSON.parse(localStorage.getItem('userProfile'))
     return userProfile.rol;
@@ -11,16 +12,15 @@ const getUserStorage = ()=>{
 
 const PrivateRoute = ({ children, allowedRoles }) => {
     const { store } = useContext(Context);
-    const userRole = store.userProfile?.rol || getUserStorage();
+    const userRole = store.userProfile.rol || getUserStorage();
     const [loading, setLoading] = useState(true);
     
     
-
     useEffect(() => {
       const timer = setTimeout(() => {
            
             setLoading(false);
-        }, 500);
+        },1000);
         return () => clearTimeout(timer);
     }, []);
 

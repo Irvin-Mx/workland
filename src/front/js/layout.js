@@ -90,15 +90,25 @@ const Layout = () => {
                                 <Route element={<FreelanceDescrption />} path="cv" />
                                 <Route element={<FreelanceLayout />} path="layout" />
                                 <Route element={<UserConfig />} path="config" />
+
+                                <Route element={<FreelanceFormulario />} path="form" />
+                                <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+
                             
-                             <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+                   
+
                             </Route>
 
                             <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminPage /></PrivateRoute>}>
                                 <Route element={<AllReports />} path="" />
                                 <Route element={<UserConfig />} path="config" />
+
+                                <Route element={<FreelanceFormulario />} path="form" />
+                                <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+                                <Route element={<Dashboard />} path="dashboard" />
+
                            
-                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+                 
                             </Route>
 
                             <Route path="/user" element={<PrivateRoute allowedRoles={["user"]}><UserEdit /></PrivateRoute>}>
@@ -108,8 +118,13 @@ const Layout = () => {
                                 <Route element={<Favorites />} path="favoritos" />
                                 <Route element={<CommentsMade />} path="comentarios" />
                                 <Route element={<UserConfig />} path="config" />
+
+                                <Route element={<FreelanceFormulario />} path="form" />
+                                <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+
                           
-                             <Route element={<ResutadoDeBusqueda />} path="busqueda" />
+              
+>
                             </Route>
 
 
