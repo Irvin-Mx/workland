@@ -71,7 +71,7 @@ export const Home = () => {
 							value={terminoBusqueda}
 							type="text"
 							className="form-control"
-							placeholder="Search"
+							placeholder="Barra de búsqueda"
 							aria-label="Recipient's username"
 							aria-describedby="button-addon2"
 							style={{ borderRadius: "5px", height: "50px", backgroundColor: "#f8f9fa", fontSize: "20px"}}
@@ -155,8 +155,11 @@ export const Home = () => {
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<i className="fa-regular fa-clipboard fa-6x"></i>
-										<h5 className="card-title justify-content-start w-100 display-6"><strong>Publica tu trabajo</strong></h5>
+
+										<i className="fa-regular fa-clipboard fa-7x mb-2"></i>
+										<h5 className="card-title justify-content-start w-100 display-6 "> <strong>Publica tu trabajo</strong></h5>
+
+
 										<p className="card-text lead">¡Es gratis y fácil! Obtén muchas ofertas competitivas que se ajusten a tu presupuesto en minutos. Comienza a hacer realidad tus sueños.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
@@ -169,8 +172,11 @@ export const Home = () => {
 							<div className="row g-0 ">
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<i className="fa-solid fa-users fa-6x"></i>
-										<h5 className="card-title justify-content-start w-100 display-6"><strong>Encuentra freelancers</strong></h5>
+
+										<i className="fa-solid fa-users fa-7x mb-2"></i>
+										<h5 className="card-title justify-content-start w-100 display-6"> <strong>Encuentra freelancers</strong></h5>
+
+
 										<p className="card-text lead">Ningún trabajo es demasiado grande o complejo. Contamos con freelancers para trabajos de cualquier tamaño o presupuesto, en más de 2700 habilidades. Deja que nuestro talento haga realidad tus ideas.</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
 									</div>
@@ -191,7 +197,10 @@ export const Home = () => {
 								</div>
 								<div className="col-md-7 d-flex align-items-center ">
 									<div className="card-body d-flex flex-column p-4">
-										<i className="fa-regular fa-credit-card fa-6x"></i>
+
+										<i className="fa-regular fa-credit-card fa-7x mb-2"></i>
+
+
 										<h5 className="card-title justify-content-start w-100 display-6"><strong>Pagos seguros</strong></h5>
 										<p className="card-text lead">Solo paga por el trabajo cuando estés 100% satisfecho con el resultado. Nuestro sistema de pagos por hitos te protege en cada paso del camino..</p>
 										{/* <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p> */}
