@@ -20,7 +20,7 @@ import Registro from "./pages/registro";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.js";
 import UserConfig from "./pages/userConfig.js";
-import Sidebar from "./component/Sidebar.jsx";
+
 import FreelancePerfil from "./pages/freelancePerfil.js";
 
 // Vistas user
@@ -38,16 +38,12 @@ import FreelanceDescrption from "./pages/freelanceDescripcion.js";
 import FreelanceFormulario from "./pages/freelanceFormulario.js";
 import FreelanceLayout from "./pages/freelanceLayout.js";
 import FreelanceOrders from "./pages/FreelanceOrders.jsx";
+import FreelancePerfilVistaPrevia from "./pages/FreelacePerrfilVistaPrevia.jsx";
 
 import FreelanceDashboard from "./pages/freelanceDashboard.js";
 
 import AdminPage from "./pages/AdminPage.jsx";
 import AllReports from "./pages/AllReports.jsx";
-
-
-
-
-
 
 
 const initialOptions = {
@@ -97,6 +93,7 @@ const Layout = () => {
                                 <Route element={<FreelanceFormulario />} path="form" />
                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
                                 <Route element={<FreelanceOrders />} path="ordenes" />
+                                <Route element={< FreelancePerfilVistaPrevia  />} path="vista-previa" />
                             </Route>
 
                             <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminPage /></PrivateRoute>}>
@@ -115,10 +112,8 @@ const Layout = () => {
                                 <Route element={<CommentsMade />} path="comentarios" />
                                 <Route element={<UserConfig />} path="config" />
                                 <Route element={<FreelanceFormulario />} path="form" />
-
                                 <Route element={<ResutadoDeBusqueda />} path="busqueda" />
-
-                                <Route element={<Dashboard />} path="dashboard" />
+                                {/* <Route element={<Dashboard />} path="dashboard" /> */}
                             </Route>
 
 

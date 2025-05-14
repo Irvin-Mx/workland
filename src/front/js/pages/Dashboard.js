@@ -79,6 +79,7 @@ const Dashboard = () => {
 
                     </div>
 
+
                 </div>
                 <div className="container-fluid my-0 p-0">
                     <div className="jumbotron w-100" style={{ background: "aliceblue", margin: 0, padding: "2rem" }}>
@@ -99,6 +100,7 @@ const Dashboard = () => {
                                     <Link to="/user/busqueda" className="btn btn-lg" style={{ background: "#00D1B2", color: "aliceblue" }}>Empieza ahora</Link>
                                 </p>
                             </div>
+
 
                         </div>
 
