@@ -24,7 +24,7 @@ const CommentsMade = ({deleteButton}) => {
 
     if (isLoading == false) {
 
-        return (<div className='my-2 py-3 rounded-2 bg-white d-flex justify-content-center align-items-center container-fluid flex-column gap-2'>
+        return (<div className='w-100 bg-white d-flex justify-content-start align-items-center  flex-column gap-2'>
             <h1 className=" w-100">
                 Comentarios.
             </h1>
@@ -39,7 +39,7 @@ const CommentsMade = ({deleteButton}) => {
 
     } else {
         return (
-            <div className='my-2 py-3 rounded-2 bg-white d-flex justify-content-center align-items-center container-fluid flex-column gap-2'>
+            <div className='w-100 bg-white d-flex justify-content-start align-items-center  flex-column gap-2'>
                 <h1 className=" w-100">
                     Comentarios.
                 </h1>

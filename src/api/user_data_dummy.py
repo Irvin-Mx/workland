@@ -8,8 +8,8 @@ usuarios = [
                 "phone": 5550102030,
                 "rol": "user",
                 "address": "Calle Principal 123, Ciudad",
-                "img_url":"https://res.cloudinary.com/dph121s7p/image/upload/v1747018192/54_zyka6l.png",
-                "cover_img_url" : "https://plus.unsplash.com/premium_photo-1661596876885-88e99553e082?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D"
+                "cover_img_url" : "https://plus.unsplash.com/premium_photo-1661596876885-88e99553e082?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
+                "img_url":"https://res.cloudinary.com/dph121s7p/image/upload/v1747177483/42_eh1wjn.jpg"
             },
                   {
                 "name": "Ana",
@@ -20,8 +20,8 @@ usuarios = [
                 "rol": "admin",
                 "address": "Calle Sur 789, Ciudad",
                 "profile_description": "",
-                "img_url":"https://res.cloudinary.com/dph121s7p/image/upload/v1746635310/95_bgksfc.png",
-                "cover_img_url" : "https://images.unsplash.com/photo-1601129490376-e24f32ed8024?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlZWxhbmNlcnN8ZW58MHwwfDB8fHww"
+                "cover_img_url" : "https://images.unsplash.com/photo-1601129490376-e24f32ed8024?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlZWxhbmNlcnN8ZW58MHwwfDB8fHww",
+                "img_url":"https://res.cloudinary.com/dph121s7p/image/upload/v1747177699/1_lmi1rn.jpg"
             },
             {
                 "name": "Carlos",
@@ -35,7 +35,7 @@ usuarios = [
                 "service_description": "profile service desc 1",
                 "address": "Avenida Norte 456, Ciudad",
                 "cover_img_url" : "https://images.unsplash.com/photo-1613909207039-6b173b755cc1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZWxhbmNlcnN8ZW58MHx8MHx8fDA%3D",
-                "img_url":"https://res.cloudinary.com/dph121s7p/image/upload/v1746643466/xyzulioy1kpqwoxlxo4y.png",
+                "img_url":"https://res.cloudinary.com/dph121s7p/image/upload/v1747177786/1_1_vbmqlo.jpg",
                 "services":[
                     {
                         "title":"test title",
@@ -72,8 +72,8 @@ usuarios = [
         "profile_description": "Experto desarrollador web con más de cinco años de experiencia en diseño responsivo y aplicaciones modernas",
         "service_description": "Desarrollo web profesional con tecnologías modernas",
         "address": "Calle 42 #87, Ciudad",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/19_jv8hg4.png",
         "cover_img_url" : "https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJlZWxhbmNlcnN8ZW58MHwwfDB8fHww",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747177848/2_tzud1m.jpg",
         "services": [
             {
                 "title": "Desarrollo Frontend",
@@ -110,7 +110,7 @@ usuarios = [
         "service_description": "Fotografía profesional con visión artística",
         "address": "Calle 91 #34, Ciudad",
         "cover_img_url" : "https://images.unsplash.com/photo-1610473068872-908afb1a7317?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJlZWxhbmNlcnN8ZW58MHwwfDB8fHww",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018336/82_lapoos.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747177905/3_cvhvd8.jpg",
         "services": [
             {
                 "title": "Sesión Fotográfica Básica",
@@ -147,7 +147,7 @@ usuarios = [
         "service_description": "Diseño gráfico profesional con enfoque en marca",
         "address": "Calle 123 #45, Ciudad",
         "cover_img_url" : "https://images.unsplash.com/photo-1652553234544-f17f2e26acea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/96_qzrglv.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747177964/4_fyg8ec.jpg",
         "services": [
             {
                 "title": "Diseño de Logo",
@@ -184,7 +184,7 @@ usuarios = [
         "service_description": "Producción de video profesional",
         "address": "Calle 156 #23, Ciudad",
         "cover_img_url" : "https://images.unsplash.com/photo-1601585612823-0d8787c1e019?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/14_pwonnv.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178008/4_1_tgjftj.jpg",
         "services": [
             {
                 "title": "Video Corporativo",
@@ -221,7 +221,7 @@ usuarios = [
         "service_description": "Contenido escrito profesional",
         "address": "Calle 189 #67, Ciudad",
         "cover_img_url" : "https://images.unsplash.com/photo-1652262868700-9f18ce78e6a8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTJ8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/59_llrsum.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178106/7_aizajq.jpg",
         "services": [
             {
                 "title": "Artículo Básico",
@@ -258,7 +258,7 @@ usuarios = [
         "service_description": "Optimización SEO profesional",
         "address": "Calle 234 #89, Ciudad",
         "cover_img_url" : "https://images.unsplash.com/photo-1616499535171-a3ca97f87a7d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1746635310/11_p6emwl.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178148/7_1_jmmftz.jpg",
         "services": [
             {
                 "title": "Análisis Básico",
@@ -295,7 +295,7 @@ usuarios = [
         "service_description": "Ilustración digital profesional",
         "address": "Calle 278 #34, Ciudad",
         "cover_img_url" : "https://images.unsplash.com/photo-1568056962708-cef41c5cbb8a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjN8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1746635310/83_dnafv5.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178200/56_uhvmuq.jpg",
         "services": [
             {
                 "title": "Ilustración Simple",
@@ -332,7 +332,7 @@ usuarios = [
         "service_description": "Professional web development with current technologies",
         "address": "Street 123 #45, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1616499452581-cc7f8e3dd3c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fGZyZWVsYW5jZXJzfGVufDB8MHwwfHx8MA%3D%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/19_jv8hg4.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178250/77_mnmzer.jpg",
         "services": [
             {
                 "title": "Frontend Development",
@@ -369,7 +369,7 @@ usuarios = [
         "service_description": "Professional photography with creative vision",
         "address": "Street 156 #23, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1699120490892-b90ab3629d4d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU0fHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/59_llrsum.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178303/66_yqujft.jpg",
         "services": [
             {
                 "title": "Basic Photo Session",
@@ -406,7 +406,7 @@ usuarios = [
         "service_description": "Professional digital marketing services",
         "address": "Street 189 #67, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1740182855808-6ea59e86eba6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ2fHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1746643466/xyzulioy1kpqwoxlxo4y.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178360/88_zwpdzf.jpg",
         "services": [
             {
                 "title": "Social Media Setup",
@@ -442,8 +442,8 @@ usuarios = [
         "profile_description": "UI/UX designer specializing in user experience and interface design",
         "service_description": "Professional UI/UX design services",
         "address": "Street 234 #89, City",
-        "cover_img_url" : "https://images.unsplash.com/photo-1602524816765-67313fa3ef54?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTUwfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1746635310/95_bgksfc.png",
+        "cover_img_url" : "https://images.unsplash.com/photo-1602524816765-67313fa3ef54?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTUwfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",  
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178360/88_zwpdzf.jpg",
         "services": [
             {
                 "title": "Basic UI Design",
@@ -480,7 +480,7 @@ usuarios = [
         "service_description": "Professional mobile app development",
         "address": "Street 278 #34, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1645886702268-a28bf146bc35?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTUxfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1746553350/ie7lza34ny6wd6dsydcg.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178488/63_jke1ft.jpg",
         "services": [
             {
                 "title": "Basic App",
@@ -517,7 +517,7 @@ usuarios = [
         "service_description": "Professional translation services",
         "address": "Street 123 #45, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1606579541129-4ca86a4eed1c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQwfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/19_jv8hg4.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178525/33_qmr4di.jpg",
         "services": [
             {
                 "title": "Basic Translation",
@@ -554,7 +554,7 @@ usuarios = [
         "service_description": "Professional voice over services",
         "address": "Street 156 #23, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1698891669085-f7f80d7f91e7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTYzfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018337/59_llrsum.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178560/91_t9syjz.jpg",
         "services": [
             {
                 "title": "Basic Recording",
@@ -591,7 +591,7 @@ usuarios = [
         "service_description": "Professional animation services",
         "address": "Street 189 #67, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1657672734224-048950398580?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjExfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018336/38_sottcv.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178602/31_cuf9tr.jpg",
         "services": [
             {
                 "title": "Basic Animation",
@@ -628,7 +628,7 @@ usuarios = [
         "service_description": "Professional writing services",
         "address": "Street 234 #89, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1630305374558-2d6a10abf65a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjY0fHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747018192/54_zyka6l.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178835/44_e31bxh.jpg",
         "services": [
             {
                 "title": "Basic Content",
@@ -665,7 +665,7 @@ usuarios = [
         "service_description": "Professional music services",
         "address": "Street 278 #34, City",
         "cover_img_url" : "https://images.unsplash.com/photo-1650377501810-5aa93c1ad448?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjgyfHxmcmVlbGFuY2Vyc3xlbnwwfDB8MHx8fDA%3D",
-        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1746635310/11_p6emwl.png",
+        "img_url": "https://res.cloudinary.com/dph121s7p/image/upload/v1747178888/11_s0wxiv.jpg",
         "services": [
             {
                 "title": "Basic Track",
