@@ -74,8 +74,10 @@
 	},
 	"dependencies": {
 		"@paypal/react-paypal-js": "^8.8.3",
+		"bootstrap": "^5.3.6",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
+		"react-bootstrap": "^2.10.10",
 		"react-dom": "^16.8.4",
 		"react-hook-form": "^7.56.2",
 		"react-hot-toast": "^2.5.2",

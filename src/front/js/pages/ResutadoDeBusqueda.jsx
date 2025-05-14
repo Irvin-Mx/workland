@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import SearchBar from '../component/SearchBar.jsx'
 import FreelanceCard from '../component/FreelanceCard.jsx'
 import { Context } from '../store/appContext.js'
+import style from './ResultadoDeBusqueda.module.css'
 
 const ResutadoDeBusqueda = () => {
   const { store, actions } = useContext(Context)
@@ -13,25 +14,28 @@ const ResutadoDeBusqueda = () => {
   }, [])
 
   return (
-    <div className=" d-flex flex-column align-items-start h-100 p-3" >
-      <div>
+    <div className=" d-flex flex-column alig-item-cneter h-100 d-block w-100 p-3"
+    >
+      <div className="banner-container">
         <SearchBar />
-        <div className='w-100'>
-          <h2>Resultado de búsqueda</h2>
-        </div>
-        <div className='w-100 h-100 d-flex justify-content-around flex-row flex-wrap'>
-          {
-            store.resutadosBusqueda.length ?
-              store.resutadosBusqueda.map((elem) => <FreelanceCard key={elem.id} {...elem} />)
-              :
+      </div>
 
-              <div className='w-100 h-100 d-flex justify-content-around align-items-center flex-row flex-wrap' >
-                <h3 className='text-secondary'>No hay resultados de búsqueda</h3>
-              </div>
-          }
-        </div>
+      <div className='w-100'>
+        <h2>Resultado de búsqueda</h2>
+      </div>
+      <div className='w-100 h-100 d-flex justify-content-around flex-row flex-wrap'>
+        {
+          store.resutadosBusqueda.length ?
+            store.resutadosBusqueda.map((elem) => <FreelanceCard key={elem.id} {...elem} />)
+            :
+
+            <div className='w-100 h-100 d-flex justify-content-around align-items-center flex-row flex-wrap' >
+              <h3 className='text-secondary'>No hay resultados de búsqueda</h3>
+            </div>
+        }
       </div>
     </div>
+   
   )
 }
 
