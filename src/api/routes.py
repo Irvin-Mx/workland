@@ -51,6 +51,7 @@ def procesar_usuarios(usuarios):
                             password=password_hasheada,
                             phone=usuario["phone"],
                             address=usuario["address"],
+                            cover_img_url=usuario["cover_img_url"],
                             rol=usuario["rol"],
                             service_title=usuario["service_title"],
                             profile_description=usuario["profile_description"],
@@ -195,7 +196,7 @@ def search_results():
             'msj': "El termino de busqueda no debe de estar vacio.",
             "result":[]
         }),400
-
+        
         resultados_service_description = User.query.filter(
             User.service_description.ilike(f'%{busqueda}%')
         ).all()
@@ -211,12 +212,12 @@ def search_results():
         ).all()
 
         combined_results_lists = list(set(resultados_service_description + resultados_service_title + resultados_profile_description))
-
         data = [{
             'id': resultado.id,
             'title': resultado.service_description,
             "user_name":f'{resultado.name} {resultado.last_name}',
-            "img_url":resultado.img_url
+            "img_url":resultado.img_url,
+            "cover_img_url":resultado.cover_img_url
             # Agrega otros campos que necesites mostrar
         } for resultado in combined_results_lists]
 
