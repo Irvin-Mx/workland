@@ -702,7 +702,8 @@ def get_user_favorites():
         name = data["name"]
         last_name = data["last_name"]
         id = data["id"]
-        return {"name": name,"last_name": last_name,"id": id}      
+        img_url=data["img_url"]
+        return {"name": name,"last_name": last_name,"id": id,"img_url":img_url}      
 
     favorites = [nombre(fav) for fav in user.favoritos_agregados]
 
