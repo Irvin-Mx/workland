@@ -1,0 +1,18 @@
+.banner-container {
+  background-image: url('https://res.cloudinary.com/dmuktnm3l/image/upload/v1747061284/homeSlider1_bkngng.jpg');
+  background-size: cover; 
+  background-position: center center;
+  padding: 40px; 
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.banner-content {
+  background-color: rgba(211, 10, 10, 0.8); 
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.banner-content h2 {
+  color: #333;
+}
