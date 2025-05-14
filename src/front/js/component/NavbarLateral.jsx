@@ -40,12 +40,7 @@ const freelanceLinks = [
     {
         name: "Mis Ordenes",
         path: "/free/ordenes",
-        icon: <i className="fa-solid fa-bag-shopping  fa-xl m-2"></i>
-    },
-    {
-        name: "Vista previa perfil",
-        path: "/free/vista-previa",
-        icon: <i className="fa-solid fa-eye  fa-xl m-2"></i>
+        icon: <i class="fa-solid fa-bag-shopping  fa-xl m-2"></i>
     },
     {
         name: "Paypal",
@@ -198,12 +193,12 @@ const NavbarLateral = ({ user }) => {
                             generalLinks.map((elem) => <LinkItem key={elem.name} {...elem} />)
                         }
                     </div>
-                    <div >
+                    {/* <div >
                         <div className={`sidebar-heading my-0 ${styles.sidebarHeading}`}><h5>Opciones</h5> </div>
                         {
-                            adminLink.map((elem) => <LinkItem key={elem.name} {...elem} />)
+                            freelanceLinks.map((elem) => <LinkItem key={elem.name} {...elem} />)
                         }
-                    </div>
+                    </div> */}
                 </ul>
 
             </div>
