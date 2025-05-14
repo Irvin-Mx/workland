@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import CommentCard from '../component/CommentCard.jsx'
 import { Context } from "../store/appContext.js";
+import ContenidoVacioPlaceholder from "../component/ContenidoVacioPlaceholder.jsx";
 
 const CommentsMade = ({deleteButton}) => {
     const { store, actions } = useContext(Context)
@@ -25,14 +26,14 @@ const CommentsMade = ({deleteButton}) => {
     if (isLoading == false) {
 
         return (<div className='w-100 bg-white d-flex justify-content-start align-items-center  flex-column gap-2'>
-            <h1 className=" w-100">
+            <h1 className=" w-100 text-center">
                 Comentarios.
             </h1>
             {
                 data?.length !== 0 ?
                     data?.map(({ author_full_name, id, stars, author_img_url, text }) => <CommentCard key={id} text={text} userName={author_full_name} img_url={author_img_url} stars={stars} deleteButton  id={id} setData={setData}/>)
                     :
-                    <h5>No hay comentarios</h5>
+                    <ContenidoVacioPlaceholder mensaje={"No has creado comentarios."}/>
             }
 
         </div>)
@@ -40,10 +41,10 @@ const CommentsMade = ({deleteButton}) => {
     } else {
         return (
             <div className='w-100 bg-white d-flex justify-content-start align-items-center  flex-column gap-2'>
-                <h1 className=" w-100">
+                <h1 className=" w-100 text-center">
                     Comentarios.
                 </h1>
-                <h5>No hay comentarios</h5>
+                <ContenidoVacioPlaceholder mensaje={"No has creado comentarios."}/>
 
             </div>
         )

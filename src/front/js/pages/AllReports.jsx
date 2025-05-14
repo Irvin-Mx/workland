@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Context } from '../store/appContext'
 import { toastExito,toastFallo } from '../component/Toaster/toasterIndex.jsx'
+import ContenidoVacioPlaceholder from '../component/ContenidoVacioPlaceholder.jsx'
 
 const ReportCard = ({ id, reason, text, author_info, recipient_info,setData }) => {
     const { store, actions } = useContext(Context)
@@ -81,12 +82,10 @@ const AllReports = () => {
 
     return (
         <div className='w-100 h-100  d-flex align-content-center flex-column gap-1'>
-            <h2>Lista de reportes</h2>
+            <h2 className='text-center'>Lista de reportes.</h2>
             {
                 data?.length == 0 ?
-                    <h2>
-                        No hay reportes.
-                    </h2>
+               <ContenidoVacioPlaceholder mensaje={"No hay reportes creados."}/>
                     :
                     data?.map((elem) => <ReportCard key={elem.id} {...elem} setData={setData} />)
 

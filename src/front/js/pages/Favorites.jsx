@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react'
+import ContenidoVacioPlaceholder from '../component/ContenidoVacioPlaceholder.jsx'
 
 import { Context } from "../store/appContext"
 
@@ -45,7 +46,7 @@ const Favorites = () => {
         return (
             <div>
                 <div>
-                    <h1>Favoritos aqui</h1>
+                    <h1>Favoritos.</h1>
                     <p>cargando</p>
                 </div>
             </div>
@@ -77,7 +78,7 @@ const Favorites = () => {
                             </button>
                         </div>
                     )
-                }) : <div>No tienes favoritos agregados</div>}
+                }) : <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."}/>}
             </div>
         </div>
     )

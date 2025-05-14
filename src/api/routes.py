@@ -534,6 +534,7 @@ def get_freelance(freelance_id):
         full_name=user_dict.name+" "+user_dict.last_name
         freelance_with ={
             "name": full_name,
+            "id":user_dict.id,
             "service_title": user_dict.service_title,
             "service_description": user_dict.service_description,
             "profile_description": user_dict.profile_description,

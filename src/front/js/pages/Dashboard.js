@@ -80,9 +80,9 @@ const Dashboard = () => {
                             <h2>¿Estás listo para empezar?</h2>
                             <p>Da el siguiente paso para construir el futuro que deseas. ¡Publica tus servicios o encuentra el talento que necesitas!</p>
                             <Link to="/user/busqueda" className="btn btn-primary btn-lg">Empieza ahora</Link>
-                            <div className="row mt-4">
+                            {/* <div className="row mt-4">
                                 <CarruselFreelancers/>
-                            </div>
+                            </div> */}
                         
                         </div>
 
