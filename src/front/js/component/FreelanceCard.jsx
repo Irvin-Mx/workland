@@ -1,11 +1,15 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const FreelanceCard = ({user_name,title,id}) => {
+const FreelanceCard = ({user_name,title,id,cover_img_url}) => {
     const navigate=useNavigate()
+
     return (
-        <div className="card m-2" style={{width: "18rem",heigth: "15rem"}}>
-            <img src="https://dummyimage.com/350x200/000/fff.jpg" className="card-img-top" alt="alt image"/>
+        <div className="card m-2" style={{width: "18rem"}}>
+            
+            <div className="card-img-top" style={{height:"9rem"}}>
+                <img src={cover_img_url} className='h-100 w-100 object-fit-scale'  alt="alt image"/>
+            </div>
                 <div className="card-body">
                     <h5>{user_name}</h5>
                     <p className="card-text">
@@ -17,6 +21,7 @@ const FreelanceCard = ({user_name,title,id}) => {
                         Detalles del Freelance
 
                     </button>
+                    
 
                 </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import SearchBar from '../component/SearchBar.jsx'
 import FreelanceCard from '../component/FreelanceCard.jsx'
 import { Context } from '../store/appContext.js'
+import style from './ResultadoDeBusqueda.module.css'
 
 const ResutadoDeBusqueda = () => {
   const { store, actions } = useContext(Context)
@@ -13,6 +14,7 @@ const ResutadoDeBusqueda = () => {
   }, [])
 
   return (
+
     <div className=" d-flex flex-column align-items-start h-100 p-3" >
       <div className='container-fluid my-0 p-0'>
         <div className="jumbotron w-100" style={{ background: "aliceblue", margin: 0, padding: "2rem" }}>
@@ -43,8 +45,10 @@ const ResutadoDeBusqueda = () => {
           </div>
         </div>
 
+
       </div>
     </div>
+   
   )
 }
 
