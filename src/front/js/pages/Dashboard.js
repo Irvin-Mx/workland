@@ -19,8 +19,6 @@ const Dashboard = () => {
             <div className=" flex-grow-1">
                 <h3 className="p-4 display-4">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
 
-
-
                 <div className="jumbotron p-4">
                     <div className="row align-items-center">
 

@@ -54,15 +54,33 @@ const Favorites = () => {
     }
 
     return (
-        <div>
-            <div>
-                <h1>Favoritos aqui</h1>
+        <div className=" d-flex flex-column align-items-start h-100 p-3">
+            <div className='container-fluid my-0 p-0'>
+                <div className="jumbotron w-100">
+                    <div className="row aling-items-center">
+                        <div className="col-md-4 d-flex justify-content-center">
+                             <div className="col-md-8 align-items-center">
+
+                            <p className="display-5"> <strong>Mis Favoritos</strong></p>
+
+                        </div>
+                            <img
+                                src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747256782/fav_sdchw3.png"
+                                alt="favoritos"
+                                className="img-fluid rounded-start"
+                                style={{ height: '50px' }}
+                            />
+                        </div>
+                    
+                    </div>
+                </div>
+               
                 {usersFavoritesArray.length > 0 ? usersFavoritesArray.map((item) => {
                     return (
                         <div className='border m-2 w-25' key={item.id}>
 
                             <p>{item.name}</p>
-                            <button id={item.id} onClick={(e)=>handleFavorite(e)} className="btn btn-primary">
+                            <button id={item.id} onClick={(e) => handleFavorite(e)} className="btn btn-primary">
                                 {
                                     isInFavorites ?
                                         <>
@@ -78,7 +96,7 @@ const Favorites = () => {
                             </button>
                         </div>
                     )
-                }) : <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."}/>}
+                }) : <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."} />}
             </div>
         </div>
     )
