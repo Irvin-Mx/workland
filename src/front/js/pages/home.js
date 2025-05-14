@@ -70,7 +70,7 @@ export const Home = () => {
 							value={terminoBusqueda}
 							type="text"
 							className="form-control"
-							placeholder="Search"
+							placeholder="Barra de búsqueda"
 							aria-label="Recipient's username"
 							aria-describedby="button-addon2"
 							style={{ borderRadius: "5px", height: "50px", backgroundColor: "#f8f9fa", fontSize: "20px"}}
