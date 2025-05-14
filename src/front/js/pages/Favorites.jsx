@@ -2,9 +2,43 @@ import React, { useEffect, useContext, useState } from 'react'
 import ContenidoVacioPlaceholder from '../component/ContenidoVacioPlaceholder.jsx'
 
 import { Context } from "../store/appContext"
+// id
+
+// img_url
+
+// last_name
+
+// name
+
+
+const FavoriteItem = ({ id, img_url, last_name, name, handleFavorite }) => {
+    console.log(id)
+    return (
+        <div
+        
+        style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}}
+        className='w-100  d-flex align-items-center flex-row p-2 rounded'>
+            <div className='w-75 d-flex align-items-center gap-2 flex-row'>
+                <img src={img_url} alt="img p" style={{ height: "50px", width: "50px" }} className='rounded-circle' />
+                <h3>
+                    {`${name} ${last_name}`}
+                </h3>
+
+            </div>
+
+
+            <button onClick={() => handleFavorite(id)} className="btn w-25 btn-danger gap-2 text-nowrap d-flex align-items-center justify-content-center flex-row">
+                <i className="fa-regular fa-heart"></i>
+                <p className='p-0 m-0' > Eliminar.</p>
+                {/* <i id={item.id} className="fa-regular fa-heart"></i>
+                                            <span id={item.id}> No esta en favoritos</span> */}
+            </button>
+
+        </div>
+    )
+}
 
 const Favorites = () => {
-
     const { store, actions } = useContext(Context)
     const [usersFavoritesArray, setUsersFavoritesArray] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -28,15 +62,17 @@ const Favorites = () => {
     }, [])
 
 
-    const handleFavorite = (e) => {
-        console.log(e.target.id)
-
+    const handleFavorite = (id) => {
+      
+       
         actions.addOrRemoveFavorite({
-            favorite_id: e.target.id,
-            favorite_status: isInFavorites
+            favorite_id: id,
+            favorite_status: true
         }).then((res) => {
-            setIsInFavorites(res.result)
+            actions.getAllFavorites()
+                .then((res)=>setUsersFavoritesArray(res.result))
         }).catch((e) => { console.log("error", e) })
+  
     }
 
 
@@ -54,31 +90,19 @@ const Favorites = () => {
     }
 
     return (
-        <div>
+        <div className='w-100'>
             <div>
-                <h1>Favoritos aqui</h1>
-                {usersFavoritesArray.length > 0 ? usersFavoritesArray.map((item) => {
-                    return (
-                        <div className='border m-2 w-25' key={item.id}>
-
-                            <p>{item.name}</p>
-                            <button id={item.id} onClick={(e)=>handleFavorite(e)} className="btn btn-primary">
-                                {
-                                    isInFavorites ?
-                                        <>
-                                            <i id={item.id} className="fa-solid fa-heart"></i>
-                                            <span id={item.id}> Esta en favoritos</span>
-                                        </>
-                                        :
-                                        <>
-                                            <i id={item.id} className="fa-regular fa-heart"></i>
-                                            <span id={item.id}> No esta en favoritos</span>
-                                        </>
-                                }
-                            </button>
-                        </div>
-                    )
-                }) : <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."}/>}
+                <h1>Favoritos.</h1>
+                {usersFavoritesArray.length > 0 ?
+                    usersFavoritesArray?.map((item) => {
+                        return (
+                            <FavoriteItem
+                                key={item.id}
+                                {...item}
+                                handleFavorite={handleFavorite} />)
+                    })
+                    :
+                    <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."} />}
             </div>
         </div>
     )
