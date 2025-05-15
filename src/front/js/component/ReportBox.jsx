@@ -26,7 +26,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
         actions.addReport({
             text: data.text,
             freelance_id: freelance_id,
-            reason:data.reason
+            reason: data.reason
         })
             .then((res) => {
 
@@ -35,7 +35,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
 
             })
             .catch((err) => toastFallo(err.msj))
-      
+
 
     }
 
@@ -64,19 +64,19 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                 <hr />
                 <div>
                     <form onSubmit={handleSubmit(onSubmit)} className='d-flex justify-content-start align-content-center flex-column mb-2'>
-                        <div  className='w-full'>
+                        <div className='w-full'>
                             <label htmlFor="disabledSelect" className="form-label">Selecciona el modo de perfil{rea}</label>
                             <select
                                 {...register("reason")}
-                                id="disabledSelect" name="rol" className="form-select" 
-                               >
+                                id="disabledSelect" name="rol" className="form-select"
+                            >
                                 <option value="">Selecciona una opción</option>
                                 <option value="No pago.">No pago.</option>
                                 <option value="Parece fraude.">Parece fraude.</option>
                                 <option value="Comentarios ofensivos.">Comentarios ofensivos.</option>
                             </select>
                             <div style={{ height: "20px" }}>
-               
+
                             </div>
                         </div>
                         <div className="mb-3">
@@ -84,7 +84,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                                 Comenta aquí <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black"}`}>({msj?.length || 0}/200 caracteres)</span>
                             </label>
                             <textarea
-                            
+
 
                                 {...register("text", { required: true, maxLength: MAX_CHARACTERS, pattern: /.+/ })}
                                 style={{ resize: 'none' }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -101,9 +101,13 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                                 errors.text && errors.text.type === "maxLength" && <span className='text-white bg-danger'>Sobrepasa el limite de carateres.</span>
                             }
                         </div>
-                        <button type='submit' className='btn btn-primary'>
-                            Enviar
-                        </button>
+                        <div class="modal-footer">
+                            <button type='submit' className='btn btn-primary'>
+                                Enviar
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+
                     </form>
                 </div>
             </div>

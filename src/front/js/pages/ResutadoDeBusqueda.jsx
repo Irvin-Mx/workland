@@ -30,25 +30,25 @@ const ResutadoDeBusqueda = () => {
             <div className="col-md-8 align-items-center">
               <SearchBar />
               <p className="lead"> Resultado de búsqueda</p>
-              <div className='w-100 h-100 d-flex justify-content-around flex-row flex-wrap'>
-                {
-                  store.resutadosBusqueda.length ?
-                    store.resutadosBusqueda.map((elem) => <FreelanceCard key={elem.id} {...elem} />)
-                    :
 
-                    <div className='w-100 h-100 d-flex justify-content-around align-items-center flex-row flex-wrap' >
-                      <h3 className='text-secondary'>No hay resultados de búsqueda</h3>
-                    </div>
-                }
-              </div>
             </div>
           </div>
         </div>
+        <div className='w-100 h-100 d-flex justify-content-around flex-row flex-wrap'>
+          {
+            store.resutadosBusqueda.length ?
+              store.resutadosBusqueda.map((elem) => <FreelanceCard key={elem.id} {...elem} />)
+              :
 
+              <div className='w-100 h-100 d-flex justify-content-around align-items-center flex-row flex-wrap' >
+                <h3 className='text-secondary'>No hay resultados de búsqueda</h3>
+              </div>
+          }
+        </div>
 
       </div>
     </div>
-   
+
   )
 }
 

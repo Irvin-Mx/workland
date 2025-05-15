@@ -19,13 +19,10 @@ const Dashboard = () => {
             <div className=" flex-grow-1">
                 <h3 className="p-4 display-4">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
 
-
-
                 <div className="jumbotron p-4">
                     <div className="row align-items-center">
-
                         <div className="col-lg-8 text-start">
-                            <h1 className="display-5">¿Estás buscando al profesional ideal para tu proyecto?</h1>
+                            <h1 className="display-6">¿Estás buscando al profesional ideal para tu proyecto?</h1>
                             <p className="lead">  ¡Estás en el lugar correcto!
                                 En nuestra comunidad, puedes conectar con talentosos freelancers de diversas áreas que se adaptan a lo que necesitas. <strong>Conecta con los mejores profesionales que se ajustan a tus necesidades</strong>
                                 y haz realidad tus ideas con el respaldo de una plataforma pensada para facilitar cada paso del proceso.</p>

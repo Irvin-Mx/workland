@@ -51,7 +51,7 @@ export const Home = () => {
 
 					<div className="carousel-inner h-100">
 						<div className="carousel-item active h-100">
-							<img className={`d-block w-100 h-100 ${styles.objectFit}`} src="https://res.cloudinary.com/dmuktnm3l/image/upload/v1747061284/homeSlider1_bkngng.jpg" alt="First slide" />
+							<img className={`d-block w-100 h-100 ${styles.objectFit}`} src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747285420/homeSlider1_fqyytp.jpg" alt="First slide" />
 						</div>
 						<div className="carousel-item">
 							<img className="d-block w-100" src="https://placehold.co/500x200" alt="Second slide" />
@@ -60,12 +60,12 @@ export const Home = () => {
 							<img className="d-block w-100" src="https://placehold.co/500x200" alt="Third slide" />
 						</div>
 					</div>
-					<div className="position-absolute start-0 top-0 h-100 w-100 d-flex flex-column justify-content-center">
+					<div className="position-absolute start-0 top-0 h-100 w-100 d-flex flex-column justify-content-center" style={{ background: "rgba(30, 62, 109, 0.5)" }}>
 						<h2 className="display-1 fw-bolder text-white mb-5">Workland</h2>
 						<h4 className="text-white display-5 mt-4 fw-bold">
-							<span style={{color:"#1E3E6D"}}>Trabaja.</span>
+							<span style={{color:"white"}}>Trabaja.</span>
 							<span style={{color:"white"}} >Contrata.</span>
-							<span style={{color:"#FF6B6B"}}>Conecta.</span>
+							<span style={{color:"white"}}>Conecta.</span>
 							</h4>
 					</div>
 					<div className="input-group mb-3 mt-2 w-50 position-absolute top-50 start-50 translate-middle">

@@ -94,7 +94,7 @@ const NavbarLateral = ({ user }) => {
         { name: "Panel principal", path: `/${genLink}/dashboard`, icon: <i className="fas fa-xl fa-tachometer-alt m-2"></i> },
         { name: "Perfil", path: `/${genLink}/config`, icon: <i className="fa-solid fa-address-card fa-xl m-2"></i> },
         {
-        name: user === "user" ? "Comunidad" : "Busqueda",
+        name: user === "freelance" ? "Comunidad" : "Búsqueda",
         path: `/${genLink}/busqueda`,
         icon: <i className="fa-solid fa-xl fa-magnifying-glass m-2"></i>
     },
