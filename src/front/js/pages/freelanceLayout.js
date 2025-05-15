@@ -118,13 +118,13 @@ export const FreelanceLayout = () => {
     const allSaved = categories.every(cat => savedPackages.includes(cat));
 
     return (
-        <div className="container">
+        <div className="w-100 ps-3">
 
-            <h5 className="card-title m-3">
-                <span className="badge me-2" style={{ background: "#FF6B6B" }}>2</span>
+            <h5 className="card-title pt-3 ">
+                <span className="badge me-2 " style={{ background: "#FF6B6B" }}>2</span>
                 Agrega tus servicios
             </h5>
-
+            <p>Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> y <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
              <div className="d-flex justify-content-around mb-4">
                 {categories.map((cat, i) => (
                     <div
@@ -140,7 +140,7 @@ export const FreelanceLayout = () => {
                 ))}
             </div>
             <div className="row">
-                <div className="col-md-8 mt-4">
+                <div className="col-md-7 mt-4">
                     <h2>Formulario para {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}</h2>
                     <div className="d-flex flex-column">
 
@@ -234,27 +234,28 @@ export const FreelanceLayout = () => {
                             <button
                                 type="button"
                                 className="btn"
+                                onClick={handleSubmitAll}
+                                style={{ width: "150px", background: "#00D1B2", color: "aliceblue" }}
+                            >
+                                Guardar
+                            </button>
+                            <button
+                                type="button"
+                                className="btn"
                                 onClick={handleNextCategory}
                                 style={{ width: "150px", background: "#1e266d", color: "aliceblue" }}
                             >
                                 <i className="bi bi-chevron-double-right me-1"></i>
                                 Siguiente
                             </button>
-                            <button
-                                type="button"
-                                className="btn"
-                                onClick={handleSubmitAll}
-                                style={{ width: "150px", background: "#00D1B2", color: "aliceblue" }}
-                            >
-                                Guardar
-                            </button>
+                            
                            
                         </div>
                     </div>
                 </div>
 
 
-                <div className="col-md-4 mt-4">
+                <div className="col-md-4 mt-4 me-1">
                     <h3>Vista previa de paquetes</h3>
                     <div className="row">
                         {categories.map((category) => (

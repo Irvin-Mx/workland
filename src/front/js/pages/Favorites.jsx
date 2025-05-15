@@ -106,28 +106,28 @@ const Favorites = () => {
     return (
 
 
-        <div className=" d-flex flex-column align-items-start h-100 p-3">
-            <div className='container-fluid my-0 p-0'>
-                <div className="jumbotron w-100">
-                    <div className="row aling-items-center">
-                        <div className="col-md-4 d-flex justify-content-center">
-                             <div className="col-md-8 align-items-center">
-
-                            <p className="display-5"> <strong>Mis Favoritos</strong></p>
-
-                        </div>
-
-                            <img
-                                src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747256782/fav_sdchw3.png"
-                                alt="favoritos"
+        <div className=" d-flex flex-column align-items-start">
+            <div className='w-100 my-0 p-0'>
+                <div className="jumbotron w-100 m-0 jumbotron-fluid" style={{background:"aliceblue",padding: "1rem" }}>
+                          <div className="row aling-items-center">
+                            <div className="col-md-4 d-flex justify-content-center">
+                              <img
+                                src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747330257/fav-13_h347v7.png"
+                                alt="Favoritos"
                                 className="img-fluid rounded-start"
-
-                                style={{ height: '50px' }}
-                            />
+                                style={{ width: '250px' }}
+                              />
+                            </div>
+                            <div className="col-md-8 align-items-center">
+                
+                              <p className="h4"> ¡Tus servicios favoritos!</p>
+                         
+                            
+                
+                
+                            </div>
+                          </div>
                         </div>
-                    
-                    </div>
-                </div>
                
                 {usersFavoritesArray.length > 0 ? usersFavoritesArray.map((item) => {
                     return (

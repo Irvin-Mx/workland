@@ -58,9 +58,11 @@ const UserConfig = () => {
                         <Link to={`/${store.userProfile?.rol=="freelance" ?"free":store.userProfile?.rol}/form`}>
                             <button
                                 type="button"
-                                className="btn d-flex align-items-center justify-content-center gap-2">
-                                    <p className="p-0 m-0" style={{ color: '#1E3E6D'}}>Editar</p>
-                                <i style={{fontSize:"25px"}} className="fa-solid fa-pen-to-square"></i>
+                                className="btn d-flex align-items-center justify-content-between gap-2">
+                                  <i style={{ color: '#1E3E6D'}} className="fa-solid fa-pen-to-square fa-2xl"></i>   
+                                    <p className="btn fs-6 text-decoration-underline" style={{ color: '#1E3E6D'}}>Editar</p>
+                                
+                               
                             </button>
                         </Link>
 

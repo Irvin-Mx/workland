@@ -159,7 +159,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 } catch (e) {
                     // console.error("Error en la solicitus para obtener el perfil de usuario", error);
-                    alert("Ocurrio un error al obtener los datos del perfil freelance");
+                    // alert("Ocurrio un error al obtener los datos del perfil freelance");
                     return null;
                 }
             },
