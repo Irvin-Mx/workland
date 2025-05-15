@@ -58,11 +58,10 @@ const UserConfig = () => {
                         <Link to={`/${store.userProfile?.rol=="freelance" ?"free":store.userProfile?.rol}/form`}>
                             <button
                                 type="button"
-                                className="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                                    <p className="p-0 m-0">Editar</p>
+                                className="btn d-flex align-items-center justify-content-center gap-2">
+                                    <p className="p-0 m-0" style={{ color: '#1E3E6D'}}>Editar</p>
                                 <i style={{fontSize:"25px"}} className="fa-solid fa-pen-to-square"></i>
                             </button>
-
                         </Link>
 
 

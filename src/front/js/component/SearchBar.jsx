@@ -26,13 +26,13 @@ const SearchBar = () => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         type="text"
-        placeholder='Barra de busqueda' />
+        placeholder='Barra de búsqueda' />
       <button
        onClick={()=>{
 
         actions.busquedaFreelancers(terminoBuqueda)
       }}
-        style={{ width: "50px", height: "100%",cursor:"pointer", backgroundColor:"#1e266d", color: "white" }}
+        style={{ width: "40px", height: "100%", cursor:"pointer", backgroundColor:"#1e266d", color: "white", border:'none' }}
         className={`d-flex justify-content-center align-items-center `}
       >
         <i 
@@ -43,3 +43,6 @@ const SearchBar = () => {
 }
 
 export default SearchBar
+
+
+
