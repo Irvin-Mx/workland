@@ -124,7 +124,7 @@ export const FreelanceLayout = () => {
                 <span className="badge me-2 " style={{ background: "#FF6B6B" }}>2</span>
                 Agrega tus servicios
             </h5>
-            <p>Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> y <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
+            <p>Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
              <div className="d-flex justify-content-around mb-4">
                 {categories.map((cat, i) => (
                     <div

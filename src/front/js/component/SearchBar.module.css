@@ -3,7 +3,6 @@
     height: 50px;
     width: 500px;
     border-radius: 5px;
-    border: 1px solid #1E266D;
     opacity: .8;
 }
 .searchbar_input{
@@ -12,6 +11,7 @@
     height: 40px;
     border-radius: 5px;
     border: none;
+    border: 1px solid #1E266D;
 }
 .searchbar_input:focus{
     outline: none;
@@ -19,8 +19,8 @@
 
 .searchbar_icon{
     background-color: #1E266D;
+    border-radius: 50px;
     color: white;
-    border-color: #1E266D;
      
 }
 
