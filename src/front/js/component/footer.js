@@ -1,76 +1,71 @@
-import React, { Component } from "react";
-import {Link} from "react-router-dom"
-
-import styles from "./footer.module.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./footer.module.css";
 
 export const Footer = () => (
-	<footer className={`footer mt-auto text-center p-4 border d-flex flex-column justify-content-center align-items-center text-white ${styles.footer__container}`}>
-		<div className="d-flex justify-content-around w-100">
-			{/* Logo */}
-			<div className="d-flex flex-column">
-				<h2 className="">Workland</h2>
-				<div className="d-flex justify-content-between">
-					<div>
-						<i class="fa-brands fa-twitter fs-4"></i>
-					</div>
+  <footer className={`text-white p-4 ${styles.footer__container}`}>
+    <div className="container">
+      <div className="row justify-content-around text-start">
+        
+        {/* Logo Column */}
+        <div className="col-md-3 mb-4">
+          <h2>Workland</h2>
+          <div className="d-flex gap-3 fs-4">
+            <i className="fa-brands fa-twitter"></i>
+            <i className="fa-brands fa-instagram"></i>
+            <i className="fa-brands fa-facebook-f"></i>
+          </div>
+        </div>
 
-					<div>
-						<i class="fa-brands fa-instagram fs-4"></i>
-					</div>
+        {/* Enlaces Column */}
+        <div className="col-md-2 mb-4">
+          <h4>Enlaces</h4>
+          <ul className={`list-unstyled ${styles.footer__ul}`}>
+            <li><Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">Inicio</Link></li>
+            <li><Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">Buscar</Link></li>
+            <li><Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/el-equipo">Nosotros</Link></li>
+          </ul>
+        </div>
 
-					<div>
-						<i class="fa-brands fa-facebook-f fs-4"></i>
-					</div>
-				</div>
-			</div>
-			{/* Enlaces */}
-			<div>
-				<h4>Enlaces</h4>
-				<ul className={` ${styles.footer__ul}`}>
-					<li >
-						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Home</Link>
-					</li>
-					<li>
-						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Buscar</Link>
-					</li>
-					<li>
-						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Nosotros</Link>
-					</li>
-				</ul>
-			</div>
-			{/* Preguntas frecuntes */}
-			<div>
-				<h4>Preguntas frecuentes</h4>
-				<ul className={` ${styles.footer__ul}`} >
-					<li>
-						<Link className={` ${styles.footer__links}`} role="button" to="/">¿Cómo funciona el proceso de contratación?</Link>
-					</li>
-					<li>
-						<Link className={` ${styles.footer__links}`} role="button" to="/">¿Qué tipos de trabajos o servicios pueden realizarse en la plataforma?</Link>
-					</li>
-					<li>
-						<Link className={` ${styles.footer__links}`} role="button" to="/">¿Cómo me protege el sistema de pagos seguro?</Link>
-					</li>
-				</ul>
-			</div>
-			{/* Legal*/}
-			<div>
-				<h4>Legal</h4>
-				<ul className={` ${styles.footer__ul}`} >
-					<li>
-						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Terminos y condiciones</Link>
-					</li>
-					<li>
-						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Politica de privacidad</Link>
-					</li>
-					<li>
-						<Link className={`fw-light ${styles.footer__links}`} role="button" to="/">Contrato de servicios</Link>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<p className="">
-			Made with <i className="fa fa-heart text-danger" /> by{" Irvin, Fredy, Sebas "}
-		</p>
-	</footer>
+        {/* Preguntas Frecuentes Column */}
+        <div className="col-md-4 mb-4">
+          <h4>Preguntas frecuentes</h4>
+          <ul className={`list-unstyled ${styles.footer__ul}`}>
+            <li>
+              <Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">
+                ¿Cómo funciona el proceso de contratación?
+              </Link>
+            </li>
+            <li>
+              <Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">
+                ¿Qué tipos de trabajos o servicios pueden realizarse en la plataforma?
+              </Link>
+            </li>
+            <li>
+              <Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">
+                ¿Cómo me protege el sistema de pagos seguro?
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Legal Column */}
+        <div className="col-md-2 mb-4">
+          <h4>Legal</h4>
+          <ul className={`list-unstyled ${styles.footer__ul}`}>
+            <li><Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/" role="button">Términos y condiciones</Link></li>
+            <li><Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">Política de privacidad</Link></li>
+            <li><Link className={`text-white text-decoration-none fw-light ${styles.footer__links}`} to="/">Contrato de servicios</Link></li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* Bottom Text */}
+      <hr className="text-white" />
+      <p className="text-center mt-3">
+        Made with <i className="fa fa-heart text-danger" /> by{" Irvin, Fredy, Sebas "}
+      </p>
+    </div>
+  </footer>
 );

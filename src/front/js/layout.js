@@ -20,6 +20,8 @@ import Registro from "./pages/registro";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.js";
 import UserConfig from "./pages/userConfig.js";
+import NotFoundPage from "./pages/NotFound404.jsx";
+import TeamSection from "../js/component/TeamSection.jsx"
 
 import FreelancePerfil from "./pages/freelancePerfil.js";
 
@@ -79,6 +81,8 @@ const Layout = () => {
                             <Route element={<FreelanceFormulario />} path="form" />
 
                             <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
+                            <Route element={<TeamSection />} path="/el-equipo" />
+
                             
 
 
@@ -115,10 +119,10 @@ const Layout = () => {
 
 
 
-                            <Route element={<h1>Not found!</h1>} />
+                            <Route path="*" element={<NotFoundPage/>} />
 
                         </Routes>
-                        {/* <Footer /> */}
+                        <Footer />
                     </ScrollToTop>
                     <Toaster />
                 </BrowserRouter>
