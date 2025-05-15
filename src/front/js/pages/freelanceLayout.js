@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+
 
 export const FreelanceLayout = () => {
     const { actions } = useContext(Context);
+     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         basic: { title: "", description: "", price: "", time: "" },
         pro: { title: "", description: "", price: "", time: "" },
@@ -111,6 +113,7 @@ export const FreelanceLayout = () => {
         }
         toast.success("Todos los paquetes han sido guardados exitosamente");
         clearStorage();
+        navigate("/free/vista-previa"); 
 
 
     };
@@ -124,8 +127,8 @@ export const FreelanceLayout = () => {
                 <span className="badge me-2 " style={{ background: "#FF6B6B" }}>2</span>
                 Agrega tus servicios
             </h5>
-            <p>Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
-             <div className="d-flex justify-content-around mb-4">
+            <p>Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> y <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
+            <div className="d-flex justify-content-around mb-4">
                 {categories.map((cat, i) => (
                     <div
                         key={cat}
@@ -138,16 +141,17 @@ export const FreelanceLayout = () => {
                         {cat === "basic" ? <div className="text-capitalize">Básico</div> : null}
                         {cat === "pro" ? <div className="text-capitalize">Profesional</div> : null}
                         {cat === "enterprise" ? <div className="text-capitalize">Empresarial</div> : null}
-                        
+
                     </div>
                 ))}
             </div>
             <div className="row">
+                <div className="col-md-7 mt-4">
 
-                   
-                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Basic" ?  <h2>Formulario: Básico</h2>:null  }
-                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Pro" ?  <h2>Formulario: Profesional</h2>:null  }
-                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Enterprise" ?  <h2>Formulario: Empresarial</h2>:null  }
+
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Basic" ? <h2>Formulario: Básico</h2> : null}
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Pro" ? <h2>Formulario: Profesional</h2> : null}
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Enterprise" ? <h2>Formulario: Empresarial</h2> : null}
 
                     <div className="d-flex flex-column">
 
@@ -255,8 +259,8 @@ export const FreelanceLayout = () => {
                                 <i className="bi bi-chevron-double-right me-1"></i>
                                 Siguiente
                             </button>
-                            
-                           
+
+
                         </div>
                     </div>
                 </div>
@@ -279,7 +283,10 @@ export const FreelanceLayout = () => {
                     </div>
                 </div>
             </div>
-        </div >
+             
+        </div>
+
+
     );
 };
 
