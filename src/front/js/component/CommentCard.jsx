@@ -9,7 +9,7 @@ const StarComponentShell = ({ value }) => {
         return (
             <div
                 className='d-flex justify-content-start align-content-center '>
-                <i style={{ fontSize: "25px", color: "yellow" }} className="fa-solid fa-star m-1"></i>
+                <i style={{ fontSize: "25px", color: "#fbae22" }} className="fa-solid fa-star m-1"></i>
             </div>
         )
     }
@@ -38,8 +38,8 @@ const CommentCard = ({ userName, stars, img_url, text, id, deleteButton,setData 
     }
 
     return (
-        <div style={{ boxShadow: "hsla(0, 0.00%, 0.00%, 0.35) 0px 5px 15px" }} className="card container-fluid m-1 p-0 col-5" >
-            <div className="card-body p-2">
+        <div style={{ boxShadow: "hsla(0, 0.00%, 0.00%, 0.35) 0px 5px 15px" }} className="card container-fluid m-3 p-0 col-5" >
+            <div className="card-body  p-2">
                 <div className='d-flex justify-content-between align-content-center flex-row'>
                     <div className='d-flex justify-content-start align-content-center flex-row'>
                         <div className="rounded-circle" style={{ height: "50px", width: "50px", marginRight: "10px" }}>
@@ -60,7 +60,7 @@ const CommentCard = ({ userName, stars, img_url, text, id, deleteButton,setData 
                         deleteButton &&
                         <button 
                         onClick={()=>deleteHandle(id)}
-                        className='btn btn-danger'>
+                        className='btn'style={{background:"#FF3860", color:"white", height:"40px", width:"40px"}}>
                             <i className="fa-solid fa-trash"></i>
                         </button>
                     }

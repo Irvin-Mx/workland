@@ -29,7 +29,7 @@ const freelanceTemplate = () => {
                 <i className="fas fa-bars"></i>
             </button>
             
-            <div className="container-fluid h-100 ">
+            <div className="w-100">
                 <Outlet />
             </div>
         </div>

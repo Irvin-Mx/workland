@@ -19,7 +19,7 @@ const FreelanceDashboard = () => {
             </div> */}
             <div className=" flex-grow-1 p-4">
 
-                <h3 className="m-2 display-4">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
+                <h3 className="ps-3 mt-3 display-6">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
                
 
                 <div>
@@ -28,25 +28,24 @@ const FreelanceDashboard = () => {
                             <div className="col-md-4">
                                 <img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747168878/emprendedor-01_spuvcr.png"
-                                    alt="Trendy Pants and Shoes"
+                                    alt="freelance_ilustacion"
                                     className="img-fluid rounded-start"
-                                    style={{ width: '400px' }}
+                                    style={{ width: '350px' }}
                                 />
                             </div>
                             <div className="col-md-8">
                                 <div className="card-body">
-                                    <h5 className="card-title display-5">¿Listo para comenzar?</h5>
-                                    <p className="card-text lead">
+                                    <p className="card-title fs-2">¿Listo para comenzar?</p>
+                                    <p className="card-text lead fs-4">
                                        
-                                        ¡Bienvenido a nuestra comunidad de emprendedores! Aquí, tienes la oportunidad de ofrecer tus servicios y conectar con personas que buscan lo que tú ofreces.
-                                        Recuerda que en nuestra plataforma, tú decides <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces.
-                                        <br /> Nuestro compromiso es ayudarte a construir el trabajo de tus sueños, donde tú tienes el control, y tu talento encuentra las oportunidades que merece.</p>
+                                       <strong>¡Bienvenido a nuestra comunidad de emprendedores!</strong></p>
+                                       <p className="lead"> Aquí, tú decides <strong>cómo,</strong><strong>cuándo</strong> y <strong>cuánto</strong> trabajar, conectando con personas que valoran lo que haces. Estamos comprometidos en ayudarte a construir el trabajo de tus sueños, donde tu talento encuentra las oportunidades que merece.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <h4 className="mt-4 display-6">¿Cómo empezar?</h4>
+                    <h4 className="mt-4 fs-2">¿Cómo empezar?</h4>
                     <p className=" lead">
                         Estás a pocos pasos de conseguir el trabajo de tus sueños. <br/>
                         Aquí tienes una guía rápida para que puedas empezar a ofrecer tus servicios y conectar con clientes potenciales.
@@ -79,7 +78,7 @@ const FreelanceDashboard = () => {
                                     style={{ width: '250px' }}
                                 />
                                             <h3 className="card-title">Sube tus productos</h3>
-                                            <p className="card-text">Crea paquetes para ofrecer tus servicios : <strong>Básico</strong>,<strong>Medio</strong> Y <strong>Profesional</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
+                                            <p className="card-text">Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> Y <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +94,7 @@ const FreelanceDashboard = () => {
                                     style={{ width: '250px' }}
                                 />
                                             <h3 className="card-title">Conecta tu PayPal</h3>
-                                            <p className="card-text">Crea una cuenta de PayPal Y recibe tus pagos de manera segura y directa, pagando una mínima comisión a la plataforma</p>
+                                            <p className="card-text">Crea una cuenta de <strong>PayPal</strong> Y recibe tus pagos de manera segura y directa, pagando una mínima comisión a la plataforma</p>
                                         </div>
                                     </div>
                                 </div>

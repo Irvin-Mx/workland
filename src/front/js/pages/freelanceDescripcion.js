@@ -81,25 +81,20 @@ const FreelanceDescription = () => {
 
 
     return (
-        <div className="d-flex">
+        <div className="w-100">
 
 
             <div className=" flex-grow-1 p-4 align-items-center" >
-                <div className="user-card d-flex flex-column p-1 w-50 align-items-center border-rounded">
-                    <h3 className="m-3" >¡Estás a pocos pasos de conseguir el trabajo de tus sueños!</h3>
+                <div className="user-card d-flex p-1 w-100 align-items-center border-rounded">
+                    <p className= "fs-2" >¡Estás a pocos pasos de conseguir el trabajo de tus sueños!</p>
                 </div>
-                <h5>Completa la siguiente información para comenzar a ofrecer tus servicios.</h5>
+                <p className="fs-5">Completa la siguiente información para comenzar a ofrecer tus servicios.</p>
                 <h5 className="card-title text-left">
                     <span className="badge me-2" style={{ background: "#FF6B6B" }}>1</span>
                     Paso:  Completa tu perfil
                 </h5>
-                <div className="user-card d-flex my-3 p-3 w-50 border-rounded">
-
-                    <p>Usa un título breve y directo para indicar tu profesión u oficio, y luego cuéntanos más sobre tu experiencia, habilidades, logros o el tipo de servicios que ofreces. Recuerda que este perfil será tu carta de presentación, así que sé auténtico, profesional y enfócate en lo que te hace destacar.</p>
-
-                </div>
-
-                <div className="card w-50 border rounded rounded shadow mb-4 " style={{ background: "aliceblue" }} >
+                
+                <div className="card w-100 border rounded rounded shadow mb-4 " style={{ background: "aliceblue" }} >
 
                     <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                         Perfil Profesional

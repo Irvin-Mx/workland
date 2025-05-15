@@ -14,12 +14,12 @@ const Dashboard = () => {
     if (!user.name) return <p>Cargando datos del usuario...</p>;
 
     return (
-        <div className="d-flex">
+        <div className="w-100">
 
             <div className=" flex-grow-1">
-                <h3 className="p-4 display-4">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
+                <h3 className="ps-3 mt-3 display-6">¡Buen día  <strong className="text-capitalize" > {user.name} {user.last_name}</strong>!</h3>
 
-                <div className="jumbotron p-4">
+                <div className="jumbotron ps-3 mt-0">
                     <div className="row align-items-center">
                         <div className="col-lg-8 text-start">
                             <h1 className="display-6">¿Estás buscando al profesional ideal para tu proyecto?</h1>
