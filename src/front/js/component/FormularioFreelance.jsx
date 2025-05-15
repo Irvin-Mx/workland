@@ -35,7 +35,7 @@ const FormularioFreelance = () => {
         formData.append("last_name", user.last_name);
         formData.append("phone", user.phone);
         formData.append("address", user.address);
-        formData.append("email", user.email);
+        // formData.append("email", user.email);
         
         if (photoFile) {
             formData.append("photo_profile", photoFile);
@@ -119,7 +119,7 @@ const FormularioFreelance = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="inputEmail" className="form-label">Correo electrónico</label>
                         <input
                             id="inputEmail"
@@ -132,7 +132,7 @@ const FormularioFreelance = () => {
                             onChange={handleChange}
                         />
                         
-                    </div>
+                    </div> */}
                     <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }}>
                         Guardar
                     </button>

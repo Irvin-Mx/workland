@@ -530,7 +530,7 @@ def get_freelance(freelance_id):
         user_dict = User.query.filter_by(id=freelance_id).first()
 
         if not user_dict:
-            return jsonify({"msj": "Freelance no encontrado", "result": []}), 404
+            return jsonify({"msj": "Freelance no encontrado", "result": {}}), 200
         services = [service.serialize() for service in user_dict.services]
         full_name=user_dict.name+" "+user_dict.last_name
         freelance_with ={
@@ -672,7 +672,7 @@ def check_favorite():
 
         # Verificar si los usuarios existen
         if not user or not favorite_user:
-            return jsonify({"error": "Usuario o favorito no encontrado"}), 404
+            return jsonify({"error": "Usuario o favorito no encontrado"}), 200
 
         # Verificar si el usuario está en la lista de favoritos
         is_favorite = user.tiene_favorito(favorite_user)
