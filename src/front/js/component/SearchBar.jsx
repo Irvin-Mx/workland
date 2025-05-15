@@ -27,17 +27,17 @@ const SearchBar = () => {
         onKeyDown={handleKeyDown}
         type="text"
         placeholder='Barra de busqueda' />
-      <div
+      <button
        onClick={()=>{
 
         actions.busquedaFreelancers(terminoBuqueda)
       }}
-        style={{ width: "50px", height: "100%",cursor:"pointer" }}
+        style={{ width: "50px", height: "100%",cursor:"pointer", backgroundColor:"#1e266d", color: "white" }}
         className={`d-flex justify-content-center align-items-center `}
       >
         <i 
         className={`${styles.searchbar_icon} fa-solid fa-magnifying-glass `}  ></i>
-      </div>
+      </button>
     </div>
   )
 }

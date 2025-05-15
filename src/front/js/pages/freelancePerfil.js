@@ -85,28 +85,45 @@ export const FreelancePerfil = () => {
 
     }, [freelance_id]);
 
-    const handleImageError = (e) => {
-        e.target.onerror = null; 
-        e.target.src = rigoImageUrl;
-    };
-
-
-
-
 
     return (
         <div className="container my-5">
             <div className="row">
                 {/* Perfil básico */}
                 <div className="col-md-8">
-                    <div className="card mb-3 shadow-sm" style={{ maxWidth: "800px" }}>
+                    <div className="card mb-3 shadow-sm position-relative" style={{ maxWidth: "800px" }}>
+                        {actions.checkLogInUser() === true ? (
+                            store.userProfile.rol === "user" || store.userProfile.rol === "admin" ?
+
+                                <button onClick={() => handleFavorite(freelance_id)} className="btn position-absolute"
+                                    style={{ top: "10px", right: "10px", zIndex: 1 }}>
+                                    {isInFavorites ? (
+                                        <>
+                                              <i className="fa-solid fa-heart fa-xl"style={{border: "2px", color:"#FF3860"}}></i>
+                                            
+                                        </>
+                                    ) : (
+                                        <>
+                                           <i className="fa-regular fa-heart fa-xl" ></i> 
+                                            
+                                        </>
+                                    )}
+                                </button>
+
+
+                                :
+                                null
+                        )
+                            :
+                            null
+                        }
                         <div className="row no-gutters g-0 align-items-center">
                             <div className="col-auto p-3">
                                 <img
                                     src={data?.img_url || rigoImageUrl}
                                     alt={`Imagen de ${data.name || "freelancer"}`}
                                     className="rounded-circle"
-                                    style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                                    style={{ width: "120px", height: "120px", objectFit: "cover" }}
                                 />
                             </div>
                             <div className="col">
@@ -114,7 +131,9 @@ export const FreelancePerfil = () => {
                                     <h2 className="card-title mb-1">{data?.service_title || "Profesión no especificada"}</h2>
                                     <h4 className="card-title mb-1">{data?.name}</h4>
                                     <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
+                                    <ReportButton report={report} setModalOpen={setModalOpen} />
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -167,7 +186,7 @@ export const FreelancePerfil = () => {
                             </div>
                         ))}
                     </div>
-         
+
 
                     {/* Solo para clientes */}
                     {actions.checkLogInUser() === true ? (
@@ -204,14 +223,14 @@ export const FreelancePerfil = () => {
                 {/* Imagen de portada */}
                 <div className="col-md-4">
                     <div className="card mb-3 shadow-sm">
-                    
+
                         <div className="card-body text-center">
-                            {store.userProfile.cover_img_url? (
+                            {store.userProfile.cover_img_url ? (
                                 <img
                                     src={store.userProfile.cover_img_url}
                                     alt="Imagen de portada"
                                     className="img-fluid"
-                                    style={{height: "200px", objectFit: "cover" }}
+                                    style={{ height: "200px", objectFit: "cover" }}
                                 />
                             ) : (
                                 <p>No se ha cargado una imagen de portada</p>

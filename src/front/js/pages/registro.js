@@ -219,7 +219,7 @@ export const Registro = () => {
 
                         </div>
                     </div>
-                    <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }}>Registrar</button>
+                    <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "white" }}>Registrar</button>
                     <Link to="/">
                         <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} >Cancelar</button>
                     </Link>
