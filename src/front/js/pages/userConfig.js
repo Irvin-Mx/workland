@@ -58,8 +58,9 @@ const UserConfig = () => {
                         <Link to={`/${store.userProfile?.rol=="freelance" ?"free":store.userProfile?.rol}/form`}>
                             <button
                                 type="button"
-                                className="btn btn-link">
-                                <i className="fa-solid fa-pen-to-square"></i>
+                                className="btn btn-primary d-flex align-items-center justify-content-center gap-2">
+                                    <p className="p-0 m-0">Editar</p>
+                                <i style={{fontSize:"25px"}} className="fa-solid fa-pen-to-square"></i>
                             </button>
 
                         </Link>
@@ -69,7 +70,7 @@ const UserConfig = () => {
                     </div>
                 </div>
                 <div className="container mt-4">
-                    <div className="row g-4">
+                    {/* <div className="row g-4">
                         <div className="col-md-6">
                             <div className="p-4">
                                     <h5 className="mb-3 d-flex align-items-center">
@@ -83,7 +84,7 @@ const UserConfig = () => {
                             </div>
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
 
 

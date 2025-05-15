@@ -15,9 +15,9 @@ const FavoriteItem = ({ id, img_url, last_name, name, handleFavorite }) => {
     console.log(id)
     return (
         <div
-        
-        style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}}
-        className='w-100  d-flex align-items-center flex-row p-2 rounded'>
+
+            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+            className='w-100  d-flex align-items-center flex-row p-2 rounded'>
             <div className='w-75 d-flex align-items-center gap-2 flex-row'>
                 <img src={img_url} alt="img p" style={{ height: "50px", width: "50px" }} className='rounded-circle' />
                 <h3>
@@ -63,16 +63,16 @@ const Favorites = () => {
 
 
     const handleFavorite = (id) => {
-      
-       
+
+
         actions.addOrRemoveFavorite({
             favorite_id: id,
             favorite_status: true
         }).then((res) => {
             actions.getAllFavorites()
-                .then((res)=>setUsersFavoritesArray(res.result))
+                .then((res) => setUsersFavoritesArray(res.result))
         }).catch((e) => { console.log("error", e) })
-  
+
     }
 
 
@@ -81,15 +81,30 @@ const Favorites = () => {
     if (isLoading) {
         return (
             <div>
-                <div>
-                    <h1>Favoritos.</h1>
+                
+                    <div className="jumbotron w-100">
+                        <div className="row aling-items-center">
+                            <div className="col-md-4 d-flex justify-content-center">
+                                <div className="col-md-8 align-items-center">
+                                    <p className="display-5"> <strong>Mis Favoritos</strong></p>
+                                </div>
+                                <img
+                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747256782/fav_sdchw3.png"
+                                    alt="favoritos"
+                                    className="img-fluid rounded-start"
+                                    style={{ height: "50px" }}
+                                />
+                            </div>
+                        </div>
+                    </div>
                     <p>cargando</p>
-                </div>
+                
             </div>
         )
     }
 
     return (
+
 
         <div className=" d-flex flex-column align-items-start h-100 p-3">
             <div className='container-fluid my-0 p-0'>
@@ -101,10 +116,12 @@ const Favorites = () => {
                             <p className="display-5"> <strong>Mis Favoritos</strong></p>
 
                         </div>
+
                             <img
                                 src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747256782/fav_sdchw3.png"
                                 alt="favoritos"
                                 className="img-fluid rounded-start"
+
                                 style={{ height: '50px' }}
                             />
                         </div>
@@ -134,6 +151,7 @@ const Favorites = () => {
                         </div>
                     )
                 }) : <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."} />}
+
 
             </div>
         </div>

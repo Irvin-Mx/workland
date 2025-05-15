@@ -14,8 +14,9 @@ const Ordenes = () => {
   useEffect(() => {
     actions.getOrders()
       .then((res) => {
+        const arraySorted=res.result.sort((a, b) => a.id - b.id);
 
-        setOrdenes(res.result)
+        setOrdenes(arraySorted)
       })
       .catch((err) => console.log(err))
       .finally(()=>setLoading(false))
@@ -31,7 +32,7 @@ const Ordenes = () => {
   
   return (
     <div style={{ height: "100vh" }} className=' w-100 d-flex align-items-start justify-content-start flex-column gap-2'>
-      <h1 className='text-center'>Tabla de ordenes</h1>
+      <h1 className=''>Tabla de ordenes</h1>
       {
         ordenes.length == 0 ?
           <ContenidoVacioPlaceholder mensaje={"No tienes ordenes creadas"}/>

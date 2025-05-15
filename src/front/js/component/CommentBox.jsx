@@ -48,7 +48,9 @@ const CommentBox = ({ freelance_id, setModalOpen, order_id, setModalInfoId, setO
             .then((res) => {
 
                 actions.getOrders()
-                    .then((res) => setOrdenes(res.result))
+                    .then((res) => {
+                        const arraySorted=res.result.sort((a, b) => a.id - b.id);
+                        setOrdenes(arraySorted)})
                     .catch((err) => toastFallo(err.msj))
 
 

@@ -101,7 +101,7 @@ const NavbarLateral = ({ user }) => {
     ];
 
     const renderLinks = (specificLinks) => (
-        <ul className={`navbar-nav sidebar accordion vh-100 d-none d-md-block ${styles.sidebar}`} id="accordionSidebar">
+        <ul style={{minHeight:"100vh",height:"100%"}} className={`navbar-nav sidebar accordion  d-none d-md-block ${styles.sidebar}`} id="accordionSidebar">
             <div>
                 {generalLinks.map((elem) => <LinkItem key={elem.name} {...elem} />)}
             </div>
@@ -117,7 +117,7 @@ const NavbarLateral = ({ user }) => {
     );
 
     return (
-        <div className="d-flex">
+        <div style={{minHeight:"100vh",height:"100%"}} className="d-flex">
             {user === "user" && renderLinks(userLinks)}
             {user === "freelance" && renderLinks(freelanceLinks)}
             {user === "admin" && renderLinks(adminLink)}

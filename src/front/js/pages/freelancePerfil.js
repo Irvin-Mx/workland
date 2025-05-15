@@ -10,32 +10,21 @@ export const FreelancePerfil = () => {
     const { store, actions } = useContext(Context);
     const { freelance_id } = useParams();
     const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [noEsta, setNoEsta] = useState(false);
     const [servicesByCategory, setServicesByCategory] = useState({});
     const navigate = useNavigate();
+
 
     const defaultFavoriteStatus = false
     const [modalOpen, setModalOpen] = useState(false)
     const [report, setReport] = useState(false)
 
     let [isInFavorites, setIsInFavorites] = useState(false)
-    console.log(actions.checkLogInUser())
+
 
     useEffect(() => {
-        actions.checkReport({ freelance_id })
-            .then((res) => {
-                setReport(res.result);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
 
-        actions.checkFavorite({ favorite_id: freelance_id })
-            .then((res) => {
-                setIsInFavorites(res.result);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
     }, []);
 
     const handleFavorite = () => {
@@ -56,6 +45,7 @@ export const FreelancePerfil = () => {
     };
 
     useEffect(() => {
+ 
         actions.getMyFreelanceProfile(freelance_id)
             .then((data) => {
 
@@ -72,6 +62,7 @@ export const FreelancePerfil = () => {
                         }
                     });
                     // console.log(data.result)
+            
 
                     setData(data.result);
                     setServicesByCategory(grouped);
@@ -79,12 +70,48 @@ export const FreelancePerfil = () => {
             })
             .catch((err) => {
                 console.error("Error al cargar el perfil freelance:", err);
-                alert("Hubo un problema al cargar el perfil. Por favor, inténtalo de nuevo.");
+
+
+            })
+
+                   actions.checkReport({ freelance_id })
+            .then((res) => {
+                setReport(res.result);
+            })
+            .catch((err) => {
+                console.log(err);
             });
 
+        actions.checkFavorite({ favorite_id: freelance_id })
+            .then((res) => {
+       
+                if(res?.error=="Usuario o favorito no encontrado"){
+                    setLoading(false)
+                    setNoEsta(true)
+                    return
+                }
+                // setIsInFavorites(res.result);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(()=>setLoading(false))
+    }, []);
 
-    }, [freelance_id]);
-
+    if(loading){
+        return(
+         <div  style={{fontSize:"40px",height:"100vh"}} className=" d-flex justify-content-lg-center align-items-center">
+                                <h2 className="text-center text-secondary" style={{fontSize:"40px"}}>Cargando.</h2>
+            </div>
+        )
+    }
+    if(noEsta){
+        return(
+            <div  style={{fontSize:"40px",height:"100vh"}} className=" d-flex justify-content-lg-center align-items-center">
+                                <h2 className="text-center text-secondary" style={{fontSize:"40px"}}>No se encuentra el freelance.</h2>
+            </div>
+        )
+    }
 
     return (
         <div className="container my-5">
@@ -215,9 +242,6 @@ export const FreelancePerfil = () => {
                     }
 
                     {/* Comentarios */}
-                    <div className="col-12 mt-4">
-                        <CommentSection freelance_id={freelance_id} />
-                    </div>
                 </div>
 
                 {/* Imagen de portada */}
@@ -238,6 +262,10 @@ export const FreelancePerfil = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="col-12 mt-4">
+                <CommentSection freelance_id={freelance_id} />
             </div>
 
             {/* Modal de reporte */}
