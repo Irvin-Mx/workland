@@ -24,7 +24,7 @@ const TeamSection = () => {
           <div className="col-md-4">
             <div className="card h-100 shadow-sm border-0 text-center p-4">
               <h5 className="card-title mb-3">Sebastián</h5>
-              <p className="text-muted">Full Stack Developer</p>
+              <p className="text-muted">Desarrollador Full Stack</p>
               <Link to="https://linkedin.com/in/fredy " target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm mt-auto">
                 <i className="fab fa-linkedin me-1"></i> LinkedIn
               </Link>
@@ -35,7 +35,7 @@ const TeamSection = () => {
           <div className="col-md-4">
             <div className="card h-100 shadow-sm border-0 text-center p-4">
               <h5 className="card-title mb-3">Irvin</h5>
-              <p className="text-muted">Full Stack Developer</p>
+              <p className="text-muted">Desarrollador Full Stack</p>
               <Link to="https://linkedin.com/in/sebastian " target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm mt-auto">
                 <i className="fab fa-linkedin me-1"></i> LinkedIn
               </Link>
