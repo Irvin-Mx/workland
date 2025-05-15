@@ -23,7 +23,7 @@ const FreelanceCard = ({user_name,title,id,cover_img_url}) => {
             </div>
                 <div className="card-body">
                     <h5>{user_name}</h5>
-                    <p className="card-text">
+                    <p style={{height:"3rem"}} className="card-text">
                         {
                             title
                         }

@@ -35,7 +35,7 @@ const Tabla = ({ lista, setOrdenes }) => {
    
         const columnOrder = [ 'freelance_name', 'user_name', "price", "freelance_email", "freelance_phone", "comment_id"];
         return (
-            <tr className='table-secondary'>
+            <tr className='table-secondary m-0 p-0'>
                 {columnOrder.map(column => {
                     const valor = data[column];
                     if (column === "price") {
@@ -77,7 +77,7 @@ const Tabla = ({ lista, setOrdenes }) => {
 
     return (
         <>
-            <table className='table striped'>
+            <table className='table striped w-100'>
                 <thead 
                 style={{ backgroundColor: "#1E266D", color: "white"}}
                 className='thead-dark'
@@ -85,33 +85,39 @@ const Tabla = ({ lista, setOrdenes }) => {
                 >
                     <tr >
        
-                        <td scope="col" 
+                        <td scope="col-2" 
+                        className={`text-center`}
           
                         >
                             Nombre de freelance
                         </td>
-                        <td scope="col" 
+                        <td scope="col-2" 
+                        className={`text-center`}
           
                         >
                             Nombre de consumidor
                         </td>
-                        <td scope="col" 
+                        <td scope="col-2" 
+                        className={`text-center`}
            
                         >
                             Precio
                         </td>
 
-                        <td scope="col" 
+                        <td scope="col-2" 
+                        className={`text-center`}
            
                         >
                             Correo Electronico
                         </td>
-                        <td scope="col" 
+                        <td scope="col-2"
+                        className={`text-center`} 
             
                          >
                             Teléfono
                         </td>
-                        <td scope="col" 
+                        <td scope="col-1" 
+                        className={`text-center`}
        
                          >
                             Comentario

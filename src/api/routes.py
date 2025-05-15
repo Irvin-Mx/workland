@@ -540,6 +540,7 @@ def get_freelance(freelance_id):
             "service_description": user_dict.service_description,
             "profile_description": user_dict.profile_description,
             "img_url": user_dict.img_url,
+            "cover_img_url": user_dict.cover_img_url,
             "services": services
         }
         return jsonify({
