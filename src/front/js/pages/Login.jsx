@@ -77,8 +77,8 @@ const Login = () => {
 
     // const { actions } = useContext(Context);
     return (
-        <div style={{backgroundColor:"#CCD6F6" ,height:"100vh"}} className="d-flex flex-column justify-content-center align-items-center" >
-            <h1 className="text-center m-5">¡Que gusto tenerte devuelta a Workland!</h1>
+        <div style={{backgroundColor:"#CCD6F6" ,height:"100vh"}} className="d-flex flex-column justify-content-start align-items-center" >
+            <h1 className="text-center m-3">¡Que gusto tenerte devuelta a Workland!</h1>
             <div className="w-50 p-4 border rounded shadow" style={{ background: "aliceblue" }}>
                 <form noValidate className="" onSubmit={handleSubmit(onSubmit)}>
                     <h5 className="text-center mb-4">Ingresa los siguientes datos para iniciar sesion</h5>
