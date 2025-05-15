@@ -40,7 +40,7 @@ const ReportModal = ({ modalOpen, setModalOpen, freelance_id }) => {
           <i className="fa-solid fa-xmark text-white"></i>
         </button>
         <div className='d-flex  justify-content-center align-items-center flex-column'>
-          <h5 className='text-white' >Agrega un comentario.</h5>
+          <h5 className='text-white' >Agrega un reporte.</h5>
           <ReportBox freelance_id={freelance_id} setModalOpen={setModalOpen} />
         </div>
       </div>

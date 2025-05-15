@@ -29,12 +29,16 @@ const CommentsMade = ({deleteButton}) => {
             <h1 className=" w-100 ">
                 Comentarios.
             </h1>
-            {
+            <div className="w-100 row">
+                            {
                 data?.length !== 0 ?
                     data?.map(({ author_full_name, id, stars, author_img_url, text }) => <CommentCard key={id} text={text} userName={author_full_name} img_url={author_img_url} stars={stars} deleteButton  id={id} setData={setData}/>)
                     :
                     <ContenidoVacioPlaceholder mensaje={"No has creado comentarios."}/>
             }
+
+            </div>
+
 
         </div>)
 

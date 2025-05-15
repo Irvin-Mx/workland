@@ -21,7 +21,7 @@ const FreelanecrOrderCard = ({ buyer_info, comment, service, id, is_payed, price
             <div>
                 <h5 style={{ fontSize: title_font }} className='text-bold'>Comprador</h5>
                 <div className='d-flex align-items-center justify-content-between flex-row'>
-                    <p style={p_font}>Nombre: {buyer_info.buyer_full_name}</p>
+                    <p style={p_font}>Nombre: <strong>{buyer_info.buyer_full_name}</strong> </p>
                 </div>
             </div>
             <div className='d-flex align-items-start justify-content-start flex-column'>
@@ -30,8 +30,8 @@ const FreelanecrOrderCard = ({ buyer_info, comment, service, id, is_payed, price
                     {
                         comment?.id ?
                             <div className='d-flex align-items-start justify-content-start w-100 flex-column '>
-                                <p className='p-0 d-flex align-items-center' style={p_font}>Estrellas {comment.stars}<FaStar/></p>
-                                <p style={p_font}>Mensaje: {comment.text}</p>
+                                <p className='p-0 d-flex align-items-center' style={p_font}> <strong>Estrellas {comment.stars}</strong> <FaStar/></p>
+                                <p style={{ fontSize: title_font }}> Comentario:<strong>{comment.text}</strong>   </p>
                             </div>
                             :
                             <p style={p_font}>No hay cometario</p>
