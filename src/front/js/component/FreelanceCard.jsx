@@ -28,7 +28,7 @@ const FreelanceCard = ({user_name,title,id,cover_img_url}) => {
                             title
                         }
                     </p>
-                    <button className='btn btn-primary' onClick={()=>navigate(`/freelancePerfil/${id}`)}>
+                    <button className='btn' style={{ background: "#00D1B2", color: "aliceblue" }} onClick={()=>navigate(`/freelancePerfil/${id}`)}>
                         Detalles del Freelance
 
                     </button>
