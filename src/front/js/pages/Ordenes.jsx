@@ -31,7 +31,7 @@ const Ordenes = () => {
   
   
   return (
-    <div style={{ height: "100vh" }} className=' w-100 d-flex align-items-start justify-content-start flex-column gap-2'>
+    <div style={{ height: "100vh" }} className=' container-fluid d-flex align-items-start justify-content-start flex-column gap-2'>
       <h1 className=''>Tabla de ordenes</h1>
       {
         ordenes.length == 0 ?

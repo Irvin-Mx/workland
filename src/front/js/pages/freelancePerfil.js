@@ -46,7 +46,7 @@ export const FreelancePerfil = () => {
     };
 
     useEffect(() => {
- 
+
         actions.getMyFreelanceProfile(freelance_id)
             .then((data) => {
 
@@ -63,8 +63,8 @@ export const FreelancePerfil = () => {
                         }
                     });
                     // console.log(data.result)
-            
 
+                    console.log(data.result)
                     setData(data.result);
                     setServicesByCategory(grouped);
                 }
@@ -75,7 +75,7 @@ export const FreelancePerfil = () => {
 
             })
 
-                   actions.checkReport({ freelance_id })
+        actions.checkReport({ freelance_id })
             .then((res) => {
                 setReport(res.result);
             })
@@ -85,8 +85,8 @@ export const FreelancePerfil = () => {
 
         actions.checkFavorite({ favorite_id: freelance_id })
             .then((res) => {
-       
-                if(res?.error=="Usuario o favorito no encontrado"){
+
+                if (res?.error == "Usuario o favorito no encontrado") {
                     setLoading(false)
                     setNoEsta(true)
                     return
@@ -96,78 +96,103 @@ export const FreelancePerfil = () => {
             .catch((err) => {
                 console.log(err);
             })
-            .finally(()=>setLoading(false))
+            .finally(() => setLoading(false))
     }, []);
 
-    if(loading){
-        return(
-         <div  style={{fontSize:"40px",height:"100vh"}} className=" d-flex justify-content-lg-center align-items-center">
-                                <h2 className="text-center text-secondary" style={{fontSize:"40px"}}>Cargando.</h2>
+    if (loading) {
+        return (
+            <div style={{ fontSize: "40px", height: "100vh" }} className=" d-flex justify-content-lg-center align-items-center">
+                <h2 className="text-center text-secondary" style={{ fontSize: "40px" }}>Cargando.</h2>
             </div>
         )
     }
-    if(noEsta){
-        return(
-            <div  style={{fontSize:"40px",height:"100vh"}} className=" d-flex justify-content-lg-center align-items-center">
-                                <h2 className="text-center text-secondary" style={{fontSize:"40px"}}>No se encuentra el freelance.</h2>
+    if (noEsta) {
+        return (
+            <div style={{ fontSize: "40px", height: "100vh" }} className=" d-flex justify-content-lg-center align-items-center">
+                <h2 className="text-center text-secondary" style={{ fontSize: "40px" }}>No se encuentra el freelance.</h2>
             </div>
         )
     }
 
     return (
-        <div style={{position:"relative"}} className="container my-5 ">
+        <div  className="container my-1 w-100">
             <div className="row">
                 {/* Perfil básico */}
-                <div className="col-md-8">
-                    <div className="card mb-3 shadow-sm position-relative" style={{ maxWidth: "800px" }}>
-                        {actions.checkLogInUser() === true ? (
-                            store.userProfile.rol === "user" || store.userProfile.rol === "admin" ?
+                <div className="col-md-8 d-flex align-items-center justify-content-center flex-row w-100 gap-2">
+                    <div className="card mb-3 shadow-sm position-relative w-75" style={{ maxWidth: "800px" }}>
+                        <div className="bg-primary" >
+                                     <img
+                                    src={data?.cover_img_url}
+                                    alt="Imagen de portada"
+                                    className="img-fluid"
+                                    style={{ height: "200px",width:"100%", objectFit: "cover" }}
+                                />
 
-                                <button onClick={() => handleFavorite(freelance_id)} className="btn position-absolute"
-                                    style={{ top: "10px", right: "10px", zIndex: 1 }}>
-                                    {isInFavorites ? (
-                                        <>
-                                              <i className="fa-solid fa-heart fa-xl"style={{border: "2px", color:"#FF3860"}}></i>
-                                            
-                                        </>
-                                    ) : (
-                                        <>
-                                           <i className="fa-regular fa-heart fa-xl" ></i> 
-                                            
-                                        </>
-                                    )}
-                                </button>
+                        </div>
+
+                        <div style={{ position: "relative" }}>
+                            {actions.checkLogInUser() === true ? (
+                                store.userProfile.rol === "user" || store.userProfile.rol === "admin" ?
+
+                                    <button onClick={() => handleFavorite(freelance_id)} className="btn position-absolute"
+                                        style={{ top: "10px", right: "10px", zIndex: 1 }}>
+                                        {isInFavorites ? (
+                                            <>
+                                                <i className="fa-solid fa-heart fa-xl" style={{ border: "2px", color: "#FF3860" }}></i>
+
+                                            </>
+                                        ) : (
+                                            <>
+                                                <i className="fa-regular fa-heart fa-xl" ></i>
+
+                                            </>
+                                        )}
+                                    </button>
 
 
+                                    :
+                                    null
+                            )
                                 :
                                 null
-                        )
-                            :
-                            null
-                        }
-                        <div className="row no-gutters g-0 align-items-center">
-                            <div className="col-auto p-3">
-                                <img
-                                    src={data?.img_url || rigoImageUrl}
-                                    alt={`Imagen de ${data.name || "freelancer"}`}
-                                    className="rounded-circle"
-                                    style={{ width: "120px", height: "120px", objectFit: "cover" }}
-                                />
-                            </div>
-                            <div className="col">
-                                <div className="card-body">
-                                    <h2 className="card-title mb-1">{data?.service_title || "Profesión no especificada"}</h2>
-                                    <h4 className="card-title mb-1">{data?.name}</h4>
-                                    <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
-                                    <ReportButton report={report} setModalOpen={setModalOpen} />
+                            }
+                            <div className="row no-gutters g-0 align-items-center">
+                                <div className="col-auto p-3">
+                                    <img
+                                        src={data?.img_url || rigoImageUrl}
+                                        alt={`Imagen de ${data.name || "freelancer"}`}
+                                        className="rounded-circle"
+                                        style={{ width: "120px", height: "120px", objectFit: "cover" }}
+                                    />
                                 </div>
+                                <div className="col">
+                                    <div className="card-body">
+                                        <h2 className="card-title mb-1">{data?.service_title || "Profesión no especificada"}</h2>
+                                        <h4 className="card-title mb-1">{data?.name}</h4>
+                                        <p>{data?.profile_description || "Este usuario aún no ha completado su perfil profesional."}</p>
+                                        {actions.checkLogInUser() === true ? (
+                                            store.userProfile.rol === "user" || store.userProfile.rol === "admin" ?
+                                                <ReportButton report={report} setModalOpen={setModalOpen} />
+                                                :
+                                                null
+                                        )
+                                            :
+                                            null
+                                        }
 
+                                    </div>
+
+                                </div>
                             </div>
+
                         </div>
+
+
                     </div>
 
                     {/* Sección de servicios */}
-                    <ul className="nav nav-tabs mb-3" id="pricingTab" role="tablist">
+                    <div className="w-25 h-100 d-flex align-items-start flex-column">
+                        <ul className="nav nav-tabs mb-3   " id="pricingTab" role="tablist">
                         {Object.entries(categories).map(([key, label], index) => (
                             <li className="nav-item" role="presentation" key={key}>
                                 <button
@@ -215,44 +240,21 @@ export const FreelancePerfil = () => {
                         ))}
                     </div>
 
+                    </div>
+              
 
-                    {/* Solo para clientes */}
-                    {actions.checkLogInUser() === true ? (
-                        store.userProfile.rol === "user" || store.userProfile.rol === "admin" ?
-                            <div className="mt-4">
-                                <button onClick={() => handleFavorite(freelance_id)} className="btn btn-primary ms-2">
-                                    {isInFavorites ? (
-                                        <>
-                                            <i className="fa-solid fa-heart"></i>
-                                            <span> Está en favoritos</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <i className="fa-regular fa-heart"></i>
-                                            <span> No está en favoritos</span>
-                                        </>
-                                    )}
-                                </button>
-                                <ReportButton report={report} setModalOpen={setModalOpen} />
-                            </div>
-                            :
-                            null
-                    )
-                        :
-                        null
-                    }
 
                     {/* Comentarios */}
                 </div>
 
                 {/* Imagen de portada */}
-                <div className="col-md-4">
+                {/* <div className="col-md-4">
                     <div className="card mb-3 shadow-sm">
 
                         <div className="card-body text-center">
-                            {store.userProfile.cover_img_url ? (
+                            {data?.cover_img_url ? (
                                 <img
-                                    src={store.userProfile.cover_img_url}
+                                    src={data?.cover_img_url}
                                     alt="Imagen de portada"
                                     className="img-fluid"
                                     style={{ height: "200px", objectFit: "cover" }}
@@ -262,7 +264,7 @@ export const FreelancePerfil = () => {
                             )}
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <div className="col-12 mt-4">
@@ -271,7 +273,7 @@ export const FreelancePerfil = () => {
 
             {/* Modal de reporte */}
             <ReportModal modalOpen={modalOpen} setModalOpen={setModalOpen} freelance_id={freelance_id} />
-            <BotonRetroseso/>
+            <BotonRetroseso />
         </div>
     );
 };

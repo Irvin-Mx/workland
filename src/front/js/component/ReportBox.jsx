@@ -75,9 +75,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                                 <option value="Parece fraude.">Parece fraude.</option>
                                 <option value="Comentarios ofensivos.">Comentarios ofensivos.</option>
                             </select>
-                            <div style={{ height: "20px" }}>
 
-                            </div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">
@@ -101,11 +99,11 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                                 errors.text && errors.text.type === "maxLength" && <span className='text-white bg-danger'>Sobrepasa el limite de carateres.</span>
                             }
                         </div>
-                        <div class="modal-footer">
+                        <div className="modal-footer">
                             <button type='submit' className='btn btn-primary'>
                                 Enviar
                             </button>
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button onClick={()=>setModalOpen(false)} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
 
                     </form>
