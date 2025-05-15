@@ -28,7 +28,7 @@ const ResutadoDeBusqueda = () => {
               />
             </div>
             <div className="col-md-8 align-items-center">
-              <SearchBar />
+              <SearchBar id="searchbar" />
               <p className="lead"> Resultado de búsqueda</p>
 
             </div>
