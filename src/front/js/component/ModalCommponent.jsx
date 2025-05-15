@@ -50,7 +50,7 @@ const ModalCommponent = ({modalOpen,setModalOpen,freelance_id,order_id,setModalI
             <i className="fa-solid fa-xmark text-white"></i>
           </button>
           <div className='d-flex  justify-content-center align-items-center flex-column'>
-            <h5 className='text-white' >Agrega un comentario.</h5>
+            <h5 className='text-white' >Cuentanos tu experiencia.</h5>
                       <CommentBox freelance_id={freelance_id} setModalOpen={setModalOpen} order_id={order_id} setModalInfoId={setModalInfoId} setOrdenes={setOrdenes}/>
           </div>
         </div>

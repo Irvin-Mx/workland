@@ -3,3 +3,7 @@
     text-align: center;
     border: 1px black solid;
 }
+
+table{
+    border-radius: 10px;
+}

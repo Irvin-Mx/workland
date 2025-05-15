@@ -29,7 +29,9 @@ const userEdit = () => {
                 <i className="fas fa-bars"></i>
             </button>
             
+
             <div className="w-100 m-0">
+
                 <Outlet />
             </div>
         </div>

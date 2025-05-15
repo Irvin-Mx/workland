@@ -103,7 +103,7 @@ const CommentBox = ({ freelance_id, setModalOpen, order_id, setModalInfoId, setO
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                                Comenta aquí <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black"}`}>({msj?.length || 0}/200 caracteres)</span>
+                                Deja un comentario al freelancer. <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black"}`}>({msj?.length || 0}/200 caracteres)</span>
                             </label>
                             <textarea
 

@@ -6,7 +6,7 @@ import ModalCommponent from "../component/ModalCommponent.jsx"
 const ButtonComment = ({ valor, setModalOpen, id, setModalInfoId, setModalOrderId, orderId }) => {
     if (!valor) {
         return (
-            <p style={{textDecoration: 'underline' ,cursor:"pointer"}} onClick={() => {
+            <p style={{textDecoration: 'underline' ,cursor:"pointer",color:"#097969	"}} onClick={() => {
                 setModalOpen(true)
                 setModalInfoId(id)
                 setModalOrderId(orderId)
@@ -18,7 +18,7 @@ const ButtonComment = ({ valor, setModalOpen, id, setModalInfoId, setModalOrderI
 
     }
     return (
-        <p className=''>
+        <p style={{color:"#880808"}}>
             Calificado
         </p>
     )
@@ -32,28 +32,17 @@ const Tabla = ({ lista, setOrdenes }) => {
     const [modalOrderId, setModalOrderId] = useState(0)
 
     const Row = ({ data }) => {
-        // console.log(data)
-        const columnOrder = ['id', 'freelance_name', 'user_name', "price", "freelance_email", "freelance_phone", "comment_id"];
+   
+        const columnOrder = [ 'freelance_name', 'user_name', "price", "freelance_email", "freelance_phone", "comment_id"];
         return (
-            <tr>
+            <tr className='table-secondary'>
                 {columnOrder.map(column => {
                     const valor = data[column];
-                    if (column === "id") {
-                        return (
-                            <th
-                                scope="row"
-                                className={`${styles.tabla_td}`}
-                                key={valor}
-                            >
-                                {`${valor}`}
-                            </th>
-                        );
-                    }
                     if (column === "price") {
                         return (
                             <th
                                 scope="row"
-                                className={`${styles.tabla_td}`}
+                                className={`text-center`}
                                 key={valor}
                             >
                                 {`$ ${valor}`}
@@ -64,7 +53,8 @@ const Tabla = ({ lista, setOrdenes }) => {
                         return (
                             <td
                                 scope="row"
-                                className={`${styles.tabla_td}`}
+                                className={`text-center`}
+                        
                                 key={valor}
                             >
                                 <ButtonComment valor={valor} setModalOpen={setModalOpen} id={data["freelance_id"]} orderId={data["id"]} setModalOrderId={setModalOrderId} setModalInfoId={setModalInfoId} />
@@ -73,7 +63,7 @@ const Tabla = ({ lista, setOrdenes }) => {
                     }
                     return (
                         <td
-                            className={`${styles.tabla_td}`}
+                        className={`text-center`}
                             key={valor}
                         >
                             {`${valor}`}
@@ -87,29 +77,43 @@ const Tabla = ({ lista, setOrdenes }) => {
 
     return (
         <>
-            <table className='table '>
-                <thead style={{ backgroundColor: "#1E266D", color: "white" }} >
+            <table className='table striped'>
+                <thead 
+                style={{ backgroundColor: "#1E266D", color: "white"}}
+                className='thead-dark'
+ 
+                >
                     <tr >
-                        <td scope="col" className={`${styles.tabla_td} `} >
-                            Id
-                        </td>
-                        <td scope="col" className={`${styles.tabla_td} `} >
+       
+                        <td scope="col" 
+          
+                        >
                             Nombre de freelance
                         </td>
-                        <td scope="col" className={`${styles.tabla_td} `} >
+                        <td scope="col" 
+          
+                        >
                             Nombre de consumidor
                         </td>
-                        <td scope="col" className={`${styles.tabla_td} `} >
+                        <td scope="col" 
+           
+                        >
                             Precio
                         </td>
 
-                        <td scope="col" className={`${styles.tabla_td} `} >
+                        <td scope="col" 
+           
+                        >
                             Correo Electronico
                         </td>
-                        <td scope="col" className={`${styles.tabla_td} `} >
+                        <td scope="col" 
+            
+                         >
                             Teléfono
                         </td>
-                        <td scope="col" className={`${styles.tabla_td} `} >
+                        <td scope="col" 
+       
+                         >
                             Comentario
                         </td>
                     </tr>

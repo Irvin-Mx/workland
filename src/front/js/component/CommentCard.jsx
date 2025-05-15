@@ -38,8 +38,8 @@ const CommentCard = ({ userName, stars, img_url, text, id, deleteButton,setData 
     }
 
     return (
-        <div style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }} className="card container-fluid" >
-            <div className="card-body">
+        <div style={{ boxShadow: "hsla(0, 0.00%, 0.00%, 0.35) 0px 5px 15px" }} className="card container-fluid m-1 p-0 col-5" >
+            <div className="card-body p-2">
                 <div className='d-flex justify-content-between align-content-center flex-row'>
                     <div className='d-flex justify-content-start align-content-center flex-row'>
                         <div className="rounded-circle" style={{ height: "50px", width: "50px", marginRight: "10px" }}>

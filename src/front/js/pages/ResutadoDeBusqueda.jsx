@@ -28,9 +28,11 @@ const ResutadoDeBusqueda = () => {
               />
             </div>
             <div className="col-md-8 align-items-center">
+
               <p className="h4"> ¡Encuentra tu servicio!</p>
               <SearchBar />
             
+
 
             </div>
           </div>
