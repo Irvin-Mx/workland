@@ -10,7 +10,7 @@ const ReportButton = ({report,setModalOpen}) => {
   return (
     <button 
     onClick={()=>setModalOpen(true)}
-    className="btn fs-6 text-decoration-underline" style={{color:'#1E3E6D', padding:'0'}}>Reportar Perfil</button>
+    className="btn fs-6 text-decoration-underline" style={{color:'#800020	', padding:'0'}}>Reportar Perfil</button>
   )
 }
 

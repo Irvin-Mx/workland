@@ -31,6 +31,7 @@ const Ordenes = () => {
   
   
   return (
+
     <div style={{ height: "100vh" }} className=' w-100 d-flex align-items-start justify-content-start flex-column gap-2'>
       <div className="jumbotron w-100 m-0 jumbotron-fluid" style={{background:"aliceblue",padding: "1rem" }}>
                           <div className="row aling-items-center">
@@ -53,6 +54,8 @@ const Ordenes = () => {
                           </div>
                         </div>
    
+
+
       {
         ordenes.length == 0 ?
           <ContenidoVacioPlaceholder mensaje={"No tienes ordenes creadas"}/>

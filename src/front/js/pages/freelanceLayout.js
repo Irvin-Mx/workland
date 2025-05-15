@@ -135,13 +135,20 @@ export const FreelanceLayout = () => {
                             style={{ width: 30, height: 30, lineHeight: "30px", color: "white" }}>
                             {i + 1}
                         </div>
-                        <div className="text-capitalize">{cat}</div>
+                        {cat === "basic" ? <div className="text-capitalize">Básico</div> : null}
+                        {cat === "pro" ? <div className="text-capitalize">Profesional</div> : null}
+                        {cat === "enterprise" ? <div className="text-capitalize">Empresarial</div> : null}
+                        
                     </div>
                 ))}
             </div>
             <div className="row">
-                <div className="col-md-7 mt-4">
-                    <h2>Formulario para {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}</h2>
+
+                   
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Basic" ?  <h2>Formulario: Básico</h2>:null  }
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Pro" ?  <h2>Formulario: Profesional</h2>:null  }
+                    {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Enterprise" ?  <h2>Formulario: Empresarial</h2>:null  }
+
                     <div className="d-flex flex-column">
 
                         <div className="input-group w-100 mb-4">
