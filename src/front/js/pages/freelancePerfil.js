@@ -5,6 +5,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import CommentSection from "../component/CommentSection.jsx";
 import ReportButton from "../component/ReportButton.jsx";
 import ReportModal from "../component/ReportModal.jsx";
+import BotonRetroseso from "../component/BotonRetroseso.jsx";
 
 export const FreelancePerfil = () => {
     const { store, actions } = useContext(Context);
@@ -114,7 +115,7 @@ export const FreelancePerfil = () => {
     }
 
     return (
-        <div className="container my-5">
+        <div style={{position:"relative"}} className="container my-5 ">
             <div className="row">
                 {/* Perfil básico */}
                 <div className="col-md-8">
@@ -270,6 +271,7 @@ export const FreelancePerfil = () => {
 
             {/* Modal de reporte */}
             <ReportModal modalOpen={modalOpen} setModalOpen={setModalOpen} freelance_id={freelance_id} />
+            <BotonRetroseso/>
         </div>
     );
 };

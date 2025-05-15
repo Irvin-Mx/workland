@@ -81,7 +81,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                                Comenta aquí <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black"}`}>({msj?.length || 0}/200 caracteres)</span>
+                                Explicanos los motivos del reporte. <span className={`${msj?.length >= MAX_CHARACTERS ? "text-danger" : "text-black"}`}>({msj?.length || 0}/200 caracteres)</span>
                             </label>
                             <textarea
 
@@ -105,7 +105,7 @@ const ReportBox = ({ freelance_id, setModalOpen }) => {
                             <button type='submit' className='btn btn-primary'>
                                 Enviar
                             </button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
 
                     </form>
