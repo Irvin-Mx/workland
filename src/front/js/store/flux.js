@@ -261,7 +261,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        alert("Producto agregado correctamente ✅");
+                    
                         return data;
                     } else {
 
@@ -292,8 +292,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                         return data;
                     } else {
-
-                        alert(data.error || "Error al obtener el perfil de usuario");
                         return null;
                     }
                 } catch (e) {

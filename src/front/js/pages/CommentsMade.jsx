@@ -26,7 +26,7 @@ const CommentsMade = ({deleteButton}) => {
     if (isLoading == false) {
 
         return (<div className='w-100 bg-white d-flex justify-content-start align-items-center  flex-column gap-2'>
-            <h1 className=" w-100 text-center">
+            <h1 className=" w-100 ">
                 Comentarios.
             </h1>
             {
@@ -41,7 +41,7 @@ const CommentsMade = ({deleteButton}) => {
     } else {
         return (
             <div className='w-100 bg-white d-flex justify-content-start align-items-center  flex-column gap-2'>
-                <h1 className=" w-100 text-center">
+                <h1 className=" w-100">
                     Comentarios.
                 </h1>
                 <ContenidoVacioPlaceholder mensaje={"No has creado comentarios."}/>

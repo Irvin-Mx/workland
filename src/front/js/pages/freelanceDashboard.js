@@ -23,20 +23,20 @@ const FreelanceDashboard = () => {
                
 
                 <div>
-                    <div class="card mb-3 w-80 border-0">
-                        <div class="row g-0">
-                            <div class="col-md-4">
+                    <div className="card mb-3 w-80 border-0">
+                        <div className="row g-0">
+                            <div className="col-md-4">
                                 <img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747168878/emprendedor-01_spuvcr.png"
                                     alt="Trendy Pants and Shoes"
-                                    class="img-fluid rounded-start"
+                                    className="img-fluid rounded-start"
                                     style={{ width: '400px' }}
                                 />
                             </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title display-5">¿Listo para comenzar?</h5>
-                                    <p class="card-text lead">
+                            <div className="col-md-8">
+                                <div className="card-body">
+                                    <h5 className="card-title display-5">¿Listo para comenzar?</h5>
+                                    <p className="card-text lead">
                                        
                                         ¡Bienvenido a nuestra comunidad de emprendedores! Aquí, tienes la oportunidad de ofrecer tus servicios y conectar con personas que buscan lo que tú ofreces.
                                         Recuerda que en nuestra plataforma, tú decides <strong>cómo</strong>, <strong>cuándo</strong> y <strong>cuánto</strong> trabajar. Aquí puedes ofrecer tus servicios y conectar con personas que valoran lo que haces.
@@ -47,7 +47,7 @@ const FreelanceDashboard = () => {
                     </div>
 
                     <h4 className="mt-4 display-6">¿Cómo empezar?</h4>
-                    <p class=" lead">
+                    <p className=" lead">
                         Estás a pocos pasos de conseguir el trabajo de tus sueños. <br/>
                         Aquí tienes una guía rápida para que puedas empezar a ofrecer tus servicios y conectar con clientes potenciales.
                     </p>
@@ -60,7 +60,7 @@ const FreelanceDashboard = () => {
                                         <img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747170250/emprendedor-03_jb8vpi.png"
                                     alt="Trendy Pants and Shoes"
-                                    class="img-fluid rounded-start"
+                                    className="img-fluid rounded-start"
                                     style={{ width: '250px' }}
                                 />
                                         <h3 className="card-title">Completa tu perfil</h3>
@@ -75,7 +75,7 @@ const FreelanceDashboard = () => {
                                              <img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747170687/emprendedor-02_lv2owo.png"
                                     alt="Trendy Pants and Shoes"
-                                    class="img-fluid rounded-start"
+                                    className="img-fluid rounded-start"
                                     style={{ width: '250px' }}
                                 />
                                             <h3 className="card-title">Sube tus productos</h3>
@@ -91,7 +91,7 @@ const FreelanceDashboard = () => {
                                            <img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747170856/emprendedor-04_jsxdaa.png"
                                     alt="Trendy Pants and Shoes"
-                                    class="img-fluid rounded-start"
+                                    className="img-fluid rounded-start"
                                     style={{ width: '250px' }}
                                 />
                                             <h3 className="card-title">Conecta tu PayPal</h3>

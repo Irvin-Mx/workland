@@ -14,6 +14,7 @@ const freelanceLinks = [
     { name: "CV", path: "/free/cv", icon: <i className="fa-solid fa-id-badge fa-xl m-2"></i> },
     { name: "Mis servicios", path: "/free/layout", icon: <i className="fa-solid fa-xl fa-business-time m-2"></i> },
     { name: "Mis Ordenes", path: "/free/ordenes", icon: <i className="fa-solid fa-bag-shopping fa-xl m-2"></i> },
+    { name: "Mi Vista Previa", path: "/free/vista-previa", icon: <i className="fa-solid fa-eye fa-xl m-2"></i> },
     { name: "Paypal", path: "https://www.paypal.com", icon: <i className="fa-brands fa-paypal fa-xl m-2"></i> },
 ];
 
@@ -100,7 +101,7 @@ const NavbarLateral = ({ user }) => {
     ];
 
     const renderLinks = (specificLinks) => (
-        <ul className={`navbar-nav sidebar accordion vh-100 d-none d-md-block ${styles.sidebar}`} id="accordionSidebar">
+        <ul style={{minHeight:"100vh",height:"100%"}} className={`navbar-nav sidebar accordion  d-none d-md-block ${styles.sidebar}`} id="accordionSidebar">
             <div>
                 {generalLinks.map((elem) => <LinkItem key={elem.name} {...elem} />)}
             </div>
@@ -116,10 +117,10 @@ const NavbarLateral = ({ user }) => {
     );
 
     return (
-        <div className="d-flex">
+        <div style={{minHeight:"100vh",height:"100%"}} className="d-flex">
             {user === "user" && renderLinks(userLinks)}
             {user === "freelance" && renderLinks(freelanceLinks)}
-            {user === "admin" && renderLinks([])}
+            {user === "admin" && renderLinks(adminLink)}
         </div>
     );
 };

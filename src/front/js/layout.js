@@ -83,8 +83,6 @@ const Layout = () => {
                             <Route element={<ResutadoDeBusqueda />} path="/busqueda" />
                             <Route element={<TeamSection />} path="/el-equipo" />
 
-
-
                             
 
 
