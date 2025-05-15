@@ -32,7 +32,7 @@ const LinkItem = ({ name, path, icon }) => {
     const isExternal = path.startsWith("http");
 
     const baseStyle = {
-        color: hover || isActive ? '#43bea9' : '#1E3E6D', 
+        color: hover || isActive ? '#249483' : '#1E3E6D', 
         backgroundColor: hover || isActive ? '#e4ecf7' : 'transparent',
         textDecoration: 'none',
       
@@ -48,7 +48,7 @@ const LinkItem = ({ name, path, icon }) => {
 
     const iconStyle = {
         marginRight: '10px',
-        color: hover || isActive ? '#43bea9' : '#1E3E6D',
+        color: hover || isActive ? '#249483' : '#1E3E6D',
     };
 
     if (isExternal) {

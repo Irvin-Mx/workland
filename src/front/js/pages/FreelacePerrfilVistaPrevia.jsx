@@ -43,7 +43,7 @@ export const FreelancePerfilVistaPrevia = () => {
             })
             .catch((err) => {
                 console.error("Error al cargar el perfil freelance:", err);
-                alert("Hubo un problema al cargar el perfil. Por favor, inténtalo de nuevo.");
+                // alert("Hubo un problema al cargar el perfil. Por favor, inténtalo de nuevo.");
             })
             .finally(()=>setLoading(false))
     }, [
