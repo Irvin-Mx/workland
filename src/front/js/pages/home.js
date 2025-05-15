@@ -111,8 +111,8 @@ export const Home = () => {
 
 				{/* Main Content */}
 				{/*Top section*/}
-				<div className="row align-items-center my-5">
-					<div className="col">
+				<div className="row align-items-center my-5 w-100">
+					<div className="col-4 m-0">
 						<div>
 							<img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747171959/indicadores-07_c8ynkt.png"
@@ -123,7 +123,7 @@ export const Home = () => {
 							<h3 className="display-6"><strong>Conexión rápida</strong></h3>
 						</div>
 					</div>
-					<div className="col">
+					<div className="col-4 m-0">
 						<div>
 							<img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747171959/indicadores-06_dsquob.png"
@@ -134,7 +134,7 @@ export const Home = () => {
 							<h3 className="display-6"><strong>Gestión integral</strong></h3>
 						</div>
 					</div>
-					<div className="col">
+					<div className="col-4 m-0">
 						<div>
 							<img
                                     src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747171959/indicadores-05_sgjbiq.png"
@@ -151,7 +151,7 @@ export const Home = () => {
 				<div className="d-flex flex-column justify-content-center align-items-center">
 					<div className="w-75">
 						{/* Card */}
-						<div className="card mb-4 ">
+						<div  className="card mb-4 ">
 							<div className="row g-0 ">
 								<div className="col-md-5 d-flex flex-column justify-content-center align-items-center p-4">
 									<img src="https://res.cloudinary.com/dmuktnm3l/image/upload/v1747096924/homeContent1_p1sesm.jpg" className="img-fluid rounded-start object-fit-contain" alt="..." />
