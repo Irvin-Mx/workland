@@ -109,14 +109,18 @@ export const FreelanceLayout = () => {
                         {cat === "basic" ? <div className="text-capitalize">Básico</div> : null}
                         {cat === "pro" ? <div className="text-capitalize">Profesional</div> : null}
                         {cat === "enterprise" ? <div className="text-capitalize">Empresarial</div> : null}
+
                     </div>
                 ))}
             </div>
             <div className="row">
                 <div className="col-md-7 mt-4">
+
+
                     {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Basic" ? <h2>Formulario: Básico</h2> : null}
                     {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Pro" ? <h2>Formulario: Profesional</h2> : null}
                     {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Enterprise" ? <h2>Formulario: Empresarial</h2> : null}
+
                     <div className="d-flex flex-column">
                         <div className="input-group w-100 mb-4">
                             <input
@@ -216,6 +220,7 @@ export const FreelanceLayout = () => {
                                 <i className="bi bi-chevron-double-right me-1"></i>
                                 Siguiente
                             </button>
+
                         </div>
                     </div>
                 </div>
