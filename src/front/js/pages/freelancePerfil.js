@@ -118,7 +118,7 @@ export const FreelancePerfil = () => {
         <div  className="container my-1 w-100">
             <div className="row">
                 {/* Perfil básico */}
-                <div className="col-md-8 d-flex align-items-center justify-content-center flex-row w-100 gap-2">
+                <div className="col-md-8 d-flex align-items-start justify-content-center flex-row w-100 gap-2">
                     <div className="card mb-3 shadow-sm position-relative w-75" style={{ maxWidth: "800px" }}>
                         <div className="bg-primary" >
                                      <img
@@ -217,7 +217,10 @@ export const FreelancePerfil = () => {
                                 id={key}
                                 role="tabpanel"
                             >
-                                {servicesByCategory[key]?.length > 0 ? (
+                                {
+                                servicesByCategory[key]?.length > 0 ? 
+                                actions.checkLogInUser() ==true ? 
+                                     (
                                     servicesByCategory[key].map((service) => (
                                         <div key={service.id} className="card p-4 shadow-sm mb-3">
                                             <h5>{service.title}</h5>
@@ -233,9 +236,29 @@ export const FreelancePerfil = () => {
                                             </button>
                                         </div>
                                     ))
-                                ) : (
+                                )
+                                :
+                                (
+                                    servicesByCategory[key].map((service) => (
+                                        <div key={service.id} className="card p-4 shadow-sm mb-3">
+                                            <h5>{service.title}</h5>
+                                            <h6>${service.price}</h6>
+                                            <p>{service.description}</p>
+                                            <button
+                                                // onClick={() => navigate(`/user/detallado-de-orden?service=${service.id}`)}
+                                                type="button"
+                                                className="btn btn-sm btn-comprar-paquete"
+                                                style={{ background: "#00D1B2", color: "aliceblue", width: "150px" }}
+                                            >
+                                                Comprar paquete
+                                            </button>
+                                        </div>
+                                    ))
+                                )
+                                 : (
                                     <p className="text-muted">No hay servicios en esta categoría.</p>
-                                )}
+                                )
+                                }
                             </div>
                         ))}
                     </div>
