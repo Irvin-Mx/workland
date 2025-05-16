@@ -55,11 +55,11 @@ export const Registro = () => {
         formDatatoSubmit.append('rol', data.rol);
         formDatatoSubmit.append('photo', data.photo[0]);
 
-        // console.log(data.photo)
+       
 
-        for (let [key, value] of formDatatoSubmit.entries()) {
-            console.log(`${key}: ${value}`);
-        }
+        // for (let [key, value] of formDatatoSubmit.entries()) {
+        //     console.log(`${key}: ${value}`);
+        // }
 
 
         await actions.signup(formDatatoSubmit)

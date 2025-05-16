@@ -35,7 +35,7 @@ export const FreelancePerfilVistaPrevia = () => {
                             grouped[service.category].push(service);
                         }
                     });
-                    // console.log(data.result)
+                
 
                     setData(data.result);
            

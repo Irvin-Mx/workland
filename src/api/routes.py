@@ -221,7 +221,7 @@ def search_results():
             # Agrega otros campos que necesites mostrar
         } for resultado in combined_results_lists]
 
-        #print(data)
+   
 
         return jsonify({
             'msj': True,
@@ -558,7 +558,7 @@ def get_freelance(freelance_id):
 def update_freelance(): 
     try:
         form_data = request.form
-        print(form_data.get("name"))
+  
         photo_profile= request.files.get('photo_profile')
         photo_cover = request.files.get('photo_cover')
 
@@ -690,7 +690,7 @@ def check_favorite():
 @jwt_required()
 def get_user_favorites():
     user_id = int(get_jwt_identity())
-    print(user_id)
+
     if user_id <= 0:
         return jsonify({"error": "El ID del usuario debe ser un número positivo"}), 400
 
@@ -709,7 +709,7 @@ def get_user_favorites():
     favorites = [nombre(fav) for fav in user.favoritos_agregados]
 
     
-    print(favorites)
+
    
     return jsonify({
         "result": favorites
@@ -805,7 +805,7 @@ def add_comment():
         stars=data.get("stars")
         freelance_id=int(data.get("freelance_id"))
         order_id=data.get("order_id")
-        print(order_id)
+   
 
         user=User.query.filter_by(id=user_id).first()
 
@@ -986,7 +986,7 @@ def delete_report():
             return jsonify({ "msj":"No es cuenta admin" }), 400
 
         report = Report.query.filter_by(id=report_id).first()
-        print(report)
+     
         
         if  not report:
             return jsonify({ "msj":"No hay reporte" }), 400
@@ -1060,7 +1060,7 @@ def all_report():
             
         
         all_report = [config(rep) for rep in all_report_raw]
-        print(all_report)
+ 
         
         return jsonify({
         # "msj":"Reporte eliminado",

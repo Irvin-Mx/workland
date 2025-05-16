@@ -37,7 +37,7 @@ const Login = () => {
                 })}
     
                 const rol = res.user_info.rol;
-                console.log("ROL del usuario:", rol);
+            
     
                 if (rol === "freelance") {
                     navigate("/free/dashboard");
