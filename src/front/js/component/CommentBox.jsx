@@ -15,7 +15,7 @@ const StarComponent = ({ value, stars, setStarsState }) => {
             onClick={() => setStarsState(value)}
             style={{ cursor: "pointer" }}
             className='d-flex justify-content-start align-content-center '>
-            <i style={{ fontSize: "25px", color: value > stars ? "black" : "yellow", scale: hover ? "1.50" : "1" }} className="fa-solid fa-star m-1"></i>
+            <i style={{ fontSize: "25px", color: value > stars ? "black" : "#fbae22", scale: hover ? "1.50" : "1" }} className="fa-solid fa-star m-1"></i>
         </div>
     )
 }
@@ -122,7 +122,7 @@ const CommentBox = ({ freelance_id, setModalOpen, order_id, setModalInfoId, setO
                                 errors.text && errors.text.type === "maxLength" && <span className='text-white bg-danger'>Sobrepasa el limite de carateres.</span>
                             }
                         </div>
-                        <button type='submit' className='btn btn-primary'>
+                        <button type='submit' className='btn'style={{ background: "#00D1B2", color: "white" }}>
                             Enviar
                         </button>
                     </form>

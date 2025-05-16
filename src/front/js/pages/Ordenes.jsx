@@ -25,7 +25,7 @@ const Ordenes = () => {
   if(loading==true){
         <div style={{ height: "100vh" }} className=' w-100 d-flex align-items-start justify-content-start flex-column gap-2'>
       <h1 className='text-center'>Tabla de ordenes</h1>
-      <h4>No hay ordenes </h4>
+      <h4>No hay órdenes </h4>
     </div>
   }
   

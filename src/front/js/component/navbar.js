@@ -112,7 +112,7 @@ export const Navbar = () => {
 								<>
 									<Link to="/registro"><button className={`${styles.navbar__btn__register} btn me-md-2`} type="button">Registrarse</button></Link>
 
-									<Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2 text-nowrap`} type="button">Iniciar sesion</button></Link>
+									<Link to="/iniciar-sesion"><button className={`${styles.navbar__btn__login} btn me-md-2 text-nowrap`} type="button">Iniciar sesión</button></Link>
 								</>
 							}
 						</div>

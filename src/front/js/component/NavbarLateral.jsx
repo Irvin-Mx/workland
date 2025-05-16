@@ -5,7 +5,7 @@ import styles from "./navbarLateral.module.css";
 // Links para usuarios normales
 const userLinks = [
     { name: "Favoritos", path: "/user/favoritos", icon: <i className="fa-solid fa-xl fa-heart m-2"></i> },
-    { name: "Ordenes", path: "/user/ordenes", icon: <i className="fa-solid fa-xl fa-sheet-plastic m-2"></i> },
+    { name: "Órdenes", path: "/user/ordenes", icon: <i className="fa-solid fa-xl fa-sheet-plastic m-2"></i> },
     { name: "Comentarios", path: "/user/comentarios", icon: <i className="fa-solid fa-xl fa-comment m-2"></i> },
 ];
 
@@ -13,8 +13,8 @@ const userLinks = [
 const freelanceLinks = [
     { name: "CV", path: "/free/cv", icon: <i className="fa-solid fa-id-badge fa-xl m-2"></i> },
     { name: "Mis servicios", path: "/free/layout", icon: <i className="fa-solid fa-xl fa-business-time m-2"></i> },
-    { name: "Mis Ordenes", path: "/free/ordenes", icon: <i className="fa-solid fa-bag-shopping fa-xl m-2"></i> },
-    { name: "Mi Vista Previa", path: "/free/vista-previa", icon: <i className="fa-solid fa-eye fa-xl m-2"></i> },
+    { name: "Mi vista previa", path: "/free/vista-previa", icon: <i className="fa-solid fa-eye fa-xl m-2"></i> },
+    { name: "Mis proyectos", path: "/free/ordenes", icon: <i className="fa-solid fa-bag-shopping fa-xl m-2"></i> },
     { name: "Paypal", path: "https://www.paypal.com", icon: <i className="fa-brands fa-paypal fa-xl m-2"></i> },
 ];
 

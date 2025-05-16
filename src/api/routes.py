@@ -174,7 +174,7 @@ def log_in():
             resultado={**existe_usuario.serialize(), "services": services}
             expires=timedelta(days=1)
             token=create_access_token(identity=str(existe_usuario.id),expires_delta=expires)
-            return jsonify({ 'token':token,"user_info":resultado,"msj":"Inicio de sesion exitosa"}), 200
+            return jsonify({ 'token':token,"user_info":resultado,"msj":"Inicio de sesión exitosa"}), 200
         else :
             return jsonify({"msj":"Contraseña equivocada"}),404
 
@@ -193,7 +193,7 @@ def search_results():
         
         if not busqueda:
             return jsonify({
-            'msj': "El termino de busqueda no debe de estar vacio.",
+            'msj': "El término de búsqueda no debe estar vacío.",
             "result":[]
         }),400
         

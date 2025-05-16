@@ -39,7 +39,7 @@ const CommentsMade = ({ deleteButton }) => {
                     </div>
                     <div className="col-md-8 align-items-center">
 
-                        <p className="h5"> ¡Gracias por compartir tus comentarios!</p> 
+                        <p className="h4"> ¡Gracias por compartir tus comentarios!</p> 
                         <p className="lead">Tu opinión es fundamental para nosotros y nos impulsa a seguir mejorando día a día. Apreciamos sinceramente que te tomes el tiempo para brindarnos tu retroalimentación.</p>
                     </div>
                     

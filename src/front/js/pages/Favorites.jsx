@@ -114,7 +114,20 @@ const Favorites = () => {
                                 alt="Favoritos"
                                 className="img-fluid rounded-start"
                                 style={{ width: '250px' }}
-                            />
+
+                              />
+                            </div>
+                            <div className="col-md-8 align-items-center">
+                
+                              <p className="display-5"> <strong>¡Servicios favoritos!</strong></p>
+                         
+                            
+                
+                
+                            </div>
+                          </div>
+
+
                         </div>
                         <div className="col-md-8 align-items-center">
 

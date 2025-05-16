@@ -44,7 +44,7 @@ const FreelanceOrders = () => {
                     <div className='d-flex justify-content-center flex-column  gap-3'>
                         {
                             data.length == 0 ?
-                                <p>No hay ordenes
+                                <p>No hay órdenes
                                 </p>
                                 :
                                 data.map((elem) => <FreelanecrOrderCard key={elem.id} {...elem} />)
