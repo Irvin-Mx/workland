@@ -153,7 +153,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     } else {
 
                         // console.error("Error al obtener los datos del usuario", data);
-                        alert(data.error || "Error al obtner el perfil de usuario");
+                        // alert(data.error || "Error al obtner el perfil de usuario");
+                        toastFallo("Error al obtener el perfil de usuario.")
                         return null;
 
                     }
@@ -237,13 +238,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return data.result;
                     } else {
                         console.error("Error al actualizar perfil freelance:", data);
-                        alert(data.error || data.msg || "Error al actualizar perfil freelance");
+                        // alert(data.error || data.msg || "Error al actualizar perfil freelance");
 
 
                     }
                 } catch (error) {
-                    console.error("Error de red al actualizar perfil freelance:", error);
-                    alert("Error de conexión con el servidor");
+                    // console.error("Error de red al actualizar perfil freelance:", error);
+                    toastFallo("Error de red al actualizar perfil freelance:");
                 }
             },
             createProduct: async (formData) => {
@@ -265,11 +266,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return data;
                     } else {
 
-                        alert(data.error || "Error al agregar producto");
+                        // alert(data.error || "Error al agregar producto");
+                        toastFallo("Error al agregar producto.")
                     }
                 } catch (error) {
                     console.error("Error al agregar producto:", error);
-                    alert("Ocurrió un error al intentar añadir producto");
+                    // alert("Ocurrió un error al intentar añadir producto");
+                    toastFallo("Error al agregar producto.")
                 }
             },
             getMyFreelanceProfile: async (freelance_id) => {
@@ -295,8 +298,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return null;
                     }
                 } catch (e) {
-                    console.error("Error en la solicitud para obtener el perfil de usuario:", e);
-                    alert("Ocurrió un error al obtener los datos del perfil freelance");
+                    // console.error("Error en la solicitud para obtener el perfil de usuario:", e);
+                    // alert("Ocurrió un error al obtener los datos del perfil freelance");
+                    toastFallo("Ocurrió un error al obtener los datos del perfil freelance")
                     return null;
                 }
             },
