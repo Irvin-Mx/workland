@@ -32,17 +32,17 @@ const SearchBar = () => {
 
         actions.busquedaFreelancers(terminoBuqueda)
       }}
-        style={{ width: "40px", height: "100%", cursor:"pointer", backgroundColor:"#1e266d", color: "white", border:'none' }}
-        className={`d-flex justify-content-center align-items-center `}
+        style={{ width: "40px", height: "40px", cursor:"pointer", backgroundColor:"#00D1B2", color: "white", border:'none' }}
+        className={`d-flex justify-content-center align-items-center rounded `}
       >
         <i 
-        className={`${styles.searchbar_icon} fa-solid fa-magnifying-glass `}  ></i>
+        className={`${styles.searchbar_icon} fa-solid fa-magnifying-glass `}
+        style={{backgroundColor:"#00D1B2"}}  ></i>
       </button>
     </div>
   )
 }
 
 export default SearchBar
-
 
 
