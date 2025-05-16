@@ -30,7 +30,7 @@ const Login = () => {
     
             if (!res) return; // si login falló, no sigas
     
-            if (res?.msj === "Inicio de sesion exitosa") {
+            if (res?.msj === "Inicio de sesión exitosa") {
                 setFormData({
                     email: '',
                     password: ''
@@ -78,10 +78,10 @@ const Login = () => {
     // const { actions } = useContext(Context);
     return (
         <div style={{backgroundColor:"#CCD6F6" ,height:"100vh"}} className="d-flex flex-column justify-content-start align-items-center" >
-            <h1 className="text-center m-3">¡Que gusto tenerte devuelta a Workland!</h1>
+            <h1 className="text-center m-3">¡Qué gusto tenerte de vuelta a Workland!</h1>
             <div className="w-50 p-4 border rounded shadow" style={{ background: "aliceblue" }}>
                 <form noValidate className="" onSubmit={handleSubmit(onSubmit)}>
-                    <h5 className="text-center mb-4">Ingresa los siguientes datos para iniciar sesion</h5>
+                    <h5 className="text-center mb-4">Ingresa los siguientes datos para iniciar sesión</h5>
                     <div className="mb-3">
                         <label htmlFor="inputEmail" className="form-label">Correo electrónico</label>
                         <input
@@ -111,7 +111,7 @@ const Login = () => {
 
                         </div>
                     </div>
-                    <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }} >Iniciar sesion</button>
+                    <button type="submit" className="btn" id="registro" style={{ background: "#00D1B2", color: "aliceblue" }} >Iniciar sesión</button>
                     <Link to="/">
                         <button type="button" className="btn ms-2" id="cancelar" style={{ background: "#FF3860", color: "aliceblue" }} >Cancelar</button>
 

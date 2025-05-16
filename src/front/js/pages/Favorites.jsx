@@ -120,7 +120,7 @@ const Favorites = () => {
                             </div>
                             <div className="col-md-8 align-items-center">
                 
-                              <p className="h4"> ¡Tus servicios favoritos!</p>
+                              <p className="display-5"> <strong>¡Servicios favoritos!</strong></p>
                          
                             
                 
