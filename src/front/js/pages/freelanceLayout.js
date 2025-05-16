@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
-
 export const FreelanceLayout = () => {
     const { actions } = useContext(Context);
      const navigate = useNavigate();
@@ -12,59 +10,39 @@ export const FreelanceLayout = () => {
         pro: { title: "", description: "", price: "", time: "" },
         enterprise: { title: "", description: "", time: "", price: "" },
     });
-
-
-
     const [activeCategory, setActiveCategory] = useState("basic");
     const [savedPackages, setSavedPackages] = useState([]);
     const [packageIds, setPackagesIds] = useState({});
-
     const categories = ["basic", "pro", "enterprise"];
-
     useEffect(() => {
         const saved = localStorage.getItem("savePackages");
         const data = localStorage.getItem("formData");
         const ids = localStorage.getItem("packageIds");
-
-
         if (saved) setSavedPackages(JSON.parse(saved));
         if (data) setFormData(JSON.parse(data));
         if (ids) setPackagesIds(JSON.parse(ids));
-
-
     }, []);
-
     useEffect(() => {
         localStorage.setItem("savePackages", JSON.stringify(savedPackages));
     }, [savedPackages]);
-
     useEffect(() => {
         localStorage.setItem("formData", JSON.stringify(formData));
     }, [formData]);
-
-
     useEffect(() => {
         localStorage.setItem("packagesIds", JSON.stringify(packageIds));
     }, [packageIds]);
-
     const clearStorage = () => {
         localStorage.removeItem("savePackages");
         localStorage.removeItem("formData");
         localStorage.removeItem("packageIds");
         setSavedPackages([]);
         setPackagesIds({});
-
     };
-
-
-
     const handleNextCategory = () => {
         const currentIndex = categories.indexOf(activeCategory);
         const nextIndex = (currentIndex + 1) % categories.length;
         setActiveCategory(categories[nextIndex]);
-
     };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -75,7 +53,6 @@ export const FreelanceLayout = () => {
             }
         });
     };
-
     const handleSubmitAll = async () => {
         for (let cat of categories) {
             const data = formData[cat];
@@ -83,16 +60,12 @@ export const FreelanceLayout = () => {
                 toast.error(`Completa todos los datos del paquete ${cat}`);
                 return;
             }
-
             const fd = new FormData();
             fd.append("title", data.title);
             fd.append("description", data.description);
             fd.append("price", parseInt(data.price));
             fd.append("time", data.time);
             fd.append("category", cat);
-
-
-
             try {
                 if (packageIds[cat]) {
                     await actions.updateProduct(packageIds[cat], fd);
@@ -114,15 +87,10 @@ export const FreelanceLayout = () => {
         toast.success("Todos los paquetes han sido guardados exitosamente");
         clearStorage();
         navigate("/free/vista-previa"); 
-
-
     };
-
     const allSaved = categories.every(cat => savedPackages.includes(cat));
-
     return (
         <div className="w-100 ps-3">
-
             <h5 className="card-title pt-3 ">
                 <span className="badge me-2 " style={{ background: "#FF6B6B" }}>2</span>
                 Agrega tus servicios
@@ -154,7 +122,6 @@ export const FreelanceLayout = () => {
                     {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1) === "Enterprise" ? <h2>Formulario: Empresarial</h2> : null}
 
                     <div className="d-flex flex-column">
-
                         <div className="input-group w-100 mb-4">
                             <input
                                 type="text"
@@ -176,11 +143,7 @@ export const FreelanceLayout = () => {
                                 }}
                             />
                         </div>
-
                         {/* Subir imagen */}
-
-
-
                         <div className="card border rounded shadow mb-4" style={{ background: "aliceblue" }}>
                             <div className="card-header" style={{ background: "#1E266D", color: "#ffffff", fontSize: "1.5rem" }}>
                                 Información del Producto
@@ -198,7 +161,6 @@ export const FreelanceLayout = () => {
                                 ></textarea>
                             </div>
                         </div>
-
                         <div className="row justify-content-around ">
                             <div className="col-6 d-flex align-items-strech">
                                 <div className=" card border rounded shadow mb-4 w-100" style={{ background: "aliceblue" }}>
@@ -239,7 +201,6 @@ export const FreelanceLayout = () => {
                                 </div>
                             </div>
                         </div>
-
                         {/* Botones */}
                         <div className="d-flex justify-content-between">
                             <button
@@ -260,12 +221,9 @@ export const FreelanceLayout = () => {
                                 Siguiente
                             </button>
 
-
                         </div>
                     </div>
                 </div>
-
-
                 <div className="col-md-4 mt-4 me-1">
                     <h3>Vista previa de paquetes</h3>
                     <div className="row">
@@ -285,9 +243,6 @@ export const FreelanceLayout = () => {
             </div>
              
         </div>
-
-
     );
 };
-
 export default FreelanceLayout;

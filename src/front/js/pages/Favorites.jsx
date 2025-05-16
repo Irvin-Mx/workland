@@ -12,10 +12,8 @@ import { Context } from "../store/appContext"
 
 
 const FavoriteItem = ({ id, img_url, last_name, name, handleFavorite }) => {
-    console.log(id)
     return (
         <div
-
             style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
             className='w-100  d-flex align-items-center flex-row p-2 rounded'>
             <div className='w-75 d-flex align-items-center gap-2 flex-row'>
@@ -80,25 +78,25 @@ const Favorites = () => {
 
     if (isLoading) {
         return (
-            <div>
-                
-                    <div className="jumbotron w-100">
-                        <div className="row aling-items-center">
-                            <div className="col-md-4 d-flex justify-content-center">
-                                <div className="col-md-8 align-items-center">
-                                    <p className="display-5"> <strong>Mis Favoritos</strong></p>
-                                </div>
-                                <img
-                                    src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747256782/fav_sdchw3.png"
-                                    alt="favoritos"
-                                    className="img-fluid rounded-start"
-                                    style={{ height: "50px" }}
-                                />
+            <div className='container-fluid p-2'>
+
+                <div className="jumbotron w-100">
+                    <div className="row aling-items-center">
+                        <div className="col-md-4 d-flex justify-content-center">
+                            <div className="col-md-8 align-items-center">
+                                <p className="display-5"> <strong>Mis Favoritos</strong></p>
                             </div>
+                            <img
+                                src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747256782/fav_sdchw3.png"
+                                alt="favoritos"
+                                className="img-fluid rounded-start"
+                                style={{ height: "50px" }}
+                            />
                         </div>
                     </div>
-                    <p>cargando</p>
-                
+                </div>
+                <p>cargando</p>
+
             </div>
         )
     }
@@ -106,16 +104,17 @@ const Favorites = () => {
     return (
 
 
-        <div className=" d-flex flex-column align-items-start">
+        <div className="d-flex flex-column align-items-start">
             <div className='w-100 my-0 p-0'>
-                <div className="jumbotron w-100 m-0 jumbotron-fluid" style={{background:"aliceblue",padding: "1rem" }}>
-                          <div className="row aling-items-center">
-                            <div className="col-md-4 d-flex justify-content-center">
-                              <img
+                <div className="jumbotron w-100 m-0 jumbotron-fluid" style={{ background: "aliceblue", padding: "1rem" }}>
+                    <div className="row aling-items-center">
+                        <div className="col-md-4 d-flex justify-content-center">
+                            <img
                                 src="https://res.cloudinary.com/djmmbd8xd/image/upload/v1747330257/fav-13_h347v7.png"
                                 alt="Favoritos"
                                 className="img-fluid rounded-start"
                                 style={{ width: '250px' }}
+
                               />
                             </div>
                             <div className="col-md-8 align-items-center">
@@ -127,31 +126,26 @@ const Favorites = () => {
                 
                             </div>
                           </div>
+
+
                         </div>
-               
+                        <div className="col-md-8 align-items-center">
+
+                            <p className="h4"> ¡Tus servicios favoritos!</p>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div className='px-3'>
                 {usersFavoritesArray.length > 0 ? usersFavoritesArray.map((item) => {
                     return (
-                        <div className='border m-2 w-25' key={item.id}>
-
-                            <p>{item.name}</p>
-                            <button id={item.id} onClick={(e) => handleFavorite(e)} className="btn btn-primary">
-                                {
-                                    isInFavorites ?
-                                        <>
-                                            <i id={item.id} className="fa-solid fa-heart"></i>
-                                            <span id={item.id}> Esta en favoritos</span>
-                                        </>
-                                        :
-                                        <>
-                                            <i id={item.id} className="fa-regular fa-heart"></i>
-                                            <span id={item.id}> No esta en favoritos</span>
-                                        </>
-                                }
-                            </button>
-                        </div>
+                        <FavoriteItem key={item.id} {...item} handleFavorite={handleFavorite}   />
                     )
                 }) : <ContenidoVacioPlaceholder mensaje={"No has agregado favoritos."} />}
-
+                </div>
 
             </div>
         </div>

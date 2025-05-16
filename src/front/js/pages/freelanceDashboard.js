@@ -39,7 +39,7 @@ const FreelanceDashboard = () => {
                                     <p className="card-text lead fs-4">
                                        
                                        <strong>¡Bienvenido a nuestra comunidad de emprendedores!</strong></p>
-                                       <p className="lead"> Aquí, tú decides <strong>cómo,</strong><strong>cuándo</strong> y <strong>cuánto</strong> trabajar, conectando con personas que valoran lo que haces. Estamos comprometidos en ayudarte a construir el trabajo de tus sueños, donde tu talento encuentra las oportunidades que merece.</p>
+                                       <p className="lead"> Aquí, tú decides <strong>cómo, </strong><strong>cuándo</strong> y <strong>cuánto</strong> trabajar, conectando con personas que valoran lo que haces. Estamos comprometidos en ayudarte a construir el trabajo de tus sueños, donde tu talento encuentra las oportunidades que merece.</p>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ const FreelanceDashboard = () => {
                                     style={{ width: '250px' }}
                                 />
                                             <h3 className="card-title">Sube tus productos</h3>
-                                            <p className="card-text">Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> Y <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
+                                            <p className="card-text">Crea paquetes para ofrecer tus servicios : <strong>Básico,</strong> <strong>Profesional</strong> y <strong>Empresarial</strong> facilita la elección del cliente y adapta tus soluciones a diferentes presupuestos.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ const FreelanceDashboard = () => {
                                     style={{ width: '250px' }}
                                 />
                                             <h3 className="card-title">Conecta tu PayPal</h3>
-                                            <p className="card-text">Crea una cuenta de <strong>PayPal</strong> Y recibe tus pagos de manera segura y directa, pagando una mínima comisión a la plataforma</p>
+                                            <p className="card-text">Crea una cuenta de <strong>PayPal</strong> y recibe tus pagos de manera segura y directa, pagando una mínima comisión a la plataforma.</p>
                                         </div>
                                     </div>
                                 </div>
