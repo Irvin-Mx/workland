@@ -25,7 +25,7 @@ const DetalladoDeOrden = () => {
 
     const fullName = `${store.userProfile.name} ${store.userProfile.last_name}`
     const fullNameFreelance = `${serviceData.user?.name} ${serviceData.user?.last_name}`
-    console.log(fullName)
+
 
     useEffect(() => {
         if (actions.checkLogInUser() == false) {

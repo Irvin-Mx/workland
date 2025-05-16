@@ -2,7 +2,7 @@ import React from 'react'
 import { FaStar } from "react-icons/fa";
 
 const FreelanecrOrderCard = ({ buyer_info, comment, service, id, is_payed, price }) => {
-    console.log({ buyer_info, comment, service, id, is_payed, price })
+
     const title_font = "25px"
     const p_font = { fontSize: "20px" }
     return (
